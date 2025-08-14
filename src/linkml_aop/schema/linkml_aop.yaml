@@ -17,6 +17,7 @@ prefixes:
   biolink: https://w3id.org/biolink/
   schema: http://schema.org/
   PATO: http://purl.obolibrary.org/obo/PATO_
+  # Just curious - why PATO here, since it seems to be the only OBO ontology amidst schemas?
   example: https://example.org/
 default_prefix: linkml_aop
 default_range: string
@@ -101,6 +102,11 @@ classes:
       or may not be known.
     attributes:
       stressor:
+      # A quirk of the AOP framework in that we have the concept of a stressor vs a prototypical stressor.
+      # https://www.aopwiki.org/handbooks/5#prototypical-stressor(s)-81 vs use of stressor in the KER evidence
+      # sections, https://www.aopwiki.org/handbooks/5#empirical-evidence-165 
+      # There is no mention of stressor with respect to the MIE in the AOP-Wiki handbook, but stressors
+      # were a key part of observations and evidence data objects in EMOD work
         range: Stressor
         description: >-
           The chemical or physical agent that initiates the molecular initiating event.
@@ -165,15 +171,24 @@ classes:
     is_a: NamedEntity
     description: >-
       A chemical, physical, or biological agent that initiates the molecular initiating event.
-
-  BiologicalTarget:
+    # See comment above regarding stressor vs prototypical stressor... though I don't have a suggestion
+    # for how to handle stressor in the model.
+  
+  BiologicalObject:
     is_a: NamedEntity
     description: >-
-      The biological molecule or structure that is affected by the stressor or key event.
+      The biological molecule or structure that is affected by the stressor or upstream key event.
       This may be a gene, protein, or other biomolecule (e.g., PARP1) or a chemical species
       (e.g., reactive oxygen species).
-
+    # I changed the class name because this definition corresponds to an EC biological object in the
+    # AOP-Wiki. Importantly, EC objects are tied to a KE, but it is also helpful to have a looser definition
+    # and flexibility for extraction purposes. In the CAM-ish graph, for example, a biological object could be
+    # part of a line of evidence or it can be the thing that is measured in an assay.
+  
   Outcome:
+  # AdverseOutcome is defined above... the definition below is interesting for expanding the framework.
+  # I'm not sure its a good idea to keep this one in right now but curious to hear how you see it
+  # fitting in.
     is_a: NamedEntity
     description: >-
       The outcome or effect that results from the key events in the pathway.
@@ -184,6 +199,8 @@ classes:
       learning and memory, cognitive function, population growth
       rate, mortality).
 
+  # For the cell term and organ term usage in the AOP-Wiki, there's a conditional that depends on 
+  # LevelOfBiologicalOrganization... I'll have to check the details another time.
   CellTerm:
     is_a: NamedEntity
 
@@ -202,7 +219,7 @@ classes:
 # Slots
 slots:
   target:
-    range: BiologicalTarget
+    range: BiologicalObject
     description: >-
       The biological molecule or structure that participates in the event.
       This may be a gene, protein, or other biomolecule (e.g., PARP1) or a chemical
@@ -267,6 +284,7 @@ enums:
         description: Effects at the population level
 
   EventTypeEnum:
+  # Interesting... this list roughly corresponds to the AOP-Wiki's EC Action terms
     description: >-
       The type of event happening at some biological level.
     permissible_values:
