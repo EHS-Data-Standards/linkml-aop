@@ -1,0 +1,1153 @@
+name: aopwiki-emod
+id: http://example.org/aopwiki-emod
+default_prefix: http://example.org/aopwiki-emod/
+title: AOP Wiki Data Model with EMOD
+description: >-
+  This is a LinkML schema for the AOP-Wiki data model,
+  extended with EMOD concepts.
+prefixes:
+  linkml: https://w3id.org/linkml/
+  xsd: http://www.w3.org/2001/XMLSchema#
+  foaf: http://xmlns.com/foaf/0.1/
+  schema: http://schema.org/
+  dcterms: http://purl.org/dc/terms/
+  prov: http://www.w3.org/ns/prov#
+default_range: string
+
+imports:
+  - linkml:types
+
+# Slot defintions shared across multiple classes
+slots:
+  changed_at:
+    description: Timestamp of when the record was last changed
+    range: datetime
+  created_at:
+    description: Timestamp of when the record was created
+    range: datetime
+  updated_at:
+    description: Timestamp of when the record was last updated
+    range: datetime
+
+# Class definitions
+classes:
+  Aops:
+    slots:
+      - created_at
+      - updated_at
+    attributes:
+      id:
+        identifier: true
+        range: integer
+      title:
+      short_name:
+      corresponding_author_id:
+        range: Users
+      abstract:
+      authors:
+      applicability_of_the_aop:
+      key_event_essentiality:
+      weight_of_evidence_summary:
+      quantitative_considerations:
+      optional_considerations:
+      references:
+      overall_assessment:
+      background:
+      user_defined_mie:
+      user_defined_ao:
+      oecd_project:
+      oecd_status_id:
+        range: OecdStatuses
+      graphical_representation_image_uid:
+      saaop_status_id:
+      legacy:
+        range: integer
+      overall_assessment_file_uid:
+      changed_at:
+      development_strategy:
+      known_modulating_factors:
+      assigned_license_id:
+        range: AssignedLicenses
+      handbook_id:
+        range: Handbooks
+      completion_score:
+      mean_ker_score:
+      mean_event_score:
+      url_links:
+        multivalued: true
+        range: UrlLinks
+      coaches:
+        multivalued: true
+        range: Users
+        inverse: coached_aops
+      contributors:
+        multivalued: true
+        range: Users
+        inverse: contributed_aops
+      life_stages:
+        multivalued: true
+        range: AopLifeStages
+      sexes:
+        multivalued: true
+        range: AopSexes
+      taxons:
+        multivalued: true
+        range: AopTaxons
+      prototypical_stressor:
+        multivalued: true
+        range: AopStressors
+      events:
+        multivalued: true
+        range: AopEvents
+      relationships:
+        multivalued: true
+        range: AopRelationships
+  Events:
+    slots:
+      - created_at
+      - updated_at
+    attributes:
+      id:
+        identifier: true
+        range: integer
+      title:
+        description: A descriptive phrase which defines a discrete biological change that can be measured.
+      short_name:
+        description: A reasonable abbreviation of the Key Event title, used in labelling throughout AOP-Wiki.
+      biological_organization_id:
+        description: The level of biological organization at which the Key Event occurs (e.g., molecular, cellular, tissue, organ, organism).
+        range: BiologicalOrganizations
+      how_it_works:
+        description: The mechanistic basis explaining how perturbation of this Key Event leads to downstream effects.
+      measured_or_detected:
+        description: A description of the type(s) of measurements that can be employed to evaluate the Key Event and the relative level of scientific confidence in those measurements.
+      supporting_tax_evidence:
+        description: Evidence describing the taxonomic applicability of the Key Event, using Latin or common names of species or broader taxonomic groupings.
+      evidence_for_chemical_initiation:
+        description: Documentation of how specific prototypical stressors (generally chemicals) can trigger or perturb this Key Event.
+      examples_using_ao:
+        description: Examples illustrating the regulatory significance of this Key Event when it serves as an adverse outcome.
+      references:
+        description: Literature cited in support of this Key Event description.
+      definition:
+        description: A description of the biological state being observed or measured, the biological compartment in which it is measured, and its general role in the biology.
+      organ_term_id:
+        description: The organ or tissue in which the Key Event takes place.
+        range: OrganTerms
+      cell_term_id:
+        description: The cell type in which the Key Event takes place.
+        range: CellTerms
+      completion_score:
+        description: Calculated metric indicating how complete the Key Event documentation is.
+      integration_score:
+        description: Calculated metric for integration and priority assessment of the Key Event.
+      has_method_text:
+        description: Indicates whether method text has been provided for this Key Event.
+      event_components:
+        multivalued: true
+        range: EventComponents
+      assays:
+        multivalued: true
+        range: Assays
+        inverse: events
+      observations:
+        multivalued: true
+        range: Observations
+        inverse: events
+      aops:
+        multivalued: true
+        range: AopEvents
+      life_stages:
+        multivalued: true
+        range: EventLifeStages
+      sexes:
+        multivalued: true
+        range: EventSexes
+      bio_target_families:
+        multivalued: true
+        range: EventBioTargetFamilies
+      taxons:
+        multivalued: true
+        range: EventTaxons
+  Relationships:
+    slots:
+      - created_at
+      - updated_at
+    attributes:
+      id:
+        identifier: true
+        range: integer
+      upstream_event_id:
+        range: Events
+      downstream_event_id:
+        range: Events
+      how_it_works:
+      biological_plausibility:
+      empirical_support:
+      uncertainties:
+      quantitative_understanding:
+      taxon_evidence:
+      weight_of_evidence:
+      response_relationship:
+      time_scale:
+      modulating_factors:
+      known_loops:
+      evidence_collection_strategy:
+      references:
+      completion_score:
+      aops:
+        multivalued: true
+        range: AopRelationships
+      taxons:
+        multivalued: true
+        range: RelationshipTaxons
+      sexes:
+        multivalued: true
+        range: RelationshipSexes
+      life_stages:
+        multivalued: true
+        range: RelationshipLifeStages
+  Stressors:
+    slots:
+      - created_at
+      - updated_at
+    attributes:
+      id:
+        identifier: true
+        range: integer
+      name:
+      chemical_description:
+      characterization_of_exposure:
+      references:
+      aops:
+        multivalued: true
+        range: AopStressors
+  BioTargetFamilies:
+    slots:
+      - created_at
+      - updated_at
+    attributes:
+      id:
+        identifier: true
+        range: integer
+      name:
+      batch_import_id:
+        range: BatchImports
+      events:
+        multivalued: true
+        range: EventBioTargetFamilies
+      assays:
+        multivalued: true
+        range: AssayBioTargetFamilies
+      citations:
+        multivalued: true
+        range: CitationBioTargetFamilies
+  Observations:
+    slots:
+      - created_at
+      - updated_at
+    attributes:
+      id:
+        identifier: true
+        range: integer
+      biological_action_id:
+        range: BiologicalActions
+      biological_process_id:
+        range: BiologicalProcesses
+      biological_object_id:
+        range: BiologicalObjects
+      assay_id:
+        range: Assays
+      batch_import_id:
+      stressor_id:
+      process_is_phenotype:
+      phenotype:
+      other:
+      notes:
+      events:
+        multivalued: true
+        range: Events
+        inverse: observations
+      citations:
+        multivalued: true
+        range: ObservationCitations
+  Citations:
+    slots:
+      - created_at
+      - updated_at
+    attributes:
+      id:
+        identifier: true
+        range: integer
+      doi:
+      title:
+      authors:
+      journal:
+      year:
+      bio_target_families:
+        multivalued: true
+        range: CitationBioTargetFamilies
+      observations:
+        multivalued: true
+        range: ObservationCitations
+  AopEvents:
+    slots:
+      - created_at
+      - updated_at
+    attributes:
+      id:
+        identifier: true
+        range: integer
+      aop_id:
+        range: Aops
+      event_id:
+        range: Events
+      type:
+      essentiality_id:
+        range: ConfidenceLevels
+      row_order:
+        range: integer
+      sequence:
+        range: integer
+      batch_import_id:
+  AopLifeStages:
+    slots:
+      - created_at
+      - updated_at
+    attributes:
+      id:
+        identifier: true
+        range: integer
+      aop_id:
+        range: Aops
+      life_stage_term_id:
+        range: LifeStageTerms
+      confidence_id:
+  AopLogs:
+    slots:
+      - created_at
+      - updated_at
+    attributes:
+      id:
+        identifier: true
+        range: integer
+      aop_id:
+        range: Aops
+      user_id:
+        range: Users
+      description:
+  AopRelationships:
+    slots:
+      - created_at
+      - updated_at
+    attributes:
+      id:
+        identifier: true
+        range: integer
+      aop_id:
+        range: Aops
+      relationship_id:
+        range: Relationships
+      confidence_id:
+      quantitative_understanding_id:
+        range: ConfidenceLevels
+      row_order:
+        range: integer
+      directness_id:
+        range: Directnesses
+      type:
+  AopSexes:
+    slots:
+      - created_at
+      - updated_at
+    attributes:
+      id:
+        identifier: true
+        range: integer
+      aop_id:
+        range: Aops
+      sex_term_id:
+        range: SexTerms
+      confidence_id:
+  AopStressors:
+    slots:
+      - created_at
+      - updated_at
+    attributes:
+      id:
+        identifier: true
+        range: integer
+      aop_id:
+        range: Aops
+      stressor_id:
+        range: Stressors
+      confidence_id:
+      evidence_text:
+  AopTaxons:
+    slots:
+      - created_at
+      - updated_at
+    attributes:
+      id:
+        identifier: true
+        range: integer
+      aop_id:
+        range: Aops
+      taxon_term_id:
+        range: TaxonTerms
+      confidence_id:
+  AssayBioTargetFamilies:
+    slots:
+      - created_at
+      - updated_at
+    attributes:
+      id:
+        identifier: true
+        range: integer
+      assay_id:
+        range: Assays
+      biological_target_family_id:
+        range: BioTargetFamilies
+      batch_import_id:
+        range: BatchImports
+  Assays:
+    slots:
+      - created_at
+      - updated_at
+    attributes:
+      id:
+        identifier: true
+        range: integer
+      title:
+      description:
+      citation_id:
+      detection_technology:
+      biological_action_id:
+        range: BiologicalActions
+      external_assay_id:
+      batch_import_id:
+      objects:
+        multivalued: true
+        range: BiologicalObjects
+      processes:
+        multivalued: true
+        range: BiologicalProcesses
+      taxon_terms:
+        multivalued: true
+        range: TaxonTerms
+      events:
+        multivalued: true
+        range: Events
+        inverse: assays
+      bio_target_families:
+        multivalued: true
+        range: AssayBioTargetFamilies
+  AssignedLicenses:
+    slots:
+      - created_at
+      - updated_at
+    attributes:
+      id:
+        identifier: true
+        range: integer
+      license_id:
+        range: Licenses
+  BatchImports:
+    slots:
+      - created_at
+      - updated_at
+    attributes:
+      id:
+        identifier: true
+        range: integer
+      batch_code:
+      contributor_id:
+        range: Users
+      citation_id:
+        range: Citations
+      description:
+  BiologicalActions:
+    slots:
+      - created_at
+      - updated_at
+    attributes:
+      id:
+        identifier: true
+        range: integer
+      term:
+        range: BiologicalActionEnum
+      source:
+      source_id:
+  BiologicalObjects:
+    slots:
+      - created_at
+      - updated_at
+    attributes:
+      id:
+        identifier: true
+        range: integer
+      term:
+      source:
+        range: BiologicalObjectSourceEnum
+      source_id:
+      description:
+      url:
+  BiologicalOrganizations:
+    slots:
+      - created_at
+      - updated_at
+    attributes:
+      id:
+        identifier: true
+        range: integer
+      term:
+        range: BiologicalOrganizationEnum
+  BiologicalProcesses:
+    slots:
+      - created_at
+      - updated_at
+    attributes:
+      id:
+        identifier: true
+        range: integer
+      term:
+      source:
+        range: BiologicalProcessSourceEnum
+      source_id:
+      description:
+      url:
+  CellTerms:
+    slots:
+      - created_at
+      - updated_at
+    attributes:
+      id:
+        identifier: true
+        range: integer
+      source_id:
+      term:
+      official_name:
+      source:
+      description:
+      url:
+  ChemicalSynonyms:
+    slots:
+      - created_at
+      - updated_at
+    attributes:
+      id:
+        identifier: true
+        range: integer
+      term:
+      chemical_id:
+        range: Chemicals
+  Chemicals:
+    slots:
+      - created_at
+      - updated_at
+    attributes:
+      id:
+        identifier: true
+        range: integer
+      dsstox_substance_id:
+      casrn:
+      preferred_name:
+      jchem_inchi_key:
+      indigo_inchi_key:
+      pubchem_substance_id:
+      pubchem_compound_id:
+      inchi:
+      inchi_key:
+      dsstox_chemical_id:
+  CitationBioTargetFamilies:
+    slots:
+      - created_at
+      - updated_at
+    attributes:
+      id:
+        identifier: true
+        range: integer
+      citation_id:
+        range: Citations
+      biological_target_family_id:
+        range: BioTargetFamilies
+      batch_import_id:
+        range: BatchImports
+  CitationRelationships:
+    slots:
+      - created_at
+      - updated_at
+    attributes:
+      id:
+        identifier: true
+        range: integer
+      relationship_id:
+        range: Relationships
+      citation_id:
+        range: Citations
+  ConfidenceLevels:
+    slots:
+      - created_at
+      - updated_at
+    attributes:
+      id:
+        identifier: true
+        range: integer
+      term:
+        range: ConfidenceLevelsEnum
+  Directnesses:
+    slots:
+      - created_at
+      - updated_at
+    attributes:
+      id:
+        identifier: true
+        range: integer
+      term:
+        range: DirectnessesEnum
+      description:
+  EventLifeStages:
+    slots:
+      - created_at
+      - updated_at
+    attributes:
+      id:
+        identifier: true
+        range: integer
+      event_id:
+        range: Events
+      life_stage_term_id:
+        range: LifeStageTerms
+      confidence_id:
+  EventLogs:
+    slots:
+      - created_at
+      - updated_at
+    attributes:
+      id:
+        identifier: true
+        range: integer
+      event_id:
+        range: Events
+      user_id:
+        range: Users
+      description:
+  EventSexes:
+    slots:
+      - created_at
+      - updated_at
+    attributes:
+      id:
+        identifier: true
+        range: integer
+      event_id:
+        range: Events
+      sex_term_id:
+        range: SexTerms
+      confidence_id:
+  EventBioTargetFamilies:
+    slots:
+      - created_at
+      - updated_at
+    attributes:
+      id:
+        identifier: true
+        range: integer
+      event_id:
+        range: Events
+      biological_target_family_id:
+        range: BioTargetFamilies
+      batch_import_id:
+        range: BatchImports
+  EventTaxons:
+    slots:
+      - created_at
+      - updated_at
+    attributes:
+      id:
+        identifier: true
+        range: integer
+      event_id:
+        range: Events
+      taxon_term_id:
+        range: TaxonTerms
+      confidence_id:
+  Evidences:
+    slots:
+      - created_at
+      - updated_at
+    attributes:
+      id:
+        identifier: true
+        range: integer
+      upstream_observation_id:
+        range: Observations
+      downstream_observation_id:
+        range: Observations
+      citation_id:
+      taxon_term_id:
+        range: TaxonTerms
+      sex_term_id:
+        range: SexTerms
+      life_stage_term_id:
+        range: LifeStageTerms
+      relationship_id:
+        range: Relationships
+      experimental_design:
+      notes:
+  ExperimentTypes:
+    slots:
+      - created_at
+      - updated_at
+    attributes:
+      id:
+        identifier: true
+        range: integer
+      exp_type:
+  Handbooks:
+    slots:
+      - created_at
+      - updated_at
+    attributes:
+      id:
+        identifier: true
+        range: integer
+      version:
+        range: float
+      release_date:
+      release_notes:
+      forum_links:
+      active_version:
+      released:
+      pdf_copy_uid:
+      pdf_only:
+      release_notes_doc_uid:
+  HarmonizedAops:
+    slots:
+      - created_at
+      - updated_at
+    attributes:
+      id:
+        identifier: true
+        range: integer
+      tag:
+      new_aop_id:
+        range: Aops
+      source_aop_id:
+        range: Aops
+      is_priority:
+      batch_import_id:
+        range: BatchImports
+  HarmonizedEvents:
+    slots:
+      - created_at
+      - updated_at
+    attributes:
+      id:
+        identifier: true
+        range: integer
+      source_event_id:
+        range: Events
+      source_event_id_text:
+      source_event_label:
+      harmonized_label:
+      harmonized_label_key:
+      harmonized_event_id:
+        range: Events
+      raw_mapping_value:
+      mapping_status:
+      batch_import_id:
+        range: BatchImports
+  Licenses:
+    slots:
+      - created_at
+      - updated_at
+    attributes:
+      id:
+        identifier: true
+        range: integer
+      label:
+      logo_uid:
+      description:
+      internal_notes:
+      short_code:
+  LifeStageTerms:
+    slots:
+      - created_at
+      - updated_at
+    attributes:
+      id:
+        identifier: true
+        range: integer
+      term:
+        range: LifeStageTermsEnum
+      aops:
+        multivalued: true
+        range: AopLifeStages
+      events:
+        multivalued: true
+        range: EventLifeStages
+      relationships:
+        multivalued: true
+        range: RelationshipLifeStages
+  ObservationCitations:
+    slots:
+      - created_at
+      - updated_at
+    attributes:
+      id:
+        identifier: true
+        range: integer
+      observation_id:
+        range: Observations
+      citation_id:
+        range: Citations
+      batch_import_id:
+        range: BatchImports
+  OecdStatuses:
+    slots:
+      - created_at
+      - updated_at
+    attributes:
+      id:
+        identifier: true
+        range: integer
+      name:
+        range: OecdStatusEnum
+      description:
+      sort:
+        range: integer
+  OrganTerms:
+    slots:
+      - created_at
+      - updated_at
+    attributes:
+      id:
+        identifier: true
+        range: integer
+      source_id:
+      term:
+      official_name:
+      source:
+      description:
+      url:
+  Profiles:
+    slots:
+      - created_at
+      - updated_at
+    attributes:
+      id:
+        identifier: true
+        range: integer
+      user_id:
+        range: Users
+      first_name:
+      last_name:
+      title:
+      username:
+      affiliation:
+      country:
+      time_zone:
+      mailing_address:
+      orcid:
+      github_handle:
+  RelationshipLifeStages:
+    slots:
+      - created_at
+      - updated_at
+    attributes:
+      id:
+        identifier: true
+        range: integer
+      relationship_id:
+        range: Relationships
+      life_stage_term_id:
+        range: LifeStageTerms
+      confidence_id:
+  RelationshipLogs:
+    slots:
+      - created_at
+      - updated_at
+    attributes:
+      id:
+        identifier: true
+        range: integer
+      relationship_id:
+        range: Relationships
+      user_id:
+        range: Users
+      description:
+  RelationshipSexes:
+    slots:
+      - created_at
+      - updated_at
+    attributes:
+      id:
+        identifier: true
+        range: integer
+      relationship_id:
+        range: Relationships
+      sex_term_id:
+        range: SexTerms
+      confidence_id:
+  RelationshipTaxons:
+    slots:
+      - created_at
+      - updated_at
+    attributes:
+      id:
+        identifier: true
+        range: integer
+      relationship_id:
+        range: Relationships
+      taxon_term_id:
+        range: TaxonTerms
+      confidence_id:
+  SexTerms:
+    slots:
+      - created_at
+      - updated_at
+    attributes:
+      id:
+        identifier: true
+        range: integer
+      term:
+        range: SexTermsEnum
+      aops:
+        multivalued: true
+        range: AopSexes
+      events:
+        multivalued: true
+        range: EventSexes
+      relationships:
+        multivalued: true
+        range: RelationshipSexes
+  StressorChemicals:
+    slots:
+      - created_at
+      - updated_at
+    attributes:
+      id:
+        identifier: true
+        range: integer
+      user_term:
+      chemical_id:
+        range: Chemicals
+      stressor_id:
+        range: Stressors
+  StressorLogs:
+    slots:
+      - created_at
+      - updated_at
+    attributes:
+      id:
+        identifier: true
+        range: integer
+      stressor_id:
+        range: Stressors
+      user_id:
+        range: Users
+      description:
+  EventComponents:
+    slots:
+      - created_at
+      - updated_at
+    attributes:
+      id:
+        identifier: true
+        range: integer
+      biological_action_id:
+        range: BiologicalActions
+      biological_object_id:
+        range: BiologicalObjects
+      biological_process_id:
+        range: BiologicalProcesses
+  TaxonTerms:
+    slots:
+      - created_at
+      - updated_at
+    attributes:
+      id:
+        identifier: true
+        range: integer
+      term_class:
+        range: TaxonTermClassesEnum
+      term:
+      source:
+      ncbi_id:
+      scientific_term:
+      source_id:
+      aops:
+        multivalued: true
+        range: AopTaxons
+      events:
+        multivalued: true
+        range: EventTaxons
+      relationships:
+        multivalued: true
+        range: RelationshipTaxons
+  UrlLinks:
+    slots:
+      - created_at
+      - updated_at
+    attributes:
+      id:
+        identifier: true
+        range: integer
+      link_source:
+      url:
+      title:
+  Users:
+    attributes:
+      id:
+        identifier: true
+        range: integer
+      email:
+      coached_aops:
+        multivalued: true
+        range: Aops
+        inverse: coaches
+      contributed_aops:
+        multivalued: true
+        range: Aops
+        inverse: contributors
+
+enums:
+  BiologicalActionEnum:
+    permissible_values:
+      increased:
+      decreased:
+      functional change:
+      abnormal:
+      pathological:
+      occurrence:
+      disrupted:
+      morphological change:
+      arrested:
+      delayed:
+      premature:
+  BiologicalOrganizationEnum:
+    permissible_values:
+      Molecular:
+      Cellular:
+      Tissue:
+      Organ:
+      Individual:
+      Population:
+  BiologicalObjectSourceEnum:
+    permissible_values:
+      GO:
+        description: Gene Ontology
+      CHEBI:
+        description: Chemical Entities of Biological Interest
+      CL:
+        description: Cell Ontology
+      PR:
+        description: Protein Ontology
+      UBERON:
+        description: Uber-anatomy Ontology
+      FMA:
+        description: Foundational Model of Anatomy
+      MESH:
+        description: Medical Subject Headings
+      PCO:
+        description: Population and Community Ontology
+      MP:
+        description: Mammalian Phenotype Ontology
+      TAIR:
+        description: The Arabidopsis Information Resource
+      N/A:
+        description: Not applicable or not mapped to an ontology
+  BiologicalProcessSourceEnum:
+    permissible_values:
+      GO:
+        description: Gene Ontology
+      HP:
+        description: Human Phenotype Ontology
+      MP:
+        description: Mammalian Phenotype Ontology
+      NBO:
+        description: Neurobehavior Ontology
+      VT:
+        description: Vertebrate Trait Ontology
+      MESH:
+        description: Medical Subject Headings
+      PCO:
+        description: Population and Community Ontology
+      MI:
+        description: Molecular Interactions Ontology
+      N/A:
+        description: Not applicable or not mapped to an ontology
+      IDO:
+        description: Infectious Disease Ontology
+      NCI:
+        description: NCI Thesaurus
+      RBO:
+        description: Radiation Biology Ontology
+  SexTermsEnum:
+    permissible_values:
+      Male:
+      Female:
+      Mixed:
+      Asexual:
+      Third Gender:
+      Hermaphrodite:
+      Unspecific:
+  LifeStageTermsEnum:
+    permissible_values:
+      Birth to < 1 month:
+      1 to < 3 months:
+      3 to < 6 months:
+      6 to < 12 months:
+      1 to < 2 years:
+      2 to < 3 years:
+      3 to < 6 years:
+      6 to < 11 years:
+      11 to < 16 years:
+      16 to < 21 years:
+      Nursing Child:
+      Pregnancy:
+      Old Age:
+      Not Otherwise Specified:
+      Lactating Mother:
+      Conception to < Fetal:
+      Fetal to Parturition:
+      Foetal:
+      Fetal:
+      Embryo:
+      Juvenile:
+      Prepubertal:
+      Perinatal:
+      Adult, reproductively mature:
+      Adults:
+      Adult:
+      During development and at adulthood:
+      During brain development, adulthood and aging:
+      During brain development:
+      Human:
+      Development:
+      All life stages:
+      Larvae:
+      Larval development:
+      before or during gonadal sex differentiation:
+  TaxonTermClassesEnum:
+    permissible_values:
+      scientific name:
+      common name:
+      synonym:
+  ConfidenceLevelsEnum:
+    permissible_values:
+      high:
+      moderate:
+      low:
+      not specified:
+  DirectnessesEnum:
+    permissible_values:
+      adjacent:
+      non-adjacent:
+  OecdStatusEnum:
+    permissible_values:
+      Under development:
+      WPHA/WNT Endorsed:
+      ESCA Approved:
+      Under Review:
