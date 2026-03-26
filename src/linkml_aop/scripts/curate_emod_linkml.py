@@ -3,9 +3,9 @@ Build a curated emod_linkml.yml from a raw schemauto-generated file that is gene
 from the AOP-Wiki EMOD 3.0 MySQL database.
 
 Usage:
-    uv run python -m scripts.curate_emod_linkml <sql_based_file> [<output_file>]
+    uv run python -m linkml_aop.scripts.curate_emod_linkml <sql_based_file> [<output_file>]
 
-    sql_based_file  Raw output from `schemauto import-sql` (e.g. aop_wiki_emod_linkml.yml)
+    sql_based_file  Raw output from `schemauto import-sql` (e.g. aop_emod_linkml.yml)
     output_file     Destination file (defaults to sql_based_file, i.e. in-place)
 
 What this script does:
@@ -35,8 +35,7 @@ import re
 import sys
 from pathlib import Path
 
-# inputs/ is at the project root; importable when run as `python -m scripts.curate_emod_linkml`
-from inputs.aop_definitions_and_enums import (
+from linkml_aop.curation.aop_definitions_and_enums import (
     biological_action_enum_list,
     biological_object_source_enum_list,
     biological_organization_enum_list,
