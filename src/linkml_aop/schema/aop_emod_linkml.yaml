@@ -31,7 +31,7 @@ slots:
 
 # Class definitions
 classes:
-  Aops:
+  Aop:
     slots:
       - created_at
       - updated_at
@@ -42,7 +42,7 @@ classes:
       title:
       short_name:
       corresponding_author_id:
-        range: Users
+        range: User
       abstract:
       authors:
       applicability_of_the_aop:
@@ -57,7 +57,7 @@ classes:
       user_defined_ao:
       oecd_project:
       oecd_status_id:
-        range: OecdStatuses
+        range: OecdStatus
       graphical_representation_image_uid:
       saaop_status_id:
       legacy:
@@ -67,42 +67,42 @@ classes:
       development_strategy:
       known_modulating_factors:
       assigned_license_id:
-        range: AssignedLicenses
+        range: AssignedLicense
       handbook_id:
-        range: Handbooks
+        range: Handbook
       completion_score:
       mean_ker_score:
       mean_event_score:
       url_links:
         multivalued: true
-        range: UrlLinks
+        range: UrlLink
       coaches:
         multivalued: true
-        range: Users
+        range: User
         inverse: coached_aops
       contributors:
         multivalued: true
-        range: Users
+        range: User
         inverse: contributed_aops
       life_stages:
         multivalued: true
-        range: AopLifeStages
+        range: AopLifeStage
       sexes:
         multivalued: true
-        range: AopSexes
+        range: AopSex
       taxons:
         multivalued: true
-        range: AopTaxons
+        range: AopTaxon
       prototypical_stressor:
         multivalued: true
-        range: AopStressors
+        range: AopStressor
       events:
         multivalued: true
-        range: AopEvents
+        range: AopEvent
       relationships:
         multivalued: true
-        range: AopRelationships
-  Events:
+        range: AopRelationship
+  Event:
     slots:
       - created_at
       - updated_at
@@ -116,7 +116,7 @@ classes:
         description: A reasonable abbreviation of the Key Event title, used in labelling throughout AOP-Wiki.
       biological_organization_id:
         description: The level of biological organization at which the Key Event occurs (e.g., molecular, cellular, tissue, organ, organism).
-        range: BiologicalOrganizations
+        range: BiologicalOrganization
       how_it_works:
         description: The mechanistic basis explaining how perturbation of this Key Event leads to downstream effects.
       measured_or_detected:
@@ -133,10 +133,10 @@ classes:
         description: A description of the biological state being observed or measured, the biological compartment in which it is measured, and its general role in the biology.
       organ_term_id:
         description: The organ or tissue in which the Key Event takes place.
-        range: OrganTerms
+        range: OrganTerm
       cell_term_id:
         description: The cell type in which the Key Event takes place.
-        range: CellTerms
+        range: CellTerm
       completion_score:
         description: Calculated metric indicating how complete the Key Event documentation is.
       integration_score:
@@ -145,31 +145,31 @@ classes:
         description: Indicates whether method text has been provided for this Key Event.
       event_components:
         multivalued: true
-        range: EventComponents
+        range: EventComponent
       assays:
         multivalued: true
-        range: Assays
+        range: Assay
         inverse: events
       observations:
         multivalued: true
-        range: Observations
+        range: Observation
         inverse: events
       aops:
         multivalued: true
-        range: AopEvents
+        range: AopEvent
       life_stages:
         multivalued: true
-        range: EventLifeStages
+        range: EventLifeStage
       sexes:
         multivalued: true
-        range: EventSexes
+        range: EventSex
       bio_target_families:
         multivalued: true
-        range: EventBioTargetFamilies
+        range: EventBioTargetFamily
       taxons:
         multivalued: true
-        range: EventTaxons
-  Relationships:
+        range: EventTaxon
+  Relationship:
     slots:
       - created_at
       - updated_at
@@ -178,9 +178,9 @@ classes:
         identifier: true
         range: integer
       upstream_event_id:
-        range: Events
+        range: Event
       downstream_event_id:
-        range: Events
+        range: Event
       how_it_works:
       biological_plausibility:
       empirical_support:
@@ -197,17 +197,17 @@ classes:
       completion_score:
       aops:
         multivalued: true
-        range: AopRelationships
+        range: AopRelationship
       taxons:
         multivalued: true
-        range: RelationshipTaxons
+        range: RelationshipTaxon
       sexes:
         multivalued: true
-        range: RelationshipSexes
+        range: RelationshipSex
       life_stages:
         multivalued: true
-        range: RelationshipLifeStages
-  Stressors:
+        range: RelationshipLifeStage
+  Stressor:
     slots:
       - created_at
       - updated_at
@@ -221,8 +221,8 @@ classes:
       references:
       aops:
         multivalued: true
-        range: AopStressors
-  BioTargetFamilies:
+        range: AopStressor
+  BioTargetFamily:
     slots:
       - created_at
       - updated_at
@@ -232,17 +232,17 @@ classes:
         range: integer
       name:
       batch_import_id:
-        range: BatchImports
+        range: BatchImport
       events:
         multivalued: true
-        range: EventBioTargetFamilies
+        range: EventBioTargetFamily
       assays:
         multivalued: true
-        range: AssayBioTargetFamilies
+        range: AssayBioTargetFamily
       citations:
         multivalued: true
-        range: CitationBioTargetFamilies
-  Observations:
+        range: CitationBioTargetFamily
+  Observation:
     slots:
       - created_at
       - updated_at
@@ -251,13 +251,13 @@ classes:
         identifier: true
         range: integer
       biological_action_id:
-        range: BiologicalActions
+        range: BiologicalAction
       biological_process_id:
-        range: BiologicalProcesses
+        range: BiologicalProcess
       biological_object_id:
-        range: BiologicalObjects
+        range: BiologicalObject
       assay_id:
-        range: Assays
+        range: Assay
       batch_import_id:
       stressor_id:
       process_is_phenotype:
@@ -266,12 +266,12 @@ classes:
       notes:
       events:
         multivalued: true
-        range: Events
+        range: Event
         inverse: observations
       citations:
         multivalued: true
-        range: ObservationCitations
-  Citations:
+        range: ObservationCitation
+  Citation:
     slots:
       - created_at
       - updated_at
@@ -286,11 +286,11 @@ classes:
       year:
       bio_target_families:
         multivalued: true
-        range: CitationBioTargetFamilies
+        range: CitationBioTargetFamily
       observations:
         multivalued: true
-        range: ObservationCitations
-  AopEvents:
+        range: ObservationCitation
+  AopEvent:
     slots:
       - created_at
       - updated_at
@@ -299,18 +299,18 @@ classes:
         identifier: true
         range: integer
       aop_id:
-        range: Aops
+        range: Aop
       event_id:
-        range: Events
+        range: Event
       type:
       essentiality_id:
-        range: ConfidenceLevels
+        range: ConfidenceLevel
       row_order:
         range: integer
       sequence:
         range: integer
       batch_import_id:
-  AopLifeStages:
+  AopLifeStage:
     slots:
       - created_at
       - updated_at
@@ -319,11 +319,11 @@ classes:
         identifier: true
         range: integer
       aop_id:
-        range: Aops
+        range: Aop
       life_stage_term_id:
-        range: LifeStageTerms
+        range: LifeStageTerm
       confidence_id:
-  AopLogs:
+  AopLog:
     slots:
       - created_at
       - updated_at
@@ -332,11 +332,11 @@ classes:
         identifier: true
         range: integer
       aop_id:
-        range: Aops
+        range: Aop
       user_id:
-        range: Users
+        range: User
       description:
-  AopRelationships:
+  AopRelationship:
     slots:
       - created_at
       - updated_at
@@ -345,18 +345,18 @@ classes:
         identifier: true
         range: integer
       aop_id:
-        range: Aops
+        range: Aop
       relationship_id:
-        range: Relationships
+        range: Relationship
       confidence_id:
       quantitative_understanding_id:
-        range: ConfidenceLevels
+        range: ConfidenceLevel
       row_order:
         range: integer
       directness_id:
-        range: Directnesses
+        range: Directness
       type:
-  AopSexes:
+  AopSex:
     slots:
       - created_at
       - updated_at
@@ -365,11 +365,11 @@ classes:
         identifier: true
         range: integer
       aop_id:
-        range: Aops
+        range: Aop
       sex_term_id:
-        range: SexTerms
+        range: SexTerm
       confidence_id:
-  AopStressors:
+  AopStressor:
     slots:
       - created_at
       - updated_at
@@ -378,12 +378,12 @@ classes:
         identifier: true
         range: integer
       aop_id:
-        range: Aops
+        range: Aop
       stressor_id:
-        range: Stressors
+        range: Stressor
       confidence_id:
       evidence_text:
-  AopTaxons:
+  AopTaxon:
     slots:
       - created_at
       - updated_at
@@ -392,11 +392,11 @@ classes:
         identifier: true
         range: integer
       aop_id:
-        range: Aops
+        range: Aop
       taxon_term_id:
-        range: TaxonTerms
+        range: TaxonTerm
       confidence_id:
-  AssayBioTargetFamilies:
+  AssayBioTargetFamily:
     slots:
       - created_at
       - updated_at
@@ -405,12 +405,12 @@ classes:
         identifier: true
         range: integer
       assay_id:
-        range: Assays
+        range: Assay
       biological_target_family_id:
-        range: BioTargetFamilies
+        range: BioTargetFamily
       batch_import_id:
-        range: BatchImports
-  Assays:
+        range: BatchImport
+  Assay:
     slots:
       - created_at
       - updated_at
@@ -423,26 +423,26 @@ classes:
       citation_id:
       detection_technology:
       biological_action_id:
-        range: BiologicalActions
+        range: BiologicalAction
       external_assay_id:
       batch_import_id:
       objects:
         multivalued: true
-        range: BiologicalObjects
+        range: BiologicalObject
       processes:
         multivalued: true
-        range: BiologicalProcesses
+        range: BiologicalProcess
       taxon_terms:
         multivalued: true
-        range: TaxonTerms
+        range: TaxonTerm
       events:
         multivalued: true
-        range: Events
+        range: Event
         inverse: assays
       bio_target_families:
         multivalued: true
-        range: AssayBioTargetFamilies
-  AssignedLicenses:
+        range: AssayBioTargetFamily
+  AssignedLicense:
     slots:
       - created_at
       - updated_at
@@ -451,8 +451,8 @@ classes:
         identifier: true
         range: integer
       license_id:
-        range: Licenses
-  BatchImports:
+        range: License
+  BatchImport:
     slots:
       - created_at
       - updated_at
@@ -462,11 +462,11 @@ classes:
         range: integer
       batch_code:
       contributor_id:
-        range: Users
+        range: User
       citation_id:
-        range: Citations
+        range: Citation
       description:
-  BiologicalActions:
+  BiologicalAction:
     slots:
       - created_at
       - updated_at
@@ -478,7 +478,7 @@ classes:
         range: BiologicalActionEnum
       source:
       source_id:
-  BiologicalObjects:
+  BiologicalObject:
     slots:
       - created_at
       - updated_at
@@ -492,7 +492,7 @@ classes:
       source_id:
       description:
       url:
-  BiologicalOrganizations:
+  BiologicalOrganization:
     slots:
       - created_at
       - updated_at
@@ -502,7 +502,7 @@ classes:
         range: integer
       term:
         range: BiologicalOrganizationEnum
-  BiologicalProcesses:
+  BiologicalProcess:
     slots:
       - created_at
       - updated_at
@@ -516,7 +516,7 @@ classes:
       source_id:
       description:
       url:
-  CellTerms:
+  CellTerm:
     slots:
       - created_at
       - updated_at
@@ -530,7 +530,7 @@ classes:
       source:
       description:
       url:
-  ChemicalSynonyms:
+  ChemicalSynonym:
     slots:
       - created_at
       - updated_at
@@ -540,8 +540,8 @@ classes:
         range: integer
       term:
       chemical_id:
-        range: Chemicals
-  Chemicals:
+        range: Chemical
+  Chemical:
     slots:
       - created_at
       - updated_at
@@ -559,7 +559,7 @@ classes:
       inchi:
       inchi_key:
       dsstox_chemical_id:
-  CitationBioTargetFamilies:
+  CitationBioTargetFamily:
     slots:
       - created_at
       - updated_at
@@ -568,12 +568,12 @@ classes:
         identifier: true
         range: integer
       citation_id:
-        range: Citations
+        range: Citation
       biological_target_family_id:
-        range: BioTargetFamilies
+        range: BioTargetFamily
       batch_import_id:
-        range: BatchImports
-  CitationRelationships:
+        range: BatchImport
+  CitationRelationship:
     slots:
       - created_at
       - updated_at
@@ -582,10 +582,10 @@ classes:
         identifier: true
         range: integer
       relationship_id:
-        range: Relationships
+        range: Relationship
       citation_id:
-        range: Citations
-  ConfidenceLevels:
+        range: Citation
+  ConfidenceLevel:
     slots:
       - created_at
       - updated_at
@@ -594,8 +594,8 @@ classes:
         identifier: true
         range: integer
       term:
-        range: ConfidenceLevelsEnum
-  Directnesses:
+        range: ConfidenceLevelEnum
+  Directness:
     slots:
       - created_at
       - updated_at
@@ -604,9 +604,9 @@ classes:
         identifier: true
         range: integer
       term:
-        range: DirectnessesEnum
+        range: DirectnessEnum
       description:
-  EventLifeStages:
+  EventLifeStage:
     slots:
       - created_at
       - updated_at
@@ -615,11 +615,11 @@ classes:
         identifier: true
         range: integer
       event_id:
-        range: Events
+        range: Event
       life_stage_term_id:
-        range: LifeStageTerms
+        range: LifeStageTerm
       confidence_id:
-  EventLogs:
+  EventLog:
     slots:
       - created_at
       - updated_at
@@ -628,11 +628,11 @@ classes:
         identifier: true
         range: integer
       event_id:
-        range: Events
+        range: Event
       user_id:
-        range: Users
+        range: User
       description:
-  EventSexes:
+  EventSex:
     slots:
       - created_at
       - updated_at
@@ -641,11 +641,11 @@ classes:
         identifier: true
         range: integer
       event_id:
-        range: Events
+        range: Event
       sex_term_id:
-        range: SexTerms
+        range: SexTerm
       confidence_id:
-  EventBioTargetFamilies:
+  EventBioTargetFamily:
     slots:
       - created_at
       - updated_at
@@ -654,12 +654,12 @@ classes:
         identifier: true
         range: integer
       event_id:
-        range: Events
+        range: Event
       biological_target_family_id:
-        range: BioTargetFamilies
+        range: BioTargetFamily
       batch_import_id:
-        range: BatchImports
-  EventTaxons:
+        range: BatchImport
+  EventTaxon:
     slots:
       - created_at
       - updated_at
@@ -668,11 +668,11 @@ classes:
         identifier: true
         range: integer
       event_id:
-        range: Events
+        range: Event
       taxon_term_id:
-        range: TaxonTerms
+        range: TaxonTerm
       confidence_id:
-  Evidences:
+  Evidence:
     slots:
       - created_at
       - updated_at
@@ -681,21 +681,21 @@ classes:
         identifier: true
         range: integer
       upstream_observation_id:
-        range: Observations
+        range: Observation
       downstream_observation_id:
-        range: Observations
+        range: Observation
       citation_id:
       taxon_term_id:
-        range: TaxonTerms
+        range: TaxonTerm
       sex_term_id:
-        range: SexTerms
+        range: SexTerm
       life_stage_term_id:
-        range: LifeStageTerms
+        range: LifeStageTerm
       relationship_id:
-        range: Relationships
+        range: Relationship
       experimental_design:
       notes:
-  ExperimentTypes:
+  ExperimentType:
     slots:
       - created_at
       - updated_at
@@ -704,7 +704,7 @@ classes:
         identifier: true
         range: integer
       exp_type:
-  Handbooks:
+  Handbook:
     slots:
       - created_at
       - updated_at
@@ -722,7 +722,7 @@ classes:
       pdf_copy_uid:
       pdf_only:
       release_notes_doc_uid:
-  HarmonizedAops:
+  HarmonizedAop:
     slots:
       - created_at
       - updated_at
@@ -732,13 +732,13 @@ classes:
         range: integer
       tag:
       new_aop_id:
-        range: Aops
+        range: Aop
       source_aop_id:
-        range: Aops
+        range: Aop
       is_priority:
       batch_import_id:
-        range: BatchImports
-  HarmonizedEvents:
+        range: BatchImport
+  HarmonizedEvent:
     slots:
       - created_at
       - updated_at
@@ -747,18 +747,18 @@ classes:
         identifier: true
         range: integer
       source_event_id:
-        range: Events
+        range: Event
       source_event_id_text:
       source_event_label:
       harmonized_label:
       harmonized_label_key:
       harmonized_event_id:
-        range: Events
+        range: Event
       raw_mapping_value:
       mapping_status:
       batch_import_id:
-        range: BatchImports
-  Licenses:
+        range: BatchImport
+  License:
     slots:
       - created_at
       - updated_at
@@ -771,7 +771,7 @@ classes:
       description:
       internal_notes:
       short_code:
-  LifeStageTerms:
+  LifeStageTerm:
     slots:
       - created_at
       - updated_at
@@ -780,17 +780,17 @@ classes:
         identifier: true
         range: integer
       term:
-        range: LifeStageTermsEnum
+        range: LifeStageTermEnum
       aops:
         multivalued: true
-        range: AopLifeStages
+        range: AopLifeStage
       events:
         multivalued: true
-        range: EventLifeStages
+        range: EventLifeStage
       relationships:
         multivalued: true
-        range: RelationshipLifeStages
-  ObservationCitations:
+        range: RelationshipLifeStage
+  ObservationCitation:
     slots:
       - created_at
       - updated_at
@@ -799,12 +799,12 @@ classes:
         identifier: true
         range: integer
       observation_id:
-        range: Observations
+        range: Observation
       citation_id:
-        range: Citations
+        range: Citation
       batch_import_id:
-        range: BatchImports
-  OecdStatuses:
+        range: BatchImport
+  OecdStatus:
     slots:
       - created_at
       - updated_at
@@ -817,7 +817,7 @@ classes:
       description:
       sort:
         range: integer
-  OrganTerms:
+  OrganTerm:
     slots:
       - created_at
       - updated_at
@@ -831,7 +831,7 @@ classes:
       source:
       description:
       url:
-  Profiles:
+  Profile:
     slots:
       - created_at
       - updated_at
@@ -840,7 +840,7 @@ classes:
         identifier: true
         range: integer
       user_id:
-        range: Users
+        range: User
       first_name:
       last_name:
       title:
@@ -851,7 +851,7 @@ classes:
       mailing_address:
       orcid:
       github_handle:
-  RelationshipLifeStages:
+  RelationshipLifeStage:
     slots:
       - created_at
       - updated_at
@@ -860,11 +860,11 @@ classes:
         identifier: true
         range: integer
       relationship_id:
-        range: Relationships
+        range: Relationship
       life_stage_term_id:
-        range: LifeStageTerms
+        range: LifeStageTerm
       confidence_id:
-  RelationshipLogs:
+  RelationshipLog:
     slots:
       - created_at
       - updated_at
@@ -873,11 +873,11 @@ classes:
         identifier: true
         range: integer
       relationship_id:
-        range: Relationships
+        range: Relationship
       user_id:
-        range: Users
+        range: User
       description:
-  RelationshipSexes:
+  RelationshipSex:
     slots:
       - created_at
       - updated_at
@@ -886,11 +886,11 @@ classes:
         identifier: true
         range: integer
       relationship_id:
-        range: Relationships
+        range: Relationship
       sex_term_id:
-        range: SexTerms
+        range: SexTerm
       confidence_id:
-  RelationshipTaxons:
+  RelationshipTaxon:
     slots:
       - created_at
       - updated_at
@@ -899,11 +899,11 @@ classes:
         identifier: true
         range: integer
       relationship_id:
-        range: Relationships
+        range: Relationship
       taxon_term_id:
-        range: TaxonTerms
+        range: TaxonTerm
       confidence_id:
-  SexTerms:
+  SexTerm:
     slots:
       - created_at
       - updated_at
@@ -912,17 +912,17 @@ classes:
         identifier: true
         range: integer
       term:
-        range: SexTermsEnum
+        range: SexTermEnum
       aops:
         multivalued: true
-        range: AopSexes
+        range: AopSex
       events:
         multivalued: true
-        range: EventSexes
+        range: EventSex
       relationships:
         multivalued: true
-        range: RelationshipSexes
-  StressorChemicals:
+        range: RelationshipSex
+  StressorChemical:
     slots:
       - created_at
       - updated_at
@@ -932,10 +932,10 @@ classes:
         range: integer
       user_term:
       chemical_id:
-        range: Chemicals
+        range: Chemical
       stressor_id:
-        range: Stressors
-  StressorLogs:
+        range: Stressor
+  StressorLog:
     slots:
       - created_at
       - updated_at
@@ -944,11 +944,11 @@ classes:
         identifier: true
         range: integer
       stressor_id:
-        range: Stressors
+        range: Stressor
       user_id:
-        range: Users
+        range: User
       description:
-  EventComponents:
+  EventComponent:
     slots:
       - created_at
       - updated_at
@@ -957,12 +957,12 @@ classes:
         identifier: true
         range: integer
       biological_action_id:
-        range: BiologicalActions
+        range: BiologicalAction
       biological_object_id:
-        range: BiologicalObjects
+        range: BiologicalObject
       biological_process_id:
-        range: BiologicalProcesses
-  TaxonTerms:
+        range: BiologicalProcess
+  TaxonTerm:
     slots:
       - created_at
       - updated_at
@@ -971,7 +971,7 @@ classes:
         identifier: true
         range: integer
       term_class:
-        range: TaxonTermClassesEnum
+        range: TaxonTermClassEnum
       term:
       source:
       ncbi_id:
@@ -979,14 +979,14 @@ classes:
       source_id:
       aops:
         multivalued: true
-        range: AopTaxons
+        range: AopTaxon
       events:
         multivalued: true
-        range: EventTaxons
+        range: EventTaxon
       relationships:
         multivalued: true
-        range: RelationshipTaxons
-  UrlLinks:
+        range: RelationshipTaxon
+  UrlLink:
     slots:
       - created_at
       - updated_at
@@ -997,7 +997,7 @@ classes:
       link_source:
       url:
       title:
-  Users:
+  User:
     attributes:
       id:
         identifier: true
@@ -1005,11 +1005,11 @@ classes:
       email:
       coached_aops:
         multivalued: true
-        range: Aops
+        range: Aop
         inverse: coaches
       contributed_aops:
         multivalued: true
-        range: Aops
+        range: Aop
         inverse: contributors
 
 enums:

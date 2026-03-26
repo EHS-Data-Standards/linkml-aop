@@ -58,6 +58,34 @@ def to_snake_case(name: str) -> str:
     return re.sub(r"(?<!^)(?=[A-Z])", "_", name).lower()
 
 
+def singularize_word(word: str) -> str:
+    """Return the singular form of a single English word (no underscores)."""
+    if word.endswith("ies"):
+        return word[:-3] + "y"
+    if word.endswith("xes"):          # sexes → sex, boxes → box
+        return word[:-2]
+    if word.endswith("sses"):         # processes → process, directnesses → directness
+        return word[:-2]
+    if word.endswith("uses"):         # statuses → status
+        return word[:-2]
+    if word.endswith("s") and not word.endswith("ss"):
+        return word[:-1]
+    return word
+
+
+def to_singular(name: str) -> str:
+    """Singularize the last underscore-separated segment of a snake_case name.
+
+    Examples: bio_target_families → bio_target_family, aops → aop,
+    oecd_statuses → oecd_status, directnesses → directness.
+    Enum names (ending in _enum) are left unchanged since 'enum' has no trailing 's'.
+    """
+    if "_" in name:
+        prefix, last = name.rsplit("_", 1)
+        return f"{prefix}_{singularize_word(last)}"
+    return singularize_word(name)
+
+
 SHARED_SLOTS = {"created_at", "updated_at"}
 
 # LinkML built-in scalar types — excluded from PascalCase conversion.
@@ -532,14 +560,14 @@ def apply_pascal_case_to_classes(text: str) -> str:
 
     body = re.sub(
         r'^(  )([a-z][a-z_0-9]*)(:\s*)$',
-        lambda m: m.group(1) + to_pascal_case(m.group(2)) + m.group(3),
+        lambda m: m.group(1) + to_pascal_case(to_singular(m.group(2))) + m.group(3),
         body,
         flags=re.MULTILINE,
     )
     body = re.sub(
         r'^( +range: )([a-z][a-z_0-9]*)(\s*)$',
         lambda m: (
-            m.group(1) + to_pascal_case(m.group(2)) + m.group(3)
+            m.group(1) + to_pascal_case(to_singular(m.group(2))) + m.group(3)
             if m.group(2) not in LINKML_BUILTIN_TYPES
             else m.group(0)
         ),

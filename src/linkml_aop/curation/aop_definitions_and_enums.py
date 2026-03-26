@@ -23,11 +23,11 @@ class_to_enum = {
     "BiologicalOrganizations": ("term",       "BiologicalOrganizationEnum"),
     "BiologicalObjects":       ("source",     "BiologicalObjectSourceEnum"),
     "BiologicalProcesses":     ("source",     "BiologicalProcessSourceEnum"),
-    "SexTerms":                ("term",       "SexTermsEnum"),
-    "LifeStageTerms":          ("term",       "LifeStageTermsEnum"),
-    "TaxonTerms":              ("term_class", "TaxonTermClassesEnum"),
-    "ConfidenceLevels":        ("term",       "ConfidenceLevelsEnum"),
-    "Directnesses":            ("term",       "DirectnessesEnum"),
+    "SexTerms":                ("term",       "SexTermEnum"),
+    "LifeStageTerms":          ("term",       "LifeStageTermEnum"),
+    "TaxonTerms":              ("term_class", "TaxonTermClassEnum"),
+    "ConfidenceLevels":        ("term",       "ConfidenceLevelEnum"),
+    "Directnesses":            ("term",       "DirectnessEnum"),
     "OecdStatuses":            ("name",       "OecdStatusEnum"),
 }
 
