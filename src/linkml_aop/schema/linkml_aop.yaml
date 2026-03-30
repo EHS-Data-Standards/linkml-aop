@@ -223,12 +223,6 @@ slots:
       The level of biological organization at which the event
       occurs. Must be one of the following: molecular, cellular, tissue, organ,
       organism, individual, or population.
-  short_name:
-    range: string
-    description: >-
-      A short name or identifier for the event. This is generally
-      a combination of the target and event type, such as "Formation, Pro-mutagenic
-      DNA Adducts" or "Increase, reactive oxygen species".
   cell_term:
     range: CellTerm
     description: >-
