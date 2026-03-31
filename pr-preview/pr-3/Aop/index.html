@@ -1,0 +1,1780 @@
+
+<!DOCTYPE html>
+
+<html class="no-js" lang="en">
+<head>
+<meta charset="utf-8"/>
+<meta content="width=device-width,initial-scale=1" name="viewport"/>
+<link href="https://caufieldjh.github.io/linkml-aop/Aop/" rel="canonical"/>
+<link href="../assets/images/favicon.png" rel="icon"/>
+<meta content="mkdocs-1.6.1, mkdocs-material-9.7.6" name="generator"/>
+<title>Class: Aop - linkml-aop</title>
+<link href="../assets/stylesheets/main.484c7ddc.min.css" rel="stylesheet"/>
+<link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect"/>
+<link href="https://fonts.googleapis.com/css?family=Roboto:300,300i,400,400i,700,700i%7CRoboto+Mono:400,400i,700,700i&amp;display=fallback" rel="stylesheet"/>
+<style>:root{--md-text-font:"Roboto";--md-code-font:"Roboto Mono"}</style>
+<link href="../css/ansi-colours.css" rel="stylesheet"/>
+<link href="../css/jupyter-cells.css" rel="stylesheet"/>
+<link href="../css/pandas-dataframe.css" rel="stylesheet"/>
+<script>__md_scope=new URL("..",location),__md_hash=e=>[...e].reduce(((e,_)=>(e<<5)-e+_.charCodeAt(0)),0),__md_get=(e,_=localStorage,t=__md_scope)=>JSON.parse(_.getItem(t.pathname+"."+e)),__md_set=(e,_,t=localStorage,a=__md_scope)=>{try{t.setItem(a.pathname+"."+e,JSON.stringify(_))}catch(e){}}</script>
+</head>
+<body dir="ltr">
+<input autocomplete="off" class="md-toggle" data-md-toggle="drawer" id="__drawer" type="checkbox"/>
+<input autocomplete="off" class="md-toggle" data-md-toggle="search" id="__search" type="checkbox"/>
+<label class="md-overlay" for="__drawer"></label>
+<div data-md-component="skip">
+<a class="md-skip" href="#class-aop">
+          Skip to content
+        </a>
+</div>
+<div data-md-component="announce">
+</div>
+<header class="md-header md-header--shadow" data-md-component="header">
+<nav aria-label="Header" class="md-header__inner md-grid">
+<a aria-label="linkml-aop" class="md-header__button md-logo" data-md-component="logo" href=".." title="linkml-aop">
+<svg viewbox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path d="M12 8a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3 3 3 0 0 0 3 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54"></path></svg>
+</a>
+<label class="md-header__button md-icon" for="__drawer">
+<svg viewbox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path d="M3 6h18v2H3zm0 5h18v2H3zm0 5h18v2H3z"></path></svg>
+</label>
+<div class="md-header__title" data-md-component="header-title">
+<div class="md-header__ellipsis">
+<div class="md-header__topic">
+<span class="md-ellipsis">
+            linkml-aop
+          </span>
+</div>
+<div class="md-header__topic" data-md-component="header-topic">
+<span class="md-ellipsis">
+            
+              Class: Aop
+            
+          </span>
+</div>
+</div>
+</div>
+<script>var palette=__md_get("__palette");if(palette&&palette.color){if("(prefers-color-scheme)"===palette.color.media){var media=matchMedia("(prefers-color-scheme: light)"),input=document.querySelector(media.matches?"[data-md-color-media='(prefers-color-scheme: light)']":"[data-md-color-media='(prefers-color-scheme: dark)']");palette.color.media=input.getAttribute("data-md-color-media"),palette.color.scheme=input.getAttribute("data-md-color-scheme"),palette.color.primary=input.getAttribute("data-md-color-primary"),palette.color.accent=input.getAttribute("data-md-color-accent")}for(var[key,value]of Object.entries(palette.color))document.body.setAttribute("data-md-color-"+key,value)}</script>
+<label class="md-header__button md-icon" for="__search">
+<svg viewbox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.52 6.52 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5"></path></svg>
+</label>
+<div class="md-search" data-md-component="search" role="dialog">
+<label class="md-search__overlay" for="__search"></label>
+<div class="md-search__inner" role="search">
+<form class="md-search__form" name="search">
+<input aria-label="Search" autocapitalize="off" autocomplete="off" autocorrect="off" class="md-search__input" data-md-component="search-query" name="query" placeholder="Search" required="" spellcheck="false" type="text"/>
+<label class="md-search__icon md-icon" for="__search">
+<svg viewbox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.52 6.52 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5"></path></svg>
+<svg viewbox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11z"></path></svg>
+</label>
+<nav aria-label="Search" class="md-search__options">
+<button aria-label="Clear" class="md-search__icon md-icon" tabindex="-1" title="Clear" type="reset">
+<svg viewbox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path d="M19 6.41 17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12z"></path></svg>
+</button>
+</nav>
+</form>
+<div class="md-search__output">
+<div class="md-search__scrollwrap" data-md-scrollfix="" tabindex="0">
+<div class="md-search-result" data-md-component="search-result">
+<div class="md-search-result__meta">
+            Initializing search
+          </div>
+<ol class="md-search-result__list" role="presentation"></ol>
+</div>
+</div>
+</div>
+</div>
+</div>
+<div class="md-header__source">
+<a class="md-source" data-md-component="source" href="https://github.com/caufieldjh/linkml-aop" title="Go to repository">
+<div class="md-source__icon md-icon">
+<svg viewbox="0 0 448 512" xmlns="http://www.w3.org/2000/svg"><!--! Font Awesome Free 7.1.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2025 Fonticons, Inc.--><path d="M439.6 236.1 244 40.5c-5.4-5.5-12.8-8.5-20.4-8.5s-15 3-20.4 8.4L162.5 81l51.5 51.5c27.1-9.1 52.7 16.8 43.4 43.7l49.7 49.7c34.2-11.8 61.2 31 35.5 56.7-26.5 26.5-70.2-2.9-56-37.3L240.3 199v121.9c25.3 12.5 22.3 41.8 9.1 55-6.4 6.4-15.2 10.1-24.3 10.1s-17.8-3.6-24.3-10.1c-17.6-17.6-11.1-46.9 11.2-56v-123c-20.8-8.5-24.6-30.7-18.6-45L142.6 101 8.5 235.1C3 240.6 0 247.9 0 255.5s3 15 8.5 20.4l195.6 195.7c5.4 5.4 12.7 8.4 20.4 8.4s15-3 20.4-8.4l194.7-194.7c5.4-5.4 8.4-12.8 8.4-20.4s-3-15-8.4-20.4"></path></svg>
+</div>
+<div class="md-source__repository">
+    GitHub
+  </div>
+</a>
+</div>
+</nav>
+</header>
+<div class="md-container" data-md-component="container">
+<main class="md-main" data-md-component="main">
+<div class="md-main__inner md-grid">
+<div class="md-sidebar md-sidebar--primary" data-md-component="sidebar" data-md-type="navigation">
+<div class="md-sidebar__scrollwrap">
+<div class="md-sidebar__inner">
+<nav aria-label="Navigation" class="md-nav md-nav--primary" data-md-level="0">
+<label class="md-nav__title" for="__drawer">
+<a aria-label="linkml-aop" class="md-nav__button md-logo" data-md-component="logo" href=".." title="linkml-aop">
+<svg viewbox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path d="M12 8a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3 3 3 0 0 0 3 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54"></path></svg>
+</a>
+    linkml-aop
+  </label>
+<div class="md-nav__source">
+<a class="md-source" data-md-component="source" href="https://github.com/caufieldjh/linkml-aop" title="Go to repository">
+<div class="md-source__icon md-icon">
+<svg viewbox="0 0 448 512" xmlns="http://www.w3.org/2000/svg"><!--! Font Awesome Free 7.1.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2025 Fonticons, Inc.--><path d="M439.6 236.1 244 40.5c-5.4-5.5-12.8-8.5-20.4-8.5s-15 3-20.4 8.4L162.5 81l51.5 51.5c27.1-9.1 52.7 16.8 43.4 43.7l49.7 49.7c34.2-11.8 61.2 31 35.5 56.7-26.5 26.5-70.2-2.9-56-37.3L240.3 199v121.9c25.3 12.5 22.3 41.8 9.1 55-6.4 6.4-15.2 10.1-24.3 10.1s-17.8-3.6-24.3-10.1c-17.6-17.6-11.1-46.9 11.2-56v-123c-20.8-8.5-24.6-30.7-18.6-45L142.6 101 8.5 235.1C3 240.6 0 247.9 0 255.5s3 15 8.5 20.4l195.6 195.7c5.4 5.4 12.7 8.4 20.4 8.4s15-3 20.4-8.4l194.7-194.7c5.4-5.4 8.4-12.8 8.4-20.4s-3-15-8.4-20.4"></path></svg>
+</div>
+<div class="md-source__repository">
+    GitHub
+  </div>
+</a>
+</div>
+<ul class="md-nav__list" data-md-scrollfix="">
+<li class="md-nav__item">
+<a class="md-nav__link" href="..">
+<span class="md-ellipsis">
+    
+  
+    Index
+  
+
+    
+  </span>
+</a>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link" href="../about/">
+<span class="md-ellipsis">
+    
+  
+    About
+  
+
+    
+  </span>
+</a>
+</li>
+</ul>
+</nav>
+</div>
+</div>
+</div>
+<div class="md-sidebar md-sidebar--secondary" data-md-component="sidebar" data-md-type="toc">
+<div class="md-sidebar__scrollwrap">
+<div class="md-sidebar__inner">
+<nav aria-label="Table of contents" class="md-nav md-nav--secondary">
+<label class="md-nav__title" for="__toc">
+<span class="md-nav__icon md-icon"></span>
+      Table of contents
+    </label>
+<ul class="md-nav__list" data-md-component="toc" data-md-scrollfix="">
+<li class="md-nav__item">
+<a class="md-nav__link" href="#slots">
+<span class="md-ellipsis">
+      
+        Slots
+      
+    </span>
+</a>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link" href="#usages">
+<span class="md-ellipsis">
+      
+        Usages
+      
+    </span>
+</a>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link" href="#identifier-and-mapping-information">
+<span class="md-ellipsis">
+      
+        Identifier and Mapping Information
+      
+    </span>
+</a>
+<nav aria-label="Identifier and Mapping Information" class="md-nav">
+<ul class="md-nav__list">
+<li class="md-nav__item">
+<a class="md-nav__link" href="#schema-source">
+<span class="md-ellipsis">
+      
+        Schema Source
+      
+    </span>
+</a>
+</li>
+</ul>
+</nav>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link" href="#mappings">
+<span class="md-ellipsis">
+      
+        Mappings
+      
+    </span>
+</a>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link" href="#linkml-source">
+<span class="md-ellipsis">
+      
+        LinkML Source
+      
+    </span>
+</a>
+<nav aria-label="LinkML Source" class="md-nav">
+<ul class="md-nav__list">
+<li class="md-nav__item">
+<a class="md-nav__link" href="#direct">
+<span class="md-ellipsis">
+      
+        Direct
+      
+    </span>
+</a>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link" href="#induced">
+<span class="md-ellipsis">
+      
+        Induced
+      
+    </span>
+</a>
+</li>
+</ul>
+</nav>
+</li>
+</ul>
+</nav>
+</div>
+</div>
+</div>
+<div class="md-content" data-md-component="content">
+<article class="md-content__inner md-typeset">
+<h1 id="class-aop">Class: Aop</h1>
+<p>URI: <a href="http://example.org/aopwiki-emod/Aop">http://example.org/aopwiki-emod/Aop</a></p>
+<div class="mermaid"> classDiagram
+    class Aop
+    click Aop href "../Aop/"
+      Aop : abstract
+
+      Aop : applicability_of_the_aop
+
+      Aop : assigned_license_id
+
+
+
+
+
+        Aop --&gt; "0..1" AssignedLicense : assigned_license_id
+        click AssignedLicense href "../AssignedLicense/"
+
+
+
+      Aop : authors
+
+      Aop : background
+
+      Aop : changed_at
+
+      Aop : coaches
+
+
+
+
+
+        Aop --&gt; "*" User : coaches
+        click User href "../User/"
+
+
+
+      Aop : completion_score
+
+      Aop : contributors
+
+
+
+
+
+        Aop --&gt; "*" User : contributors
+        click User href "../User/"
+
+
+
+      Aop : corresponding_author_id
+
+
+
+
+
+        Aop --&gt; "0..1" User : corresponding_author_id
+        click User href "../User/"
+
+
+
+      Aop : created_at
+
+      Aop : development_strategy
+
+      Aop : events
+
+
+
+
+
+        Aop --&gt; "*" AopEvent : events
+        click AopEvent href "../AopEvent/"
+
+
+
+      Aop : graphical_representation_image_uid
+
+      Aop : handbook_id
+
+
+
+
+
+        Aop --&gt; "0..1" Handbook : handbook_id
+        click Handbook href "../Handbook/"
+
+
+
+      Aop : id
+
+      Aop : key_event_essentiality
+
+      Aop : known_modulating_factors
+
+      Aop : legacy
+
+      Aop : life_stages
+
+
+
+
+
+        Aop --&gt; "*" AopLifeStage : life_stages
+        click AopLifeStage href "../AopLifeStage/"
+
+
+
+      Aop : mean_event_score
+
+      Aop : mean_ker_score
+
+      Aop : oecd_project
+
+      Aop : oecd_status_id
+
+
+
+
+
+        Aop --&gt; "0..1" OecdStatus : oecd_status_id
+        click OecdStatus href "../OecdStatus/"
+
+
+
+      Aop : optional_considerations
+
+      Aop : overall_assessment
+
+      Aop : overall_assessment_file_uid
+
+      Aop : prototypical_stressor
+
+
+
+
+
+        Aop --&gt; "*" AopStressor : prototypical_stressor
+        click AopStressor href "../AopStressor/"
+
+
+
+      Aop : quantitative_considerations
+
+      Aop : references
+
+      Aop : relationships
+
+
+
+
+
+        Aop --&gt; "*" AopRelationship : relationships
+        click AopRelationship href "../AopRelationship/"
+
+
+
+      Aop : saaop_status_id
+
+      Aop : sexes
+
+
+
+
+
+        Aop --&gt; "*" AopSex : sexes
+        click AopSex href "../AopSex/"
+
+
+
+      Aop : short_name
+
+      Aop : taxons
+
+
+
+
+
+        Aop --&gt; "*" AopTaxon : taxons
+        click AopTaxon href "../AopTaxon/"
+
+
+
+      Aop : title
+
+      Aop : updated_at
+
+      Aop : url_links
+
+
+
+
+
+        Aop --&gt; "*" UrlLink : url_links
+        click UrlLink href "../UrlLink/"
+
+
+
+      Aop : user_defined_ao
+
+      Aop : user_defined_mie
+
+      Aop : weight_of_evidence_summary
+
+
+</div>
+<!-- no inheritance hierarchy -->
+<h2 id="slots">Slots</h2>
+<table>
+<thead>
+<tr>
+<th>Name</th>
+<th>Cardinality and Range</th>
+<th>Description</th>
+<th>Inheritance</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><a href="../created_at/">created_at</a></td>
+<td>0..1 <br/> <a href="../Datetime/">Datetime</a></td>
+<td>Timestamp of when the record was created</td>
+<td>direct</td>
+</tr>
+<tr>
+<td><a href="../updated_at/">updated_at</a></td>
+<td>0..1 <br/> <a href="../Datetime/">Datetime</a></td>
+<td>Timestamp of when the record was last updated</td>
+<td>direct</td>
+</tr>
+<tr>
+<td><a href="../id/">id</a></td>
+<td>1 <br/> <a href="../Integer/">Integer</a></td>
+<td></td>
+<td>direct</td>
+</tr>
+<tr>
+<td><a href="../title/">title</a></td>
+<td>0..1 <br/> <a href="../String/">String</a></td>
+<td></td>
+<td>direct</td>
+</tr>
+<tr>
+<td><a href="../short_name/">short_name</a></td>
+<td>0..1 <br/> <a href="../String/">String</a></td>
+<td></td>
+<td>direct</td>
+</tr>
+<tr>
+<td><a href="../corresponding_author_id/">corresponding_author_id</a></td>
+<td>0..1 <br/> <a href="../User/">User</a></td>
+<td></td>
+<td>direct</td>
+</tr>
+<tr>
+<td><a href="../abstract/">abstract</a></td>
+<td>0..1 <br/> <a href="../String/">String</a></td>
+<td></td>
+<td>direct</td>
+</tr>
+<tr>
+<td><a href="../authors/">authors</a></td>
+<td>0..1 <br/> <a href="../String/">String</a></td>
+<td></td>
+<td>direct</td>
+</tr>
+<tr>
+<td><a href="../applicability_of_the_aop/">applicability_of_the_aop</a></td>
+<td>0..1 <br/> <a href="../String/">String</a></td>
+<td></td>
+<td>direct</td>
+</tr>
+<tr>
+<td><a href="../key_event_essentiality/">key_event_essentiality</a></td>
+<td>0..1 <br/> <a href="../String/">String</a></td>
+<td></td>
+<td>direct</td>
+</tr>
+<tr>
+<td><a href="../weight_of_evidence_summary/">weight_of_evidence_summary</a></td>
+<td>0..1 <br/> <a href="../String/">String</a></td>
+<td></td>
+<td>direct</td>
+</tr>
+<tr>
+<td><a href="../quantitative_considerations/">quantitative_considerations</a></td>
+<td>0..1 <br/> <a href="../String/">String</a></td>
+<td></td>
+<td>direct</td>
+</tr>
+<tr>
+<td><a href="../optional_considerations/">optional_considerations</a></td>
+<td>0..1 <br/> <a href="../String/">String</a></td>
+<td></td>
+<td>direct</td>
+</tr>
+<tr>
+<td><a href="../references/">references</a></td>
+<td>0..1 <br/> <a href="../String/">String</a></td>
+<td></td>
+<td>direct</td>
+</tr>
+<tr>
+<td><a href="../overall_assessment/">overall_assessment</a></td>
+<td>0..1 <br/> <a href="../String/">String</a></td>
+<td></td>
+<td>direct</td>
+</tr>
+<tr>
+<td><a href="../background/">background</a></td>
+<td>0..1 <br/> <a href="../String/">String</a></td>
+<td></td>
+<td>direct</td>
+</tr>
+<tr>
+<td><a href="../user_defined_mie/">user_defined_mie</a></td>
+<td>0..1 <br/> <a href="../String/">String</a></td>
+<td></td>
+<td>direct</td>
+</tr>
+<tr>
+<td><a href="../user_defined_ao/">user_defined_ao</a></td>
+<td>0..1 <br/> <a href="../String/">String</a></td>
+<td></td>
+<td>direct</td>
+</tr>
+<tr>
+<td><a href="../oecd_project/">oecd_project</a></td>
+<td>0..1 <br/> <a href="../String/">String</a></td>
+<td></td>
+<td>direct</td>
+</tr>
+<tr>
+<td><a href="../oecd_status_id/">oecd_status_id</a></td>
+<td>0..1 <br/> <a href="../OecdStatus/">OecdStatus</a></td>
+<td></td>
+<td>direct</td>
+</tr>
+<tr>
+<td><a href="../graphical_representation_image_uid/">graphical_representation_image_uid</a></td>
+<td>0..1 <br/> <a href="../String/">String</a></td>
+<td></td>
+<td>direct</td>
+</tr>
+<tr>
+<td><a href="../saaop_status_id/">saaop_status_id</a></td>
+<td>0..1 <br/> <a href="../String/">String</a></td>
+<td></td>
+<td>direct</td>
+</tr>
+<tr>
+<td><a href="../legacy/">legacy</a></td>
+<td>0..1 <br/> <a href="../Integer/">Integer</a></td>
+<td></td>
+<td>direct</td>
+</tr>
+<tr>
+<td><a href="../overall_assessment_file_uid/">overall_assessment_file_uid</a></td>
+<td>0..1 <br/> <a href="../String/">String</a></td>
+<td></td>
+<td>direct</td>
+</tr>
+<tr>
+<td><a href="../changed_at/">changed_at</a></td>
+<td>0..1 <br/> <a href="../String/">String</a></td>
+<td></td>
+<td>direct</td>
+</tr>
+<tr>
+<td><a href="../development_strategy/">development_strategy</a></td>
+<td>0..1 <br/> <a href="../String/">String</a></td>
+<td></td>
+<td>direct</td>
+</tr>
+<tr>
+<td><a href="../known_modulating_factors/">known_modulating_factors</a></td>
+<td>0..1 <br/> <a href="../String/">String</a></td>
+<td></td>
+<td>direct</td>
+</tr>
+<tr>
+<td><a href="../assigned_license_id/">assigned_license_id</a></td>
+<td>0..1 <br/> <a href="../AssignedLicense/">AssignedLicense</a></td>
+<td></td>
+<td>direct</td>
+</tr>
+<tr>
+<td><a href="../handbook_id/">handbook_id</a></td>
+<td>0..1 <br/> <a href="../Handbook/">Handbook</a></td>
+<td></td>
+<td>direct</td>
+</tr>
+<tr>
+<td><a href="../completion_score/">completion_score</a></td>
+<td>0..1 <br/> <a href="../String/">String</a></td>
+<td></td>
+<td>direct</td>
+</tr>
+<tr>
+<td><a href="../mean_ker_score/">mean_ker_score</a></td>
+<td>0..1 <br/> <a href="../String/">String</a></td>
+<td></td>
+<td>direct</td>
+</tr>
+<tr>
+<td><a href="../mean_event_score/">mean_event_score</a></td>
+<td>0..1 <br/> <a href="../String/">String</a></td>
+<td></td>
+<td>direct</td>
+</tr>
+<tr>
+<td><a href="../url_links/">url_links</a></td>
+<td>* <br/> <a href="../UrlLink/">UrlLink</a></td>
+<td></td>
+<td>direct</td>
+</tr>
+<tr>
+<td><a href="../coaches/">coaches</a></td>
+<td>* <br/> <a href="../User/">User</a></td>
+<td></td>
+<td>direct</td>
+</tr>
+<tr>
+<td><a href="../contributors/">contributors</a></td>
+<td>* <br/> <a href="../User/">User</a></td>
+<td></td>
+<td>direct</td>
+</tr>
+<tr>
+<td><a href="../life_stages/">life_stages</a></td>
+<td>* <br/> <a href="../AopLifeStage/">AopLifeStage</a></td>
+<td></td>
+<td>direct</td>
+</tr>
+<tr>
+<td><a href="../sexes/">sexes</a></td>
+<td>* <br/> <a href="../AopSex/">AopSex</a></td>
+<td></td>
+<td>direct</td>
+</tr>
+<tr>
+<td><a href="../taxons/">taxons</a></td>
+<td>* <br/> <a href="../AopTaxon/">AopTaxon</a></td>
+<td></td>
+<td>direct</td>
+</tr>
+<tr>
+<td><a href="../prototypical_stressor/">prototypical_stressor</a></td>
+<td>* <br/> <a href="../AopStressor/">AopStressor</a></td>
+<td></td>
+<td>direct</td>
+</tr>
+<tr>
+<td><a href="../events/">events</a></td>
+<td>* <br/> <a href="../AopEvent/">AopEvent</a></td>
+<td></td>
+<td>direct</td>
+</tr>
+<tr>
+<td><a href="../relationships/">relationships</a></td>
+<td>* <br/> <a href="../AopRelationship/">AopRelationship</a></td>
+<td></td>
+<td>direct</td>
+</tr>
+</tbody>
+</table>
+<h2 id="usages">Usages</h2>
+<table>
+<thead>
+<tr>
+<th>used by</th>
+<th>used in</th>
+<th>type</th>
+<th>used</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><a href="../AopEvent/">AopEvent</a></td>
+<td><a href="../aop_id/">aop_id</a></td>
+<td>range</td>
+<td><a href="./">Aop</a></td>
+</tr>
+<tr>
+<td><a href="../AopLifeStage/">AopLifeStage</a></td>
+<td><a href="../aop_id/">aop_id</a></td>
+<td>range</td>
+<td><a href="./">Aop</a></td>
+</tr>
+<tr>
+<td><a href="../AopLog/">AopLog</a></td>
+<td><a href="../aop_id/">aop_id</a></td>
+<td>range</td>
+<td><a href="./">Aop</a></td>
+</tr>
+<tr>
+<td><a href="../AopRelationship/">AopRelationship</a></td>
+<td><a href="../aop_id/">aop_id</a></td>
+<td>range</td>
+<td><a href="./">Aop</a></td>
+</tr>
+<tr>
+<td><a href="../AopSex/">AopSex</a></td>
+<td><a href="../aop_id/">aop_id</a></td>
+<td>range</td>
+<td><a href="./">Aop</a></td>
+</tr>
+<tr>
+<td><a href="../AopStressor/">AopStressor</a></td>
+<td><a href="../aop_id/">aop_id</a></td>
+<td>range</td>
+<td><a href="./">Aop</a></td>
+</tr>
+<tr>
+<td><a href="../AopTaxon/">AopTaxon</a></td>
+<td><a href="../aop_id/">aop_id</a></td>
+<td>range</td>
+<td><a href="./">Aop</a></td>
+</tr>
+<tr>
+<td><a href="../HarmonizedAop/">HarmonizedAop</a></td>
+<td><a href="../new_aop_id/">new_aop_id</a></td>
+<td>range</td>
+<td><a href="./">Aop</a></td>
+</tr>
+<tr>
+<td><a href="../HarmonizedAop/">HarmonizedAop</a></td>
+<td><a href="../source_aop_id/">source_aop_id</a></td>
+<td>range</td>
+<td><a href="./">Aop</a></td>
+</tr>
+<tr>
+<td><a href="../User/">User</a></td>
+<td><a href="../coached_aops/">coached_aops</a></td>
+<td>range</td>
+<td><a href="./">Aop</a></td>
+</tr>
+<tr>
+<td><a href="../User/">User</a></td>
+<td><a href="../contributed_aops/">contributed_aops</a></td>
+<td>range</td>
+<td><a href="./">Aop</a></td>
+</tr>
+</tbody>
+</table>
+<h2 id="identifier-and-mapping-information">Identifier and Mapping Information</h2>
+<h3 id="schema-source">Schema Source</h3>
+<ul>
+<li>from schema: http://example.org/aopwiki-emod</li>
+</ul>
+<h2 id="mappings">Mappings</h2>
+<table>
+<thead>
+<tr>
+<th>Mapping Type</th>
+<th>Mapped Value</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>self</td>
+<td>http://example.org/aopwiki-emod/Aop</td>
+</tr>
+<tr>
+<td>native</td>
+<td>http://example.org/aopwiki-emod/Aop</td>
+</tr>
+</tbody>
+</table>
+<h2 id="linkml-source">LinkML Source</h2>
+<!-- TODO: investigate https://stackoverflow.com/questions/37606292/how-to-create-tabbed-code-blocks-in-mkdocs-or-sphinx -->
+<h3 id="direct">Direct</h3>
+<details>
+<pre><code class="language-yaml">name: Aop
+from_schema: http://example.org/aopwiki-emod
+slots:
+- created_at
+- updated_at
+attributes:
+  id:
+    name: id
+    from_schema: http://example.org/aopwiki-emod
+    rank: 1000
+    identifier: true
+    domain_of:
+    - Aop
+    - Event
+    - Relationship
+    - Stressor
+    - BioTargetFamily
+    - Observation
+    - Citation
+    - AopEvent
+    - AopLifeStage
+    - AopLog
+    - AopRelationship
+    - AopSex
+    - AopStressor
+    - AopTaxon
+    - AssayBioTargetFamily
+    - Assay
+    - AssignedLicense
+    - BatchImport
+    - BiologicalAction
+    - BiologicalObject
+    - BiologicalOrganization
+    - BiologicalProcess
+    - CellTerm
+    - ChemicalSynonym
+    - Chemical
+    - CitationBioTargetFamily
+    - CitationRelationship
+    - ConfidenceLevel
+    - Directness
+    - EventLifeStage
+    - EventLog
+    - EventSex
+    - EventBioTargetFamily
+    - EventTaxon
+    - Evidence
+    - ExperimentType
+    - Handbook
+    - HarmonizedAop
+    - HarmonizedEvent
+    - License
+    - LifeStageTerm
+    - ObservationCitation
+    - OecdStatus
+    - OrganTerm
+    - Profile
+    - RelationshipLifeStage
+    - RelationshipLog
+    - RelationshipSex
+    - RelationshipTaxon
+    - SexTerm
+    - StressorChemical
+    - StressorLog
+    - EventComponent
+    - TaxonTerm
+    - UrlLink
+    - User
+    range: integer
+    required: true
+  title:
+    name: title
+    from_schema: http://example.org/aopwiki-emod
+    rank: 1000
+    domain_of:
+    - Aop
+    - Event
+    - Citation
+    - Assay
+    - Profile
+    - UrlLink
+  short_name:
+    name: short_name
+    from_schema: http://example.org/aopwiki-emod
+    rank: 1000
+    domain_of:
+    - Aop
+    - Event
+  corresponding_author_id:
+    name: corresponding_author_id
+    from_schema: http://example.org/aopwiki-emod
+    rank: 1000
+    domain_of:
+    - Aop
+    range: User
+  abstract:
+    name: abstract
+    from_schema: http://example.org/aopwiki-emod
+    rank: 1000
+    domain_of:
+    - Aop
+  authors:
+    name: authors
+    from_schema: http://example.org/aopwiki-emod
+    rank: 1000
+    domain_of:
+    - Aop
+    - Citation
+  applicability_of_the_aop:
+    name: applicability_of_the_aop
+    from_schema: http://example.org/aopwiki-emod
+    rank: 1000
+    domain_of:
+    - Aop
+  key_event_essentiality:
+    name: key_event_essentiality
+    from_schema: http://example.org/aopwiki-emod
+    rank: 1000
+    domain_of:
+    - Aop
+  weight_of_evidence_summary:
+    name: weight_of_evidence_summary
+    from_schema: http://example.org/aopwiki-emod
+    rank: 1000
+    domain_of:
+    - Aop
+  quantitative_considerations:
+    name: quantitative_considerations
+    from_schema: http://example.org/aopwiki-emod
+    rank: 1000
+    domain_of:
+    - Aop
+  optional_considerations:
+    name: optional_considerations
+    from_schema: http://example.org/aopwiki-emod
+    rank: 1000
+    domain_of:
+    - Aop
+  references:
+    name: references
+    from_schema: http://example.org/aopwiki-emod
+    rank: 1000
+    domain_of:
+    - Aop
+    - Event
+    - Relationship
+    - Stressor
+  overall_assessment:
+    name: overall_assessment
+    from_schema: http://example.org/aopwiki-emod
+    rank: 1000
+    domain_of:
+    - Aop
+  background:
+    name: background
+    from_schema: http://example.org/aopwiki-emod
+    rank: 1000
+    domain_of:
+    - Aop
+  user_defined_mie:
+    name: user_defined_mie
+    from_schema: http://example.org/aopwiki-emod
+    rank: 1000
+    domain_of:
+    - Aop
+  user_defined_ao:
+    name: user_defined_ao
+    from_schema: http://example.org/aopwiki-emod
+    rank: 1000
+    domain_of:
+    - Aop
+  oecd_project:
+    name: oecd_project
+    from_schema: http://example.org/aopwiki-emod
+    rank: 1000
+    domain_of:
+    - Aop
+  oecd_status_id:
+    name: oecd_status_id
+    from_schema: http://example.org/aopwiki-emod
+    rank: 1000
+    domain_of:
+    - Aop
+    range: OecdStatus
+  graphical_representation_image_uid:
+    name: graphical_representation_image_uid
+    from_schema: http://example.org/aopwiki-emod
+    rank: 1000
+    domain_of:
+    - Aop
+  saaop_status_id:
+    name: saaop_status_id
+    from_schema: http://example.org/aopwiki-emod
+    rank: 1000
+    domain_of:
+    - Aop
+  legacy:
+    name: legacy
+    from_schema: http://example.org/aopwiki-emod
+    rank: 1000
+    domain_of:
+    - Aop
+    range: integer
+  overall_assessment_file_uid:
+    name: overall_assessment_file_uid
+    from_schema: http://example.org/aopwiki-emod
+    rank: 1000
+    domain_of:
+    - Aop
+  changed_at:
+    name: changed_at
+    from_schema: http://example.org/aopwiki-emod
+    domain_of:
+    - Aop
+  development_strategy:
+    name: development_strategy
+    from_schema: http://example.org/aopwiki-emod
+    rank: 1000
+    domain_of:
+    - Aop
+  known_modulating_factors:
+    name: known_modulating_factors
+    from_schema: http://example.org/aopwiki-emod
+    rank: 1000
+    domain_of:
+    - Aop
+  assigned_license_id:
+    name: assigned_license_id
+    from_schema: http://example.org/aopwiki-emod
+    rank: 1000
+    domain_of:
+    - Aop
+    range: AssignedLicense
+  handbook_id:
+    name: handbook_id
+    from_schema: http://example.org/aopwiki-emod
+    rank: 1000
+    domain_of:
+    - Aop
+    range: Handbook
+  completion_score:
+    name: completion_score
+    from_schema: http://example.org/aopwiki-emod
+    rank: 1000
+    domain_of:
+    - Aop
+    - Event
+    - Relationship
+  mean_ker_score:
+    name: mean_ker_score
+    from_schema: http://example.org/aopwiki-emod
+    rank: 1000
+    domain_of:
+    - Aop
+  mean_event_score:
+    name: mean_event_score
+    from_schema: http://example.org/aopwiki-emod
+    rank: 1000
+    domain_of:
+    - Aop
+  url_links:
+    name: url_links
+    from_schema: http://example.org/aopwiki-emod
+    rank: 1000
+    domain_of:
+    - Aop
+    range: UrlLink
+    multivalued: true
+  coaches:
+    name: coaches
+    from_schema: http://example.org/aopwiki-emod
+    rank: 1000
+    domain_of:
+    - Aop
+    range: User
+    multivalued: true
+  contributors:
+    name: contributors
+    from_schema: http://example.org/aopwiki-emod
+    rank: 1000
+    domain_of:
+    - Aop
+    range: User
+    multivalued: true
+  life_stages:
+    name: life_stages
+    from_schema: http://example.org/aopwiki-emod
+    rank: 1000
+    domain_of:
+    - Aop
+    - Event
+    - Relationship
+    range: AopLifeStage
+    multivalued: true
+  sexes:
+    name: sexes
+    from_schema: http://example.org/aopwiki-emod
+    rank: 1000
+    domain_of:
+    - Aop
+    - Event
+    - Relationship
+    range: AopSex
+    multivalued: true
+  taxons:
+    name: taxons
+    from_schema: http://example.org/aopwiki-emod
+    rank: 1000
+    domain_of:
+    - Aop
+    - Event
+    - Relationship
+    range: AopTaxon
+    multivalued: true
+  prototypical_stressor:
+    name: prototypical_stressor
+    from_schema: http://example.org/aopwiki-emod
+    rank: 1000
+    domain_of:
+    - Aop
+    range: AopStressor
+    multivalued: true
+  events:
+    name: events
+    from_schema: http://example.org/aopwiki-emod
+    rank: 1000
+    domain_of:
+    - Aop
+    - BioTargetFamily
+    - Observation
+    - Assay
+    - LifeStageTerm
+    - SexTerm
+    - TaxonTerm
+    range: AopEvent
+    multivalued: true
+  relationships:
+    name: relationships
+    from_schema: http://example.org/aopwiki-emod
+    rank: 1000
+    domain_of:
+    - Aop
+    - LifeStageTerm
+    - SexTerm
+    - TaxonTerm
+    range: AopRelationship
+    multivalued: true
+
+</code></pre>
+</details>
+<h3 id="induced">Induced</h3>
+<details>
+<pre><code class="language-yaml">name: Aop
+from_schema: http://example.org/aopwiki-emod
+attributes:
+  id:
+    name: id
+    from_schema: http://example.org/aopwiki-emod
+    rank: 1000
+    identifier: true
+    alias: id
+    owner: Aop
+    domain_of:
+    - Aop
+    - Event
+    - Relationship
+    - Stressor
+    - BioTargetFamily
+    - Observation
+    - Citation
+    - AopEvent
+    - AopLifeStage
+    - AopLog
+    - AopRelationship
+    - AopSex
+    - AopStressor
+    - AopTaxon
+    - AssayBioTargetFamily
+    - Assay
+    - AssignedLicense
+    - BatchImport
+    - BiologicalAction
+    - BiologicalObject
+    - BiologicalOrganization
+    - BiologicalProcess
+    - CellTerm
+    - ChemicalSynonym
+    - Chemical
+    - CitationBioTargetFamily
+    - CitationRelationship
+    - ConfidenceLevel
+    - Directness
+    - EventLifeStage
+    - EventLog
+    - EventSex
+    - EventBioTargetFamily
+    - EventTaxon
+    - Evidence
+    - ExperimentType
+    - Handbook
+    - HarmonizedAop
+    - HarmonizedEvent
+    - License
+    - LifeStageTerm
+    - ObservationCitation
+    - OecdStatus
+    - OrganTerm
+    - Profile
+    - RelationshipLifeStage
+    - RelationshipLog
+    - RelationshipSex
+    - RelationshipTaxon
+    - SexTerm
+    - StressorChemical
+    - StressorLog
+    - EventComponent
+    - TaxonTerm
+    - UrlLink
+    - User
+    range: integer
+  title:
+    name: title
+    from_schema: http://example.org/aopwiki-emod
+    rank: 1000
+    alias: title
+    owner: Aop
+    domain_of:
+    - Aop
+    - Event
+    - Citation
+    - Assay
+    - Profile
+    - UrlLink
+    range: string
+  short_name:
+    name: short_name
+    from_schema: http://example.org/aopwiki-emod
+    rank: 1000
+    alias: short_name
+    owner: Aop
+    domain_of:
+    - Aop
+    - Event
+    range: string
+  corresponding_author_id:
+    name: corresponding_author_id
+    from_schema: http://example.org/aopwiki-emod
+    rank: 1000
+    alias: corresponding_author_id
+    owner: Aop
+    domain_of:
+    - Aop
+    range: User
+  abstract:
+    name: abstract
+    from_schema: http://example.org/aopwiki-emod
+    rank: 1000
+    alias: abstract
+    owner: Aop
+    domain_of:
+    - Aop
+    range: string
+  authors:
+    name: authors
+    from_schema: http://example.org/aopwiki-emod
+    rank: 1000
+    alias: authors
+    owner: Aop
+    domain_of:
+    - Aop
+    - Citation
+    range: string
+  applicability_of_the_aop:
+    name: applicability_of_the_aop
+    from_schema: http://example.org/aopwiki-emod
+    rank: 1000
+    alias: applicability_of_the_aop
+    owner: Aop
+    domain_of:
+    - Aop
+    range: string
+  key_event_essentiality:
+    name: key_event_essentiality
+    from_schema: http://example.org/aopwiki-emod
+    rank: 1000
+    alias: key_event_essentiality
+    owner: Aop
+    domain_of:
+    - Aop
+    range: string
+  weight_of_evidence_summary:
+    name: weight_of_evidence_summary
+    from_schema: http://example.org/aopwiki-emod
+    rank: 1000
+    alias: weight_of_evidence_summary
+    owner: Aop
+    domain_of:
+    - Aop
+    range: string
+  quantitative_considerations:
+    name: quantitative_considerations
+    from_schema: http://example.org/aopwiki-emod
+    rank: 1000
+    alias: quantitative_considerations
+    owner: Aop
+    domain_of:
+    - Aop
+    range: string
+  optional_considerations:
+    name: optional_considerations
+    from_schema: http://example.org/aopwiki-emod
+    rank: 1000
+    alias: optional_considerations
+    owner: Aop
+    domain_of:
+    - Aop
+    range: string
+  references:
+    name: references
+    from_schema: http://example.org/aopwiki-emod
+    rank: 1000
+    alias: references
+    owner: Aop
+    domain_of:
+    - Aop
+    - Event
+    - Relationship
+    - Stressor
+    range: string
+  overall_assessment:
+    name: overall_assessment
+    from_schema: http://example.org/aopwiki-emod
+    rank: 1000
+    alias: overall_assessment
+    owner: Aop
+    domain_of:
+    - Aop
+    range: string
+  background:
+    name: background
+    from_schema: http://example.org/aopwiki-emod
+    rank: 1000
+    alias: background
+    owner: Aop
+    domain_of:
+    - Aop
+    range: string
+  user_defined_mie:
+    name: user_defined_mie
+    from_schema: http://example.org/aopwiki-emod
+    rank: 1000
+    alias: user_defined_mie
+    owner: Aop
+    domain_of:
+    - Aop
+    range: string
+  user_defined_ao:
+    name: user_defined_ao
+    from_schema: http://example.org/aopwiki-emod
+    rank: 1000
+    alias: user_defined_ao
+    owner: Aop
+    domain_of:
+    - Aop
+    range: string
+  oecd_project:
+    name: oecd_project
+    from_schema: http://example.org/aopwiki-emod
+    rank: 1000
+    alias: oecd_project
+    owner: Aop
+    domain_of:
+    - Aop
+    range: string
+  oecd_status_id:
+    name: oecd_status_id
+    from_schema: http://example.org/aopwiki-emod
+    rank: 1000
+    alias: oecd_status_id
+    owner: Aop
+    domain_of:
+    - Aop
+    range: OecdStatus
+  graphical_representation_image_uid:
+    name: graphical_representation_image_uid
+    from_schema: http://example.org/aopwiki-emod
+    rank: 1000
+    alias: graphical_representation_image_uid
+    owner: Aop
+    domain_of:
+    - Aop
+    range: string
+  saaop_status_id:
+    name: saaop_status_id
+    from_schema: http://example.org/aopwiki-emod
+    rank: 1000
+    alias: saaop_status_id
+    owner: Aop
+    domain_of:
+    - Aop
+    range: string
+  legacy:
+    name: legacy
+    from_schema: http://example.org/aopwiki-emod
+    rank: 1000
+    alias: legacy
+    owner: Aop
+    domain_of:
+    - Aop
+    range: integer
+  overall_assessment_file_uid:
+    name: overall_assessment_file_uid
+    from_schema: http://example.org/aopwiki-emod
+    rank: 1000
+    alias: overall_assessment_file_uid
+    owner: Aop
+    domain_of:
+    - Aop
+    range: string
+  changed_at:
+    name: changed_at
+    from_schema: http://example.org/aopwiki-emod
+    alias: changed_at
+    owner: Aop
+    domain_of:
+    - Aop
+    range: string
+  development_strategy:
+    name: development_strategy
+    from_schema: http://example.org/aopwiki-emod
+    rank: 1000
+    alias: development_strategy
+    owner: Aop
+    domain_of:
+    - Aop
+    range: string
+  known_modulating_factors:
+    name: known_modulating_factors
+    from_schema: http://example.org/aopwiki-emod
+    rank: 1000
+    alias: known_modulating_factors
+    owner: Aop
+    domain_of:
+    - Aop
+    range: string
+  assigned_license_id:
+    name: assigned_license_id
+    from_schema: http://example.org/aopwiki-emod
+    rank: 1000
+    alias: assigned_license_id
+    owner: Aop
+    domain_of:
+    - Aop
+    range: AssignedLicense
+  handbook_id:
+    name: handbook_id
+    from_schema: http://example.org/aopwiki-emod
+    rank: 1000
+    alias: handbook_id
+    owner: Aop
+    domain_of:
+    - Aop
+    range: Handbook
+  completion_score:
+    name: completion_score
+    from_schema: http://example.org/aopwiki-emod
+    rank: 1000
+    alias: completion_score
+    owner: Aop
+    domain_of:
+    - Aop
+    - Event
+    - Relationship
+    range: string
+  mean_ker_score:
+    name: mean_ker_score
+    from_schema: http://example.org/aopwiki-emod
+    rank: 1000
+    alias: mean_ker_score
+    owner: Aop
+    domain_of:
+    - Aop
+    range: string
+  mean_event_score:
+    name: mean_event_score
+    from_schema: http://example.org/aopwiki-emod
+    rank: 1000
+    alias: mean_event_score
+    owner: Aop
+    domain_of:
+    - Aop
+    range: string
+  url_links:
+    name: url_links
+    from_schema: http://example.org/aopwiki-emod
+    rank: 1000
+    alias: url_links
+    owner: Aop
+    domain_of:
+    - Aop
+    range: UrlLink
+    multivalued: true
+  coaches:
+    name: coaches
+    from_schema: http://example.org/aopwiki-emod
+    rank: 1000
+    alias: coaches
+    owner: Aop
+    domain_of:
+    - Aop
+    range: User
+    multivalued: true
+  contributors:
+    name: contributors
+    from_schema: http://example.org/aopwiki-emod
+    rank: 1000
+    alias: contributors
+    owner: Aop
+    domain_of:
+    - Aop
+    range: User
+    multivalued: true
+  life_stages:
+    name: life_stages
+    from_schema: http://example.org/aopwiki-emod
+    rank: 1000
+    alias: life_stages
+    owner: Aop
+    domain_of:
+    - Aop
+    - Event
+    - Relationship
+    range: AopLifeStage
+    multivalued: true
+  sexes:
+    name: sexes
+    from_schema: http://example.org/aopwiki-emod
+    rank: 1000
+    alias: sexes
+    owner: Aop
+    domain_of:
+    - Aop
+    - Event
+    - Relationship
+    range: AopSex
+    multivalued: true
+  taxons:
+    name: taxons
+    from_schema: http://example.org/aopwiki-emod
+    rank: 1000
+    alias: taxons
+    owner: Aop
+    domain_of:
+    - Aop
+    - Event
+    - Relationship
+    range: AopTaxon
+    multivalued: true
+  prototypical_stressor:
+    name: prototypical_stressor
+    from_schema: http://example.org/aopwiki-emod
+    rank: 1000
+    alias: prototypical_stressor
+    owner: Aop
+    domain_of:
+    - Aop
+    range: AopStressor
+    multivalued: true
+  events:
+    name: events
+    from_schema: http://example.org/aopwiki-emod
+    rank: 1000
+    alias: events
+    owner: Aop
+    domain_of:
+    - Aop
+    - BioTargetFamily
+    - Observation
+    - Assay
+    - LifeStageTerm
+    - SexTerm
+    - TaxonTerm
+    range: AopEvent
+    multivalued: true
+  relationships:
+    name: relationships
+    from_schema: http://example.org/aopwiki-emod
+    rank: 1000
+    alias: relationships
+    owner: Aop
+    domain_of:
+    - Aop
+    - LifeStageTerm
+    - SexTerm
+    - TaxonTerm
+    range: AopRelationship
+    multivalued: true
+  created_at:
+    name: created_at
+    description: Timestamp of when the record was created
+    from_schema: http://example.org/aopwiki-emod
+    rank: 1000
+    alias: created_at
+    owner: Aop
+    domain_of:
+    - Aop
+    - Event
+    - Relationship
+    - Stressor
+    - BioTargetFamily
+    - Observation
+    - Citation
+    - AopEvent
+    - AopLifeStage
+    - AopLog
+    - AopRelationship
+    - AopSex
+    - AopStressor
+    - AopTaxon
+    - AssayBioTargetFamily
+    - Assay
+    - AssignedLicense
+    - BatchImport
+    - BiologicalAction
+    - BiologicalObject
+    - BiologicalOrganization
+    - BiologicalProcess
+    - CellTerm
+    - ChemicalSynonym
+    - Chemical
+    - CitationBioTargetFamily
+    - CitationRelationship
+    - ConfidenceLevel
+    - Directness
+    - EventLifeStage
+    - EventLog
+    - EventSex
+    - EventBioTargetFamily
+    - EventTaxon
+    - Evidence
+    - ExperimentType
+    - Handbook
+    - HarmonizedAop
+    - HarmonizedEvent
+    - License
+    - LifeStageTerm
+    - ObservationCitation
+    - OecdStatus
+    - OrganTerm
+    - Profile
+    - RelationshipLifeStage
+    - RelationshipLog
+    - RelationshipSex
+    - RelationshipTaxon
+    - SexTerm
+    - StressorChemical
+    - StressorLog
+    - EventComponent
+    - TaxonTerm
+    - UrlLink
+    range: datetime
+  updated_at:
+    name: updated_at
+    description: Timestamp of when the record was last updated
+    from_schema: http://example.org/aopwiki-emod
+    rank: 1000
+    alias: updated_at
+    owner: Aop
+    domain_of:
+    - Aop
+    - Event
+    - Relationship
+    - Stressor
+    - BioTargetFamily
+    - Observation
+    - Citation
+    - AopEvent
+    - AopLifeStage
+    - AopLog
+    - AopRelationship
+    - AopSex
+    - AopStressor
+    - AopTaxon
+    - AssayBioTargetFamily
+    - Assay
+    - AssignedLicense
+    - BatchImport
+    - BiologicalAction
+    - BiologicalObject
+    - BiologicalOrganization
+    - BiologicalProcess
+    - CellTerm
+    - ChemicalSynonym
+    - Chemical
+    - CitationBioTargetFamily
+    - CitationRelationship
+    - ConfidenceLevel
+    - Directness
+    - EventLifeStage
+    - EventLog
+    - EventSex
+    - EventBioTargetFamily
+    - EventTaxon
+    - Evidence
+    - ExperimentType
+    - Handbook
+    - HarmonizedAop
+    - HarmonizedEvent
+    - License
+    - LifeStageTerm
+    - ObservationCitation
+    - OecdStatus
+    - OrganTerm
+    - Profile
+    - RelationshipLifeStage
+    - RelationshipLog
+    - RelationshipSex
+    - RelationshipTaxon
+    - SexTerm
+    - StressorChemical
+    - StressorLog
+    - EventComponent
+    - TaxonTerm
+    - UrlLink
+    range: datetime
+
+</code></pre>
+</details>
+</article>
+</div>
+<script>var tabs=__md_get("__tabs");if(Array.isArray(tabs))e:for(var set of document.querySelectorAll(".tabbed-set")){var labels=set.querySelector(".tabbed-labels");for(var tab of tabs)for(var label of labels.getElementsByTagName("label"))if(label.innerText.trim()===tab){var input=document.getElementById(label.htmlFor);input.checked=!0;continue e}}</script>
+<script>var target=document.getElementById(location.hash.slice(1));target&&target.name&&(target.checked=target.name.startsWith("__tabbed_"))</script>
+</div>
+</main>
+<footer class="md-footer">
+<div class="md-footer-meta md-typeset">
+<div class="md-footer-meta__inner md-grid">
+<div class="md-copyright">
+  
+  
+    Made with
+    <a href="https://squidfunk.github.io/mkdocs-material/" rel="noopener" target="_blank">
+      Material for MkDocs
+    </a>
+</div>
+</div>
+</div>
+</footer>
+</div>
+<div class="md-dialog" data-md-component="dialog">
+<div class="md-dialog__inner md-typeset"></div>
+</div>
+<script id="__config" type="application/json">{"annotate": null, "base": "..", "features": ["content.tabs.link"], "search": "../assets/javascripts/workers/search.2c215733.min.js", "tags": null, "translations": {"clipboard.copied": "Copied to clipboard", "clipboard.copy": "Copy to clipboard", "search.result.more.one": "1 more on this page", "search.result.more.other": "# more on this page", "search.result.none": "No matching documents", "search.result.one": "1 matching document", "search.result.other": "# matching documents", "search.result.placeholder": "Type to start searching", "search.result.term.missing": "Missing", "select.version": "Select version"}, "version": null}</script>
+<script src="../assets/javascripts/bundle.79ae519e.min.js"></script>
+<script src="https://unpkg.com/tablesort@5.3.0/dist/tablesort.min.js"></script>
+<script src="../javascripts/tablesort.js"></script>
+<script type="module">import mermaid from "https://unpkg.com/mermaid@10.4.0/dist/mermaid.esm.min.mjs";
+mermaid.initialize({});</script><script type="module">import mermaid from "https://unpkg.com/mermaid@10.9.0/dist/mermaid.esm.min.mjs";
+mermaid.initialize({});</script></body>
+</html>

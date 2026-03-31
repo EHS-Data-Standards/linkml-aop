@@ -1,0 +1,1652 @@
+
+<!doctype html>
+<html lang="en" class="no-js">
+  <head>
+    
+      <meta charset="utf-8">
+      <meta name="viewport" content="width=device-width,initial-scale=1">
+      
+      
+      
+        <link rel="canonical" href="https://caufieldjh.github.io/linkml-aop/">
+      
+      
+      
+        <link rel="next" href="about/">
+      
+      
+        
+      
+      
+      <link rel="icon" href="assets/images/favicon.png">
+      <meta name="generator" content="mkdocs-1.6.1, mkdocs-material-9.7.6">
+    
+    
+      
+        <title>linkml-aop</title>
+      
+    
+    
+      <link rel="stylesheet" href="assets/stylesheets/main.484c7ddc.min.css">
+      
+      
+
+
+    
+    
+      
+    
+    
+      
+        
+        
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:300,300i,400,400i,700,700i%7CRoboto+Mono:400,400i,700,700i&display=fallback">
+        <style>:root{--md-text-font:"Roboto";--md-code-font:"Roboto Mono"}</style>
+      
+    
+    
+      <link rel="stylesheet" href="css/ansi-colours.css">
+    
+      <link rel="stylesheet" href="css/jupyter-cells.css">
+    
+      <link rel="stylesheet" href="css/pandas-dataframe.css">
+    
+    <script>__md_scope=new URL(".",location),__md_hash=e=>[...e].reduce(((e,_)=>(e<<5)-e+_.charCodeAt(0)),0),__md_get=(e,_=localStorage,t=__md_scope)=>JSON.parse(_.getItem(t.pathname+"."+e)),__md_set=(e,_,t=localStorage,a=__md_scope)=>{try{t.setItem(a.pathname+"."+e,JSON.stringify(_))}catch(e){}}</script>
+    
+      
+
+    
+    
+  </head>
+  
+  
+    <body dir="ltr">
+  
+    
+    <input class="md-toggle" data-md-toggle="drawer" type="checkbox" id="__drawer" autocomplete="off">
+    <input class="md-toggle" data-md-toggle="search" type="checkbox" id="__search" autocomplete="off">
+    <label class="md-overlay" for="__drawer"></label>
+    <div data-md-component="skip">
+      
+        
+        <a href="#aop-wiki-data-model-with-emod" class="md-skip">
+          Skip to content
+        </a>
+      
+    </div>
+    <div data-md-component="announce">
+      
+    </div>
+    
+    
+      
+
+  
+
+<header class="md-header md-header--shadow" data-md-component="header">
+  <nav class="md-header__inner md-grid" aria-label="Header">
+    <a href="." title="linkml-aop" class="md-header__button md-logo" aria-label="linkml-aop" data-md-component="logo">
+      
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3 3 3 0 0 0 3 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54"/></svg>
+
+    </a>
+    <label class="md-header__button md-icon" for="__drawer">
+      
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M3 6h18v2H3zm0 5h18v2H3zm0 5h18v2H3z"/></svg>
+    </label>
+    <div class="md-header__title" data-md-component="header-title">
+      <div class="md-header__ellipsis">
+        <div class="md-header__topic">
+          <span class="md-ellipsis">
+            linkml-aop
+          </span>
+        </div>
+        <div class="md-header__topic" data-md-component="header-topic">
+          <span class="md-ellipsis">
+            
+              Index
+            
+          </span>
+        </div>
+      </div>
+    </div>
+    
+    
+      <script>var palette=__md_get("__palette");if(palette&&palette.color){if("(prefers-color-scheme)"===palette.color.media){var media=matchMedia("(prefers-color-scheme: light)"),input=document.querySelector(media.matches?"[data-md-color-media='(prefers-color-scheme: light)']":"[data-md-color-media='(prefers-color-scheme: dark)']");palette.color.media=input.getAttribute("data-md-color-media"),palette.color.scheme=input.getAttribute("data-md-color-scheme"),palette.color.primary=input.getAttribute("data-md-color-primary"),palette.color.accent=input.getAttribute("data-md-color-accent")}for(var[key,value]of Object.entries(palette.color))document.body.setAttribute("data-md-color-"+key,value)}</script>
+    
+    
+    
+      
+      
+        <label class="md-header__button md-icon" for="__search">
+          
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.52 6.52 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5"/></svg>
+        </label>
+        <div class="md-search" data-md-component="search" role="dialog">
+  <label class="md-search__overlay" for="__search"></label>
+  <div class="md-search__inner" role="search">
+    <form class="md-search__form" name="search">
+      <input type="text" class="md-search__input" name="query" aria-label="Search" placeholder="Search" autocapitalize="off" autocorrect="off" autocomplete="off" spellcheck="false" data-md-component="search-query" required>
+      <label class="md-search__icon md-icon" for="__search">
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.52 6.52 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5"/></svg>
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11z"/></svg>
+      </label>
+      <nav class="md-search__options" aria-label="Search">
+        
+        <button type="reset" class="md-search__icon md-icon" title="Clear" aria-label="Clear" tabindex="-1">
+          
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M19 6.41 17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12z"/></svg>
+        </button>
+      </nav>
+      
+    </form>
+    <div class="md-search__output">
+      <div class="md-search__scrollwrap" tabindex="0" data-md-scrollfix>
+        <div class="md-search-result" data-md-component="search-result">
+          <div class="md-search-result__meta">
+            Initializing search
+          </div>
+          <ol class="md-search-result__list" role="presentation"></ol>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+      
+    
+    
+      <div class="md-header__source">
+        <a href="https://github.com/caufieldjh/linkml-aop" title="Go to repository" class="md-source" data-md-component="source">
+  <div class="md-source__icon md-icon">
+    
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512"><!--! Font Awesome Free 7.1.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2025 Fonticons, Inc.--><path d="M439.6 236.1 244 40.5c-5.4-5.5-12.8-8.5-20.4-8.5s-15 3-20.4 8.4L162.5 81l51.5 51.5c27.1-9.1 52.7 16.8 43.4 43.7l49.7 49.7c34.2-11.8 61.2 31 35.5 56.7-26.5 26.5-70.2-2.9-56-37.3L240.3 199v121.9c25.3 12.5 22.3 41.8 9.1 55-6.4 6.4-15.2 10.1-24.3 10.1s-17.8-3.6-24.3-10.1c-17.6-17.6-11.1-46.9 11.2-56v-123c-20.8-8.5-24.6-30.7-18.6-45L142.6 101 8.5 235.1C3 240.6 0 247.9 0 255.5s3 15 8.5 20.4l195.6 195.7c5.4 5.4 12.7 8.4 20.4 8.4s15-3 20.4-8.4l194.7-194.7c5.4-5.4 8.4-12.8 8.4-20.4s-3-15-8.4-20.4"/></svg>
+  </div>
+  <div class="md-source__repository">
+    GitHub
+  </div>
+</a>
+      </div>
+    
+  </nav>
+  
+</header>
+    
+    <div class="md-container" data-md-component="container">
+      
+      
+        
+          
+        
+      
+      <main class="md-main" data-md-component="main">
+        <div class="md-main__inner md-grid">
+          
+            
+              
+              <div class="md-sidebar md-sidebar--primary" data-md-component="sidebar" data-md-type="navigation" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+
+
+<nav class="md-nav md-nav--primary" aria-label="Navigation" data-md-level="0">
+  <label class="md-nav__title" for="__drawer">
+    <a href="." title="linkml-aop" class="md-nav__button md-logo" aria-label="linkml-aop" data-md-component="logo">
+      
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3 3 3 0 0 0 3 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54"/></svg>
+
+    </a>
+    linkml-aop
+  </label>
+  
+    <div class="md-nav__source">
+      <a href="https://github.com/caufieldjh/linkml-aop" title="Go to repository" class="md-source" data-md-component="source">
+  <div class="md-source__icon md-icon">
+    
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512"><!--! Font Awesome Free 7.1.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2025 Fonticons, Inc.--><path d="M439.6 236.1 244 40.5c-5.4-5.5-12.8-8.5-20.4-8.5s-15 3-20.4 8.4L162.5 81l51.5 51.5c27.1-9.1 52.7 16.8 43.4 43.7l49.7 49.7c34.2-11.8 61.2 31 35.5 56.7-26.5 26.5-70.2-2.9-56-37.3L240.3 199v121.9c25.3 12.5 22.3 41.8 9.1 55-6.4 6.4-15.2 10.1-24.3 10.1s-17.8-3.6-24.3-10.1c-17.6-17.6-11.1-46.9 11.2-56v-123c-20.8-8.5-24.6-30.7-18.6-45L142.6 101 8.5 235.1C3 240.6 0 247.9 0 255.5s3 15 8.5 20.4l195.6 195.7c5.4 5.4 12.7 8.4 20.4 8.4s15-3 20.4-8.4l194.7-194.7c5.4-5.4 8.4-12.8 8.4-20.4s-3-15-8.4-20.4"/></svg>
+  </div>
+  <div class="md-source__repository">
+    GitHub
+  </div>
+</a>
+    </div>
+  
+  <ul class="md-nav__list" data-md-scrollfix>
+    
+      
+      
+  
+  
+    
+  
+  
+  
+    <li class="md-nav__item md-nav__item--active">
+      
+      <input class="md-nav__toggle md-toggle" type="checkbox" id="__toc">
+      
+      
+        
+      
+      
+        <label class="md-nav__link md-nav__link--active" for="__toc">
+          
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Index
+  
+
+    
+  </span>
+  
+  
+
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <a href="." class="md-nav__link md-nav__link--active">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Index
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+      
+        
+
+<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Table of contents
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#classes" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Classes
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#slots" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Slots
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#enumerations" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Enumerations
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#types" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Types
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#subsets" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Subsets
+      
+    </span>
+  </a>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="about/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    About
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+    
+  </ul>
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+            
+              
+              <div class="md-sidebar md-sidebar--secondary" data-md-component="sidebar" data-md-type="toc" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Table of contents
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#classes" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Classes
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#slots" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Slots
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#enumerations" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Enumerations
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#types" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Types
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#subsets" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Subsets
+      
+    </span>
+  </a>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+          
+          
+            <div class="md-content" data-md-component="content">
+              
+              <article class="md-content__inner md-typeset">
+                
+                  
+
+
+  
+  
+
+
+<h1 id="aop-wiki-data-model-with-emod">AOP Wiki Data Model with EMOD</h1>
+<p>This is a LinkML schema for the AOP-Wiki data model, extended with EMOD concepts.</p>
+<p>URI: http://example.org/aopwiki-emod</p>
+<p>Name: aopwiki-emod</p>
+<h2 id="classes">Classes</h2>
+<table>
+<thead>
+<tr>
+<th>Class</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><a href="Aop/">Aop</a></td>
+<td></td>
+</tr>
+<tr>
+<td><a href="AopEvent/">AopEvent</a></td>
+<td></td>
+</tr>
+<tr>
+<td><a href="AopLifeStage/">AopLifeStage</a></td>
+<td></td>
+</tr>
+<tr>
+<td><a href="AopLog/">AopLog</a></td>
+<td></td>
+</tr>
+<tr>
+<td><a href="AopRelationship/">AopRelationship</a></td>
+<td></td>
+</tr>
+<tr>
+<td><a href="AopSex/">AopSex</a></td>
+<td></td>
+</tr>
+<tr>
+<td><a href="AopStressor/">AopStressor</a></td>
+<td></td>
+</tr>
+<tr>
+<td><a href="AopTaxon/">AopTaxon</a></td>
+<td></td>
+</tr>
+<tr>
+<td><a href="Assay/">Assay</a></td>
+<td></td>
+</tr>
+<tr>
+<td><a href="AssayBioTargetFamily/">AssayBioTargetFamily</a></td>
+<td></td>
+</tr>
+<tr>
+<td><a href="AssignedLicense/">AssignedLicense</a></td>
+<td></td>
+</tr>
+<tr>
+<td><a href="BatchImport/">BatchImport</a></td>
+<td></td>
+</tr>
+<tr>
+<td><a href="BiologicalAction/">BiologicalAction</a></td>
+<td></td>
+</tr>
+<tr>
+<td><a href="BiologicalObject/">BiologicalObject</a></td>
+<td></td>
+</tr>
+<tr>
+<td><a href="BiologicalOrganization/">BiologicalOrganization</a></td>
+<td></td>
+</tr>
+<tr>
+<td><a href="BiologicalProcess/">BiologicalProcess</a></td>
+<td></td>
+</tr>
+<tr>
+<td><a href="BioTargetFamily/">BioTargetFamily</a></td>
+<td></td>
+</tr>
+<tr>
+<td><a href="CellTerm/">CellTerm</a></td>
+<td></td>
+</tr>
+<tr>
+<td><a href="Chemical/">Chemical</a></td>
+<td></td>
+</tr>
+<tr>
+<td><a href="ChemicalSynonym/">ChemicalSynonym</a></td>
+<td></td>
+</tr>
+<tr>
+<td><a href="Citation/">Citation</a></td>
+<td></td>
+</tr>
+<tr>
+<td><a href="CitationBioTargetFamily/">CitationBioTargetFamily</a></td>
+<td></td>
+</tr>
+<tr>
+<td><a href="CitationRelationship/">CitationRelationship</a></td>
+<td></td>
+</tr>
+<tr>
+<td><a href="ConfidenceLevel/">ConfidenceLevel</a></td>
+<td></td>
+</tr>
+<tr>
+<td><a href="Directness/">Directness</a></td>
+<td></td>
+</tr>
+<tr>
+<td><a href="Event/">Event</a></td>
+<td></td>
+</tr>
+<tr>
+<td><a href="EventBioTargetFamily/">EventBioTargetFamily</a></td>
+<td></td>
+</tr>
+<tr>
+<td><a href="EventComponent/">EventComponent</a></td>
+<td></td>
+</tr>
+<tr>
+<td><a href="EventLifeStage/">EventLifeStage</a></td>
+<td></td>
+</tr>
+<tr>
+<td><a href="EventLog/">EventLog</a></td>
+<td></td>
+</tr>
+<tr>
+<td><a href="EventSex/">EventSex</a></td>
+<td></td>
+</tr>
+<tr>
+<td><a href="EventTaxon/">EventTaxon</a></td>
+<td></td>
+</tr>
+<tr>
+<td><a href="Evidence/">Evidence</a></td>
+<td></td>
+</tr>
+<tr>
+<td><a href="ExperimentType/">ExperimentType</a></td>
+<td></td>
+</tr>
+<tr>
+<td><a href="Handbook/">Handbook</a></td>
+<td></td>
+</tr>
+<tr>
+<td><a href="HarmonizedAop/">HarmonizedAop</a></td>
+<td></td>
+</tr>
+<tr>
+<td><a href="HarmonizedEvent/">HarmonizedEvent</a></td>
+<td></td>
+</tr>
+<tr>
+<td><a href="License/">License</a></td>
+<td></td>
+</tr>
+<tr>
+<td><a href="LifeStageTerm/">LifeStageTerm</a></td>
+<td></td>
+</tr>
+<tr>
+<td><a href="Observation/">Observation</a></td>
+<td></td>
+</tr>
+<tr>
+<td><a href="ObservationCitation/">ObservationCitation</a></td>
+<td></td>
+</tr>
+<tr>
+<td><a href="OecdStatus/">OecdStatus</a></td>
+<td></td>
+</tr>
+<tr>
+<td><a href="OrganTerm/">OrganTerm</a></td>
+<td></td>
+</tr>
+<tr>
+<td><a href="Profile/">Profile</a></td>
+<td></td>
+</tr>
+<tr>
+<td><a href="Relationship/">Relationship</a></td>
+<td></td>
+</tr>
+<tr>
+<td><a href="RelationshipLifeStage/">RelationshipLifeStage</a></td>
+<td></td>
+</tr>
+<tr>
+<td><a href="RelationshipLog/">RelationshipLog</a></td>
+<td></td>
+</tr>
+<tr>
+<td><a href="RelationshipSex/">RelationshipSex</a></td>
+<td></td>
+</tr>
+<tr>
+<td><a href="RelationshipTaxon/">RelationshipTaxon</a></td>
+<td></td>
+</tr>
+<tr>
+<td><a href="SexTerm/">SexTerm</a></td>
+<td></td>
+</tr>
+<tr>
+<td><a href="Stressor/">Stressor</a></td>
+<td></td>
+</tr>
+<tr>
+<td><a href="StressorChemical/">StressorChemical</a></td>
+<td></td>
+</tr>
+<tr>
+<td><a href="StressorLog/">StressorLog</a></td>
+<td></td>
+</tr>
+<tr>
+<td><a href="TaxonTerm/">TaxonTerm</a></td>
+<td></td>
+</tr>
+<tr>
+<td><a href="UrlLink/">UrlLink</a></td>
+<td></td>
+</tr>
+<tr>
+<td><a href="User/">User</a></td>
+<td></td>
+</tr>
+</tbody>
+</table>
+<h2 id="slots">Slots</h2>
+<table>
+<thead>
+<tr>
+<th>Slot</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><a href="abstract/">abstract</a></td>
+<td></td>
+</tr>
+<tr>
+<td><a href="active_version/">active_version</a></td>
+<td></td>
+</tr>
+<tr>
+<td><a href="affiliation/">affiliation</a></td>
+<td></td>
+</tr>
+<tr>
+<td><a href="aop_id/">aop_id</a></td>
+<td></td>
+</tr>
+<tr>
+<td><a href="aops/">aops</a></td>
+<td></td>
+</tr>
+<tr>
+<td><a href="applicability_of_the_aop/">applicability_of_the_aop</a></td>
+<td></td>
+</tr>
+<tr>
+<td><a href="assay_id/">assay_id</a></td>
+<td></td>
+</tr>
+<tr>
+<td><a href="assays/">assays</a></td>
+<td></td>
+</tr>
+<tr>
+<td><a href="assigned_license_id/">assigned_license_id</a></td>
+<td></td>
+</tr>
+<tr>
+<td><a href="authors/">authors</a></td>
+<td></td>
+</tr>
+<tr>
+<td><a href="background/">background</a></td>
+<td></td>
+</tr>
+<tr>
+<td><a href="batch_code/">batch_code</a></td>
+<td></td>
+</tr>
+<tr>
+<td><a href="batch_import_id/">batch_import_id</a></td>
+<td></td>
+</tr>
+<tr>
+<td><a href="bio_target_families/">bio_target_families</a></td>
+<td></td>
+</tr>
+<tr>
+<td><a href="biological_action_id/">biological_action_id</a></td>
+<td></td>
+</tr>
+<tr>
+<td><a href="biological_object_id/">biological_object_id</a></td>
+<td></td>
+</tr>
+<tr>
+<td><a href="biological_organization_id/">biological_organization_id</a></td>
+<td>The level of biological organization at which the Key Event occurs (e</td>
+</tr>
+<tr>
+<td><a href="biological_plausibility/">biological_plausibility</a></td>
+<td></td>
+</tr>
+<tr>
+<td><a href="biological_process_id/">biological_process_id</a></td>
+<td></td>
+</tr>
+<tr>
+<td><a href="biological_target_family_id/">biological_target_family_id</a></td>
+<td></td>
+</tr>
+<tr>
+<td><a href="casrn/">casrn</a></td>
+<td></td>
+</tr>
+<tr>
+<td><a href="cell_term_id/">cell_term_id</a></td>
+<td>The cell type in which the Key Event takes place</td>
+</tr>
+<tr>
+<td><a href="changed_at/">changed_at</a></td>
+<td>Timestamp of when the record was last changed</td>
+</tr>
+<tr>
+<td><a href="characterization_of_exposure/">characterization_of_exposure</a></td>
+<td></td>
+</tr>
+<tr>
+<td><a href="chemical_description/">chemical_description</a></td>
+<td></td>
+</tr>
+<tr>
+<td><a href="chemical_id/">chemical_id</a></td>
+<td></td>
+</tr>
+<tr>
+<td><a href="citation_id/">citation_id</a></td>
+<td></td>
+</tr>
+<tr>
+<td><a href="citations/">citations</a></td>
+<td></td>
+</tr>
+<tr>
+<td><a href="coached_aops/">coached_aops</a></td>
+<td></td>
+</tr>
+<tr>
+<td><a href="coaches/">coaches</a></td>
+<td></td>
+</tr>
+<tr>
+<td><a href="completion_score/">completion_score</a></td>
+<td></td>
+</tr>
+<tr>
+<td><a href="confidence_id/">confidence_id</a></td>
+<td></td>
+</tr>
+<tr>
+<td><a href="contributed_aops/">contributed_aops</a></td>
+<td></td>
+</tr>
+<tr>
+<td><a href="contributor_id/">contributor_id</a></td>
+<td></td>
+</tr>
+<tr>
+<td><a href="contributors/">contributors</a></td>
+<td></td>
+</tr>
+<tr>
+<td><a href="corresponding_author_id/">corresponding_author_id</a></td>
+<td></td>
+</tr>
+<tr>
+<td><a href="country/">country</a></td>
+<td></td>
+</tr>
+<tr>
+<td><a href="created_at/">created_at</a></td>
+<td>Timestamp of when the record was created</td>
+</tr>
+<tr>
+<td><a href="definition/">definition</a></td>
+<td>A description of the biological state being observed or measured, the biologi...</td>
+</tr>
+<tr>
+<td><a href="description/">description</a></td>
+<td></td>
+</tr>
+<tr>
+<td><a href="detection_technology/">detection_technology</a></td>
+<td></td>
+</tr>
+<tr>
+<td><a href="development_strategy/">development_strategy</a></td>
+<td></td>
+</tr>
+<tr>
+<td><a href="directness_id/">directness_id</a></td>
+<td></td>
+</tr>
+<tr>
+<td><a href="doi/">doi</a></td>
+<td></td>
+</tr>
+<tr>
+<td><a href="downstream_event_id/">downstream_event_id</a></td>
+<td></td>
+</tr>
+<tr>
+<td><a href="downstream_observation_id/">downstream_observation_id</a></td>
+<td></td>
+</tr>
+<tr>
+<td><a href="dsstox_chemical_id/">dsstox_chemical_id</a></td>
+<td></td>
+</tr>
+<tr>
+<td><a href="dsstox_substance_id/">dsstox_substance_id</a></td>
+<td></td>
+</tr>
+<tr>
+<td><a href="email/">email</a></td>
+<td></td>
+</tr>
+<tr>
+<td><a href="empirical_support/">empirical_support</a></td>
+<td></td>
+</tr>
+<tr>
+<td><a href="essentiality_id/">essentiality_id</a></td>
+<td></td>
+</tr>
+<tr>
+<td><a href="event_components/">event_components</a></td>
+<td></td>
+</tr>
+<tr>
+<td><a href="event_id/">event_id</a></td>
+<td></td>
+</tr>
+<tr>
+<td><a href="events/">events</a></td>
+<td></td>
+</tr>
+<tr>
+<td><a href="evidence_collection_strategy/">evidence_collection_strategy</a></td>
+<td></td>
+</tr>
+<tr>
+<td><a href="evidence_for_chemical_initiation/">evidence_for_chemical_initiation</a></td>
+<td>Documentation of how specific prototypical stressors (generally chemicals) ca...</td>
+</tr>
+<tr>
+<td><a href="evidence_text/">evidence_text</a></td>
+<td></td>
+</tr>
+<tr>
+<td><a href="examples_using_ao/">examples_using_ao</a></td>
+<td>Examples illustrating the regulatory significance of this Key Event when it s...</td>
+</tr>
+<tr>
+<td><a href="exp_type/">exp_type</a></td>
+<td></td>
+</tr>
+<tr>
+<td><a href="experimental_design/">experimental_design</a></td>
+<td></td>
+</tr>
+<tr>
+<td><a href="external_assay_id/">external_assay_id</a></td>
+<td></td>
+</tr>
+<tr>
+<td><a href="first_name/">first_name</a></td>
+<td></td>
+</tr>
+<tr>
+<td><a href="forum_links/">forum_links</a></td>
+<td></td>
+</tr>
+<tr>
+<td><a href="github_handle/">github_handle</a></td>
+<td></td>
+</tr>
+<tr>
+<td><a href="graphical_representation_image_uid/">graphical_representation_image_uid</a></td>
+<td></td>
+</tr>
+<tr>
+<td><a href="handbook_id/">handbook_id</a></td>
+<td></td>
+</tr>
+<tr>
+<td><a href="harmonized_event_id/">harmonized_event_id</a></td>
+<td></td>
+</tr>
+<tr>
+<td><a href="harmonized_label/">harmonized_label</a></td>
+<td></td>
+</tr>
+<tr>
+<td><a href="harmonized_label_key/">harmonized_label_key</a></td>
+<td></td>
+</tr>
+<tr>
+<td><a href="has_method_text/">has_method_text</a></td>
+<td>Indicates whether method text has been provided for this Key Event</td>
+</tr>
+<tr>
+<td><a href="how_it_works/">how_it_works</a></td>
+<td>The mechanistic basis explaining how perturbation of this Key Event leads to ...</td>
+</tr>
+<tr>
+<td><a href="id/">id</a></td>
+<td></td>
+</tr>
+<tr>
+<td><a href="inchi/">inchi</a></td>
+<td></td>
+</tr>
+<tr>
+<td><a href="inchi_key/">inchi_key</a></td>
+<td></td>
+</tr>
+<tr>
+<td><a href="indigo_inchi_key/">indigo_inchi_key</a></td>
+<td></td>
+</tr>
+<tr>
+<td><a href="integration_score/">integration_score</a></td>
+<td>Calculated metric for integration and priority assessment of the Key Event</td>
+</tr>
+<tr>
+<td><a href="internal_notes/">internal_notes</a></td>
+<td></td>
+</tr>
+<tr>
+<td><a href="is_priority/">is_priority</a></td>
+<td></td>
+</tr>
+<tr>
+<td><a href="jchem_inchi_key/">jchem_inchi_key</a></td>
+<td></td>
+</tr>
+<tr>
+<td><a href="journal/">journal</a></td>
+<td></td>
+</tr>
+<tr>
+<td><a href="key_event_essentiality/">key_event_essentiality</a></td>
+<td></td>
+</tr>
+<tr>
+<td><a href="known_loops/">known_loops</a></td>
+<td></td>
+</tr>
+<tr>
+<td><a href="known_modulating_factors/">known_modulating_factors</a></td>
+<td></td>
+</tr>
+<tr>
+<td><a href="label/">label</a></td>
+<td></td>
+</tr>
+<tr>
+<td><a href="last_name/">last_name</a></td>
+<td></td>
+</tr>
+<tr>
+<td><a href="legacy/">legacy</a></td>
+<td></td>
+</tr>
+<tr>
+<td><a href="license_id/">license_id</a></td>
+<td></td>
+</tr>
+<tr>
+<td><a href="life_stage_term_id/">life_stage_term_id</a></td>
+<td></td>
+</tr>
+<tr>
+<td><a href="life_stages/">life_stages</a></td>
+<td></td>
+</tr>
+<tr>
+<td><a href="link_source/">link_source</a></td>
+<td></td>
+</tr>
+<tr>
+<td><a href="logo_uid/">logo_uid</a></td>
+<td></td>
+</tr>
+<tr>
+<td><a href="mailing_address/">mailing_address</a></td>
+<td></td>
+</tr>
+<tr>
+<td><a href="mapping_status/">mapping_status</a></td>
+<td></td>
+</tr>
+<tr>
+<td><a href="mean_event_score/">mean_event_score</a></td>
+<td></td>
+</tr>
+<tr>
+<td><a href="mean_ker_score/">mean_ker_score</a></td>
+<td></td>
+</tr>
+<tr>
+<td><a href="measured_or_detected/">measured_or_detected</a></td>
+<td>A description of the type(s) of measurements that can be employed to evaluate...</td>
+</tr>
+<tr>
+<td><a href="modulating_factors/">modulating_factors</a></td>
+<td></td>
+</tr>
+<tr>
+<td><a href="name/">name</a></td>
+<td></td>
+</tr>
+<tr>
+<td><a href="ncbi_id/">ncbi_id</a></td>
+<td></td>
+</tr>
+<tr>
+<td><a href="new_aop_id/">new_aop_id</a></td>
+<td></td>
+</tr>
+<tr>
+<td><a href="notes/">notes</a></td>
+<td></td>
+</tr>
+<tr>
+<td><a href="objects/">objects</a></td>
+<td></td>
+</tr>
+<tr>
+<td><a href="observation_id/">observation_id</a></td>
+<td></td>
+</tr>
+<tr>
+<td><a href="observations/">observations</a></td>
+<td></td>
+</tr>
+<tr>
+<td><a href="oecd_project/">oecd_project</a></td>
+<td></td>
+</tr>
+<tr>
+<td><a href="oecd_status_id/">oecd_status_id</a></td>
+<td></td>
+</tr>
+<tr>
+<td><a href="official_name/">official_name</a></td>
+<td></td>
+</tr>
+<tr>
+<td><a href="optional_considerations/">optional_considerations</a></td>
+<td></td>
+</tr>
+<tr>
+<td><a href="orcid/">orcid</a></td>
+<td></td>
+</tr>
+<tr>
+<td><a href="organ_term_id/">organ_term_id</a></td>
+<td>The organ or tissue in which the Key Event takes place</td>
+</tr>
+<tr>
+<td><a href="other/">other</a></td>
+<td></td>
+</tr>
+<tr>
+<td><a href="overall_assessment/">overall_assessment</a></td>
+<td></td>
+</tr>
+<tr>
+<td><a href="overall_assessment_file_uid/">overall_assessment_file_uid</a></td>
+<td></td>
+</tr>
+<tr>
+<td><a href="pdf_copy_uid/">pdf_copy_uid</a></td>
+<td></td>
+</tr>
+<tr>
+<td><a href="pdf_only/">pdf_only</a></td>
+<td></td>
+</tr>
+<tr>
+<td><a href="phenotype/">phenotype</a></td>
+<td></td>
+</tr>
+<tr>
+<td><a href="preferred_name/">preferred_name</a></td>
+<td></td>
+</tr>
+<tr>
+<td><a href="process_is_phenotype/">process_is_phenotype</a></td>
+<td></td>
+</tr>
+<tr>
+<td><a href="processes/">processes</a></td>
+<td></td>
+</tr>
+<tr>
+<td><a href="prototypical_stressor/">prototypical_stressor</a></td>
+<td></td>
+</tr>
+<tr>
+<td><a href="pubchem_compound_id/">pubchem_compound_id</a></td>
+<td></td>
+</tr>
+<tr>
+<td><a href="pubchem_substance_id/">pubchem_substance_id</a></td>
+<td></td>
+</tr>
+<tr>
+<td><a href="quantitative_considerations/">quantitative_considerations</a></td>
+<td></td>
+</tr>
+<tr>
+<td><a href="quantitative_understanding/">quantitative_understanding</a></td>
+<td></td>
+</tr>
+<tr>
+<td><a href="quantitative_understanding_id/">quantitative_understanding_id</a></td>
+<td></td>
+</tr>
+<tr>
+<td><a href="raw_mapping_value/">raw_mapping_value</a></td>
+<td></td>
+</tr>
+<tr>
+<td><a href="references/">references</a></td>
+<td></td>
+</tr>
+<tr>
+<td><a href="relationship_id/">relationship_id</a></td>
+<td></td>
+</tr>
+<tr>
+<td><a href="relationships/">relationships</a></td>
+<td></td>
+</tr>
+<tr>
+<td><a href="release_date/">release_date</a></td>
+<td></td>
+</tr>
+<tr>
+<td><a href="release_notes/">release_notes</a></td>
+<td></td>
+</tr>
+<tr>
+<td><a href="release_notes_doc_uid/">release_notes_doc_uid</a></td>
+<td></td>
+</tr>
+<tr>
+<td><a href="released/">released</a></td>
+<td></td>
+</tr>
+<tr>
+<td><a href="response_relationship/">response_relationship</a></td>
+<td></td>
+</tr>
+<tr>
+<td><a href="row_order/">row_order</a></td>
+<td></td>
+</tr>
+<tr>
+<td><a href="saaop_status_id/">saaop_status_id</a></td>
+<td></td>
+</tr>
+<tr>
+<td><a href="scientific_term/">scientific_term</a></td>
+<td></td>
+</tr>
+<tr>
+<td><a href="sequence/">sequence</a></td>
+<td></td>
+</tr>
+<tr>
+<td><a href="sex_term_id/">sex_term_id</a></td>
+<td></td>
+</tr>
+<tr>
+<td><a href="sexes/">sexes</a></td>
+<td></td>
+</tr>
+<tr>
+<td><a href="short_code/">short_code</a></td>
+<td></td>
+</tr>
+<tr>
+<td><a href="short_name/">short_name</a></td>
+<td></td>
+</tr>
+<tr>
+<td><a href="sort/">sort</a></td>
+<td></td>
+</tr>
+<tr>
+<td><a href="source/">source</a></td>
+<td></td>
+</tr>
+<tr>
+<td><a href="source_aop_id/">source_aop_id</a></td>
+<td></td>
+</tr>
+<tr>
+<td><a href="source_event_id/">source_event_id</a></td>
+<td></td>
+</tr>
+<tr>
+<td><a href="source_event_id_text/">source_event_id_text</a></td>
+<td></td>
+</tr>
+<tr>
+<td><a href="source_event_label/">source_event_label</a></td>
+<td></td>
+</tr>
+<tr>
+<td><a href="source_id/">source_id</a></td>
+<td></td>
+</tr>
+<tr>
+<td><a href="stressor_id/">stressor_id</a></td>
+<td></td>
+</tr>
+<tr>
+<td><a href="supporting_tax_evidence/">supporting_tax_evidence</a></td>
+<td>Evidence describing the taxonomic applicability of the Key Event, using Latin...</td>
+</tr>
+<tr>
+<td><a href="tag/">tag</a></td>
+<td></td>
+</tr>
+<tr>
+<td><a href="taxon_evidence/">taxon_evidence</a></td>
+<td></td>
+</tr>
+<tr>
+<td><a href="taxon_term_id/">taxon_term_id</a></td>
+<td></td>
+</tr>
+<tr>
+<td><a href="taxon_terms/">taxon_terms</a></td>
+<td></td>
+</tr>
+<tr>
+<td><a href="taxons/">taxons</a></td>
+<td></td>
+</tr>
+<tr>
+<td><a href="term/">term</a></td>
+<td></td>
+</tr>
+<tr>
+<td><a href="term_class/">term_class</a></td>
+<td></td>
+</tr>
+<tr>
+<td><a href="time_scale/">time_scale</a></td>
+<td></td>
+</tr>
+<tr>
+<td><a href="time_zone/">time_zone</a></td>
+<td></td>
+</tr>
+<tr>
+<td><a href="title/">title</a></td>
+<td></td>
+</tr>
+<tr>
+<td><a href="type/">type</a></td>
+<td></td>
+</tr>
+<tr>
+<td><a href="uncertainties/">uncertainties</a></td>
+<td></td>
+</tr>
+<tr>
+<td><a href="updated_at/">updated_at</a></td>
+<td>Timestamp of when the record was last updated</td>
+</tr>
+<tr>
+<td><a href="upstream_event_id/">upstream_event_id</a></td>
+<td></td>
+</tr>
+<tr>
+<td><a href="upstream_observation_id/">upstream_observation_id</a></td>
+<td></td>
+</tr>
+<tr>
+<td><a href="url/">url</a></td>
+<td></td>
+</tr>
+<tr>
+<td><a href="url_links/">url_links</a></td>
+<td></td>
+</tr>
+<tr>
+<td><a href="user_defined_ao/">user_defined_ao</a></td>
+<td></td>
+</tr>
+<tr>
+<td><a href="user_defined_mie/">user_defined_mie</a></td>
+<td></td>
+</tr>
+<tr>
+<td><a href="user_id/">user_id</a></td>
+<td></td>
+</tr>
+<tr>
+<td><a href="user_term/">user_term</a></td>
+<td></td>
+</tr>
+<tr>
+<td><a href="username/">username</a></td>
+<td></td>
+</tr>
+<tr>
+<td><a href="version/">version</a></td>
+<td></td>
+</tr>
+<tr>
+<td><a href="weight_of_evidence/">weight_of_evidence</a></td>
+<td></td>
+</tr>
+<tr>
+<td><a href="weight_of_evidence_summary/">weight_of_evidence_summary</a></td>
+<td></td>
+</tr>
+<tr>
+<td><a href="year/">year</a></td>
+<td></td>
+</tr>
+</tbody>
+</table>
+<h2 id="enumerations">Enumerations</h2>
+<table>
+<thead>
+<tr>
+<th>Enumeration</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><a href="BiologicalActionEnum/">BiologicalActionEnum</a></td>
+<td></td>
+</tr>
+<tr>
+<td><a href="BiologicalObjectSourceEnum/">BiologicalObjectSourceEnum</a></td>
+<td></td>
+</tr>
+<tr>
+<td><a href="BiologicalOrganizationEnum/">BiologicalOrganizationEnum</a></td>
+<td></td>
+</tr>
+<tr>
+<td><a href="BiologicalProcessSourceEnum/">BiologicalProcessSourceEnum</a></td>
+<td></td>
+</tr>
+<tr>
+<td><a href="ConfidenceLevelEnum/">ConfidenceLevelEnum</a></td>
+<td></td>
+</tr>
+<tr>
+<td><a href="DirectnessEnum/">DirectnessEnum</a></td>
+<td></td>
+</tr>
+<tr>
+<td><a href="LifeStageTermEnum/">LifeStageTermEnum</a></td>
+<td></td>
+</tr>
+<tr>
+<td><a href="OecdStatusEnum/">OecdStatusEnum</a></td>
+<td></td>
+</tr>
+<tr>
+<td><a href="SexTermEnum/">SexTermEnum</a></td>
+<td></td>
+</tr>
+<tr>
+<td><a href="TaxonTermClassEnum/">TaxonTermClassEnum</a></td>
+<td></td>
+</tr>
+</tbody>
+</table>
+<h2 id="types">Types</h2>
+<table>
+<thead>
+<tr>
+<th>Type</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><a href="Boolean/">Boolean</a></td>
+<td>A binary (true or false) value</td>
+</tr>
+<tr>
+<td><a href="Curie/">Curie</a></td>
+<td>a compact URI</td>
+</tr>
+<tr>
+<td><a href="Date/">Date</a></td>
+<td>a date (year, month and day) in an idealized calendar</td>
+</tr>
+<tr>
+<td><a href="DateOrDatetime/">DateOrDatetime</a></td>
+<td>Either a date or a datetime</td>
+</tr>
+<tr>
+<td><a href="Datetime/">Datetime</a></td>
+<td>The combination of a date and time</td>
+</tr>
+<tr>
+<td><a href="Decimal/">Decimal</a></td>
+<td>A real number with arbitrary precision that conforms to the xsd:decimal speci...</td>
+</tr>
+<tr>
+<td><a href="Double/">Double</a></td>
+<td>A real number that conforms to the xsd:double specification</td>
+</tr>
+<tr>
+<td><a href="Float/">Float</a></td>
+<td>A real number that conforms to the xsd:float specification</td>
+</tr>
+<tr>
+<td><a href="Integer/">Integer</a></td>
+<td>An integer</td>
+</tr>
+<tr>
+<td><a href="Jsonpath/">Jsonpath</a></td>
+<td>A string encoding a JSON Path</td>
+</tr>
+<tr>
+<td><a href="Jsonpointer/">Jsonpointer</a></td>
+<td>A string encoding a JSON Pointer</td>
+</tr>
+<tr>
+<td><a href="Ncname/">Ncname</a></td>
+<td>Prefix part of CURIE</td>
+</tr>
+<tr>
+<td><a href="Nodeidentifier/">Nodeidentifier</a></td>
+<td>A URI, CURIE or BNODE that represents a node in a model</td>
+</tr>
+<tr>
+<td><a href="Objectidentifier/">Objectidentifier</a></td>
+<td>A URI or CURIE that represents an object in the model</td>
+</tr>
+<tr>
+<td><a href="Sparqlpath/">Sparqlpath</a></td>
+<td>A string encoding a SPARQL Property Path</td>
+</tr>
+<tr>
+<td><a href="String/">String</a></td>
+<td>A character string</td>
+</tr>
+<tr>
+<td><a href="Time/">Time</a></td>
+<td>A time object represents a (local) time of day, independent of any particular...</td>
+</tr>
+<tr>
+<td><a href="Uri/">Uri</a></td>
+<td>a complete URI</td>
+</tr>
+<tr>
+<td><a href="Uriorcurie/">Uriorcurie</a></td>
+<td>a URI or a CURIE</td>
+</tr>
+</tbody>
+</table>
+<h2 id="subsets">Subsets</h2>
+<table>
+<thead>
+<tr>
+<th>Subset</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td></td>
+<td></td>
+</tr>
+</tbody>
+</table>
+
+
+
+
+
+
+
+
+
+
+
+
+                
+              </article>
+            </div>
+          
+          
+  <script>var tabs=__md_get("__tabs");if(Array.isArray(tabs))e:for(var set of document.querySelectorAll(".tabbed-set")){var labels=set.querySelector(".tabbed-labels");for(var tab of tabs)for(var label of labels.getElementsByTagName("label"))if(label.innerText.trim()===tab){var input=document.getElementById(label.htmlFor);input.checked=!0;continue e}}</script>
+
+<script>var target=document.getElementById(location.hash.slice(1));target&&target.name&&(target.checked=target.name.startsWith("__tabbed_"))</script>
+        </div>
+        
+      </main>
+      
+        <footer class="md-footer">
+  
+  <div class="md-footer-meta md-typeset">
+    <div class="md-footer-meta__inner md-grid">
+      <div class="md-copyright">
+  
+  
+    Made with
+    <a href="https://squidfunk.github.io/mkdocs-material/" target="_blank" rel="noopener">
+      Material for MkDocs
+    </a>
+  
+</div>
+      
+    </div>
+  </div>
+</footer>
+      
+    </div>
+    <div class="md-dialog" data-md-component="dialog">
+      <div class="md-dialog__inner md-typeset"></div>
+    </div>
+    
+    
+    
+      
+      
+      <script id="__config" type="application/json">{"annotate": null, "base": ".", "features": ["content.tabs.link"], "search": "assets/javascripts/workers/search.2c215733.min.js", "tags": null, "translations": {"clipboard.copied": "Copied to clipboard", "clipboard.copy": "Copy to clipboard", "search.result.more.one": "1 more on this page", "search.result.more.other": "# more on this page", "search.result.none": "No matching documents", "search.result.one": "1 matching document", "search.result.other": "# matching documents", "search.result.placeholder": "Type to start searching", "search.result.term.missing": "Missing", "select.version": "Select version"}, "version": null}</script>
+    
+    
+      <script src="assets/javascripts/bundle.79ae519e.min.js"></script>
+      
+        <script src="https://unpkg.com/tablesort@5.3.0/dist/tablesort.min.js"></script>
+      
+        <script src="javascripts/tablesort.js"></script>
+      
+    
+  </body>
+</html>
