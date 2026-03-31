@@ -79,11 +79,9 @@ classes:
       coaches:
         multivalued: true
         range: User
-        inverse: coached_aops
       contributors:
         multivalued: true
         range: User
-        inverse: contributed_aops
       life_stages:
         multivalued: true
         range: AopLifeStage
@@ -149,11 +147,9 @@ classes:
       assays:
         multivalued: true
         range: Assay
-        inverse: events
       observations:
         multivalued: true
         range: Observation
-        inverse: events
       aops:
         multivalued: true
         range: AopEvent
@@ -267,7 +263,6 @@ classes:
       events:
         multivalued: true
         range: Event
-        inverse: observations
       citations:
         multivalued: true
         range: ObservationCitation
@@ -438,7 +433,6 @@ classes:
       events:
         multivalued: true
         range: Event
-        inverse: assays
       bio_target_families:
         multivalued: true
         range: AssayBioTargetFamily
@@ -1006,11 +1000,9 @@ classes:
       coached_aops:
         multivalued: true
         range: Aop
-        inverse: coaches
       contributed_aops:
         multivalued: true
         range: Aop
-        inverse: contributors
 
 enums:
   BiologicalActionEnum:
@@ -1084,7 +1076,7 @@ enums:
         description: NCI Thesaurus
       RBO:
         description: Radiation Biology Ontology
-  SexTermsEnum:
+  SexTermEnum:
     permissible_values:
       Male:
       Female:
@@ -1093,7 +1085,7 @@ enums:
       Third Gender:
       Hermaphrodite:
       Unspecific:
-  LifeStageTermsEnum:
+  LifeStageTermEnum:
     permissible_values:
       Birth to < 1 month:
       1 to < 3 months:
@@ -1130,18 +1122,18 @@ enums:
       Larvae:
       Larval development:
       before or during gonadal sex differentiation:
-  TaxonTermClassesEnum:
+  TaxonTermClassEnum:
     permissible_values:
       scientific name:
       common name:
       synonym:
-  ConfidenceLevelsEnum:
+  ConfidenceLevelEnum:
     permissible_values:
       high:
       moderate:
       low:
       not specified:
-  DirectnessesEnum:
+  DirectnessEnum:
     permissible_values:
       adjacent:
       non-adjacent:

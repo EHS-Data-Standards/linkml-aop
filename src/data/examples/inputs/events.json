@@ -1,0 +1,331 @@
+{
+  "142": {
+    "aop_ids": [
+      "1"
+    ],
+    "is_ao": false,
+    "regulatory_relevance": false,
+    "summary_oecd_statuses": {
+      "statuses": [
+        ""
+      ],
+      "any_oecd_endorsed": false,
+      "in_oecd_aop_program": false
+    },
+    "summary_licenses": {
+      "licenses": [
+        "BY-SA"
+      ],
+      "only_all_rights_reserved": false,
+      "only_open_for_adoption": false,
+      "any_open_for_adoption": false,
+      "any_all_rights_reserved": false
+    },
+    "aops": "1",
+    "aops_to_oecd": {
+      "1": ""
+    },
+    "aops_to_license": {
+      "1": "BY-SA"
+    },
+    "ke_id": "142",
+    "title": "Hyperplasia, Hyperplasia",
+    "short_name": "Hyperplasia, Hyperplasia",
+    "doa_free_text": null,
+    "description": null,
+    "measurement_method": null,
+    "level_of_biological_organization": "Tissue",
+    "references": null,
+    "cell_term": {
+      "source": null,
+      "term": null
+    },
+    "organ_term": {
+      "source": "UBERON",
+      "term": "liver"
+    },
+    "ecs": [
+      {
+        "biological_process": {
+          "source": "MESH",
+          "source_id": "D006965",
+          "term": "hyperplasia"
+        },
+        "biological_object": {},
+        "biological_action": {
+          "source_id": "1",
+          "term": "increased"
+        }
+      }
+    ],
+    "sex_terms": [],
+    "life_stage_terms": [],
+    "taxonomy_terms": [],
+    "aop_count": 1,
+    "completion_score": {
+      "percent": 41.67,
+      "raw_score": 5,
+      "max_score": 12,
+      "empty_free_text": [
+        "description",
+        "doa_free_text",
+        "measurement_method",
+        "references"
+      ],
+      "empty_structured": [
+        "taxonomy_terms",
+        "life_stage_terms",
+        "sex_terms"
+      ]
+    },
+    "retention_score": 2,
+    "max_retention_score": 9,
+    "percent_retention_score": 22.22222222222222,
+    "has_method": false
+  },
+  "57": {
+    "aop_ids": [
+      "1"
+    ],
+    "is_ao": false,
+    "regulatory_relevance": false,
+    "summary_oecd_statuses": {
+      "statuses": [
+        ""
+      ],
+      "any_oecd_endorsed": false,
+      "in_oecd_aop_program": false
+    },
+    "summary_licenses": {
+      "licenses": [
+        "BY-SA"
+      ],
+      "only_all_rights_reserved": false,
+      "only_open_for_adoption": false,
+      "any_open_for_adoption": false,
+      "any_all_rights_reserved": false
+    },
+    "aops": "1",
+    "aops_to_oecd": {
+      "1": ""
+    },
+    "aops_to_license": {
+      "1": "BY-SA"
+    },
+    "ke_id": "57",
+    "title": "Proliferation, Cell proliferation in the absence of cytotoxicity",
+    "short_name": "Proliferation, Cell proliferation in the absence of cytotoxicity",
+    "doa_free_text": null,
+    "description": null,
+    "measurement_method": null,
+    "level_of_biological_organization": "Cellular",
+    "references": null,
+    "cell_term": {
+      "source": "CL",
+      "term": "eukaryotic cell"
+    },
+    "organ_term": {
+      "source": null,
+      "term": null
+    },
+    "ecs": [
+      {
+        "biological_process": {
+          "source": "GO",
+          "source_id": "GO:0008283",
+          "term": "cell proliferation"
+        },
+        "biological_object": {},
+        "biological_action": {
+          "source_id": "1",
+          "term": "increased"
+        }
+      }
+    ],
+    "sex_terms": [],
+    "life_stage_terms": [],
+    "taxonomy_terms": [],
+    "aop_count": 1,
+    "completion_score": {
+      "percent": 41.67,
+      "raw_score": 5,
+      "max_score": 12,
+      "empty_free_text": [
+        "description",
+        "doa_free_text",
+        "measurement_method",
+        "references"
+      ],
+      "empty_structured": [
+        "taxonomy_terms",
+        "life_stage_terms",
+        "sex_terms"
+      ]
+    },
+    "retention_score": 2,
+    "max_retention_score": 9,
+    "percent_retention_score": 22.22222222222222,
+    "has_method": false
+  },
+  "294": {
+    "aop_ids": [
+      "1",
+      "33"
+    ],
+    "is_ao": false,
+    "regulatory_relevance": false,
+    "summary_oecd_statuses": {
+      "statuses": [
+        "",
+        ""
+      ],
+      "any_oecd_endorsed": false,
+      "in_oecd_aop_program": false
+    },
+    "summary_licenses": {
+      "licenses": [
+        "BY-SA",
+        "Open for adoption"
+      ],
+      "only_all_rights_reserved": false,
+      "only_open_for_adoption": false,
+      "any_open_for_adoption": true,
+      "any_all_rights_reserved": false
+    },
+    "aops": "1, 33",
+    "aops_to_oecd": {
+      "1": "",
+      "33": ""
+    },
+    "aops_to_license": {
+      "1": "BY-SA",
+      "33": "Open for adoption"
+    },
+    "ke_id": "294",
+    "title": "N/A, Unknown",
+    "short_name": "N/A, Unknown",
+    "doa_free_text": null,
+    "description": null,
+    "measurement_method": null,
+    "level_of_biological_organization": "Molecular",
+    "references": null,
+    "cell_term": {
+      "source": "CL",
+      "term": "eukaryotic cell"
+    },
+    "organ_term": {
+      "source": null,
+      "term": null
+    },
+    "ecs": [],
+    "sex_terms": [],
+    "life_stage_terms": [],
+    "taxonomy_terms": [],
+    "aop_count": 2,
+    "completion_score": {
+      "percent": 33.33,
+      "raw_score": 4,
+      "max_score": 12,
+      "empty_free_text": [
+        "description",
+        "doa_free_text",
+        "measurement_method",
+        "references"
+      ],
+      "empty_structured": [
+        "taxonomy_terms",
+        "life_stage_terms",
+        "sex_terms",
+        "sub_events"
+      ]
+    },
+    "retention_score": 3,
+    "max_retention_score": 9,
+    "percent_retention_score": 33.33333333333333,
+    "has_method": false
+  },
+  "334": {
+    "aop_ids": [
+      "1"
+    ],
+    "is_ao": false,
+    "regulatory_relevance": false,
+    "summary_oecd_statuses": {
+      "statuses": [
+        ""
+      ],
+      "any_oecd_endorsed": false,
+      "in_oecd_aop_program": false
+    },
+    "summary_licenses": {
+      "licenses": [
+        "BY-SA"
+      ],
+      "only_all_rights_reserved": false,
+      "only_open_for_adoption": false,
+      "any_open_for_adoption": false,
+      "any_all_rights_reserved": false
+    },
+    "aops": "1",
+    "aops_to_oecd": {
+      "1": ""
+    },
+    "aops_to_license": {
+      "1": "BY-SA"
+    },
+    "ke_id": "334",
+    "title": "Promotion, Hepatocelluar carcinoma",
+    "short_name": "Promotion, Hepatocelluar carcinoma",
+    "doa_free_text": null,
+    "description": null,
+    "measurement_method": null,
+    "level_of_biological_organization": "Individual",
+    "references": null,
+    "cell_term": {
+      "source": null,
+      "term": null
+    },
+    "organ_term": {
+      "source": "UBERON",
+      "term": "liver"
+    },
+    "ecs": [
+      {
+        "biological_process": {
+          "source": "MESH",
+          "source_id": "D006528",
+          "term": "hepatocellular carcinoma"
+        },
+        "biological_object": {},
+        "biological_action": {
+          "source_id": "1",
+          "term": "increased"
+        }
+      }
+    ],
+    "sex_terms": [],
+    "life_stage_terms": [],
+    "taxonomy_terms": [],
+    "aop_count": 1,
+    "completion_score": {
+      "percent": 36.36,
+      "raw_score": 4,
+      "max_score": 11,
+      "empty_free_text": [
+        "description",
+        "doa_free_text",
+        "measurement_method",
+        "references"
+      ],
+      "empty_structured": [
+        "taxonomy_terms",
+        "life_stage_terms",
+        "sex_terms"
+      ]
+    },
+    "retention_score": 2,
+    "max_retention_score": 9,
+    "percent_retention_score": 22.22222222222222,
+    "has_method": false
+  }
+}

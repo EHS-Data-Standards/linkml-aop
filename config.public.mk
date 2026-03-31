@@ -10,11 +10,11 @@
 LINKML_SCHEMA_NAME="linkml_aop"
 LINKML_SCHEMA_AUTHOR="J. Harry Caufield <jhc@lbl.gov>"
 LINKML_SCHEMA_DESCRIPTION="A LinkML schema for Adverse Outcome Pathways"
-LINKML_SCHEMA_SOURCE_PATH="src/linkml_aop/schema/linkml_aop.yaml"
+LINKML_SCHEMA_SOURCE_PATH="src/linkml_aop/schema/aop_emod_linkml.yaml"
 LINKML_SCHEMA_GOOGLE_SHEET_MODULE="personinfo_enums"
 LINKML_SCHEMA_GOOGLE_SHEET_ID="1wVoaiFg47aT9YWNeRfTZ8tYHN8s8PAuDx5i2HUcDpvQ"
 LINKML_SCHEMA_GOOGLE_SHEET_TABS="personinfo enums"
-LINKML_USE_SCHEMASHEETS=Yes
+LINKML_USE_SCHEMASHEETS=No
 
 ###### linkml generator variables, used by makefile
 

@@ -27,8 +27,10 @@ classes:
   AOPathway:
     is_a: NamedEntity
     description: >-
-      A representation of an Adverse Outcome Pathway, linking molecular initiating events 
+      A representation of an Adverse Outcome Pathway, linking molecular initiating events
       to adverse outcomes through key events.
+    slots:
+      - short_name
     attributes:
       # Examples from AOP:503
       title:
@@ -38,13 +40,6 @@ classes:
           the adverse outcome.
         examples:
           - value: "Activation of uterine estrogen receptor-alfa leading to endometrial adenocarcinoma, via epigenetic modulation"
-      short_name:
-        range: string
-        description: >-
-          A name that succinctly summarises the information from the title.
-          This name should not exceed 90 characters. 
-        examples:
-          - value: "Activation of uterine estrogen receptor-alfa, endometrial adenocarcinoma"
       graphical_representation:
         range: string
         description: >-
@@ -237,6 +232,10 @@ slots:
       This may be a specific organ (e.g., liver, heart) or a general
       organ system (e.g., cardiovascular, respiratory).
       If not applicable, this can be left blank.
+  short_name:
+    description: >-
+      A name that succinctly summarises the information from the title.
+      This name should not exceed 90 characters.
 
 # Enums
 enums:

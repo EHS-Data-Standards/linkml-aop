@@ -40,6 +40,20 @@ To add or revise schema definitions and enumerations:
 
 3. Review the changes in [`src/linkml_aop/schema/aop_emod_linkml.yaml`](src/linkml_aop/schema/aop_emod_linkml.yaml).
 
+## Developer Documentation
+
+<details>
+<summary>Commands</summary>
+
+This LinkML project uses the command runner [just](https://github.com/casey/just/) which is a better choice than `make` on Windows.
+To generate project artefacts, run:
+
+* `just --list`: list all pre-defined tasks
+* `just all`: make everything
+* `just deploy`: deploys site
+
+</details>
+
 ## Credits
 
 This project was started from:

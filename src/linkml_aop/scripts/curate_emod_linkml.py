@@ -429,11 +429,11 @@ ENUM_DEFINITIONS: dict[str, list | dict] = {
     "biological_organization_enum":  biological_organization_enum_list,
     "biological_object_source_enum": biological_object_source_enum_list,
     "biological_process_source_enum":biological_process_source_enum_list,
-    "sex_terms_enum":                sex_terms_enum_list,
-    "life_stage_terms_enum":         life_stage_terms_enum_list,
-    "taxon_term_classes_enum":       taxon_term_classes_enum_list,
-    "confidence_levels_enum":        confidence_levels_enum_list,
-    "directnesses_enum":             directnesses_enum_list,
+    "sex_term_enum":                  sex_terms_enum_list,
+    "life_stage_term_enum":          life_stage_terms_enum_list,
+    "taxon_term_class_enum":         taxon_term_classes_enum_list,
+    "confidence_level_enum":         confidence_levels_enum_list,
+    "directness_enum":               directnesses_enum_list,
     "oecd_status_enum":              oecd_status_enum_list,
 }
 
@@ -578,17 +578,19 @@ def apply_pascal_case_to_classes(text: str) -> str:
 
 
 def make_multivalued_attr_lines(
-    attr_name: str, range_name: str, inverse: str | None = None
+    attr_name: str, range_name: str
 ) -> list[str]:
-    """Return attribute lines for a multivalued reference, optionally with inverse:."""
-    lines = [
+    """Return attribute lines for a multivalued reference.
+
+    Note: inverse: is intentionally omitted. Class-level attributes cannot be referenced
+    by inverse: in LinkML (only top-level slots can); including it causes schema validation
+    errors in linkml-run-examples.
+    """
+    return [
         f"      {attr_name}:\n",
         f"        multivalued: true\n",
         f"        range: {range_name}\n",
     ]
-    if inverse:
-        lines.append(f"        inverse: {inverse}\n")
-    return lines
 
 
 def convert_class_block(
@@ -762,10 +764,10 @@ def main() -> None:
     for jt, (owner, owner_attr, inv_class, inv_attr) in BIDIRECTIONAL_INVERSE.items():
         if jt in sql_based_classes:
             extra_attrs.setdefault(owner, []).extend(
-                make_multivalued_attr_lines(owner_attr, inv_class, inverse=inv_attr)
+                make_multivalued_attr_lines(owner_attr, inv_class)
             )
             extra_attrs.setdefault(inv_class, []).extend(
-                make_multivalued_attr_lines(inv_attr, owner, inverse=owner_attr)
+                make_multivalued_attr_lines(inv_attr, owner)
             )
     for jt, (class_a, class_a_attr, class_b, class_b_attr) in SEMANTIC_JOIN_TABLES.items():
         if jt in sql_based_classes:

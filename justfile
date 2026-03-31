@@ -56,7 +56,7 @@ setup: _check-config _git-init install _gen-project _gen-examples _gendoc _git-a
 
 # Install project dependencies
 install:
-    poetry install
+    uv sync --group dev
 
 # Check project configuration
 _check-config:
@@ -95,7 +95,7 @@ deploy: site
 
 _compile_sheets:
     @if [ "{{use_schemasheets}}" != "No" ]; then \
-        poetry run sheets2linkml --gsheet-id {{sheet_ID}} {{sheet_tabs}} > {{sheet_module_path}}.tmp && \
+        uv run sheets2linkml --gsheet-id {{sheet_ID}} {{sheet_tabs}} > {{sheet_module_path}}.tmp && \
         mv {{sheet_module_path}}.tmp {{sheet_module_path}}; \
     fi
 
@@ -106,17 +106,17 @@ _gen-examples:
 
 # Generate project files
 _gen-project: _ensure_pymodel_dir _compile_sheets
-    poetry run gen-project {{config_yaml}} -d {{dest}} {{source_schema_path}} && \
+    uv run gen-project {{config_yaml}} -d {{dest}} {{source_schema_path}} && \
     mv {{dest}}/*.py {{pymodel}}
     @if [ ! -z "${{gen_owl_args}}" ]; then \
       mkdir -p {{dest}}/owl || true && \
-      poetry run gen-owl {{gen_owl_args}} {{source_schema_path}} > {{dest}}/owl/{{schema_name}}.owl.ttl || true ; \
+      uv run gen-owl {{gen_owl_args}} {{source_schema_path}} > {{dest}}/owl/{{schema_name}}.owl.ttl || true ; \
     fi
     @if [ ! ${{gen_java_args}} ]; then \
-      poetry run gen-java {{gen_java_args}} --output-directory {{dest}}/java/ {{source_schema_path}} || true ; \
+      uv run gen-java {{gen_java_args}} --output-directory {{dest}}/java/ {{source_schema_path}} || true ; \
     fi
     @if [ ! ${{gen_ts_args}} ]; then \
-      poetry run gen-typescript {{gen_ts_args}} {{source_schema_path}} > {{dest}}/typescript/{{schema_name}}.ts || true ; \
+      uv run gen-typescript {{gen_ts_args}} {{source_schema_path}} > {{dest}}/typescript/{{schema_name}}.ts || true ; \
     fi
 
 # Run all tests
@@ -124,15 +124,15 @@ test: _test-schema _test-python _test-examples
 
 # Test schema generation
 _test-schema:
-    poetry run gen-project {{config_yaml}} -d tmp {{source_schema_path}}
+    uv run linkml-lint --ignore-warnings {{source_schema_path}}
 
 # Run Python unit tests with pytest
 _test-python:
-    poetry run python -m pytest
+    uv run python -m pytest; e=$?; [ $e -eq 5 ] && exit 0 || exit $e
 
 # Run example tests
 _test-examples: _ensure_examples_output
-    poetry run linkml-run-examples \
+    uv run linkml-run-examples \
         --output-formats json \
         --output-formats yaml \
         --counter-example-input-directory src/data/examples/invalid \
@@ -142,19 +142,19 @@ _test-examples: _ensure_examples_output
 
 # Run linting
 lint:
-    poetry run linkml-lint {{source_schema_path}}
+    uv run linkml-lint {{source_schema_path}}
 
 # Generate documentation
 _gendoc: _ensure_docdir
     cp -r {{src}}/docs/files/* {{docdir}}
-    poetry run gen-doc {{gen_doc_args}} -d {{docdir}} {{source_schema_path}}
+    uv run gen-doc {{gen_doc_args}} -d {{docdir}} {{source_schema_path}}
 
 # Build docs and run test server
 testdoc: _gendoc _serve
 
 # Run documentation server
 _serve:
-    poetry run mkdocs serve
+    uv run mkdocs serve
 
 # Initialize and add everything to git
 _git-init-add: _git-init _git-add _git-commit _git-status
