@@ -20,21 +20,19 @@ jobs:
         with:
           fetch-depth: 0  # otherwise, you will failed to push refs to dest repo
 
-      - name: Set up Python.
-        uses: actions/setup-python@v4
-        with:
-          python-version: 3.9
+      - name: Install uv
+        uses: astral-sh/setup-uv@v5
 
-      - name: Install Poetry.
-        run: pipx install poetry
+      - name: Install just
+        run: pipx install rust-just
 
-      - name: Install dependencies.
-        run: poetry install
+      - name: Install dependencies
+        run: uv sync --group dev
 
-      - name: Build documentation.
+      - name: Build documentation
         run: |
           mkdir -p docs
           touch docs/.nojekyll
-          make gendoc
+          just _gendoc
           ([ ! -f docs/about.md ] && cp src/docs/about.md docs/) || true
-          make mkd-gh-deploy
+          uv run mkdocs gh-deploy --force
