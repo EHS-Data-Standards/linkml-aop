@@ -157,18 +157,19 @@ BIDIRECTIONAL_INVERSE: dict[str, tuple[str, str, str, str]] = {
 
 # Join tables with extra semantic attributes: stay as top-level classes; both referenced
 # classes get a multivalued attr pointing to the join table.
-# Format: join_table -> (class_a, class_a_attr, class_b, class_b_attr)
+# Format: join_table -> (class_a, class_a_attr, class_b, class_b_attr[, output_name])
 # Where the attr name may strip the owner prefix for readability (e.g. event_life_stages
 # becomes life_stages on events), while the range always points to the join table class.
-SEMANTIC_JOIN_TABLES: dict[str, tuple[str, str, str, str]] = {
-    # Format: join_table -> (class_a, class_a_attr, class_b, class_b_attr)
+# An optional 5th element overrides the output class name (pre-PascalCase).
+SEMANTIC_JOIN_TABLES: dict[str, tuple[str, str, str, str] | tuple[str, str, str, str, str]] = {
+    # Format: join_table -> (class_a, class_a_attr, class_b, class_b_attr[, output_name])
     # class_a_attr: strip the owner prefix from the join table name
     # class_b_attr: use the owner (class_a) name
-    "aop_life_stages":                     ("aops",         "life_stages",               "life_stage_terms",          "aops"),
+    "aop_life_stages":                     ("aops",         "life_stages",               "life_stage_terms",          "aops",          "aop_to_life_stage_relationship"),
     "aop_sexes":                           ("aops",         "sexes",                     "sex_terms",                 "aops"),
     "aop_taxons":                          ("aops",         "taxons",                    "taxon_terms",               "aops"),
     "aop_stressors":                       ("aops",         "prototypical_stressor",     "stressors",                 "aops"),
-    "aop_events":                          ("aops",         "events",                    "events",                    "aops"),
+    "aop_events":                          ("aops",         "events",                    "events",                    "aops",          "aop_to_event_relationship"),
     "aop_relationships":                   ("aops",         "relationships",             "relationships",             "aops"),
     "event_life_stages":                   ("events",       "life_stages",               "life_stage_terms",          "events"),
     "event_sexes":                         ("events",       "sexes",                     "sex_terms",                 "events"),
@@ -180,6 +181,12 @@ SEMANTIC_JOIN_TABLES: dict[str, tuple[str, str, str, str]] = {
     "relationship_taxons":                 ("relationships","taxons",                    "taxon_terms",               "relationships"),
     "relationship_sexes":                  ("relationships","sexes",                     "sex_terms",                 "relationships"),
     "relationship_life_stages":            ("relationships","life_stages",               "life_stage_terms",          "relationships"),
+}
+
+# All class renames: CLASS_RENAMES plus any output names from SEMANTIC_JOIN_TABLES 5th elements.
+ALL_RENAMES = {
+    **CLASS_RENAMES,
+    **{jt: entry[4] for jt, entry in SEMANTIC_JOIN_TABLES.items() if len(entry) > 4},
 }
 
 # Schema header written verbatim at the top of the output file.
@@ -444,7 +451,7 @@ ENUM_DEFINITIONS: dict[str, list | dict] = {
 # Parsing helpers
 # ---------------------------------------------------------------------------
 
-def extract_class_names(text: str) -> set[str]:
+def extract_class_names_from_input_schema(text: str) -> set[str]:
     """Return all class names defined under the top-level 'classes:' section."""
     in_classes = False
     names: set[str] = set()
@@ -720,50 +727,39 @@ def build_enums_yaml(enum_definitions: dict) -> str:
 
 
 # ---------------------------------------------------------------------------
-# Main
+# Pipeline steps
 # ---------------------------------------------------------------------------
 
-def main() -> None:
-    if len(sys.argv) < 2:
-        print(__doc__)
-        sys.exit(1)
-
-    sql_based_path = Path(sys.argv[1])
-    output_path = Path(sys.argv[2]) if len(sys.argv) > 2 else sql_based_path
-
-    if not sql_based_path.exists():
-        print(f"ERROR: file not found: {sql_based_path}")
-        sys.exit(1)
-
-    sql_based_text = sql_based_path.read_text()
-
-    admin_classes = set(WIKI_TABLES_TO_DROP)
-
-    # Remove admin classes from the sql-based file in-place
-    sql_based_text, removed = remove_admin_classes(sql_based_text, admin_classes)
-    if removed:
-        sql_based_path.write_text(sql_based_text)
-        print(f"Removed admin classes from {sql_based_path}: {sorted(removed)}")
-
-    sql_based_classes = extract_class_names(sql_based_text)
-
-    join_tables_present = sql_based_classes & (
-        set(PURE_PIVOT_UNIDIRECTIONAL) | set(BIDIRECTIONAL_INVERSE) | set(SEMANTIC_JOIN_TABLES)
-    )
-    nested_join_tables = (
+def compute_nested_join_tables(sql_based_classes: set[str]) -> set[str]:
+    """Return join tables that are collapsed into owner classes (not written as top-level classes)."""
+    return (
         (sql_based_classes & set(PURE_PIVOT_UNIDIRECTIONAL))
         | (sql_based_classes & set(BIDIRECTIONAL_INVERSE))
     )
+
+
+def report_class_breakdown(sql_based_classes: set[str], nested_join_tables: set[str]) -> None:
+    """Print a breakdown of all input classes by how they are handled in the output."""
+    join_tables_present = sql_based_classes & (
+        set(PURE_PIVOT_UNIDIRECTIONAL) | set(BIDIRECTIONAL_INVERSE) | set(SEMANTIC_JOIN_TABLES)
+    )
     semantic_join_tables_present = sql_based_classes & set(SEMANTIC_JOIN_TABLES)
+    entity_classes = sql_based_classes - join_tables_present
 
-    print(f"Active classes: {len(sql_based_classes - nested_join_tables)}")
-    print(f"Join tables identified ({len(join_tables_present)}): {sorted(join_tables_present)}")
-    print(f"Join tables nested ({len(nested_join_tables)}): {sorted(nested_join_tables)}")
-    print(f"Join tables with extra attrs — refs added to both owners ({len(semantic_join_tables_present)}): {sorted(semantic_join_tables_present)}")
+    print(f"Input classes: {len(sql_based_classes)}")
+    print(f"  Entity classes — written as top-level classes ({len(entity_classes)}):")
+    for c in sorted(entity_classes):
+        print(f"    {c}")
+    print(f"  Semantic join tables — written as top-level classes + refs injected into owners ({len(semantic_join_tables_present)}):")
+    for jt in sorted(semantic_join_tables_present):
+        print(f"    {jt}")
+    print(f"  Nested join tables — collapsed into owner classes, not written ({len(nested_join_tables)}):")
+    for jt in sorted(nested_join_tables):
+        print(f"    {jt}")
 
-    sql_based_blocks = extract_class_blocks(sql_based_text, sql_based_classes)
 
-    # Build extra multivalued attrs to inject into owner class blocks
+def build_extra_attrs(sql_based_classes: set[str]) -> dict[str, list[str]]:
+    """Build extra multivalued attrs to inject into owner class blocks from all join table types."""
     extra_attrs: dict[str, list[str]] = {}
     for jt, (owner, attr_name, target_range) in PURE_PIVOT_UNIDIRECTIONAL.items():
         if jt in sql_based_classes:
@@ -778,43 +774,90 @@ def main() -> None:
             extra_attrs.setdefault(inv_class, []).extend(
                 make_multivalued_attr_lines(inv_attr, owner)
             )
-    for jt, (class_a, class_a_attr, class_b, class_b_attr) in SEMANTIC_JOIN_TABLES.items():
+    for jt, entry in SEMANTIC_JOIN_TABLES.items():
+        class_a, class_a_attr, class_b, class_b_attr = entry[:4]
+        range_name = ALL_RENAMES.get(jt, jt)
         if jt in sql_based_classes:
             extra_attrs.setdefault(class_a, []).extend(
-                make_multivalued_attr_lines(class_a_attr, jt)
+                make_multivalued_attr_lines(class_a_attr, range_name)
             )
             extra_attrs.setdefault(class_b, []).extend(
-                make_multivalued_attr_lines(class_b_attr, jt)
+                make_multivalued_attr_lines(class_b_attr, range_name)
             )
+    return extra_attrs
 
-    # Build output: schema header + classes: + converted class blocks
-    lines = [SCHEMA_HEADER, "classes:\n"]
 
-    # CLASS_ORDER uses output names; resolve back to sql-based names for lookup.
-    reverse_renames = {v: k for k, v in CLASS_RENAMES.items()}
+def resolve_class_order(sql_based_classes: set[str], nested_join_tables: set[str]) -> list[str]:
+    """Return active classes in CLASS_ORDER priority first, then alphabetically."""
+    reverse_renames = {v: k for k, v in ALL_RENAMES.items()}
     active_classes = sql_based_classes - nested_join_tables
     priority = [
         reverse_renames.get(n, n)
         for n in CLASS_ORDER
         if reverse_renames.get(n, n) in active_classes
     ]
-    remaining = sorted(active_classes - set(priority))
+    return priority + sorted(active_classes - set(priority))
 
-    for name in priority + remaining:
+
+def build_classes_yaml(
+    ordered_classes: list[str],
+    sql_based_blocks: dict[str, list[str]],
+    extra_attrs: dict[str, list[str]],
+) -> str:
+    """Convert and assemble all class blocks into the classes: YAML body string."""
+    lines = []
+    for name in ordered_classes:
         raw_lines = sql_based_blocks.get(name)
         if raw_lines is None:
             continue
-        curated_ranges = CURATED_RANGES.get(name, {})
         converted = convert_class_block(
-            raw_lines, curated_ranges, DROPPED_ATTRS.get(name), DESCRIPTIONS.get(name),
-            class_descriptions.get(name),
+            raw_lines, CURATED_RANGES.get(name, {}), DROPPED_ATTRS.get(name),
+            DESCRIPTIONS.get(name), class_descriptions.get(name),
         )
-        converted = apply_class_renames(converted, CLASS_RENAMES)
+        converted = apply_class_renames(converted, ALL_RENAMES)
         if name in extra_attrs:
-            converted.extend(apply_class_renames(extra_attrs[name], CLASS_RENAMES))
+            converted.extend(apply_class_renames(extra_attrs[name], ALL_RENAMES))
         lines.append("".join(converted))
+    return "".join(lines)
 
-    output = apply_pascal_case_to_classes("".join(lines))
+
+# ---------------------------------------------------------------------------
+# Main
+# ---------------------------------------------------------------------------
+
+def main() -> None:
+    if len(sys.argv) < 2:
+        print(__doc__)
+        sys.exit(1)
+
+    if len(sys.argv) > 2:
+        output_path = Path(sys.argv[2]) 
+    else:
+        print(f"ERROR: No output path specified")
+        sys.exit(1)
+
+    sql_based_path = Path(sys.argv[1])
+    if not sql_based_path.exists():
+        print(f"ERROR: file not found: {sql_based_path}")
+        sys.exit(1)
+
+    sql_based_linkml = sql_based_path.read_text()
+
+    # Strip admin/internal classes from the in-memory text before processing.
+    sql_based_linkml, removed = remove_admin_classes(sql_based_linkml, set(WIKI_TABLES_TO_DROP))
+    if removed:
+        print(f"Skipping admin classes: {sorted(removed)}")
+
+    sql_based_classes = extract_class_names_from_input_schema(sql_based_linkml)
+    nested_join_tables = compute_nested_join_tables(sql_based_classes)
+    report_class_breakdown(sql_based_classes, nested_join_tables)
+
+    sql_based_blocks = extract_class_blocks(sql_based_linkml, sql_based_classes)
+    extra_attrs = build_extra_attrs(sql_based_classes)
+    ordered_classes = resolve_class_order(sql_based_classes, nested_join_tables)
+    classes_yaml = build_classes_yaml(ordered_classes, sql_based_blocks, extra_attrs)
+
+    output = apply_pascal_case_to_classes(SCHEMA_HEADER + "classes:\n" + classes_yaml)
     output += build_enums_yaml(ENUM_DEFINITIONS)
     output_path.write_text(output)
     print(f"Written to {output_path}")
