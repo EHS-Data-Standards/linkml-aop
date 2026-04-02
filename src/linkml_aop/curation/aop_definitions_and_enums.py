@@ -156,3 +156,54 @@ oecd_status_enum_list = [
     "ESCA Approved",
     "Under Review",
 ]
+
+# Class-level descriptions sourced from AOP-Wiki handbook and info pages.
+# Keys are sql-based class names (pre-rename, pre-PascalCase).
+class_descriptions = {
+    "aops": (
+        "An AOP describes a sequence of events starting with initial interaction(s) between a stressor and a"
+        " biomolecule within an organism that causes a perturbation in its biology (i.e., molecular initiating"
+        " event, MIE), which can progress through a dependent series of intermediate key events (KEs) and culminate"
+        " in an adverse outcome (AO) considered relevant to risk assessment or regulatory decision-making. AOPs are"
+        " composed of a causal sequence of upstream to downstream KEs, representing a cascading series of measurable"
+        " biological changes that can be expected to occur if the perturbation is sufficiently severe (i.e., in terms"
+        " of potency, duration, frequency) to drive the pathway all the way to the AO. Importantly, AOPs do not describe"
+        " every detail of the biology but instead focus on describing critical steps or check-points along the path"
+        " to adversity, which are both measurable and have potential predictive value for regulatory application."
+    ),
+    "events": (
+        "A change in biological or physiological state that is both measurable and essential to the progression"
+        " of a defined biological perturbation leading to a specific adverse outcome."
+    ),
+    "relationships": (
+        "A scientifically-based relationship that connects one key event to another, defines a causal"
+        " and predictive relationship between the upstream and downstream event, and thereby facilitates"
+        " inference or extrapolation of the state of the downstream key event from the known, measured,"
+        "or predicted state of the upstream key event."
+    ),
+    "stressors": (
+        "An external or internal factor that induces a perturbation to a biological system, potentially"
+        " initiating a molecular initiating event (MIE) but could also impact a biological process"
+        " represented by a key event. Stressors may include chemical, physical, or biological agents"
+        " capable of eliciting measurable changes in the biological system relevant to the AOP."
+    ),
+    "citations": (),
+    "evidences": (),
+    "observations": (),
+    "assays": (),
+    "chemicals": (),
+    "biological_target_families": (),
+    "biological_objects": (),
+    "biological_processes": (),
+    "biological_actions": (),
+    "biological_organizations": (),
+    "confidence_levels": (),
+    "directnesses": (),
+    "life_stage_terms": (),
+    "sex_terms": (),
+    "taxon_terms": (),
+    "organ_terms": (),
+    "cell_terms": (),
+    "oecd_statuses": (),
+    "users": (),
+}

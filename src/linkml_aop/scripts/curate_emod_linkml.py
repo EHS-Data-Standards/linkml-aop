@@ -40,6 +40,7 @@ from linkml_aop.curation.aop_definitions_and_enums import (
     biological_object_source_enum_list,
     biological_organization_enum_list,
     biological_process_source_enum_list,
+    class_descriptions,
     class_to_enum,
     confidence_levels_enum_list,
     directnesses_enum_list,
@@ -128,9 +129,10 @@ CLASS_RENAMES = {
 }
 
 
+
 # Attributes to drop from specific classes. Keys are sql-based class names.
 DROPPED_ATTRS: dict[str, list[str]] = {
-    "aops": ["status_id"],
+    "aops": ["status_id", "saaop_status_id"]
 }
 
 
@@ -598,6 +600,7 @@ def convert_class_block(
     curated_ranges: dict[str, str],
     dropped_attrs: list[str] | None = None,
     descriptions: dict[str, str] | None = None,
+    class_description: str | None = None,
 ) -> list[str]:
     """Convert a schemauto-generated class block to the hand-curated style.
 
@@ -616,9 +619,15 @@ def convert_class_block(
     dropped_attrs = dropped_attrs or []
     descriptions = descriptions or {}
     found_slots: list[str] = []
-    result: list[str] = []
 
-    i = 0
+    # Inject class-level description after the class header line (first line).
+    if class_description and lines:
+        result: list[str] = [lines[0], f"    description: >-\n      {class_description}\n"]
+        i = 1
+    else:
+        result = []
+        i = 0
+
     while i < len(lines):
         line = lines[i]
 
@@ -797,7 +806,8 @@ def main() -> None:
             continue
         curated_ranges = CURATED_RANGES.get(name, {})
         converted = convert_class_block(
-            raw_lines, curated_ranges, DROPPED_ATTRS.get(name), DESCRIPTIONS.get(name)
+            raw_lines, curated_ranges, DROPPED_ATTRS.get(name), DESCRIPTIONS.get(name),
+            class_descriptions.get(name),
         )
         converted = apply_class_renames(converted, CLASS_RENAMES)
         if name in extra_attrs:
