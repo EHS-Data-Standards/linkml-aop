@@ -85,7 +85,7 @@ classes:
         range: User
       life_stages:
         multivalued: true
-        range: AopLifeStage
+        range: AopToLifeStageRelationship
       sexes:
         multivalued: true
         range: AopSex
@@ -97,7 +97,7 @@ classes:
         range: AopStressor
       events:
         multivalued: true
-        range: AopEvent
+        range: AopToEventRelationship
       relationships:
         multivalued: true
         range: AopRelationship
@@ -155,7 +155,7 @@ classes:
         range: Observation
       aops:
         multivalued: true
-        range: AopEvent
+        range: AopToEventRelationship
       life_stages:
         multivalued: true
         range: EventLifeStage
@@ -292,7 +292,7 @@ classes:
       observations:
         multivalued: true
         range: ObservationCitation
-  AopEvent:
+  AopToEventRelationship:
     slots:
       - created_at
       - updated_at
@@ -312,7 +312,7 @@ classes:
       sequence:
         range: integer
       batch_import_id:
-  AopLifeStage:
+  AopToLifeStageRelationship:
     slots:
       - created_at
       - updated_at
@@ -784,7 +784,7 @@ classes:
         range: LifeStageTermEnum
       aops:
         multivalued: true
-        range: AopLifeStage
+        range: AopToLifeStageRelationship
       events:
         multivalued: true
         range: EventLifeStage
