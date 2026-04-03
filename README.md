@@ -40,6 +40,31 @@ To add or revise schema definitions and enumerations:
 
 3. Review the changes in [`src/linkml_aop/schema/aop_emod_linkml.yaml`](src/linkml_aop/schema/aop_emod_linkml.yaml).
 
+## To Do's
+
+* [x] Rename `relationships` attributes
+* [ ] Update all class descriptions, especially for `KeRelationship`
+* [ ] Set up an enum for Experiment Types
+* [ ] Rethink modeling for entity classes that are joins, `assigned_licenses`. Others are being dropped for now.
+* [ ] Think through modeling for `harmonized_aops` and `harmonized_events`. Both are internal join models
+  that pair the **source** entity with a **harmonized** entity
+* [ ] Move all classes based on join tables to the end of the ordering
+
+Experiment Types values used in EMOD 2.0:
+
+* in vivo
+* in vitro
+* in silico
+* ex vivo
+* in situ
+* cell-free
+* biochemical
+
+## Future To Do's
+
+* [ ] Refine constraints/rules for how batch_imports and citations are used for prov tracking.
+   Align with principles and standards being developed in other bio-ontology curation spaces.
+
 ## Developer Documentation
 
 <details>
@@ -58,4 +83,3 @@ To generate project artefacts, run:
 
 This project was started from:
 [linkml-project-cookiecutter](https://github.com/linkml/linkml-project-cookiecutter).
-****

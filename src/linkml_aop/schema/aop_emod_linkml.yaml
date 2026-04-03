@@ -52,11 +52,8 @@ classes:
       weight_of_evidence_summary:
       quantitative_considerations:
       optional_considerations:
-      references:
       overall_assessment:
       background:
-      user_defined_mie:
-      user_defined_ao:
       oecd_project:
       oecd_status_id:
         range: OecdStatus
@@ -77,30 +74,24 @@ classes:
       url_links:
         multivalued: true
         range: UrlLink
-      coaches:
+      prototypical_stressors:
         multivalued: true
-        range: User
-      contributors:
-        multivalued: true
-        range: User
-      life_stages:
-        multivalued: true
-        range: AopToLifeStageRelationship
-      sexes:
-        multivalued: true
-        range: AopSex
-      taxons:
-        multivalued: true
-        range: AopTaxon
-      prototypical_stressor:
-        multivalued: true
-        range: AopStressor
+        range: AopToPrototypicalStressor
       events:
         multivalued: true
-        range: AopToEventRelationship
-      relationships:
+        range: AopToEvent
+      ke_relationships:
         multivalued: true
-        range: AopRelationship
+        range: AopToKeRelationship
+      life_stages:
+        multivalued: true
+        range: AopToLifeStage
+      sexes:
+        multivalued: true
+        range: AopToSex
+      taxons:
+        multivalued: true
+        range: AopToTaxon
   Event:
     description: >-
       A change in biological or physiological state that is both measurable and essential to the progression of a defined biological perturbation leading to a specific adverse outcome.
@@ -117,7 +108,7 @@ classes:
         description: A reasonable abbreviation of the Key Event title, used in labelling throughout AOP-Wiki.
       biological_organization_id:
         description: The level of biological organization at which the Key Event occurs (e.g., molecular, cellular, tissue, organ, organism).
-        range: BiologicalOrganization
+        range: LevelOfBiologicalOrganization
       how_it_works:
         description: The mechanistic basis explaining how perturbation of this Key Event leads to downstream effects.
       measured_or_detected:
@@ -155,20 +146,20 @@ classes:
         range: Observation
       aops:
         multivalued: true
-        range: AopToEventRelationship
+        range: AopToEvent
       life_stages:
         multivalued: true
-        range: EventLifeStage
+        range: EventToLifeStage
       sexes:
         multivalued: true
-        range: EventSex
-      bio_target_families:
-        multivalued: true
-        range: EventBioTargetFamily
+        range: EventToSex
       taxons:
         multivalued: true
-        range: EventTaxon
-  Relationship:
+        range: EventToTaxon
+      bio_target_families:
+        multivalued: true
+        range: EventToBioTargetFamily
+  KeRelationship:
     description: >-
       A scientifically-based relationship that connects one key event to another, defines a causal and predictive relationship between the upstream and downstream event, and thereby facilitates inference or extrapolation of the state of the downstream key event from the known, measured,or predicted state of the upstream key event.
     slots:
@@ -198,220 +189,16 @@ classes:
       completion_score:
       aops:
         multivalued: true
-        range: AopRelationship
+        range: AopToKeRelationship
       taxons:
         multivalued: true
-        range: RelationshipTaxon
+        range: KeRelationshipToTaxon
       sexes:
         multivalued: true
-        range: RelationshipSex
+        range: KeRelationshipToSex
       life_stages:
         multivalued: true
-        range: RelationshipLifeStage
-  Stressor:
-    description: >-
-      An external or internal factor that induces a perturbation to a biological system, potentially initiating a molecular initiating event (MIE) but could also impact a biological process represented by a key event. Stressors may include chemical, physical, or biological agents capable of eliciting measurable changes in the biological system relevant to the AOP.
-    slots:
-      - created_at
-      - updated_at
-    attributes:
-      id:
-        identifier: true
-        range: integer
-      name:
-      chemical_description:
-      characterization_of_exposure:
-      references:
-      aops:
-        multivalued: true
-        range: AopStressor
-  BioTargetFamily:
-    slots:
-      - created_at
-      - updated_at
-    attributes:
-      id:
-        identifier: true
-        range: integer
-      name:
-      batch_import_id:
-        range: BatchImport
-      events:
-        multivalued: true
-        range: EventBioTargetFamily
-      assays:
-        multivalued: true
-        range: AssayBioTargetFamily
-      citations:
-        multivalued: true
-        range: CitationBioTargetFamily
-  Observation:
-    slots:
-      - created_at
-      - updated_at
-    attributes:
-      id:
-        identifier: true
-        range: integer
-      biological_action_id:
-        range: BiologicalAction
-      biological_process_id:
-        range: BiologicalProcess
-      biological_object_id:
-        range: BiologicalObject
-      assay_id:
-        range: Assay
-      batch_import_id:
-      stressor_id:
-      process_is_phenotype:
-      phenotype:
-      other:
-      notes:
-      events:
-        multivalued: true
-        range: Event
-      citations:
-        multivalued: true
-        range: ObservationCitation
-  Citation:
-    slots:
-      - created_at
-      - updated_at
-    attributes:
-      id:
-        identifier: true
-        range: integer
-      doi:
-      title:
-      authors:
-      journal:
-      year:
-      bio_target_families:
-        multivalued: true
-        range: CitationBioTargetFamily
-      observations:
-        multivalued: true
-        range: ObservationCitation
-  AopToEventRelationship:
-    slots:
-      - created_at
-      - updated_at
-    attributes:
-      id:
-        identifier: true
-        range: integer
-      aop_id:
-        range: Aop
-      event_id:
-        range: Event
-      type:
-      essentiality_id:
-        range: ConfidenceLevel
-      row_order:
-        range: integer
-      sequence:
-        range: integer
-      batch_import_id:
-  AopToLifeStageRelationship:
-    slots:
-      - created_at
-      - updated_at
-    attributes:
-      id:
-        identifier: true
-        range: integer
-      aop_id:
-        range: Aop
-      life_stage_term_id:
-        range: LifeStageTerm
-      confidence_id:
-  AopLog:
-    slots:
-      - created_at
-      - updated_at
-    attributes:
-      id:
-        identifier: true
-        range: integer
-      aop_id:
-        range: Aop
-      user_id:
-        range: User
-      description:
-  AopRelationship:
-    slots:
-      - created_at
-      - updated_at
-    attributes:
-      id:
-        identifier: true
-        range: integer
-      aop_id:
-        range: Aop
-      relationship_id:
-        range: Relationship
-      confidence_id:
-      quantitative_understanding_id:
-        range: ConfidenceLevel
-      row_order:
-        range: integer
-      directness_id:
-        range: Directness
-      type:
-  AopSex:
-    slots:
-      - created_at
-      - updated_at
-    attributes:
-      id:
-        identifier: true
-        range: integer
-      aop_id:
-        range: Aop
-      sex_term_id:
-        range: SexTerm
-      confidence_id:
-  AopStressor:
-    slots:
-      - created_at
-      - updated_at
-    attributes:
-      id:
-        identifier: true
-        range: integer
-      aop_id:
-        range: Aop
-      stressor_id:
-        range: Stressor
-      confidence_id:
-      evidence_text:
-  AopTaxon:
-    slots:
-      - created_at
-      - updated_at
-    attributes:
-      id:
-        identifier: true
-        range: integer
-      aop_id:
-        range: Aop
-      taxon_term_id:
-        range: TaxonTerm
-      confidence_id:
-  AssayBioTargetFamily:
-    slots:
-      - created_at
-      - updated_at
-    attributes:
-      id:
-        identifier: true
-        range: integer
-      assay_id:
-        range: Assay
-      biological_target_family_id:
-        range: BioTargetFamily
-      batch_import_id:
-        range: BatchImport
+        range: KeRelationshipToLifeStage
   Assay:
     slots:
       - created_at
@@ -442,8 +229,8 @@ classes:
         range: Event
       bio_target_families:
         multivalued: true
-        range: AssayBioTargetFamily
-  AssignedLicense:
+        range: AssayToBioTargetFamily
+  Observation:
     slots:
       - created_at
       - updated_at
@@ -451,9 +238,24 @@ classes:
       id:
         identifier: true
         range: integer
-      license_id:
-        range: License
-  BatchImport:
+      biological_action_id:
+        range: BiologicalAction
+      biological_process_id:
+        range: BiologicalProcess
+      biological_object_id:
+        range: BiologicalObject
+      assay_id:
+        range: Assay
+      batch_import_id:
+      stressor_id:
+      phenotype:
+      events:
+        multivalued: true
+        range: Event
+      citations:
+        multivalued: true
+        range: ObservationToCitation
+  Evidence:
     slots:
       - created_at
       - updated_at
@@ -461,12 +263,48 @@ classes:
       id:
         identifier: true
         range: integer
-      batch_code:
-      contributor_id:
-        range: User
+      upstream_observation_id:
+        range: Observation
+      downstream_observation_id:
+        range: Observation
       citation_id:
-        range: Citation
-      description:
+      taxon_term_id:
+        range: TaxonTerm
+      sex_term_id:
+        range: SexTerm
+      life_stage_term_id:
+        range: LifeStageTerm
+      relationship_id:
+        range: KeRelationship
+      experimental_design:
+      notes:
+  Stressor:
+    description: >-
+      An external or internal factor that induces a perturbation to a biological system, potentially initiating a molecular initiating event (MIE) but could also impact a biological process represented by a key event. Stressors may include chemical, physical, or biological agents capable of eliciting measurable changes in the biological system relevant to the AOP.
+    slots:
+      - created_at
+      - updated_at
+    attributes:
+      id:
+        identifier: true
+        range: integer
+      name:
+      aops:
+        multivalued: true
+        range: AopToPrototypicalStressor
+  Citation:
+    slots:
+      - created_at
+      - updated_at
+    attributes:
+      id:
+        identifier: true
+        range: integer
+      doi:
+      title:
+      authors:
+      journal:
+      year:
   BiologicalAction:
     slots:
       - created_at
@@ -493,16 +331,6 @@ classes:
       source_id:
       description:
       url:
-  BiologicalOrganization:
-    slots:
-      - created_at
-      - updated_at
-    attributes:
-      id:
-        identifier: true
-        range: integer
-      term:
-        range: BiologicalOrganizationEnum
   BiologicalProcess:
     slots:
       - created_at
@@ -517,6 +345,161 @@ classes:
       source_id:
       description:
       url:
+  LevelOfBiologicalOrganization:
+    slots:
+      - created_at
+      - updated_at
+    attributes:
+      id:
+        identifier: true
+        range: integer
+      term:
+        range: BiologicalOrganizationEnum
+  BatchImport:
+    slots:
+      - created_at
+      - updated_at
+    attributes:
+      id:
+        identifier: true
+        range: integer
+      batch_code:
+      contributor_id:
+        range: User
+      citation_id:
+        range: Citation
+      description:
+  AopToEvent:
+    slots:
+      - created_at
+      - updated_at
+    attributes:
+      id:
+        identifier: true
+        range: integer
+      aop_id:
+        range: Aop
+      event_id:
+        range: Event
+      type:
+      essentiality_id:
+        range: ConfidenceLevel
+      row_order:
+        range: integer
+      sequence:
+        range: integer
+      batch_import_id:
+  AopToLifeStage:
+    slots:
+      - created_at
+      - updated_at
+    attributes:
+      id:
+        identifier: true
+        range: integer
+      aop_id:
+        range: Aop
+      life_stage_term_id:
+        range: LifeStageTerm
+      confidence_id:
+  AopToKeRelationship:
+    slots:
+      - created_at
+      - updated_at
+    attributes:
+      id:
+        identifier: true
+        range: integer
+      aop_id:
+        range: Aop
+      relationship_id:
+        range: KeRelationship
+      confidence_id:
+      quantitative_understanding_id:
+        range: ConfidenceLevel
+      row_order:
+        range: integer
+      directness_id:
+        range: Directness
+      type:
+  AopToSex:
+    slots:
+      - created_at
+      - updated_at
+    attributes:
+      id:
+        identifier: true
+        range: integer
+      aop_id:
+        range: Aop
+      sex_term_id:
+        range: SexTerm
+      confidence_id:
+  AopToPrototypicalStressor:
+    slots:
+      - created_at
+      - updated_at
+    attributes:
+      id:
+        identifier: true
+        range: integer
+      aop_id:
+        range: Aop
+      stressor_id:
+        range: Stressor
+      confidence_id:
+      evidence_text:
+  AopToTaxon:
+    slots:
+      - created_at
+      - updated_at
+    attributes:
+      id:
+        identifier: true
+        range: integer
+      aop_id:
+        range: Aop
+      taxon_term_id:
+        range: TaxonTerm
+      confidence_id:
+  AssayToBioTargetFamily:
+    slots:
+      - created_at
+      - updated_at
+    attributes:
+      id:
+        identifier: true
+        range: integer
+      assay_id:
+        range: Assay
+      biological_target_family_id:
+        range: BioTargetFamily
+      batch_import_id:
+        range: BatchImport
+  AssignedLicense:
+    slots:
+      - created_at
+      - updated_at
+    attributes:
+      id:
+        identifier: true
+        range: integer
+      license_id:
+        range: License
+  BioTargetFamily:
+    slots:
+      - created_at
+      - updated_at
+    attributes:
+      id:
+        identifier: true
+        range: integer
+      name:
+      batch_import_id:
+        range: BatchImport
+      assays:
+        multivalued: true
+        range: AssayToBioTargetFamily
   CellTerm:
     slots:
       - created_at
@@ -531,61 +514,6 @@ classes:
       source:
       description:
       url:
-  ChemicalSynonym:
-    slots:
-      - created_at
-      - updated_at
-    attributes:
-      id:
-        identifier: true
-        range: integer
-      term:
-      chemical_id:
-        range: Chemical
-  Chemical:
-    slots:
-      - created_at
-      - updated_at
-    attributes:
-      id:
-        identifier: true
-        range: integer
-      dsstox_substance_id:
-      casrn:
-      preferred_name:
-      jchem_inchi_key:
-      indigo_inchi_key:
-      pubchem_substance_id:
-      pubchem_compound_id:
-      inchi:
-      inchi_key:
-      dsstox_chemical_id:
-  CitationBioTargetFamily:
-    slots:
-      - created_at
-      - updated_at
-    attributes:
-      id:
-        identifier: true
-        range: integer
-      citation_id:
-        range: Citation
-      biological_target_family_id:
-        range: BioTargetFamily
-      batch_import_id:
-        range: BatchImport
-  CitationRelationship:
-    slots:
-      - created_at
-      - updated_at
-    attributes:
-      id:
-        identifier: true
-        range: integer
-      relationship_id:
-        range: Relationship
-      citation_id:
-        range: Citation
   ConfidenceLevel:
     slots:
       - created_at
@@ -607,7 +535,7 @@ classes:
       term:
         range: DirectnessEnum
       description:
-  EventLifeStage:
+  EventToLifeStage:
     slots:
       - created_at
       - updated_at
@@ -620,20 +548,7 @@ classes:
       life_stage_term_id:
         range: LifeStageTerm
       confidence_id:
-  EventLog:
-    slots:
-      - created_at
-      - updated_at
-    attributes:
-      id:
-        identifier: true
-        range: integer
-      event_id:
-        range: Event
-      user_id:
-        range: User
-      description:
-  EventSex:
+  EventToSex:
     slots:
       - created_at
       - updated_at
@@ -646,7 +561,7 @@ classes:
       sex_term_id:
         range: SexTerm
       confidence_id:
-  EventBioTargetFamily:
+  EventToBioTargetFamily:
     slots:
       - created_at
       - updated_at
@@ -660,7 +575,7 @@ classes:
         range: BioTargetFamily
       batch_import_id:
         range: BatchImport
-  EventTaxon:
+  EventToTaxon:
     slots:
       - created_at
       - updated_at
@@ -673,29 +588,6 @@ classes:
       taxon_term_id:
         range: TaxonTerm
       confidence_id:
-  Evidence:
-    slots:
-      - created_at
-      - updated_at
-    attributes:
-      id:
-        identifier: true
-        range: integer
-      upstream_observation_id:
-        range: Observation
-      downstream_observation_id:
-        range: Observation
-      citation_id:
-      taxon_term_id:
-        range: TaxonTerm
-      sex_term_id:
-        range: SexTerm
-      life_stage_term_id:
-        range: LifeStageTerm
-      relationship_id:
-        range: Relationship
-      experimental_design:
-      notes:
   ExperimentType:
     slots:
       - created_at
@@ -782,16 +674,7 @@ classes:
         range: integer
       term:
         range: LifeStageTermEnum
-      aops:
-        multivalued: true
-        range: AopToLifeStageRelationship
-      events:
-        multivalued: true
-        range: EventLifeStage
-      relationships:
-        multivalued: true
-        range: RelationshipLifeStage
-  ObservationCitation:
+  ObservationToCitation:
     slots:
       - created_at
       - updated_at
@@ -832,27 +715,7 @@ classes:
       source:
       description:
       url:
-  Profile:
-    slots:
-      - created_at
-      - updated_at
-    attributes:
-      id:
-        identifier: true
-        range: integer
-      user_id:
-        range: User
-      first_name:
-      last_name:
-      title:
-      username:
-      affiliation:
-      country:
-      time_zone:
-      mailing_address:
-      orcid:
-      github_handle:
-  RelationshipLifeStage:
+  KeRelationshipToLifeStage:
     slots:
       - created_at
       - updated_at
@@ -861,11 +724,11 @@ classes:
         identifier: true
         range: integer
       relationship_id:
-        range: Relationship
+        range: KeRelationship
       life_stage_term_id:
         range: LifeStageTerm
       confidence_id:
-  RelationshipLog:
+  KeRelationshipToSex:
     slots:
       - created_at
       - updated_at
@@ -874,24 +737,11 @@ classes:
         identifier: true
         range: integer
       relationship_id:
-        range: Relationship
-      user_id:
-        range: User
-      description:
-  RelationshipSex:
-    slots:
-      - created_at
-      - updated_at
-    attributes:
-      id:
-        identifier: true
-        range: integer
-      relationship_id:
-        range: Relationship
+        range: KeRelationship
       sex_term_id:
         range: SexTerm
       confidence_id:
-  RelationshipTaxon:
+  KeRelationshipToTaxon:
     slots:
       - created_at
       - updated_at
@@ -900,7 +750,7 @@ classes:
         identifier: true
         range: integer
       relationship_id:
-        range: Relationship
+        range: KeRelationship
       taxon_term_id:
         range: TaxonTerm
       confidence_id:
@@ -914,41 +764,6 @@ classes:
         range: integer
       term:
         range: SexTermEnum
-      aops:
-        multivalued: true
-        range: AopSex
-      events:
-        multivalued: true
-        range: EventSex
-      relationships:
-        multivalued: true
-        range: RelationshipSex
-  StressorChemical:
-    slots:
-      - created_at
-      - updated_at
-    attributes:
-      id:
-        identifier: true
-        range: integer
-      user_term:
-      chemical_id:
-        range: Chemical
-      stressor_id:
-        range: Stressor
-  StressorLog:
-    slots:
-      - created_at
-      - updated_at
-    attributes:
-      id:
-        identifier: true
-        range: integer
-      stressor_id:
-        range: Stressor
-      user_id:
-        range: User
-      description:
   EventComponent:
     slots:
       - created_at
@@ -978,38 +793,12 @@ classes:
       ncbi_id:
       scientific_term:
       source_id:
-      aops:
-        multivalued: true
-        range: AopTaxon
-      events:
-        multivalued: true
-        range: EventTaxon
-      relationships:
-        multivalued: true
-        range: RelationshipTaxon
-  UrlLink:
-    slots:
-      - created_at
-      - updated_at
-    attributes:
-      id:
-        identifier: true
-        range: integer
-      link_source:
-      url:
-      title:
   User:
     attributes:
       id:
         identifier: true
         range: integer
       email:
-      coached_aops:
-        multivalued: true
-        range: Aop
-      contributed_aops:
-        multivalued: true
-        range: Aop
 
 enums:
   BiologicalActionEnum:
