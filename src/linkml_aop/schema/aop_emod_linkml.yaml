@@ -45,6 +45,7 @@ classes:
       short_name:
       corresponding_author_id:
         range: User
+        inlined: true
       abstract:
       authors:
       applicability_of_the_aop:
@@ -57,6 +58,7 @@ classes:
       oecd_project:
       oecd_status_id:
         range: OecdStatus
+        inlined: true
       graphical_representation_image_uid:
       legacy:
         range: integer
@@ -66,16 +68,13 @@ classes:
       known_modulating_factors:
       assigned_license_id:
         range: AssignedLicense
+        inlined: true
       handbook_id:
         range: Handbook
+        inlined: true
       completion_score:
       mean_ker_score:
       mean_event_score:
-      url_links:
-        multivalued: true
-        range: UrlLink
-        inlined: true
-        inlined_as_list: true
       prototypical_stressors:
         multivalued: true
         range: AopToPrototypicalStressor
@@ -123,6 +122,7 @@ classes:
       biological_organization_id:
         description: The level of biological organization at which the Key Event occurs (e.g., molecular, cellular, tissue, organ, organism).
         range: LevelOfBiologicalOrganization
+        inlined: true
       how_it_works:
         description: The mechanistic basis explaining how perturbation of this Key Event leads to downstream effects.
       measured_or_detected:
@@ -140,9 +140,11 @@ classes:
       organ_term_id:
         description: The organ or tissue in which the Key Event takes place.
         range: OrganTerm
+        inlined: true
       cell_term_id:
         description: The cell type in which the Key Event takes place.
         range: CellTerm
+        inlined: true
       completion_score:
         description: Calculated metric indicating how complete the Key Event documentation is.
       integration_score:
@@ -201,8 +203,10 @@ classes:
         range: integer
       upstream_event_id:
         range: Event
+        inlined: true
       downstream_event_id:
         range: Event
+        inlined: true
       how_it_works:
       biological_plausibility:
       empirical_support:
@@ -251,6 +255,7 @@ classes:
       detection_technology:
       biological_action_id:
         range: BiologicalAction
+        inlined: true
       external_assay_id:
       batch_import_id:
       objects:
@@ -288,12 +293,16 @@ classes:
         range: integer
       biological_action_id:
         range: BiologicalAction
+        inlined: true
       biological_process_id:
         range: BiologicalProcess
+        inlined: true
       biological_object_id:
         range: BiologicalObject
+        inlined: true
       assay_id:
         range: Assay
+        inlined: true
       batch_import_id:
       stressor_id:
       phenotype:
@@ -317,17 +326,23 @@ classes:
         range: integer
       upstream_observation_id:
         range: Observation
+        inlined: true
       downstream_observation_id:
         range: Observation
+        inlined: true
       citation_id:
       taxon_term_id:
         range: TaxonTerm
+        inlined: true
       sex_term_id:
         range: SexTerm
+        inlined: true
       life_stage_term_id:
         range: LifeStageTerm
+        inlined: true
       relationship_id:
         range: KeRelationship
+        inlined: true
       experimental_design:
       notes:
   Stressor:
@@ -420,8 +435,10 @@ classes:
       batch_code:
       contributor_id:
         range: User
+        inlined: true
       citation_id:
         range: Citation
+        inlined: true
       description:
   AopToEvent:
     slots:
@@ -433,11 +450,14 @@ classes:
         range: integer
       aop_id:
         range: Aop
+        inlined: true
       event_id:
         range: Event
+        inlined: true
       type:
       essentiality_id:
         range: ConfidenceLevel
+        inlined: true
       row_order:
         range: integer
       sequence:
@@ -453,8 +473,10 @@ classes:
         range: integer
       aop_id:
         range: Aop
+        inlined: true
       life_stage_term_id:
         range: LifeStageTerm
+        inlined: true
       confidence_id:
   AopToKeRelationship:
     slots:
@@ -466,15 +488,19 @@ classes:
         range: integer
       aop_id:
         range: Aop
+        inlined: true
       relationship_id:
         range: KeRelationship
+        inlined: true
       confidence_id:
       quantitative_understanding_id:
         range: ConfidenceLevel
+        inlined: true
       row_order:
         range: integer
       directness_id:
         range: Directness
+        inlined: true
       type:
   AopToSex:
     slots:
@@ -486,8 +512,10 @@ classes:
         range: integer
       aop_id:
         range: Aop
+        inlined: true
       sex_term_id:
         range: SexTerm
+        inlined: true
       confidence_id:
   AopToPrototypicalStressor:
     slots:
@@ -499,8 +527,10 @@ classes:
         range: integer
       aop_id:
         range: Aop
+        inlined: true
       stressor_id:
         range: Stressor
+        inlined: true
       confidence_id:
       evidence_text:
   AopToTaxon:
@@ -513,8 +543,10 @@ classes:
         range: integer
       aop_id:
         range: Aop
+        inlined: true
       taxon_term_id:
         range: TaxonTerm
+        inlined: true
       confidence_id:
   AssayToBioTargetFamily:
     slots:
@@ -526,10 +558,13 @@ classes:
         range: integer
       assay_id:
         range: Assay
+        inlined: true
       biological_target_family_id:
         range: BioTargetFamily
+        inlined: true
       batch_import_id:
         range: BatchImport
+        inlined: true
   AssignedLicense:
     slots:
       - created_at
@@ -540,6 +575,7 @@ classes:
         range: integer
       license_id:
         range: License
+        inlined: true
   BioTargetFamily:
     slots:
       - created_at
@@ -551,6 +587,7 @@ classes:
       name:
       batch_import_id:
         range: BatchImport
+        inlined: true
       assays:
         multivalued: true
         range: AssayToBioTargetFamily
@@ -601,8 +638,10 @@ classes:
         range: integer
       event_id:
         range: Event
+        inlined: true
       life_stage_term_id:
         range: LifeStageTerm
+        inlined: true
       confidence_id:
   EventToSex:
     slots:
@@ -614,8 +653,10 @@ classes:
         range: integer
       event_id:
         range: Event
+        inlined: true
       sex_term_id:
         range: SexTerm
+        inlined: true
       confidence_id:
   EventToBioTargetFamily:
     slots:
@@ -627,10 +668,13 @@ classes:
         range: integer
       event_id:
         range: Event
+        inlined: true
       biological_target_family_id:
         range: BioTargetFamily
+        inlined: true
       batch_import_id:
         range: BatchImport
+        inlined: true
   EventToTaxon:
     slots:
       - created_at
@@ -641,8 +685,10 @@ classes:
         range: integer
       event_id:
         range: Event
+        inlined: true
       taxon_term_id:
         range: TaxonTerm
+        inlined: true
       confidence_id:
   ExperimentType:
     slots:
@@ -682,11 +728,14 @@ classes:
       tag:
       new_aop_id:
         range: Aop
+        inlined: true
       source_aop_id:
         range: Aop
+        inlined: true
       is_priority:
       batch_import_id:
         range: BatchImport
+        inlined: true
   HarmonizedEvent:
     slots:
       - created_at
@@ -697,16 +746,19 @@ classes:
         range: integer
       source_event_id:
         range: Event
+        inlined: true
       source_event_id_text:
       source_event_label:
       harmonized_label:
       harmonized_label_key:
       harmonized_event_id:
         range: Event
+        inlined: true
       raw_mapping_value:
       mapping_status:
       batch_import_id:
         range: BatchImport
+        inlined: true
   License:
     slots:
       - created_at
@@ -740,10 +792,13 @@ classes:
         range: integer
       observation_id:
         range: Observation
+        inlined: true
       citation_id:
         range: Citation
+        inlined: true
       batch_import_id:
         range: BatchImport
+        inlined: true
   OecdStatus:
     slots:
       - created_at
@@ -781,8 +836,10 @@ classes:
         range: integer
       relationship_id:
         range: KeRelationship
+        inlined: true
       life_stage_term_id:
         range: LifeStageTerm
+        inlined: true
       confidence_id:
   KeRelationshipToSex:
     slots:
@@ -794,8 +851,10 @@ classes:
         range: integer
       relationship_id:
         range: KeRelationship
+        inlined: true
       sex_term_id:
         range: SexTerm
+        inlined: true
       confidence_id:
   KeRelationshipToTaxon:
     slots:
@@ -807,8 +866,10 @@ classes:
         range: integer
       relationship_id:
         range: KeRelationship
+        inlined: true
       taxon_term_id:
         range: TaxonTerm
+        inlined: true
       confidence_id:
   SexTerm:
     slots:
@@ -830,10 +891,13 @@ classes:
         range: integer
       biological_action_id:
         range: BiologicalAction
+        inlined: true
       biological_object_id:
         range: BiologicalObject
+        inlined: true
       biological_process_id:
         range: BiologicalProcess
+        inlined: true
   TaxonTerm:
     slots:
       - created_at
