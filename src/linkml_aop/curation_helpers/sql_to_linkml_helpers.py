@@ -77,11 +77,15 @@ WIKI_TABLES_TO_DROP = [
     "stressor_chemicals",                       # could be handled using external references and more time is needed to set this up
     "chemicals",                                # could be handled using external references and more time is needed to set this up     
     "url_links",                                # could be expanded to serve more entities than just AOPs; needs more time to set this up
+    "aop_url_links",                            # could be handled using external references and more time is needed to set this up
     "relationship_logs",
     "aop_logs",
     "event_logs",
     "stressor_logs",
 ]
+
+# TODO: Add ATTR_RENAMES support to strip "_id" suffix from attributes that reference
+# other classes (e.g. upstream_event_id → upstream_event, downstream_event_id → downstream_event).
 
 # Attributes to drop from specific classes. Keys are sql-based class names.
 DROPPED_ATTRS: dict[str, list[str]] = {
@@ -97,7 +101,7 @@ PURE_PIVOT_UNIDIRECTIONAL: dict[str, tuple[str, str, str]] = {
     "assay_objects": ("assays", "objects", "biological_objects"),
     "assay_processes": ("assays", "processes", "biological_processes"),
     "assay_taxon_terms": ("assays", "taxon_terms", "taxon_terms"),
-    "aop_url_links": ("aops", "url_links", "url_links"),
+    # "aop_url_links": ("aops", "url_links", "url_links"),
     "event_sub_events": ("events", "event_components", "sub_events")
 }
 

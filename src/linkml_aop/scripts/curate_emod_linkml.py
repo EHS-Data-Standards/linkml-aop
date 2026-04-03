@@ -314,12 +314,16 @@ def convert_class_block(
                 if re.match(r"^        range:\s+\S+\s*$", al):
                     if curated:
                         new_block.append(f"        range: {curated}\n")
+                        if curated not in LINKML_BUILTIN_TYPES and not curated.endswith("_enum"):
+                            new_block.append(f"        inlined: true\n")
                         replaced = True
                     # else: drop range: string (it's the default)
                 else:
                     new_block.append(al)
             if curated and not replaced:
                 new_block.append(f"        range: {curated}\n")
+                if curated not in LINKML_BUILTIN_TYPES and not curated.endswith("_enum"):
+                    new_block.append(f"        inlined: true\n")
             desc = descriptions.get(attr_name)
             if desc and not any("description:" in al for al in new_block):
                 new_block.insert(1, f"        description: {desc}\n")
