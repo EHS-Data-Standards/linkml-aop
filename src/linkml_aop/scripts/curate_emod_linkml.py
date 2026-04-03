@@ -3,30 +3,31 @@ Build a curated emod_linkml.yml from a raw schemauto-generated file that is gene
 from the AOP-Wiki EMOD 3.0 MySQL database.
 
 Usage:
-    uv run python -m linkml_aop.scripts.curate_emod_linkml <sql_based_file> [<output_file>]
+    uv run python -m linkml_aop.scripts.curate_emod_linkml <sql_based_file> <output_file>
 
     sql_based_file  Raw output from `schemauto import-sql` (e.g. aop_emod_linkml.yml)
-    output_file     Destination file (defaults to sql_based_file, i.e. in-place)
+    output_file     Destination file for the curated schema
 
 What this script does:
   1. Writes the SCHEMA_HEADER constant as the output header, replacing the raw
      header from sql_based_file.
-  2. Removes admin/internal classes (WIKI_TABLES_TO_DROP) from the
-     generated file in-place before processing.
-  3. Handles join tables in three ways depending on their type:
+  2. Removes wiki-specific tables (WIKI_TABLES_TO_DROP) from the input before processing.
+  3. Handles join tables in four ways depending on their type:
        - PURE_PIVOT_UNIDIRECTIONAL: join table is removed from output as a class; the
-         owner class gains a multivalued attribute pointing directly to the target class.
+         parent class gains a multivalued attribute pointing directly to the target class.
        - BIDIRECTIONAL_INVERSE: join table is removed from output; both referenced
-         classes gain a multivalued attribute with inverse: pointing to each other.
-       - SEMANTIC_JOIN_TABLES: join table stays as a top-level class (it carries
-         extra semantic attributes); both referenced classes gain a multivalued
-         attribute pointing to the join table class.
+         classes gain a multivalued attribute pointing to each other.
+       - JOIN_TABLES_TO_BIDIRECTIONAL_RELS: join table stays as a top-level class;
+         both referenced classes gain a multivalued attribute pointing to the join table.
+       - JOIN_TABLES_TO_UNIDIRECTIONAL_RELS: join table stays as a top-level class;
+         only class_a gains a multivalued attribute pointing to the join table.
   4. For each remaining class:
        - CURATED_RANGES attribute-level range: references are grafted onto the
          generated attributes, then the slots pattern conversion is applied
          (shared slots → slots: list, id range → integer, bare range: string stripped).
   5. CLASS_RENAMES substitutions are applied to class headers and range: values
-     throughout the output.
+     throughout the output. All rename definitions live in CLASS_RENAMES as the
+     single source of truth.
   6. Classes are written in CLASS_ORDER priority first, then alphabetically.
   7. All class names are converted to PascalCase in the output.
 """
@@ -35,21 +36,13 @@ import re
 import sys
 from pathlib import Path
 
-from linkml_aop.curation.aop_definitions_and_enums import (
-    biological_action_enum_list,
-    biological_object_source_enum_list,
-    biological_organization_enum_list,
-    biological_process_source_enum_list,
-    class_descriptions,
-    class_to_enum,
-    confidence_levels_enum_list,
-    directnesses_enum_list,
-    event_definitions,
-    life_stage_terms_enum_list,
-    oecd_status_enum_list,
-    sex_terms_enum_list,
-    taxon_term_classes_enum_list,
+from linkml_aop.curation_helpers.aop_definitions_and_enums import (
+    ATTRIBUTE_DESCRIPTIONS,
+    ENUM_DEFINITIONS,
+    CLASS_DESCRIPTIONS,
+    CLASS_TO_ENUM,
 )
+from linkml_aop.curation_helpers.sql_to_linkml_helpers import *
 
 def to_pascal_case(name: str) -> str:
     return "".join(word.capitalize() for word in name.split("_"))
@@ -85,366 +78,6 @@ def to_singular(name: str) -> str:
         prefix, last = name.rsplit("_", 1)
         return f"{prefix}_{singularize_word(last)}"
     return singularize_word(name)
-
-
-SHARED_SLOTS = {"created_at", "updated_at"}
-
-# LinkML built-in scalar types — excluded from PascalCase conversion.
-LINKML_BUILTIN_TYPES = {
-    "string", "integer", "float", "double", "decimal",
-    "boolean", "date", "datetime", "time", "uri",
-    "uriorcurie", "curie", "ncname",
-}
-
-# Tables from the aop-wiki DB should not be part of the schema at this stage.
-WIKI_TABLES_TO_DROP = [
-    "alembic_version",
-    "entity_counts",
-    "oecd_metrics",
-    "roles",
-    "assignments",
-    "event_stressors",
-]
-
-# Classes that appear first in the output, in this order. All other classes follow alphabetically.
-# Use final output names (i.e. post-CLASS_RENAMES) here.
-CLASS_ORDER = [
-    "aops",
-    "events",
-    "relationships",
-    "stressors",
-    "bio_target_families",
-    "observations",
-    "citations",
-]
-
-# Class name substitutions applied to headers and range: references in the output.
-# Also governs attribute names wherever the old class name appears as an attr name.
-CLASS_RENAMES = {
-    "biological_target_families":           "bio_target_families",
-    "assay_target_families":                "assay_bio_target_families",
-    "citation_biological_target_families":  "citation_bio_target_families",
-    "event_target_families":                "event_bio_target_families",
-    "sub_events":                           "event_components",
-}
-
-
-
-# Attributes to drop from specific classes. Keys are sql-based class names.
-DROPPED_ATTRS: dict[str, list[str]] = {
-    "aops": ["status_id", "saaop_status_id"]
-}
-
-
-# Join tables that collapse to a unidirectional multivalued reference on the owner.
-# Format: join_table -> (owner_class, attr_name, target_range)
-PURE_PIVOT_UNIDIRECTIONAL: dict[str, tuple[str, str, str]] = {
-    "assay_objects": ("assays", "objects", "biological_objects"),
-    "assay_processes": ("assays", "processes", "biological_processes"),
-    "assay_taxon_terms": ("assays", "taxon_terms", "taxon_terms"),
-    "aop_url_links": ("aops", "url_links", "url_links"),
-    "event_sub_events": ("events", "event_components", "sub_events")
-}
-
-# Join tables that collapse to bidirectional inverse multivalued refs.
-# Format: join_table -> (owner_class, owner_attr, inverse_class, inverse_attr)
-BIDIRECTIONAL_INVERSE: dict[str, tuple[str, str, str, str]] = {
-    "aop_coaches": ("aops", "coaches", "users", "coached_aops"),
-    "aop_contributors": ("aops", "contributors", "users", "contributed_aops"),
-    "event_assays": ("events", "assays", "assays", "events"),
-    "observation_events": ("observations", "events", "events", "observations"),
-}
-
-# Join tables with extra semantic attributes: stay as top-level classes; both referenced
-# classes get a multivalued attr pointing to the join table.
-# Format: join_table -> (class_a, class_a_attr, class_b, class_b_attr[, output_name])
-# Where the attr name may strip the owner prefix for readability (e.g. event_life_stages
-# becomes life_stages on events), while the range always points to the join table class.
-# An optional 5th element overrides the output class name (pre-PascalCase).
-SEMANTIC_JOIN_TABLES: dict[str, tuple[str, str, str, str] | tuple[str, str, str, str, str]] = {
-    # Format: join_table -> (class_a, class_a_attr, class_b, class_b_attr[, output_name])
-    # class_a_attr: strip the owner prefix from the join table name
-    # class_b_attr: use the owner (class_a) name
-    "aop_life_stages":                     ("aops",         "life_stages",               "life_stage_terms",          "aops",          "aop_to_life_stage_relationship"),
-    "aop_sexes":                           ("aops",         "sexes",                     "sex_terms",                 "aops"),
-    "aop_taxons":                          ("aops",         "taxons",                    "taxon_terms",               "aops"),
-    "aop_stressors":                       ("aops",         "prototypical_stressor",     "stressors",                 "aops"),
-    "aop_events":                          ("aops",         "events",                    "events",                    "aops",          "aop_to_event_relationship"),
-    "aop_relationships":                   ("aops",         "relationships",             "relationships",             "aops"),
-    "event_life_stages":                   ("events",       "life_stages",               "life_stage_terms",          "events"),
-    "event_sexes":                         ("events",       "sexes",                     "sex_terms",                 "events"),
-    "event_target_families":               ("events",       "bio_target_families",       "biological_target_families","events"),
-    "event_taxons":                        ("events",       "taxons",                    "taxon_terms",               "events"),
-    "assay_target_families":               ("assays",       "bio_target_families",       "biological_target_families","assays"),
-    "citation_biological_target_families": ("citations",    "bio_target_families",       "biological_target_families","citations"),
-    "observation_citations":               ("observations", "citations",                 "citations",                 "observations"),
-    "relationship_taxons":                 ("relationships","taxons",                    "taxon_terms",               "relationships"),
-    "relationship_sexes":                  ("relationships","sexes",                     "sex_terms",                 "relationships"),
-    "relationship_life_stages":            ("relationships","life_stages",               "life_stage_terms",          "relationships"),
-}
-
-# All class renames: CLASS_RENAMES plus any output names from SEMANTIC_JOIN_TABLES 5th elements.
-ALL_RENAMES = {
-    **CLASS_RENAMES,
-    **{jt: entry[4] for jt, entry in SEMANTIC_JOIN_TABLES.items() if len(entry) > 4},
-}
-
-# Schema header written verbatim at the top of the output file.
-# Sourced from aop_wiki_linkml.yml; inlined here to make the script self-contained.
-SCHEMA_HEADER = """\
-name: aopwiki-emod
-id: http://example.org/aopwiki-emod
-default_prefix: http://example.org/aopwiki-emod/
-title: AOP Wiki Data Model with EMOD
-description: >-
-  This is a LinkML schema for the AOP-Wiki data model,
-  extended with EMOD concepts.
-prefixes:
-  linkml: https://w3id.org/linkml/
-  xsd: http://www.w3.org/2001/XMLSchema#
-  foaf: http://xmlns.com/foaf/0.1/
-  schema: http://schema.org/
-  dcterms: http://purl.org/dc/terms/
-  prov: http://www.w3.org/ns/prov#
-default_range: string
-
-imports:
-  - linkml:types
-
-# Slot defintions shared across multiple classes
-slots:
-  changed_at:
-    description: Timestamp of when the record was last changed
-    range: datetime
-  created_at:
-    description: Timestamp of when the record was created
-    range: datetime
-  updated_at:
-    description: Timestamp of when the record was last updated
-    range: datetime
-
-# Class definitions
-"""
-
-# Hand-curated FK and type ranges for class attributes.
-# Attribute-level range: string is the default and is omitted from this dict.
-# Only non-string, non-id ranges are listed (id is always set to integer by
-# convert_class_block regardless).
-CURATED_RANGES: dict[str, dict[str, str]] = {
-    # aop_coaches and aop_contributors are BIDIRECTIONAL_INVERSE — classes removed from output.
-    "aop_events": {
-        "aop_id": "aops",
-        "event_id": "events",
-        "essentiality_id": "confidence_levels",
-        "row_order": "integer",
-        "sequence": "integer",
-    },
-    "aop_life_stages": {
-        "aop_id": "aops",
-        "life_stage_term_id": "life_stage_terms",
-        "evidence_id": "confidence_levels",
-    },
-    "aop_logs": {
-        "aop_id": "aops",
-        "user_id": "users",
-    },
-    "aop_relationships": {
-        "aop_id": "aops",
-        "relationship_id": "relationships",
-        "evidence_id": "confidence_levels",
-        "quantitative_understanding_id": "confidence_levels",
-        "row_order": "integer",
-        "directness_id": "directnesses",
-    },
-    "aop_sexes": {
-        "aop_id": "aops",
-        "sex_term_id": "sex_terms",
-        "evidence_id": "confidence_levels",
-    },
-    "aop_stressors": {
-        "aop_id": "aops",
-        "stressor_id": "stressors",
-        "evidence_id": "confidence_levels",
-    },
-    "aop_taxons": {
-        "aop_id": "aops",
-        "taxon_term_id": "taxon_terms",
-        "evidence_id": "confidence_levels",
-    },
-    "aops": {
-        "corresponding_author_id": "users",
-        "oecd_status_id": "oecd_statuses",
-        "legacy": "integer",
-        "assigned_license_id": "assigned_licenses",
-        "handbook_id": "handbooks",
-    },
-    "assay_target_families": {
-        "assay_id": "assays",
-        "biological_target_family_id": "biological_target_families",
-        "batch_import_id": "batch_imports",
-    },
-    "assays": {
-        "reference_id": "citations",
-        "taxon_term_id": "taxon_terms",
-        "biological_action_id": "biological_actions",
-    },
-    "assigned_licenses": {
-        "license_id": "licenses",
-    },
-    "batch_imports": {
-        "contributor_id": "users",
-        "citation_id": "citations",
-    },
-    "biological_target_families": {
-        "batch_import_id": "batch_imports",
-    },
-    "chemical_synonyms": {
-        "chemical_id": "chemicals",
-    },
-    "citation_biological_target_families": {
-        "citation_id": "citations",
-        "biological_target_family_id": "biological_target_families",
-        "batch_import_id": "batch_imports",
-    },
-    "citation_relationships": {
-        "citation_id": "citations",
-        "relationship_id": "relationships",
-    },
-    "event_life_stages": {
-        "event_id": "events",
-        "life_stage_term_id": "life_stage_terms",
-        "evidence_id": "confidence_levels",
-    },
-    "event_logs": {
-        "event_id": "events",
-        "user_id": "users",
-    },
-    "event_sexes": {
-        "event_id": "events",
-        "sex_term_id": "sex_terms",
-        "evidence_id": "confidence_levels",
-    },
-    "event_target_families": {
-        "event_id": "events",
-        "biological_target_family_id": "biological_target_families",
-        "batch_import_id": "batch_imports",
-    },
-    "event_taxons": {
-        "event_id": "events",
-        "taxon_term_id": "taxon_terms",
-        "evidence_id": "confidence_levels",
-    },
-    "events": {
-        "biological_organization_id": "biological_organizations",
-        "organ_term_id": "organ_terms",
-        "cell_term_id": "cell_terms",
-    },
-    "evidences": {
-        "upstream_observation_id": "observations",
-        "downstream_observation_id": "observations",
-        "reference_id": "citations",
-        "taxon_term_id": "taxon_terms",
-        "sex_term_id": "sex_terms",
-        "life_stage_term_id": "life_stage_terms",
-        "relationship_id": "relationships",
-    },
-    "handbooks": {
-        "version": "float",
-    },
-    "harmonized_aops": {
-        "new_aop_id": "aops",
-        "source_aop_id": "aops",
-        "batch_import_id": "batch_imports",
-    },
-    "harmonized_events": {
-        "source_event_id": "events",
-        "harmonized_event_id": "events",
-        "batch_import_id": "batch_imports",
-    },
-    "observation_citations": {
-        "observation_id": "observations",
-        "citation_id": "citations",
-        "batch_import_id": "batch_imports",
-    },
-    "observations": {
-        "biological_action_id": "biological_actions",
-        "biological_process_id": "biological_processes",
-        "biological_object_id": "biological_objects",
-        "assay_id": "assays",
-    },
-    "oecd_statuses": {
-        "sort": "integer",
-    },
-    "profiles": {
-        "user_id": "users",
-    },
-    "relationship_life_stages": {
-        "relationship_id": "relationships",
-        "life_stage_term_id": "life_stage_terms",
-        "evidence_id": "confidence_levels",
-    },
-    "relationship_logs": {
-        "relationship_id": "relationships",
-        "user_id": "users",
-    },
-    "relationship_sexes": {
-        "relationship_id": "relationships",
-        "sex_term_id": "sex_terms",
-        "evidence_id": "confidence_levels",
-    },
-    "relationship_taxons": {
-        "relationship_id": "relationships",
-        "taxon_term_id": "taxon_terms",
-        "evidence_id": "confidence_levels",
-    },
-    "relationships": {
-        "upstream_event_id": "events",
-        "downstream_event_id": "events",
-    },
-    "statuses": {
-        "sort": "integer",
-    },
-    "stressor_chemicals": {
-        "chemical_id": "chemicals",
-        "stressor_id": "stressors",
-    },
-    "stressor_logs": {
-        "stressor_id": "stressors",
-        "user_id": "users",
-    },
-    "sub_events": {
-        "biological_action_id": "biological_actions",
-        "biological_object_id": "biological_objects",
-        "biological_process_id": "biological_processes",
-    }
-}
-
-# Merge enum ranges from inputs/aop_definitions_and_enums.py into CURATED_RANGES.
-# class_to_enum maps PascalCase class name -> (attr, PascalCaseEnumName).
-# Both are converted to snake_case for lookup; apply_pascal_case_to_classes handles output.
-for _pascal_class, (_attr, _pascal_enum) in class_to_enum.items():
-    CURATED_RANGES.setdefault(to_snake_case(_pascal_class), {})[_attr] = to_snake_case(_pascal_enum)
-
-# Attribute descriptions keyed by sql-based class name -> attr name -> description string.
-DESCRIPTIONS: dict[str, dict[str, str]] = {
-    "events": event_definitions,
-}
-
-# Enum definitions used to generate the enums: section of the output YAML.
-# Keys are snake_case enum names (converted to PascalCase in output).
-# Values are either a list (no descriptions) or a dict {value: description}.
-ENUM_DEFINITIONS: dict[str, list | dict] = {
-    "biological_action_enum":        biological_action_enum_list,
-    "biological_organization_enum":  biological_organization_enum_list,
-    "biological_object_source_enum": biological_object_source_enum_list,
-    "biological_process_source_enum":biological_process_source_enum_list,
-    "sex_term_enum":                  sex_terms_enum_list,
-    "life_stage_term_enum":          life_stage_terms_enum_list,
-    "taxon_term_class_enum":         taxon_term_classes_enum_list,
-    "confidence_level_enum":         confidence_levels_enum_list,
-    "directness_enum":               directnesses_enum_list,
-    "oecd_status_enum":              oecd_status_enum_list,
-}
 
 
 # ---------------------------------------------------------------------------
@@ -505,7 +138,7 @@ def extract_class_blocks(text: str, class_names: set[str]) -> dict[str, list[str
     return blocks
 
 
-def remove_admin_classes(text: str, class_names: set[str]) -> tuple[str, list[str]]:
+def remove_wiki_classes(text: str, class_names: set[str]) -> tuple[str, list[str]]:
     """Remove named class blocks from the 'classes:' section of a YAML text.
 
     Returns (updated_text, removed_names).
@@ -535,7 +168,12 @@ def remove_admin_classes(text: str, class_names: set[str]) -> tuple[str, list[st
 
     return "".join(result), removed
 
-
+# Merge enum ranges from curation_helpers/aop_definitions_and_enums.py into CURATED_RANGES.
+# CLASS_TO_ENUM maps PascalCase class name -> (attr, PascalCaseEnumName).
+# Both are converted to snake_case for lookup; apply_pascal_case_to_classes handles output.
+for _pascal_class, (_attr, _pascal_enum) in CLASS_TO_ENUM.items():
+    CURATED_RANGES.setdefault(to_snake_case(_pascal_class), {})[_attr] = to_snake_case(_pascal_enum)
+    
 # ---------------------------------------------------------------------------
 # Conversion
 # ---------------------------------------------------------------------------
@@ -730,72 +368,91 @@ def build_enums_yaml(enum_definitions: dict) -> str:
 # Pipeline steps
 # ---------------------------------------------------------------------------
 
-def compute_nested_join_tables(sql_based_classes: set[str]) -> set[str]:
-    """Return join tables that are collapsed into owner classes (not written as top-level classes)."""
-    return (
-        (sql_based_classes & set(PURE_PIVOT_UNIDIRECTIONAL))
-        | (sql_based_classes & set(BIDIRECTIONAL_INVERSE))
-    )
-
-
-def report_class_breakdown(sql_based_classes: set[str], nested_join_tables: set[str]) -> None:
+def report_class_breakdown(
+    sql_based_classes: set[str],
+    removed: set[str],
+    pure_pivot: dict,
+    bidirectional_inv: dict,
+    bidir_rels: dict,
+    unidir_rels: dict,
+) -> None:
     """Print a breakdown of all input classes by how they are handled in the output."""
-    join_tables_present = sql_based_classes & (
-        set(PURE_PIVOT_UNIDIRECTIONAL) | set(BIDIRECTIONAL_INVERSE) | set(SEMANTIC_JOIN_TABLES)
-    )
-    semantic_join_tables_present = sql_based_classes & set(SEMANTIC_JOIN_TABLES)
-    entity_classes = sql_based_classes - join_tables_present
+    all_join_tables = set(pure_pivot) | set(bidirectional_inv) | set(bidir_rels) | set(unidir_rels)
+    entity_classes  = sql_based_classes - all_join_tables
+
+    if removed:
+        print(f"Tables from Wiki that are being skipped/removed:")
+        for table in sorted(removed):
+            print(f"  {table}")
+        print("")
 
     print(f"Input classes: {len(sql_based_classes)}")
     print(f"  Entity classes — written as top-level classes ({len(entity_classes)}):")
     for c in sorted(entity_classes):
         print(f"    {c}")
-    print(f"  Semantic join tables — written as top-level classes + refs injected into owners ({len(semantic_join_tables_present)}):")
-    for jt in sorted(semantic_join_tables_present):
+    print("")
+
+    print(f"  Bidirectional rel join tables — top-level + refs on both parent classes ({len(bidir_rels)}):")
+    for jt in sorted(bidir_rels):
         print(f"    {jt}")
-    print(f"  Nested join tables — collapsed into owner classes, not written ({len(nested_join_tables)}):")
-    for jt in sorted(nested_join_tables):
+    print("")
+
+    print(f"  Unidirectional rel join tables — top-level + ref on parent only ({len(unidir_rels)}):")
+    for jt in sorted(unidir_rels):
         print(f"    {jt}")
+    print("")
+
+    print(f"  Pure pivot join tables — collapsed as attributes on parent class ({len(pure_pivot)}):")
+    for jt in sorted(pure_pivot):
+        print(f"    {jt}")
+    print("")
+
+    print(f"  Bidirectional inverse join tables — collapsed into both parent classes as attributes ({len(bidirectional_inv)}):")
+    for jt in sorted(bidirectional_inv):
+        print(f"    {jt}")
+    print("")
 
 
-def build_extra_attrs(sql_based_classes: set[str]) -> dict[str, list[str]]:
-    """Build extra multivalued attrs to inject into owner class blocks from all join table types."""
+def build_extra_attrs(
+    pure_pivot: dict,
+    bidirectional_inv: dict,
+    bidir_rels: dict,
+    unidir_rels: dict,
+) -> dict[str, list[str]]:
+    """Build extra multivalued attrs to inject into parent class blocks from all join table types."""
     extra_attrs: dict[str, list[str]] = {}
-    for jt, (owner, attr_name, target_range) in PURE_PIVOT_UNIDIRECTIONAL.items():
-        if jt in sql_based_classes:
-            extra_attrs.setdefault(owner, []).extend(
-                make_multivalued_attr_lines(attr_name, target_range)
-            )
-    for jt, (owner, owner_attr, inv_class, inv_attr) in BIDIRECTIONAL_INVERSE.items():
-        if jt in sql_based_classes:
-            extra_attrs.setdefault(owner, []).extend(
-                make_multivalued_attr_lines(owner_attr, inv_class)
-            )
-            extra_attrs.setdefault(inv_class, []).extend(
-                make_multivalued_attr_lines(inv_attr, owner)
-            )
-    for jt, entry in SEMANTIC_JOIN_TABLES.items():
-        class_a, class_a_attr, class_b, class_b_attr = entry[:4]
-        range_name = ALL_RENAMES.get(jt, jt)
-        if jt in sql_based_classes:
-            extra_attrs.setdefault(class_a, []).extend(
-                make_multivalued_attr_lines(class_a_attr, range_name)
-            )
-            extra_attrs.setdefault(class_b, []).extend(
-                make_multivalued_attr_lines(class_b_attr, range_name)
-            )
+    for jt, (parent, attr_name, target_range) in pure_pivot.items():
+        extra_attrs.setdefault(parent, []).extend(
+            make_multivalued_attr_lines(attr_name, target_range)
+        )
+    for jt, (parent, parent_attr, inv_class, inv_attr) in bidirectional_inv.items():
+        extra_attrs.setdefault(parent, []).extend(
+            make_multivalued_attr_lines(parent_attr, inv_class)
+        )
+        extra_attrs.setdefault(inv_class, []).extend(
+            make_multivalued_attr_lines(inv_attr, parent)
+        )
+    for jt, (class_a, class_a_attr, class_b) in bidir_rels.items():
+        extra_attrs.setdefault(class_a, []).extend(
+            make_multivalued_attr_lines(class_a_attr, jt)
+        )
+        extra_attrs.setdefault(class_b, []).extend(
+            make_multivalued_attr_lines(class_a, jt)
+        )
+    for jt, (class_a, class_a_attr, class_b) in unidir_rels.items():
+        extra_attrs.setdefault(class_a, []).extend(
+            make_multivalued_attr_lines(class_a_attr, jt)
+        )
     return extra_attrs
 
 
 def resolve_class_order(sql_based_classes: set[str], nested_join_tables: set[str]) -> list[str]:
-    """Return active classes in CLASS_ORDER priority first, then alphabetically."""
-    reverse_renames = {v: k for k, v in ALL_RENAMES.items()}
+    """
+    Return active classes (SQL-based names) in CLASS_ORDER priority first, then alphabetically.
+    TODO: move all classes based on join tables to the end of the ordering
+    """
     active_classes = sql_based_classes - nested_join_tables
-    priority = [
-        reverse_renames.get(n, n)
-        for n in CLASS_ORDER
-        if reverse_renames.get(n, n) in active_classes
-    ]
+    priority = [n for n in CLASS_ORDER if n in active_classes]
     return priority + sorted(active_classes - set(priority))
 
 
@@ -804,22 +461,29 @@ def build_classes_yaml(
     sql_based_blocks: dict[str, list[str]],
     extra_attrs: dict[str, list[str]],
 ) -> str:
-    """Convert and assemble all class blocks into the classes: YAML body string."""
+    """Convert and assemble all class blocks into the classes: YAML body string.
+
+    All dicts are keyed by SQL-based names. CLASS_RENAMES is applied here as the single rename step.
+    """
     lines = []
-    for name in ordered_classes:
-        raw_lines = sql_based_blocks.get(name)
+    for sql_name in ordered_classes:
+        raw_lines = sql_based_blocks.get(sql_name)
         if raw_lines is None:
             continue
         converted = convert_class_block(
-            raw_lines, CURATED_RANGES.get(name, {}), DROPPED_ATTRS.get(name),
-            DESCRIPTIONS.get(name), class_descriptions.get(name),
+            raw_lines, CURATED_RANGES.get(sql_name, {}), DROPPED_ATTRS.get(sql_name),
+            ATTRIBUTE_DESCRIPTIONS.get(sql_name), CLASS_DESCRIPTIONS.get(sql_name),
         )
-        converted = apply_class_renames(converted, ALL_RENAMES)
-        if name in extra_attrs:
-            converted.extend(apply_class_renames(extra_attrs[name], ALL_RENAMES))
+        converted = apply_class_renames(converted, CLASS_RENAMES)
+        if sql_name in extra_attrs:
+            converted.extend(apply_class_renames(extra_attrs[sql_name], CLASS_RENAMES))
         lines.append("".join(converted))
     return "".join(lines)
 
+
+def filter_join_groupings(join_groupings: dict[str, tuple], sql_based_classes: set[str]) -> dict[str, tuple]:
+    """Filter join table groupings to only those present in the input schema."""
+    return {k: v for k, v in join_groupings.items() if k in sql_based_classes}
 
 # ---------------------------------------------------------------------------
 # Main
@@ -843,18 +507,22 @@ def main() -> None:
 
     sql_based_linkml = sql_based_path.read_text()
 
-    # Strip admin/internal classes from the in-memory text before processing.
-    sql_based_linkml, removed = remove_admin_classes(sql_based_linkml, set(WIKI_TABLES_TO_DROP))
-    if removed:
-        print(f"Skipping admin classes: {sorted(removed)}")
-
+    # Strip wiki-specific classes from the in-memory text before processing.
+    sql_based_linkml, removed = remove_wiki_classes(sql_based_linkml, set(WIKI_TABLES_TO_DROP))
     sql_based_classes = extract_class_names_from_input_schema(sql_based_linkml)
-    nested_join_tables = compute_nested_join_tables(sql_based_classes)
-    report_class_breakdown(sql_based_classes, nested_join_tables)
+
+    # Filter all join table dicts to only those present in the input schema.
+    pure_pivot    = filter_join_groupings(PURE_PIVOT_UNIDIRECTIONAL, sql_based_classes)
+    bidir_inv     = filter_join_groupings(BIDIRECTIONAL_INVERSE, sql_based_classes)
+    bidir_rels    = filter_join_groupings(JOIN_TABLES_TO_BIDIRECTIONAL_RELS, sql_based_classes)
+    unidir_rels   = filter_join_groupings(JOIN_TABLES_TO_UNIDIRECTIONAL_RELS, sql_based_classes)
+    collapsed_join_tables = set(pure_pivot) | set(bidir_inv)
+
+    report_class_breakdown(sql_based_classes, removed, pure_pivot, bidir_inv, bidir_rels, unidir_rels)
 
     sql_based_blocks = extract_class_blocks(sql_based_linkml, sql_based_classes)
-    extra_attrs = build_extra_attrs(sql_based_classes)
-    ordered_classes = resolve_class_order(sql_based_classes, nested_join_tables)
+    extra_attrs = build_extra_attrs(pure_pivot, bidir_inv, bidir_rels, unidir_rels)
+    ordered_classes = resolve_class_order(sql_based_classes, collapsed_join_tables)
     classes_yaml = build_classes_yaml(ordered_classes, sql_based_blocks, extra_attrs)
 
     output = apply_pascal_case_to_classes(SCHEMA_HEADER + "classes:\n" + classes_yaml)

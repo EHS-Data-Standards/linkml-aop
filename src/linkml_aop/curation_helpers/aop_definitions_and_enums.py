@@ -18,7 +18,7 @@ event_definitions = {
 }
 
 # Maps class name to the enum used for its controlled-vocabulary field (term, source, or name).
-class_to_enum = {
+CLASS_TO_ENUM = {
     "BiologicalActions":       ("term",       "BiologicalActionEnum"),
     "BiologicalOrganizations": ("term",       "BiologicalOrganizationEnum"),
     "BiologicalObjects":       ("source",     "BiologicalObjectSourceEnum"),
@@ -159,7 +159,7 @@ oecd_status_enum_list = [
 
 # Class-level descriptions sourced from AOP-Wiki handbook and info pages.
 # Keys are sql-based class names (pre-rename, pre-PascalCase).
-class_descriptions = {
+CLASS_DESCRIPTIONS = {
     "aops": (
         "An AOP describes a sequence of events starting with initial interaction(s) between a stressor and a"
         " biomolecule within an organism that causes a perturbation in its biology (i.e., molecular initiating"
@@ -206,4 +206,27 @@ class_descriptions = {
     "cell_terms": (),
     "oecd_statuses": (),
     "users": (),
+}
+
+
+
+# Attribute descriptions keyed by sql-based class name -> attr name -> description string.
+ATTRIBUTE_DESCRIPTIONS: dict[str, dict[str, str]] = {
+    "events": event_definitions,
+}
+
+# Enum definitions used to generate the enums: section of the output YAML.
+# Keys are snake_case enum names (converted to PascalCase in output).
+# Values are either a list (no descriptions) or a dict {value: description}.
+ENUM_DEFINITIONS: dict[str, list | dict] = {
+    "biological_action_enum":        biological_action_enum_list,
+    "biological_organization_enum":  biological_organization_enum_list,
+    "biological_object_source_enum": biological_object_source_enum_list,
+    "biological_process_source_enum":biological_process_source_enum_list,
+    "sex_term_enum":                  sex_terms_enum_list,
+    "life_stage_term_enum":          life_stage_terms_enum_list,
+    "taxon_term_class_enum":         taxon_term_classes_enum_list,
+    "confidence_level_enum":         confidence_levels_enum_list,
+    "directness_enum":               directnesses_enum_list,
+    "oecd_status_enum":              oecd_status_enum_list,
 }
