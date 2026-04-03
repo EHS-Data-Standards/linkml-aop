@@ -74,24 +74,38 @@ classes:
       url_links:
         multivalued: true
         range: UrlLink
+        inlined: true
+        inlined_as_list: true
       prototypical_stressors:
         multivalued: true
         range: AopToPrototypicalStressor
+        inlined: true
+        inlined_as_list: true
       events:
         multivalued: true
         range: AopToEvent
+        inlined: true
+        inlined_as_list: true
       ke_relationships:
         multivalued: true
         range: AopToKeRelationship
+        inlined: true
+        inlined_as_list: true
       life_stages:
         multivalued: true
         range: AopToLifeStage
+        inlined: true
+        inlined_as_list: true
       sexes:
         multivalued: true
         range: AopToSex
+        inlined: true
+        inlined_as_list: true
       taxons:
         multivalued: true
         range: AopToTaxon
+        inlined: true
+        inlined_as_list: true
   Event:
     description: >-
       A change in biological or physiological state that is both measurable and essential to the progression of a defined biological perturbation leading to a specific adverse outcome.
@@ -138,27 +152,43 @@ classes:
       event_components:
         multivalued: true
         range: EventComponent
+        inlined: true
+        inlined_as_list: true
       assays:
         multivalued: true
         range: Assay
+        inlined: true
+        inlined_as_list: true
       observations:
         multivalued: true
         range: Observation
+        inlined: true
+        inlined_as_list: true
       aops:
         multivalued: true
         range: AopToEvent
+        inlined: true
+        inlined_as_list: true
       life_stages:
         multivalued: true
         range: EventToLifeStage
+        inlined: true
+        inlined_as_list: true
       sexes:
         multivalued: true
         range: EventToSex
+        inlined: true
+        inlined_as_list: true
       taxons:
         multivalued: true
         range: EventToTaxon
+        inlined: true
+        inlined_as_list: true
       bio_target_families:
         multivalued: true
         range: EventToBioTargetFamily
+        inlined: true
+        inlined_as_list: true
   KeRelationship:
     description: >-
       A scientifically-based relationship that connects one key event to another, defines a causal and predictive relationship between the upstream and downstream event, and thereby facilitates inference or extrapolation of the state of the downstream key event from the known, measured,or predicted state of the upstream key event.
@@ -190,15 +220,23 @@ classes:
       aops:
         multivalued: true
         range: AopToKeRelationship
+        inlined: true
+        inlined_as_list: true
       taxons:
         multivalued: true
         range: KeRelationshipToTaxon
+        inlined: true
+        inlined_as_list: true
       sexes:
         multivalued: true
         range: KeRelationshipToSex
+        inlined: true
+        inlined_as_list: true
       life_stages:
         multivalued: true
         range: KeRelationshipToLifeStage
+        inlined: true
+        inlined_as_list: true
   Assay:
     slots:
       - created_at
@@ -218,18 +256,28 @@ classes:
       objects:
         multivalued: true
         range: BiologicalObject
+        inlined: true
+        inlined_as_list: true
       processes:
         multivalued: true
         range: BiologicalProcess
+        inlined: true
+        inlined_as_list: true
       taxon_terms:
         multivalued: true
         range: TaxonTerm
+        inlined: true
+        inlined_as_list: true
       events:
         multivalued: true
         range: Event
+        inlined: true
+        inlined_as_list: true
       bio_target_families:
         multivalued: true
         range: AssayToBioTargetFamily
+        inlined: true
+        inlined_as_list: true
   Observation:
     slots:
       - created_at
@@ -252,9 +300,13 @@ classes:
       events:
         multivalued: true
         range: Event
+        inlined: true
+        inlined_as_list: true
       citations:
         multivalued: true
         range: ObservationToCitation
+        inlined: true
+        inlined_as_list: true
   Evidence:
     slots:
       - created_at
@@ -292,6 +344,8 @@ classes:
       aops:
         multivalued: true
         range: AopToPrototypicalStressor
+        inlined: true
+        inlined_as_list: true
   Citation:
     slots:
       - created_at
@@ -500,6 +554,8 @@ classes:
       assays:
         multivalued: true
         range: AssayToBioTargetFamily
+        inlined: true
+        inlined_as_list: true
   CellTerm:
     slots:
       - created_at

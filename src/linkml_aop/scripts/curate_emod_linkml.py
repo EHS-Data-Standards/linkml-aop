@@ -224,20 +224,15 @@ def apply_pascal_case_to_classes(text: str) -> str:
     return header + body
 
 
-def make_multivalued_attr_lines(
-    attr_name: str, range_name: str
-) -> list[str]:
-    """Return attribute lines for a multivalued reference.
-
-    Note: inverse: is intentionally omitted. Class-level attributes cannot be referenced
-    by inverse: in LinkML (only top-level slots can); including it causes schema validation
-    errors in linkml-run-examples.
-    """
-    return [
+def make_multivalued_attr_lines(attr_name: str, range_name: str) -> list[str]:
+    lines = [
         f"      {attr_name}:\n",
         f"        multivalued: true\n",
         f"        range: {range_name}\n",
+        f"        inlined: true\n",
+        f"        inlined_as_list: true\n",
     ]
+    return lines
 
 
 def convert_class_block(
