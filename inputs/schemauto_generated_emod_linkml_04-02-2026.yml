@@ -1,0 +1,1260 @@
+name: test-schema
+id: http://example.org/test-schema
+default_prefix: http://example.org/test-schema/
+classes:
+  alembic_version:
+    attributes:
+      version_num:
+        identifier: true
+        range: string
+  biological_actions:
+    attributes:
+      id:
+        identifier: true
+        range: string
+      created_at:
+        range: string
+      updated_at:
+        range: string
+      term:
+        range: string
+      source:
+        range: string
+      source_id:
+        range: string
+  biological_objects:
+    attributes:
+      id:
+        identifier: true
+        range: string
+      created_at:
+        range: string
+      updated_at:
+        range: string
+      term:
+        range: string
+      source:
+        range: string
+      source_id:
+        range: string
+      description:
+        range: string
+      url:
+        range: string
+  biological_organizations:
+    attributes:
+      id:
+        identifier: true
+        range: string
+      term:
+        range: string
+      created_at:
+        range: string
+      updated_at:
+        range: string
+  biological_processes:
+    attributes:
+      id:
+        identifier: true
+        range: string
+      created_at:
+        range: string
+      updated_at:
+        range: string
+      term:
+        range: string
+      source:
+        range: string
+      source_id:
+        range: string
+      description:
+        range: string
+      url:
+        range: string
+  cell_terms:
+    attributes:
+      id:
+        identifier: true
+        range: string
+      created_at:
+        range: string
+      updated_at:
+        range: string
+      source_id:
+        range: string
+      term:
+        range: string
+      official_name:
+        range: string
+      source:
+        range: string
+      description:
+        range: string
+      url:
+        range: string
+  chemicals:
+    attributes:
+      id:
+        identifier: true
+        range: string
+      dsstox_substance_id:
+        range: string
+      casrn:
+        range: string
+      preferred_name:
+        range: string
+      jchem_inchi_key:
+        range: string
+      indigo_inchi_key:
+        range: string
+      created_at:
+        range: string
+      updated_at:
+        range: string
+      pubchem_substance_id:
+        range: string
+      pubchem_compound_id:
+        range: string
+      inchi:
+        range: string
+      inchi_key:
+        range: string
+      dsstox_chemical_id:
+        range: string
+  citations:
+    attributes:
+      id:
+        identifier: true
+        range: string
+      created_at:
+        range: string
+      updated_at:
+        range: string
+      doi:
+        range: string
+      title:
+        range: string
+      authors:
+        range: string
+      journal:
+        range: string
+      year:
+        range: string
+  confidence_levels:
+    attributes:
+      id:
+        identifier: true
+        range: string
+      term:
+        range: string
+      created_at:
+        range: string
+      updated_at:
+        range: string
+  directnesses:
+    attributes:
+      id:
+        identifier: true
+        range: string
+      created_at:
+        range: string
+      updated_at:
+        range: string
+      term:
+        range: string
+      description:
+        range: string
+  entity_counts:
+    attributes:
+      id:
+        identifier: true
+        range: string
+      created_at:
+        range: string
+      updated_at:
+        range: string
+      date_string:
+        range: string
+      aops:
+        range: string
+      key_events:
+        range: string
+      kers:
+        range: string
+  experiment_types:
+    attributes:
+      id:
+        identifier: true
+        range: string
+      created_at:
+        range: string
+      updated_at:
+        range: string
+      exp_type:
+        range: string
+  handbooks:
+    attributes:
+      id:
+        identifier: true
+        range: string
+      created_at:
+        range: string
+      updated_at:
+        range: string
+      version:
+        range: float
+      release_date:
+        range: string
+      release_notes:
+        range: string
+      forum_links:
+        range: string
+      active_version:
+        range: string
+      released:
+        range: string
+      pdf_copy_uid:
+        range: string
+      pdf_only:
+        range: string
+      release_notes_doc_uid:
+        range: string
+  licenses:
+    attributes:
+      id:
+        identifier: true
+        range: string
+      created_at:
+        range: string
+      updated_at:
+        range: string
+      label:
+        range: string
+      logo_uid:
+        range: string
+      description:
+        range: string
+      internal_notes:
+        range: string
+      short_code:
+        range: string
+  life_stage_terms:
+    attributes:
+      id:
+        identifier: true
+        range: string
+      term:
+        range: string
+      created_at:
+        range: string
+      updated_at:
+        range: string
+  oecd_metrics:
+    attributes:
+      id:
+        identifier: true
+        range: string
+      created_at:
+        range: string
+      updated_at:
+        range: string
+      date_string:
+        range: string
+      wpha_wnt_endorsed:
+        range: string
+      esca_approved:
+        range: string
+      esca_under_review:
+        range: string
+      under_development:
+        range: string
+      not_specified:
+        range: string
+      archived:
+        range: string
+  oecd_statuses:
+    attributes:
+      id:
+        identifier: true
+        range: string
+      created_at:
+        range: string
+      updated_at:
+        range: string
+      name:
+        range: string
+      description:
+        range: string
+      sort:
+        range: string
+  organ_terms:
+    attributes:
+      id:
+        identifier: true
+        range: string
+      created_at:
+        range: string
+      updated_at:
+        range: string
+      source_id:
+        range: string
+      term:
+        range: string
+      official_name:
+        range: string
+      source:
+        range: string
+      description:
+        range: string
+      url:
+        range: string
+  roles:
+    attributes:
+      id:
+        identifier: true
+        range: string
+      created_at:
+        range: string
+      updated_at:
+        range: string
+      role:
+        range: string
+  sex_terms:
+    attributes:
+      id:
+        identifier: true
+        range: string
+      term:
+        range: string
+      created_at:
+        range: string
+      updated_at:
+        range: string
+  stressors:
+    attributes:
+      id:
+        identifier: true
+        range: string
+      name:
+        range: string
+      created_at:
+        range: string
+      updated_at:
+        range: string
+      chemical_description:
+        range: string
+      characterization_of_exposure:
+        range: string
+      references:
+        range: string
+  taxon_terms:
+    attributes:
+      id:
+        identifier: true
+        range: string
+      term_class:
+        range: string
+      term:
+        range: string
+      source:
+        range: string
+      ncbi_id:
+        range: string
+      created_at:
+        range: string
+      updated_at:
+        range: string
+      scientific_term:
+        range: string
+      source_id:
+        range: string
+  url_links:
+    attributes:
+      id:
+        identifier: true
+        range: string
+      created_at:
+        range: string
+      updated_at:
+        range: string
+      link_source:
+        range: string
+      url:
+        range: string
+      title:
+        range: string
+  users:
+    attributes:
+      id:
+        identifier: true
+        range: string
+      email:
+        range: string
+  assigned_licenses:
+    attributes:
+      id:
+        identifier: true
+        range: string
+      created_at:
+        range: string
+      updated_at:
+        range: string
+      license_id:
+        range: licenses
+  assignments:
+    attributes:
+      id:
+        identifier: true
+        range: string
+      created_at:
+        range: string
+      updated_at:
+        range: string
+      user_id:
+        range: users
+      role_id:
+        range: roles
+  batch_imports:
+    attributes:
+      id:
+        identifier: true
+        range: string
+      batch_code:
+        range: string
+      contributor_id:
+        range: users
+      citation_id:
+        range: citations
+      created_at:
+        range: string
+      updated_at:
+        range: string
+      description:
+        range: string
+  chemical_synonyms:
+    attributes:
+      id:
+        identifier: true
+        range: string
+      created_at:
+        range: string
+      updated_at:
+        range: string
+      term:
+        range: string
+      chemical_id:
+        range: chemicals
+  events:
+    attributes:
+      id:
+        identifier: true
+        range: string
+      created_at:
+        range: string
+      updated_at:
+        range: string
+      title:
+        range: string
+      short_name:
+        range: string
+      biological_organization_id:
+        range: biological_organizations
+      how_it_works:
+        range: string
+      measured_or_detected:
+        range: string
+      supporting_tax_evidence:
+        range: string
+      evidence_for_chemical_initiation:
+        range: string
+      examples_using_ao:
+        range: string
+      references:
+        range: string
+      definition:
+        range: string
+      organ_term_id:
+        range: organ_terms
+      cell_term_id:
+        range: cell_terms
+      completion_score:
+        range: float
+      integration_score:
+        range: float
+      has_method_text:
+        range: string
+  profiles:
+    attributes:
+      id:
+        identifier: true
+        range: string
+      created_at:
+        range: string
+      updated_at:
+        range: string
+      user_id:
+        range: users
+      first_name:
+        range: string
+      last_name:
+        range: string
+      title:
+        range: string
+      username:
+        range: string
+      affiliation:
+        range: string
+      country:
+        range: string
+      time_zone:
+        range: string
+      mailing_address:
+        range: string
+      orcid:
+        range: string
+      github_handle:
+        range: string
+  stressor_chemicals:
+    attributes:
+      id:
+        identifier: true
+        range: string
+      created_at:
+        range: string
+      updated_at:
+        range: string
+      user_term:
+        range: string
+      chemical_id:
+        range: chemicals
+      stressor_id:
+        range: stressors
+  stressor_logs:
+    attributes:
+      id:
+        identifier: true
+        range: string
+      created_at:
+        range: string
+      updated_at:
+        range: string
+      stressor_id:
+        range: stressors
+      user_id:
+        range: users
+      description:
+        range: string
+  sub_events:
+    attributes:
+      id:
+        identifier: true
+        range: string
+      created_at:
+        range: string
+      updated_at:
+        range: string
+      biological_action_id:
+        range: biological_actions
+      biological_object_id:
+        range: biological_objects
+      biological_process_id:
+        range: biological_processes
+  aops:
+    attributes:
+      id:
+        identifier: true
+        range: string
+      created_at:
+        range: string
+      updated_at:
+        range: string
+      title:
+        range: string
+      short_name:
+        range: string
+      corresponding_author_id:
+        range: users
+      abstract:
+        range: string
+      status_id:
+        range: string
+      authors:
+        range: string
+      applicability_of_the_aop:
+        range: string
+      key_event_essentiality:
+        range: string
+      weight_of_evidence_summary:
+        range: string
+      quantitative_considerations:
+        range: string
+      optional_considerations:
+        range: string
+      references:
+        range: string
+      overall_assessment:
+        range: string
+      background:
+        range: string
+      user_defined_mie:
+        range: string
+      user_defined_ao:
+        range: string
+      oecd_project:
+        range: string
+      oecd_status_id:
+        range: oecd_statuses
+      graphical_representation_image_uid:
+        range: string
+      saaop_status_id:
+        range: string
+      legacy:
+        range: string
+      overall_assessment_file_uid:
+        range: string
+      changed_at:
+        range: string
+      development_strategy:
+        range: string
+      known_modulating_factors:
+        range: string
+      assigned_license_id:
+        range: assigned_licenses
+      handbook_id:
+        range: handbooks
+      completion_score:
+        range: float
+      mean_ker_score:
+        range: float
+      mean_event_score:
+        range: float
+  assays:
+    attributes:
+      id:
+        identifier: true
+        range: string
+      title:
+        range: string
+      description:
+        range: string
+      citation_id:
+        range: citations
+      detection_technology:
+        range: string
+      biological_action_id:
+        range: biological_actions
+      external_assay_id:
+        range: string
+      created_at:
+        range: string
+      updated_at:
+        range: string
+      batch_import_id:
+        range: batch_imports
+  biological_target_families:
+    attributes:
+      id:
+        identifier: true
+        range: string
+      name:
+        range: string
+      batch_import_id:
+        range: batch_imports
+      created_at:
+        range: string
+      updated_at:
+        range: string
+  event_life_stages:
+    attributes:
+      id:
+        identifier: true
+        range: string
+      created_at:
+        range: string
+      updated_at:
+        range: string
+      event_id:
+        range: events
+      life_stage_term_id:
+        range: life_stage_terms
+      confidence_id:
+        range: confidence_levels
+  event_logs:
+    attributes:
+      id:
+        identifier: true
+        range: string
+      created_at:
+        range: string
+      updated_at:
+        range: string
+      event_id:
+        range: events
+      user_id:
+        range: users
+      description:
+        range: string
+  event_sexes:
+    attributes:
+      id:
+        identifier: true
+        range: string
+      created_at:
+        range: string
+      updated_at:
+        range: string
+      event_id:
+        range: events
+      sex_term_id:
+        range: sex_terms
+      confidence_id:
+        range: confidence_levels
+  event_stressors:
+    attributes:
+      id:
+        identifier: true
+        range: string
+      created_at:
+        range: string
+      updated_at:
+        range: string
+      event_id:
+        range: events
+      stressor_id:
+        range: stressors
+      evidence_text:
+        range: string
+      user_id:
+        range: users
+  event_sub_events:
+    attributes:
+      id:
+        identifier: true
+        range: string
+      created_at:
+        range: string
+      updated_at:
+        range: string
+      event_id:
+        range: events
+      sub_event_id:
+        range: sub_events
+  event_taxons:
+    attributes:
+      id:
+        identifier: true
+        range: string
+      created_at:
+        range: string
+      updated_at:
+        range: string
+      event_id:
+        range: events
+      taxon_term_id:
+        range: taxon_terms
+      confidence_id:
+        range: confidence_levels
+  harmonized_events:
+    attributes:
+      id:
+        identifier: true
+        range: string
+      created_at:
+        range: string
+      updated_at:
+        range: string
+      source_event_id:
+        range: events
+      source_event_id_text:
+        range: string
+      source_event_label:
+        range: string
+      harmonized_label:
+        range: string
+      harmonized_label_key:
+        range: string
+      harmonized_event_id:
+        range: events
+      raw_mapping_value:
+        range: string
+      mapping_status:
+        range: string
+      batch_import_id:
+        range: batch_imports
+  relationships:
+    attributes:
+      id:
+        identifier: true
+        range: string
+      created_at:
+        range: string
+      updated_at:
+        range: string
+      upstream_event_id:
+        range: events
+      downstream_event_id:
+        range: events
+      how_it_works:
+        range: string
+      biological_plausibility:
+        range: string
+      empirical_support:
+        range: string
+      uncertainties:
+        range: string
+      quantitative_understanding:
+        range: string
+      taxon_evidence:
+        range: string
+      weight_of_evidence:
+        range: string
+      response_relationship:
+        range: string
+      time_scale:
+        range: string
+      modulating_factors:
+        range: string
+      known_loops:
+        range: string
+      evidence_collection_strategy:
+        range: string
+      references:
+        range: string
+      completion_score:
+        range: float
+  aop_coaches:
+    attributes:
+      id:
+        identifier: true
+        range: string
+      created_at:
+        range: string
+      updated_at:
+        range: string
+      aop_id:
+        range: aops
+      user_id:
+        range: users
+  aop_contributors:
+    attributes:
+      id:
+        identifier: true
+        range: string
+      created_at:
+        range: string
+      updated_at:
+        range: string
+      aop_id:
+        range: aops
+      user_id:
+        range: users
+  aop_events:
+    attributes:
+      id:
+        identifier: true
+        range: string
+      created_at:
+        range: string
+      updated_at:
+        range: string
+      aop_id:
+        range: aops
+      event_id:
+        range: events
+      type:
+        range: string
+      essentiality_id:
+        range: confidence_levels
+      row_order:
+        range: string
+      sequence:
+        range: string
+      batch_import_id:
+        range: batch_imports
+  aop_life_stages:
+    attributes:
+      id:
+        identifier: true
+        range: string
+      created_at:
+        range: string
+      updated_at:
+        range: string
+      aop_id:
+        range: aops
+      life_stage_term_id:
+        range: life_stage_terms
+      confidence_id:
+        range: confidence_levels
+  aop_logs:
+    attributes:
+      id:
+        identifier: true
+        range: string
+      created_at:
+        range: string
+      updated_at:
+        range: string
+      aop_id:
+        range: aops
+      user_id:
+        range: users
+      description:
+        range: string
+  aop_relationships:
+    attributes:
+      id:
+        identifier: true
+        range: string
+      created_at:
+        range: string
+      updated_at:
+        range: string
+      aop_id:
+        range: aops
+      relationship_id:
+        range: relationships
+      confidence_id:
+        range: confidence_levels
+      quantitative_understanding_id:
+        range: confidence_levels
+      row_order:
+        range: string
+      directness_id:
+        range: directnesses
+      type:
+        range: string
+  aop_sexes:
+    attributes:
+      id:
+        identifier: true
+        range: string
+      created_at:
+        range: string
+      updated_at:
+        range: string
+      aop_id:
+        range: aops
+      sex_term_id:
+        range: sex_terms
+      confidence_id:
+        range: confidence_levels
+  aop_stressors:
+    attributes:
+      id:
+        identifier: true
+        range: string
+      created_at:
+        range: string
+      updated_at:
+        range: string
+      aop_id:
+        range: aops
+      stressor_id:
+        range: stressors
+      confidence_id:
+        range: confidence_levels
+      evidence_text:
+        range: string
+  aop_taxons:
+    attributes:
+      id:
+        identifier: true
+        range: string
+      created_at:
+        range: string
+      updated_at:
+        range: string
+      aop_id:
+        range: aops
+      taxon_term_id:
+        range: taxon_terms
+      confidence_id:
+        range: confidence_levels
+  aop_url_links:
+    attributes:
+      id:
+        identifier: true
+        range: string
+      created_at:
+        range: string
+      updated_at:
+        range: string
+      aop_id:
+        range: aops
+      url_link_id:
+        range: url_links
+  assay_objects:
+    attributes:
+      id:
+        identifier: true
+        range: string
+      created_at:
+        range: string
+      updated_at:
+        range: string
+      assay_id:
+        range: assays
+      biological_object_id:
+        range: biological_objects
+  assay_processes:
+    attributes:
+      id:
+        identifier: true
+        range: string
+      created_at:
+        range: string
+      updated_at:
+        range: string
+      assay_id:
+        range: assays
+      biological_process_id:
+        range: biological_processes
+  assay_target_families:
+    attributes:
+      id:
+        identifier: true
+        range: string
+      assay_id:
+        range: assays
+      biological_target_family_id:
+        range: biological_target_families
+      created_at:
+        range: string
+      updated_at:
+        range: string
+      batch_import_id:
+        range: batch_imports
+  assay_taxon_terms:
+    attributes:
+      id:
+        identifier: true
+        range: string
+      assay_id:
+        range: assays
+      taxon_term_id:
+        range: taxon_terms
+      created_at:
+        range: string
+      updated_at:
+        range: string
+  citation_biological_target_families:
+    attributes:
+      id:
+        identifier: true
+        range: string
+      citation_id:
+        range: citations
+      biological_target_family_id:
+        range: biological_target_families
+      created_at:
+        range: string
+      updated_at:
+        range: string
+      batch_import_id:
+        range: batch_imports
+  citation_relationships:
+    attributes:
+      id:
+        identifier: true
+        range: string
+      created_at:
+        range: string
+      updated_at:
+        range: string
+      relationship_id:
+        range: relationships
+      citation_id:
+        range: citations
+  event_assays:
+    attributes:
+      id:
+        identifier: true
+        range: string
+      event_id:
+        range: events
+      assay_id:
+        range: assays
+      created_at:
+        range: string
+      updated_at:
+        range: string
+  event_target_families:
+    attributes:
+      id:
+        identifier: true
+        range: string
+      event_id:
+        range: events
+      biological_target_family_id:
+        range: biological_target_families
+      batch_import_id:
+        range: batch_imports
+      created_at:
+        range: string
+      updated_at:
+        range: string
+  harmonized_aops:
+    attributes:
+      id:
+        identifier: true
+        range: string
+      tag:
+        range: string
+      new_aop_id:
+        range: aops
+      source_aop_id:
+        range: aops
+      is_priority:
+        range: string
+      batch_import_id:
+        range: batch_imports
+      created_at:
+        range: string
+      updated_at:
+        range: string
+  observations:
+    attributes:
+      id:
+        identifier: true
+        range: string
+      created_at:
+        range: string
+      updated_at:
+        range: string
+      biological_action_id:
+        range: biological_actions
+      biological_process_id:
+        range: biological_processes
+      biological_object_id:
+        range: biological_objects
+      assay_id:
+        range: assays
+      batch_import_id:
+        range: batch_imports
+      stressor_id:
+        range: stressors
+      process_is_phenotype:
+        range: string
+      phenotype:
+        range: string
+      other:
+        range: string
+      notes:
+        range: string
+  relationship_life_stages:
+    attributes:
+      id:
+        identifier: true
+        range: string
+      created_at:
+        range: string
+      updated_at:
+        range: string
+      relationship_id:
+        range: relationships
+      life_stage_term_id:
+        range: life_stage_terms
+      confidence_id:
+        range: confidence_levels
+  relationship_logs:
+    attributes:
+      id:
+        identifier: true
+        range: string
+      created_at:
+        range: string
+      updated_at:
+        range: string
+      relationship_id:
+        range: relationships
+      user_id:
+        range: users
+      description:
+        range: string
+  relationship_sexes:
+    attributes:
+      id:
+        identifier: true
+        range: string
+      created_at:
+        range: string
+      updated_at:
+        range: string
+      relationship_id:
+        range: relationships
+      sex_term_id:
+        range: sex_terms
+      confidence_id:
+        range: confidence_levels
+  relationship_taxons:
+    attributes:
+      id:
+        identifier: true
+        range: string
+      created_at:
+        range: string
+      updated_at:
+        range: string
+      relationship_id:
+        range: relationships
+      taxon_term_id:
+        range: taxon_terms
+      confidence_id:
+        range: confidence_levels
+  evidences:
+    attributes:
+      id:
+        identifier: true
+        range: string
+      created_at:
+        range: string
+      updated_at:
+        range: string
+      upstream_observation_id:
+        range: observations
+      downstream_observation_id:
+        range: observations
+      citation_id:
+        range: citations
+      taxon_term_id:
+        range: taxon_terms
+      sex_term_id:
+        range: sex_terms
+      life_stage_term_id:
+        range: life_stage_terms
+      relationship_id:
+        range: relationships
+      experimental_design:
+        range: string
+      notes:
+        range: string
+  observation_citations:
+    attributes:
+      id:
+        identifier: true
+        range: string
+      observation_id:
+        range: observations
+      citation_id:
+        range: citations
+      created_at:
+        range: string
+      updated_at:
+        range: string
+      batch_import_id:
+        range: batch_imports
+  observation_events:
+    attributes:
+      id:
+        identifier: true
+        range: string
+      created_at:
+        range: string
+      updated_at:
+        range: string
+      observation_id:
+        range: observations
+      event_id:
+        range: events
+prefixes: {}

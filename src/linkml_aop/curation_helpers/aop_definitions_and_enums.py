@@ -18,7 +18,7 @@ event_definitions = {
 }
 
 # Maps class name to the enum used for its controlled-vocabulary field (term, source, or name).
-class_to_enum = {
+CLASS_TO_ENUM = {
     "BiologicalActions":       ("term",       "BiologicalActionEnum"),
     "BiologicalOrganizations": ("term",       "BiologicalOrganizationEnum"),
     "BiologicalObjects":       ("source",     "BiologicalObjectSourceEnum"),
@@ -156,3 +156,77 @@ oecd_status_enum_list = [
     "ESCA Approved",
     "Under Review",
 ]
+
+# Class-level descriptions sourced from AOP-Wiki handbook and info pages.
+# Keys are sql-based class names (pre-rename, pre-PascalCase).
+CLASS_DESCRIPTIONS = {
+    "aops": (
+        "An AOP describes a sequence of events starting with initial interaction(s) between a stressor and a"
+        " biomolecule within an organism that causes a perturbation in its biology (i.e., molecular initiating"
+        " event, MIE), which can progress through a dependent series of intermediate key events (KEs) and culminate"
+        " in an adverse outcome (AO) considered relevant to risk assessment or regulatory decision-making. AOPs are"
+        " composed of a causal sequence of upstream to downstream KEs, representing a cascading series of measurable"
+        " biological changes that can be expected to occur if the perturbation is sufficiently severe (i.e., in terms"
+        " of potency, duration, frequency) to drive the pathway all the way to the AO. Importantly, AOPs do not describe"
+        " every detail of the biology but instead focus on describing critical steps or check-points along the path"
+        " to adversity, which are both measurable and have potential predictive value for regulatory application."
+    ),
+    "events": (
+        "A change in biological or physiological state that is both measurable and essential to the progression"
+        " of a defined biological perturbation leading to a specific adverse outcome."
+    ),
+    "relationships": (
+        "A scientifically-based relationship that connects one key event to another, defines a causal"
+        " and predictive relationship between the upstream and downstream event, and thereby facilitates"
+        " inference or extrapolation of the state of the downstream key event from the known, measured,"
+        "or predicted state of the upstream key event."
+    ),
+    "stressors": (
+        "An external or internal factor that induces a perturbation to a biological system, potentially"
+        " initiating a molecular initiating event (MIE) but could also impact a biological process"
+        " represented by a key event. Stressors may include chemical, physical, or biological agents"
+        " capable of eliciting measurable changes in the biological system relevant to the AOP."
+    ),
+    "citations": (),
+    "evidences": (),
+    "observations": (),
+    "assays": (),
+    "chemicals": (),
+    "biological_target_families": (),
+    "biological_objects": (),
+    "biological_processes": (),
+    "biological_actions": (),
+    "biological_organizations": (),
+    "confidence_levels": (),
+    "directnesses": (),
+    "life_stage_terms": (),
+    "sex_terms": (),
+    "taxon_terms": (),
+    "organ_terms": (),
+    "cell_terms": (),
+    "oecd_statuses": (),
+    "users": (),
+}
+
+
+
+# Attribute descriptions keyed by sql-based class name -> attr name -> description string.
+ATTRIBUTE_DESCRIPTIONS: dict[str, dict[str, str]] = {
+    "events": event_definitions,
+}
+
+# Enum definitions used to generate the enums: section of the output YAML.
+# Keys are snake_case enum names (converted to PascalCase in output).
+# Values are either a list (no descriptions) or a dict {value: description}.
+ENUM_DEFINITIONS: dict[str, list | dict] = {
+    "biological_action_enum":        biological_action_enum_list,
+    "biological_organization_enum":  biological_organization_enum_list,
+    "biological_object_source_enum": biological_object_source_enum_list,
+    "biological_process_source_enum":biological_process_source_enum_list,
+    "sex_term_enum":                  sex_terms_enum_list,
+    "life_stage_term_enum":          life_stage_terms_enum_list,
+    "taxon_term_class_enum":         taxon_term_classes_enum_list,
+    "confidence_level_enum":         confidence_levels_enum_list,
+    "directness_enum":               directnesses_enum_list,
+    "oecd_status_enum":              oecd_status_enum_list,
+}
