@@ -6,8 +6,8 @@ text that goes into the schema; this file records why that text says what it say
 
 ## Aop, KeRelationship, and Stressor
 
-These descriptions came with the `join-classes` work and are quoted, not written here.
-Checked against the
+These descriptions came with the `join-classes` work. Aop and KeRelationship are quoted;
+Stressor was written for EMOD. Checked against the
 [AOP Developers' Handbook 2.8](https://aopwiki.org/handbooks/6) (released 2026-03-12) on
 2026-09-21:
 
@@ -17,10 +17,9 @@ Checked against the
   interaction(s) of a stressor with a biomolecule").
 - **KeRelationship:** verbatim from the handbook's Table 1 definition of a Key Event
   Relationship.
-- **Stressor:** *source not found.* The handbook has no formal stressor definition, and
-  the text ("An external or internal factor that induces a perturbation...") does not
-  appear in it. Its nearest statement is about prototypical stressors: "stressors for
-  which responses at multiple KEs in addition to the MIE have been well documented."
+- **Stressor:** written for EMOD, not quoted. The handbook has no formal stressor
+  definition; its nearest statement is about prototypical stressors: "stressors for which
+  responses at multiple KEs in addition to the MIE have been well documented."
 
 ## Event
 

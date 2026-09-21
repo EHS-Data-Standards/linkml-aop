@@ -172,9 +172,9 @@ oecd_status_enum_list = [
     "Under Review",
 ]
 
-# Class-level descriptions. Aop, KeRelationship, and Stressor are sourced from the AOP-Wiki
-# handbook and info pages; the reasoning behind the Event, Assay, and TestGuideline
-# definitions is in src/docs/dev/definition_rationale.md.
+# Class-level descriptions. Aop and KeRelationship are quoted from the AOP Developers'
+# Handbook; Stressor, Event, Assay, and TestGuideline were written for EMOD. Sources and
+# reasoning for each are in src/docs/dev/definition_rationale.md.
 # Keys are sql-based class names (pre-rename, pre-PascalCase).
 CLASS_DESCRIPTIONS = {
     "aops": (
