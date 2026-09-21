@@ -416,23 +416,13 @@ Alias: references</p>
 </thead>
 <tbody>
 <tr>
-<td><a href="../Relationship/">Relationship</a></td>
-<td></td>
-<td>no</td>
-</tr>
-<tr>
-<td><a href="../Stressor/">Stressor</a></td>
-<td></td>
-<td>no</td>
-</tr>
-<tr>
-<td><a href="../Aop/">Aop</a></td>
-<td></td>
+<td><a href="../KeRelationship/">KeRelationship</a></td>
+<td>A scientifically-based relationship that connects one key event to another, d...</td>
 <td>no</td>
 </tr>
 <tr>
 <td><a href="../Event/">Event</a></td>
-<td></td>
+<td>A change in biological or physiological state that is both measurable and ess...</td>
 <td>no</td>
 </tr>
 </tbody>
@@ -453,7 +443,7 @@ Alias: references</p>
 </tr>
 <tr>
 <td>Domain Of</td>
-<td><a href="../Aop/">Aop</a>, <a href="../Event/">Event</a>, <a href="../Relationship/">Relationship</a>, <a href="../Stressor/">Stressor</a></td>
+<td><a href="../Event/">Event</a>, <a href="../KeRelationship/">KeRelationship</a></td>
 </tr>
 </tbody>
 </table>
@@ -498,10 +488,8 @@ Alias: references</p>
 <pre><code class="language-yaml">name: references
 alias: references
 domain_of:
-- Aop
 - Event
-- Relationship
-- Stressor
+- KeRelationship
 range: string
 
 </code></pre>

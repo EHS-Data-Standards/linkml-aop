@@ -416,32 +416,12 @@ Alias: term</p>
 </thead>
 <tbody>
 <tr>
-<td><a href="../BiologicalProcess/">BiologicalProcess</a></td>
-<td></td>
-<td>no</td>
-</tr>
-<tr>
-<td><a href="../TaxonTerm/">TaxonTerm</a></td>
-<td></td>
-<td>no</td>
-</tr>
-<tr>
-<td><a href="../BiologicalObject/">BiologicalObject</a></td>
-<td></td>
-<td>no</td>
-</tr>
-<tr>
-<td><a href="../Directness/">Directness</a></td>
-<td></td>
-<td>no</td>
-</tr>
-<tr>
-<td><a href="../CellTerm/">CellTerm</a></td>
-<td></td>
-<td>no</td>
-</tr>
-<tr>
 <td><a href="../LifeStageTerm/">LifeStageTerm</a></td>
+<td></td>
+<td>no</td>
+</tr>
+<tr>
+<td><a href="../LevelOfBiologicalOrganization/">LevelOfBiologicalOrganization</a></td>
 <td></td>
 <td>no</td>
 </tr>
@@ -451,7 +431,27 @@ Alias: term</p>
 <td>no</td>
 </tr>
 <tr>
-<td><a href="../ChemicalSynonym/">ChemicalSynonym</a></td>
+<td><a href="../TaxonTerm/">TaxonTerm</a></td>
+<td></td>
+<td>no</td>
+</tr>
+<tr>
+<td><a href="../CellTerm/">CellTerm</a></td>
+<td></td>
+<td>no</td>
+</tr>
+<tr>
+<td><a href="../BiologicalObject/">BiologicalObject</a></td>
+<td></td>
+<td>no</td>
+</tr>
+<tr>
+<td><a href="../BiologicalAction/">BiologicalAction</a></td>
+<td></td>
+<td>no</td>
+</tr>
+<tr>
+<td><a href="../Directness/">Directness</a></td>
 <td></td>
 <td>no</td>
 </tr>
@@ -466,12 +466,7 @@ Alias: term</p>
 <td>no</td>
 </tr>
 <tr>
-<td><a href="../BiologicalOrganization/">BiologicalOrganization</a></td>
-<td></td>
-<td>no</td>
-</tr>
-<tr>
-<td><a href="../BiologicalAction/">BiologicalAction</a></td>
+<td><a href="../BiologicalProcess/">BiologicalProcess</a></td>
 <td></td>
 <td>no</td>
 </tr>
@@ -493,7 +488,7 @@ Alias: term</p>
 </tr>
 <tr>
 <td>Domain Of</td>
-<td><a href="../BiologicalAction/">BiologicalAction</a>, <a href="../BiologicalObject/">BiologicalObject</a>, <a href="../BiologicalOrganization/">BiologicalOrganization</a>, <a href="../BiologicalProcess/">BiologicalProcess</a>, <a href="../CellTerm/">CellTerm</a>, <a href="../ChemicalSynonym/">ChemicalSynonym</a>, <a href="../ConfidenceLevel/">ConfidenceLevel</a>, <a href="../Directness/">Directness</a>, <a href="../LifeStageTerm/">LifeStageTerm</a>, <a href="../OrganTerm/">OrganTerm</a>, <a href="../SexTerm/">SexTerm</a>, <a href="../TaxonTerm/">TaxonTerm</a></td>
+<td><a href="../BiologicalAction/">BiologicalAction</a>, <a href="../BiologicalObject/">BiologicalObject</a>, <a href="../BiologicalProcess/">BiologicalProcess</a>, <a href="../LevelOfBiologicalOrganization/">LevelOfBiologicalOrganization</a>, <a href="../CellTerm/">CellTerm</a>, <a href="../ConfidenceLevel/">ConfidenceLevel</a>, <a href="../Directness/">Directness</a>, <a href="../LifeStageTerm/">LifeStageTerm</a>, <a href="../OrganTerm/">OrganTerm</a>, <a href="../SexTerm/">SexTerm</a>, <a href="../TaxonTerm/">TaxonTerm</a></td>
 </tr>
 </tbody>
 </table>
@@ -540,10 +535,9 @@ alias: term
 domain_of:
 - BiologicalAction
 - BiologicalObject
-- BiologicalOrganization
 - BiologicalProcess
+- LevelOfBiologicalOrganization
 - CellTerm
-- ChemicalSynonym
 - ConfidenceLevel
 - Directness
 - LifeStageTerm

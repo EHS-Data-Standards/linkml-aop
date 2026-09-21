@@ -246,6 +246,7 @@
 <div class="md-content" data-md-component="content">
 <article class="md-content__inner md-typeset">
 <h1 id="class-stressor">Class: Stressor</h1>
+<p><em>An external or internal factor that induces a perturbation to a biological system, potentially initiating a molecular initiating event (MIE) but could also impact a biological process represented by a key event. Stressors may include chemical, physical, or biological agents capable of eliciting measurable changes in the biological system relevant to the AOP.</em></p>
 <p>URI: <a href="http://example.org/aopwiki-emod/Stressor">http://example.org/aopwiki-emod/Stressor</a></p>
 <div class="mermaid"> classDiagram
     class Stressor
@@ -256,22 +257,16 @@
 
 
 
-        Stressor --&gt; "*" AopStressor : aops
-        click AopStressor href "../AopStressor/"
+        Stressor --&gt; "*" AopToPrototypicalStressor : aops
+        click AopToPrototypicalStressor href "../AopToPrototypicalStressor/"
 
 
-
-      Stressor : characterization_of_exposure
-
-      Stressor : chemical_description
 
       Stressor : created_at
 
       Stressor : id
 
       Stressor : name
-
-      Stressor : references
 
       Stressor : updated_at
 
@@ -314,26 +309,8 @@
 <td>direct</td>
 </tr>
 <tr>
-<td><a href="../chemical_description/">chemical_description</a></td>
-<td>0..1 <br/> <a href="../String/">String</a></td>
-<td></td>
-<td>direct</td>
-</tr>
-<tr>
-<td><a href="../characterization_of_exposure/">characterization_of_exposure</a></td>
-<td>0..1 <br/> <a href="../String/">String</a></td>
-<td></td>
-<td>direct</td>
-</tr>
-<tr>
-<td><a href="../references/">references</a></td>
-<td>0..1 <br/> <a href="../String/">String</a></td>
-<td></td>
-<td>direct</td>
-</tr>
-<tr>
 <td><a href="../aops/">aops</a></td>
-<td>* <br/> <a href="../AopStressor/">AopStressor</a></td>
+<td>* <br/> <a href="../AopToPrototypicalStressor/">AopToPrototypicalStressor</a></td>
 <td></td>
 <td>direct</td>
 </tr>
@@ -351,19 +328,7 @@
 </thead>
 <tbody>
 <tr>
-<td><a href="../AopStressor/">AopStressor</a></td>
-<td><a href="../stressor_id/">stressor_id</a></td>
-<td>range</td>
-<td><a href="./">Stressor</a></td>
-</tr>
-<tr>
-<td><a href="../StressorChemical/">StressorChemical</a></td>
-<td><a href="../stressor_id/">stressor_id</a></td>
-<td>range</td>
-<td><a href="./">Stressor</a></td>
-</tr>
-<tr>
-<td><a href="../StressorLog/">StressorLog</a></td>
+<td><a href="../AopToPrototypicalStressor/">AopToPrototypicalStressor</a></td>
 <td><a href="../stressor_id/">stressor_id</a></td>
 <td>range</td>
 <td><a href="./">Stressor</a></td>
@@ -399,6 +364,11 @@
 <h3 id="direct">Direct</h3>
 <details>
 <pre><code class="language-yaml">name: Stressor
+description: An external or internal factor that induces a perturbation to a biological
+  system, potentially initiating a molecular initiating event (MIE) but could also
+  impact a biological process represented by a key event. Stressors may include chemical,
+  physical, or biological agents capable of eliciting measurable changes in the biological
+  system relevant to the AOP.
 from_schema: http://example.org/aopwiki-emod
 slots:
 - created_at
@@ -411,59 +381,48 @@ attributes:
     domain_of:
     - Aop
     - Event
-    - Relationship
-    - Stressor
-    - BioTargetFamily
-    - Observation
-    - Citation
-    - AopEvent
-    - AopLifeStage
-    - AopLog
-    - AopRelationship
-    - AopSex
-    - AopStressor
-    - AopTaxon
-    - AssayBioTargetFamily
+    - KeRelationship
     - Assay
-    - AssignedLicense
-    - BatchImport
+    - Observation
+    - Evidence
+    - Stressor
+    - Citation
     - BiologicalAction
     - BiologicalObject
-    - BiologicalOrganization
     - BiologicalProcess
+    - LevelOfBiologicalOrganization
+    - BatchImport
+    - AopToEvent
+    - AopToLifeStage
+    - AopToKeRelationship
+    - AopToSex
+    - AopToPrototypicalStressor
+    - AopToTaxon
+    - AssayToBioTargetFamily
+    - AssignedLicense
+    - BioTargetFamily
     - CellTerm
-    - ChemicalSynonym
-    - Chemical
-    - CitationBioTargetFamily
-    - CitationRelationship
     - ConfidenceLevel
     - Directness
-    - EventLifeStage
-    - EventLog
-    - EventSex
-    - EventBioTargetFamily
-    - EventTaxon
-    - Evidence
+    - EventToLifeStage
+    - EventToSex
+    - EventToBioTargetFamily
+    - EventToTaxon
     - ExperimentType
     - Handbook
     - HarmonizedAop
     - HarmonizedEvent
     - License
     - LifeStageTerm
-    - ObservationCitation
+    - ObservationToCitation
     - OecdStatus
     - OrganTerm
-    - Profile
-    - RelationshipLifeStage
-    - RelationshipLog
-    - RelationshipSex
-    - RelationshipTaxon
+    - KeRelationshipToLifeStage
+    - KeRelationshipToSex
+    - KeRelationshipToTaxon
     - SexTerm
-    - StressorChemical
-    - StressorLog
     - EventComponent
     - TaxonTerm
-    - UrlLink
     - User
     range: integer
     required: true
@@ -475,44 +434,28 @@ attributes:
     - Stressor
     - BioTargetFamily
     - OecdStatus
-  chemical_description:
-    name: chemical_description
-    from_schema: http://example.org/aopwiki-emod
-    rank: 1000
-    domain_of:
-    - Stressor
-  characterization_of_exposure:
-    name: characterization_of_exposure
-    from_schema: http://example.org/aopwiki-emod
-    rank: 1000
-    domain_of:
-    - Stressor
-  references:
-    name: references
-    from_schema: http://example.org/aopwiki-emod
-    domain_of:
-    - Aop
-    - Event
-    - Relationship
-    - Stressor
   aops:
     name: aops
     from_schema: http://example.org/aopwiki-emod
     domain_of:
     - Event
-    - Relationship
+    - KeRelationship
     - Stressor
-    - LifeStageTerm
-    - SexTerm
-    - TaxonTerm
-    range: AopStressor
+    range: AopToPrototypicalStressor
     multivalued: true
+    inlined: true
+    inlined_as_list: true
 
 </code></pre>
 </details>
 <h3 id="induced">Induced</h3>
 <details>
 <pre><code class="language-yaml">name: Stressor
+description: An external or internal factor that induces a perturbation to a biological
+  system, potentially initiating a molecular initiating event (MIE) but could also
+  impact a biological process represented by a key event. Stressors may include chemical,
+  physical, or biological agents capable of eliciting measurable changes in the biological
+  system relevant to the AOP.
 from_schema: http://example.org/aopwiki-emod
 attributes:
   id:
@@ -524,59 +467,48 @@ attributes:
     domain_of:
     - Aop
     - Event
-    - Relationship
-    - Stressor
-    - BioTargetFamily
-    - Observation
-    - Citation
-    - AopEvent
-    - AopLifeStage
-    - AopLog
-    - AopRelationship
-    - AopSex
-    - AopStressor
-    - AopTaxon
-    - AssayBioTargetFamily
+    - KeRelationship
     - Assay
-    - AssignedLicense
-    - BatchImport
+    - Observation
+    - Evidence
+    - Stressor
+    - Citation
     - BiologicalAction
     - BiologicalObject
-    - BiologicalOrganization
     - BiologicalProcess
+    - LevelOfBiologicalOrganization
+    - BatchImport
+    - AopToEvent
+    - AopToLifeStage
+    - AopToKeRelationship
+    - AopToSex
+    - AopToPrototypicalStressor
+    - AopToTaxon
+    - AssayToBioTargetFamily
+    - AssignedLicense
+    - BioTargetFamily
     - CellTerm
-    - ChemicalSynonym
-    - Chemical
-    - CitationBioTargetFamily
-    - CitationRelationship
     - ConfidenceLevel
     - Directness
-    - EventLifeStage
-    - EventLog
-    - EventSex
-    - EventBioTargetFamily
-    - EventTaxon
-    - Evidence
+    - EventToLifeStage
+    - EventToSex
+    - EventToBioTargetFamily
+    - EventToTaxon
     - ExperimentType
     - Handbook
     - HarmonizedAop
     - HarmonizedEvent
     - License
     - LifeStageTerm
-    - ObservationCitation
+    - ObservationToCitation
     - OecdStatus
     - OrganTerm
-    - Profile
-    - RelationshipLifeStage
-    - RelationshipLog
-    - RelationshipSex
-    - RelationshipTaxon
+    - KeRelationshipToLifeStage
+    - KeRelationshipToSex
+    - KeRelationshipToTaxon
     - SexTerm
-    - StressorChemical
-    - StressorLog
     - EventComponent
     - TaxonTerm
-    - UrlLink
     - User
     range: integer
     required: true
@@ -591,35 +523,6 @@ attributes:
     - BioTargetFamily
     - OecdStatus
     range: string
-  chemical_description:
-    name: chemical_description
-    from_schema: http://example.org/aopwiki-emod
-    rank: 1000
-    alias: chemical_description
-    owner: Stressor
-    domain_of:
-    - Stressor
-    range: string
-  characterization_of_exposure:
-    name: characterization_of_exposure
-    from_schema: http://example.org/aopwiki-emod
-    rank: 1000
-    alias: characterization_of_exposure
-    owner: Stressor
-    domain_of:
-    - Stressor
-    range: string
-  references:
-    name: references
-    from_schema: http://example.org/aopwiki-emod
-    alias: references
-    owner: Stressor
-    domain_of:
-    - Aop
-    - Event
-    - Relationship
-    - Stressor
-    range: string
   aops:
     name: aops
     from_schema: http://example.org/aopwiki-emod
@@ -627,13 +530,12 @@ attributes:
     owner: Stressor
     domain_of:
     - Event
-    - Relationship
+    - KeRelationship
     - Stressor
-    - LifeStageTerm
-    - SexTerm
-    - TaxonTerm
-    range: AopStressor
+    range: AopToPrototypicalStressor
     multivalued: true
+    inlined: true
+    inlined_as_list: true
   created_at:
     name: created_at
     description: Timestamp of when the record was created
@@ -644,59 +546,48 @@ attributes:
     domain_of:
     - Aop
     - Event
-    - Relationship
-    - Stressor
-    - BioTargetFamily
-    - Observation
-    - Citation
-    - AopEvent
-    - AopLifeStage
-    - AopLog
-    - AopRelationship
-    - AopSex
-    - AopStressor
-    - AopTaxon
-    - AssayBioTargetFamily
+    - KeRelationship
     - Assay
-    - AssignedLicense
-    - BatchImport
+    - Observation
+    - Evidence
+    - Stressor
+    - Citation
     - BiologicalAction
     - BiologicalObject
-    - BiologicalOrganization
     - BiologicalProcess
+    - LevelOfBiologicalOrganization
+    - BatchImport
+    - AopToEvent
+    - AopToLifeStage
+    - AopToKeRelationship
+    - AopToSex
+    - AopToPrototypicalStressor
+    - AopToTaxon
+    - AssayToBioTargetFamily
+    - AssignedLicense
+    - BioTargetFamily
     - CellTerm
-    - ChemicalSynonym
-    - Chemical
-    - CitationBioTargetFamily
-    - CitationRelationship
     - ConfidenceLevel
     - Directness
-    - EventLifeStage
-    - EventLog
-    - EventSex
-    - EventBioTargetFamily
-    - EventTaxon
-    - Evidence
+    - EventToLifeStage
+    - EventToSex
+    - EventToBioTargetFamily
+    - EventToTaxon
     - ExperimentType
     - Handbook
     - HarmonizedAop
     - HarmonizedEvent
     - License
     - LifeStageTerm
-    - ObservationCitation
+    - ObservationToCitation
     - OecdStatus
     - OrganTerm
-    - Profile
-    - RelationshipLifeStage
-    - RelationshipLog
-    - RelationshipSex
-    - RelationshipTaxon
+    - KeRelationshipToLifeStage
+    - KeRelationshipToSex
+    - KeRelationshipToTaxon
     - SexTerm
-    - StressorChemical
-    - StressorLog
     - EventComponent
     - TaxonTerm
-    - UrlLink
     range: datetime
   updated_at:
     name: updated_at
@@ -708,59 +599,48 @@ attributes:
     domain_of:
     - Aop
     - Event
-    - Relationship
-    - Stressor
-    - BioTargetFamily
-    - Observation
-    - Citation
-    - AopEvent
-    - AopLifeStage
-    - AopLog
-    - AopRelationship
-    - AopSex
-    - AopStressor
-    - AopTaxon
-    - AssayBioTargetFamily
+    - KeRelationship
     - Assay
-    - AssignedLicense
-    - BatchImport
+    - Observation
+    - Evidence
+    - Stressor
+    - Citation
     - BiologicalAction
     - BiologicalObject
-    - BiologicalOrganization
     - BiologicalProcess
+    - LevelOfBiologicalOrganization
+    - BatchImport
+    - AopToEvent
+    - AopToLifeStage
+    - AopToKeRelationship
+    - AopToSex
+    - AopToPrototypicalStressor
+    - AopToTaxon
+    - AssayToBioTargetFamily
+    - AssignedLicense
+    - BioTargetFamily
     - CellTerm
-    - ChemicalSynonym
-    - Chemical
-    - CitationBioTargetFamily
-    - CitationRelationship
     - ConfidenceLevel
     - Directness
-    - EventLifeStage
-    - EventLog
-    - EventSex
-    - EventBioTargetFamily
-    - EventTaxon
-    - Evidence
+    - EventToLifeStage
+    - EventToSex
+    - EventToBioTargetFamily
+    - EventToTaxon
     - ExperimentType
     - Handbook
     - HarmonizedAop
     - HarmonizedEvent
     - License
     - LifeStageTerm
-    - ObservationCitation
+    - ObservationToCitation
     - OecdStatus
     - OrganTerm
-    - Profile
-    - RelationshipLifeStage
-    - RelationshipLog
-    - RelationshipSex
-    - RelationshipTaxon
+    - KeRelationshipToLifeStage
+    - KeRelationshipToSex
+    - KeRelationshipToTaxon
     - SexTerm
-    - StressorChemical
-    - StressorLog
     - EventComponent
     - TaxonTerm
-    - UrlLink
     range: datetime
 
 </code></pre>

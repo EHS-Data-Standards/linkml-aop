@@ -416,37 +416,32 @@ Alias: aop_id</p>
 </thead>
 <tbody>
 <tr>
-<td><a href="../AopTaxon/">AopTaxon</a></td>
+<td><a href="../AopToLifeStage/">AopToLifeStage</a></td>
 <td></td>
 <td>no</td>
 </tr>
 <tr>
-<td><a href="../AopStressor/">AopStressor</a></td>
+<td><a href="../AopToTaxon/">AopToTaxon</a></td>
 <td></td>
 <td>no</td>
 </tr>
 <tr>
-<td><a href="../AopLifeStage/">AopLifeStage</a></td>
+<td><a href="../AopToKeRelationship/">AopToKeRelationship</a></td>
 <td></td>
 <td>no</td>
 </tr>
 <tr>
-<td><a href="../AopRelationship/">AopRelationship</a></td>
+<td><a href="../AopToSex/">AopToSex</a></td>
 <td></td>
 <td>no</td>
 </tr>
 <tr>
-<td><a href="../AopSex/">AopSex</a></td>
+<td><a href="../AopToEvent/">AopToEvent</a></td>
 <td></td>
 <td>no</td>
 </tr>
 <tr>
-<td><a href="../AopEvent/">AopEvent</a></td>
-<td></td>
-<td>no</td>
-</tr>
-<tr>
-<td><a href="../AopLog/">AopLog</a></td>
+<td><a href="../AopToPrototypicalStressor/">AopToPrototypicalStressor</a></td>
 <td></td>
 <td>no</td>
 </tr>
@@ -468,7 +463,7 @@ Alias: aop_id</p>
 </tr>
 <tr>
 <td>Domain Of</td>
-<td><a href="../AopEvent/">AopEvent</a>, <a href="../AopLifeStage/">AopLifeStage</a>, <a href="../AopLog/">AopLog</a>, <a href="../AopRelationship/">AopRelationship</a>, <a href="../AopSex/">AopSex</a>, <a href="../AopStressor/">AopStressor</a>, <a href="../AopTaxon/">AopTaxon</a></td>
+<td><a href="../AopToEvent/">AopToEvent</a>, <a href="../AopToLifeStage/">AopToLifeStage</a>, <a href="../AopToKeRelationship/">AopToKeRelationship</a>, <a href="../AopToSex/">AopToSex</a>, <a href="../AopToPrototypicalStressor/">AopToPrototypicalStressor</a>, <a href="../AopToTaxon/">AopToTaxon</a></td>
 </tr>
 </tbody>
 </table>
@@ -513,13 +508,12 @@ Alias: aop_id</p>
 <pre><code class="language-yaml">name: aop_id
 alias: aop_id
 domain_of:
-- AopEvent
-- AopLifeStage
-- AopLog
-- AopRelationship
-- AopSex
-- AopStressor
-- AopTaxon
+- AopToEvent
+- AopToLifeStage
+- AopToKeRelationship
+- AopToSex
+- AopToPrototypicalStressor
+- AopToTaxon
 range: string
 
 </code></pre>

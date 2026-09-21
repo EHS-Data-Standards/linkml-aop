@@ -416,32 +416,27 @@ Alias: event_id</p>
 </thead>
 <tbody>
 <tr>
-<td><a href="../EventBioTargetFamily/">EventBioTargetFamily</a></td>
+<td><a href="../EventToSex/">EventToSex</a></td>
 <td></td>
 <td>no</td>
 </tr>
 <tr>
-<td><a href="../EventTaxon/">EventTaxon</a></td>
+<td><a href="../EventToLifeStage/">EventToLifeStage</a></td>
 <td></td>
 <td>no</td>
 </tr>
 <tr>
-<td><a href="../EventSex/">EventSex</a></td>
+<td><a href="../EventToTaxon/">EventToTaxon</a></td>
 <td></td>
 <td>no</td>
 </tr>
 <tr>
-<td><a href="../EventLifeStage/">EventLifeStage</a></td>
+<td><a href="../AopToEvent/">AopToEvent</a></td>
 <td></td>
 <td>no</td>
 </tr>
 <tr>
-<td><a href="../AopEvent/">AopEvent</a></td>
-<td></td>
-<td>no</td>
-</tr>
-<tr>
-<td><a href="../EventLog/">EventLog</a></td>
+<td><a href="../EventToBioTargetFamily/">EventToBioTargetFamily</a></td>
 <td></td>
 <td>no</td>
 </tr>
@@ -463,7 +458,7 @@ Alias: event_id</p>
 </tr>
 <tr>
 <td>Domain Of</td>
-<td><a href="../AopEvent/">AopEvent</a>, <a href="../EventLifeStage/">EventLifeStage</a>, <a href="../EventLog/">EventLog</a>, <a href="../EventSex/">EventSex</a>, <a href="../EventBioTargetFamily/">EventBioTargetFamily</a>, <a href="../EventTaxon/">EventTaxon</a></td>
+<td><a href="../AopToEvent/">AopToEvent</a>, <a href="../EventToLifeStage/">EventToLifeStage</a>, <a href="../EventToSex/">EventToSex</a>, <a href="../EventToBioTargetFamily/">EventToBioTargetFamily</a>, <a href="../EventToTaxon/">EventToTaxon</a></td>
 </tr>
 </tbody>
 </table>
@@ -508,12 +503,11 @@ Alias: event_id</p>
 <pre><code class="language-yaml">name: event_id
 alias: event_id
 domain_of:
-- AopEvent
-- EventLifeStage
-- EventLog
-- EventSex
-- EventBioTargetFamily
-- EventTaxon
+- AopToEvent
+- EventToLifeStage
+- EventToSex
+- EventToBioTargetFamily
+- EventToTaxon
 range: string
 
 </code></pre>

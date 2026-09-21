@@ -416,7 +416,7 @@ Alias: biological_action_id</p>
 </thead>
 <tbody>
 <tr>
-<td><a href="../Observation/">Observation</a></td>
+<td><a href="../EventComponent/">EventComponent</a></td>
 <td></td>
 <td>no</td>
 </tr>
@@ -426,7 +426,7 @@ Alias: biological_action_id</p>
 <td>no</td>
 </tr>
 <tr>
-<td><a href="../EventComponent/">EventComponent</a></td>
+<td><a href="../Observation/">Observation</a></td>
 <td></td>
 <td>no</td>
 </tr>
@@ -448,7 +448,7 @@ Alias: biological_action_id</p>
 </tr>
 <tr>
 <td>Domain Of</td>
-<td><a href="../Observation/">Observation</a>, <a href="../Assay/">Assay</a>, <a href="../EventComponent/">EventComponent</a></td>
+<td><a href="../Assay/">Assay</a>, <a href="../Observation/">Observation</a>, <a href="../EventComponent/">EventComponent</a></td>
 </tr>
 </tbody>
 </table>
@@ -493,8 +493,8 @@ Alias: biological_action_id</p>
 <pre><code class="language-yaml">name: biological_action_id
 alias: biological_action_id
 domain_of:
-- Observation
 - Assay
+- Observation
 - EventComponent
 range: string
 

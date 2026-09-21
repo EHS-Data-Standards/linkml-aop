@@ -416,12 +416,12 @@ Alias: row_order</p>
 </thead>
 <tbody>
 <tr>
-<td><a href="../AopRelationship/">AopRelationship</a></td>
+<td><a href="../AopToKeRelationship/">AopToKeRelationship</a></td>
 <td></td>
 <td>no</td>
 </tr>
 <tr>
-<td><a href="../AopEvent/">AopEvent</a></td>
+<td><a href="../AopToEvent/">AopToEvent</a></td>
 <td></td>
 <td>no</td>
 </tr>
@@ -443,7 +443,7 @@ Alias: row_order</p>
 </tr>
 <tr>
 <td>Domain Of</td>
-<td><a href="../AopEvent/">AopEvent</a>, <a href="../AopRelationship/">AopRelationship</a></td>
+<td><a href="../AopToEvent/">AopToEvent</a>, <a href="../AopToKeRelationship/">AopToKeRelationship</a></td>
 </tr>
 </tbody>
 </table>
@@ -488,8 +488,8 @@ Alias: row_order</p>
 <pre><code class="language-yaml">name: row_order
 alias: row_order
 domain_of:
-- AopEvent
-- AopRelationship
+- AopToEvent
+- AopToKeRelationship
 range: string
 
 </code></pre>

@@ -416,27 +416,17 @@ Alias: citation_id</p>
 </thead>
 <tbody>
 <tr>
-<td><a href="../ObservationCitation/">ObservationCitation</a></td>
-<td></td>
-<td>no</td>
-</tr>
-<tr>
-<td><a href="../CitationBioTargetFamily/">CitationBioTargetFamily</a></td>
-<td></td>
-<td>no</td>
-</tr>
-<tr>
 <td><a href="../Assay/">Assay</a></td>
 <td></td>
 <td>no</td>
 </tr>
 <tr>
-<td><a href="../BatchImport/">BatchImport</a></td>
+<td><a href="../ObservationToCitation/">ObservationToCitation</a></td>
 <td></td>
 <td>no</td>
 </tr>
 <tr>
-<td><a href="../CitationRelationship/">CitationRelationship</a></td>
+<td><a href="../BatchImport/">BatchImport</a></td>
 <td></td>
 <td>no</td>
 </tr>
@@ -463,7 +453,7 @@ Alias: citation_id</p>
 </tr>
 <tr>
 <td>Domain Of</td>
-<td><a href="../Assay/">Assay</a>, <a href="../BatchImport/">BatchImport</a>, <a href="../CitationBioTargetFamily/">CitationBioTargetFamily</a>, <a href="../CitationRelationship/">CitationRelationship</a>, <a href="../Evidence/">Evidence</a>, <a href="../ObservationCitation/">ObservationCitation</a></td>
+<td><a href="../Assay/">Assay</a>, <a href="../Evidence/">Evidence</a>, <a href="../BatchImport/">BatchImport</a>, <a href="../ObservationToCitation/">ObservationToCitation</a></td>
 </tr>
 </tbody>
 </table>
@@ -509,11 +499,9 @@ Alias: citation_id</p>
 alias: citation_id
 domain_of:
 - Assay
-- BatchImport
-- CitationBioTargetFamily
-- CitationRelationship
 - Evidence
-- ObservationCitation
+- BatchImport
+- ObservationToCitation
 range: string
 
 </code></pre>

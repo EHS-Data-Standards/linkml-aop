@@ -356,6 +356,23 @@
     </span>
   </a>
   
+    <nav class="md-nav" aria-label="Identifier and Mapping Information">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#schema-source" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Schema Source
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
 </li>
       
         <li class="md-nav__item">
@@ -416,13 +433,8 @@ Alias: observations</p>
 </thead>
 <tbody>
 <tr>
-<td><a href="../Citation/">Citation</a></td>
-<td></td>
-<td>no</td>
-</tr>
-<tr>
 <td><a href="../Event/">Event</a></td>
-<td></td>
+<td>A change in biological or physiological state that is both measurable and ess...</td>
 <td>no</td>
 </tr>
 </tbody>
@@ -439,11 +451,11 @@ Alias: observations</p>
 <tbody>
 <tr>
 <td>Range</td>
-<td><a href="../String/">String</a></td>
+<td><a href="../Observation/">Observation</a></td>
 </tr>
 <tr>
 <td>Domain Of</td>
-<td><a href="../Event/">Event</a>, <a href="../Citation/">Citation</a></td>
+<td><a href="../Event/">Event</a></td>
 </tr>
 </tbody>
 </table>
@@ -457,12 +469,34 @@ Alias: observations</p>
 </thead>
 <tbody>
 <tr>
-<td></td>
+<td>Multivalued</td>
+<td>Yes</td>
+</tr>
+<tr>
+<td>### Slot Characteristics</td>
 <td></td>
 </tr>
 </tbody>
 </table>
+<table>
+<thead>
+<tr>
+<th>Property</th>
+<th>Value</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Owner</td>
+<td><a href="../Event/">Event</a></td>
+</tr>
+</tbody>
+</table>
 <h2 id="identifier-and-mapping-information">Identifier and Mapping Information</h2>
+<h3 id="schema-source">Schema Source</h3>
+<ul>
+<li>from schema: http://example.org/aopwiki-emod</li>
+</ul>
 <h2 id="mappings">Mappings</h2>
 <table>
 <thead>
@@ -486,11 +520,16 @@ Alias: observations</p>
 <details>
 
 <pre><code class="language-yaml">name: observations
+from_schema: http://example.org/aopwiki-emod
+rank: 1000
 alias: observations
+owner: Event
 domain_of:
 - Event
-- Citation
-range: string
+range: Observation
+multivalued: true
+inlined: true
+inlined_as_list: true
 
 </code></pre>
 

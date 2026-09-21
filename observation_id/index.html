@@ -433,7 +433,7 @@ Alias: observation_id</p>
 </thead>
 <tbody>
 <tr>
-<td><a href="../ObservationCitation/">ObservationCitation</a></td>
+<td><a href="../ObservationToCitation/">ObservationToCitation</a></td>
 <td></td>
 <td>no</td>
 </tr>
@@ -455,7 +455,7 @@ Alias: observation_id</p>
 </tr>
 <tr>
 <td>Domain Of</td>
-<td><a href="../ObservationCitation/">ObservationCitation</a></td>
+<td><a href="../ObservationToCitation/">ObservationToCitation</a></td>
 </tr>
 </tbody>
 </table>
@@ -484,7 +484,7 @@ Alias: observation_id</p>
 <tbody>
 <tr>
 <td>Owner</td>
-<td><a href="../ObservationCitation/">ObservationCitation</a></td>
+<td><a href="../ObservationToCitation/">ObservationToCitation</a></td>
 </tr>
 </tbody>
 </table>
@@ -519,10 +519,11 @@ Alias: observation_id</p>
 from_schema: http://example.org/aopwiki-emod
 rank: 1000
 alias: observation_id
-owner: ObservationCitation
+owner: ObservationToCitation
 domain_of:
-- ObservationCitation
+- ObservationToCitation
 range: Observation
+inlined: true
 
 </code></pre>
 

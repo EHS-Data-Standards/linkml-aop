@@ -416,17 +416,12 @@ Alias: biological_target_family_id</p>
 </thead>
 <tbody>
 <tr>
-<td><a href="../AssayBioTargetFamily/">AssayBioTargetFamily</a></td>
+<td><a href="../AssayToBioTargetFamily/">AssayToBioTargetFamily</a></td>
 <td></td>
 <td>no</td>
 </tr>
 <tr>
-<td><a href="../EventBioTargetFamily/">EventBioTargetFamily</a></td>
-<td></td>
-<td>no</td>
-</tr>
-<tr>
-<td><a href="../CitationBioTargetFamily/">CitationBioTargetFamily</a></td>
+<td><a href="../EventToBioTargetFamily/">EventToBioTargetFamily</a></td>
 <td></td>
 <td>no</td>
 </tr>
@@ -448,7 +443,7 @@ Alias: biological_target_family_id</p>
 </tr>
 <tr>
 <td>Domain Of</td>
-<td><a href="../AssayBioTargetFamily/">AssayBioTargetFamily</a>, <a href="../CitationBioTargetFamily/">CitationBioTargetFamily</a>, <a href="../EventBioTargetFamily/">EventBioTargetFamily</a></td>
+<td><a href="../AssayToBioTargetFamily/">AssayToBioTargetFamily</a>, <a href="../EventToBioTargetFamily/">EventToBioTargetFamily</a></td>
 </tr>
 </tbody>
 </table>
@@ -493,9 +488,8 @@ Alias: biological_target_family_id</p>
 <pre><code class="language-yaml">name: biological_target_family_id
 alias: biological_target_family_id
 domain_of:
-- AssayBioTargetFamily
-- CitationBioTargetFamily
-- EventBioTargetFamily
+- AssayToBioTargetFamily
+- EventToBioTargetFamily
 range: string
 
 </code></pre>

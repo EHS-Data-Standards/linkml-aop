@@ -416,27 +416,17 @@ Alias: relationship_id</p>
 </thead>
 <tbody>
 <tr>
-<td><a href="../RelationshipSex/">RelationshipSex</a></td>
+<td><a href="../AopToKeRelationship/">AopToKeRelationship</a></td>
 <td></td>
 <td>no</td>
 </tr>
 <tr>
-<td><a href="../RelationshipLifeStage/">RelationshipLifeStage</a></td>
+<td><a href="../KeRelationshipToLifeStage/">KeRelationshipToLifeStage</a></td>
 <td></td>
 <td>no</td>
 </tr>
 <tr>
-<td><a href="../RelationshipTaxon/">RelationshipTaxon</a></td>
-<td></td>
-<td>no</td>
-</tr>
-<tr>
-<td><a href="../AopRelationship/">AopRelationship</a></td>
-<td></td>
-<td>no</td>
-</tr>
-<tr>
-<td><a href="../CitationRelationship/">CitationRelationship</a></td>
+<td><a href="../KeRelationshipToSex/">KeRelationshipToSex</a></td>
 <td></td>
 <td>no</td>
 </tr>
@@ -446,7 +436,7 @@ Alias: relationship_id</p>
 <td>no</td>
 </tr>
 <tr>
-<td><a href="../RelationshipLog/">RelationshipLog</a></td>
+<td><a href="../KeRelationshipToTaxon/">KeRelationshipToTaxon</a></td>
 <td></td>
 <td>no</td>
 </tr>
@@ -468,7 +458,7 @@ Alias: relationship_id</p>
 </tr>
 <tr>
 <td>Domain Of</td>
-<td><a href="../AopRelationship/">AopRelationship</a>, <a href="../CitationRelationship/">CitationRelationship</a>, <a href="../Evidence/">Evidence</a>, <a href="../RelationshipLifeStage/">RelationshipLifeStage</a>, <a href="../RelationshipLog/">RelationshipLog</a>, <a href="../RelationshipSex/">RelationshipSex</a>, <a href="../RelationshipTaxon/">RelationshipTaxon</a></td>
+<td><a href="../Evidence/">Evidence</a>, <a href="../AopToKeRelationship/">AopToKeRelationship</a>, <a href="../KeRelationshipToLifeStage/">KeRelationshipToLifeStage</a>, <a href="../KeRelationshipToSex/">KeRelationshipToSex</a>, <a href="../KeRelationshipToTaxon/">KeRelationshipToTaxon</a></td>
 </tr>
 </tbody>
 </table>
@@ -513,13 +503,11 @@ Alias: relationship_id</p>
 <pre><code class="language-yaml">name: relationship_id
 alias: relationship_id
 domain_of:
-- AopRelationship
-- CitationRelationship
 - Evidence
-- RelationshipLifeStage
-- RelationshipLog
-- RelationshipSex
-- RelationshipTaxon
+- AopToKeRelationship
+- KeRelationshipToLifeStage
+- KeRelationshipToSex
+- KeRelationshipToTaxon
 range: string
 
 </code></pre>

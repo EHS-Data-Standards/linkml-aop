@@ -416,22 +416,22 @@ Alias: life_stage_term_id</p>
 </thead>
 <tbody>
 <tr>
-<td><a href="../AopLifeStage/">AopLifeStage</a></td>
+<td><a href="../AopToLifeStage/">AopToLifeStage</a></td>
 <td></td>
 <td>no</td>
 </tr>
 <tr>
-<td><a href="../RelationshipLifeStage/">RelationshipLifeStage</a></td>
+<td><a href="../EventToLifeStage/">EventToLifeStage</a></td>
+<td></td>
+<td>no</td>
+</tr>
+<tr>
+<td><a href="../KeRelationshipToLifeStage/">KeRelationshipToLifeStage</a></td>
 <td></td>
 <td>no</td>
 </tr>
 <tr>
 <td><a href="../Evidence/">Evidence</a></td>
-<td></td>
-<td>no</td>
-</tr>
-<tr>
-<td><a href="../EventLifeStage/">EventLifeStage</a></td>
 <td></td>
 <td>no</td>
 </tr>
@@ -453,7 +453,7 @@ Alias: life_stage_term_id</p>
 </tr>
 <tr>
 <td>Domain Of</td>
-<td><a href="../AopLifeStage/">AopLifeStage</a>, <a href="../EventLifeStage/">EventLifeStage</a>, <a href="../Evidence/">Evidence</a>, <a href="../RelationshipLifeStage/">RelationshipLifeStage</a></td>
+<td><a href="../Evidence/">Evidence</a>, <a href="../AopToLifeStage/">AopToLifeStage</a>, <a href="../EventToLifeStage/">EventToLifeStage</a>, <a href="../KeRelationshipToLifeStage/">KeRelationshipToLifeStage</a></td>
 </tr>
 </tbody>
 </table>
@@ -498,10 +498,10 @@ Alias: life_stage_term_id</p>
 <pre><code class="language-yaml">name: life_stage_term_id
 alias: life_stage_term_id
 domain_of:
-- AopLifeStage
-- EventLifeStage
 - Evidence
-- RelationshipLifeStage
+- AopToLifeStage
+- EventToLifeStage
+- KeRelationshipToLifeStage
 range: string
 
 </code></pre>

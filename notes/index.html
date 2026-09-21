@@ -356,6 +356,23 @@
     </span>
   </a>
   
+    <nav class="md-nav" aria-label="Identifier and Mapping Information">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#schema-source" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Schema Source
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
 </li>
       
         <li class="md-nav__item">
@@ -416,11 +433,6 @@ Alias: notes</p>
 </thead>
 <tbody>
 <tr>
-<td><a href="../Observation/">Observation</a></td>
-<td></td>
-<td>no</td>
-</tr>
-<tr>
 <td><a href="../Evidence/">Evidence</a></td>
 <td></td>
 <td>no</td>
@@ -443,7 +455,7 @@ Alias: notes</p>
 </tr>
 <tr>
 <td>Domain Of</td>
-<td><a href="../Observation/">Observation</a>, <a href="../Evidence/">Evidence</a></td>
+<td><a href="../Evidence/">Evidence</a></td>
 </tr>
 </tbody>
 </table>
@@ -457,12 +469,30 @@ Alias: notes</p>
 </thead>
 <tbody>
 <tr>
-<td></td>
+<td>### Slot Characteristics</td>
 <td></td>
 </tr>
 </tbody>
 </table>
+<table>
+<thead>
+<tr>
+<th>Property</th>
+<th>Value</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Owner</td>
+<td><a href="../Evidence/">Evidence</a></td>
+</tr>
+</tbody>
+</table>
 <h2 id="identifier-and-mapping-information">Identifier and Mapping Information</h2>
+<h3 id="schema-source">Schema Source</h3>
+<ul>
+<li>from schema: http://example.org/aopwiki-emod</li>
+</ul>
 <h2 id="mappings">Mappings</h2>
 <table>
 <thead>
@@ -486,9 +516,11 @@ Alias: notes</p>
 <details>
 
 <pre><code class="language-yaml">name: notes
+from_schema: http://example.org/aopwiki-emod
+rank: 1000
 alias: notes
+owner: Evidence
 domain_of:
-- Observation
 - Evidence
 range: string
 

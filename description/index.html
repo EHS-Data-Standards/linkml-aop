@@ -416,12 +416,32 @@ Alias: description</p>
 </thead>
 <tbody>
 <tr>
-<td><a href="../BiologicalProcess/">BiologicalProcess</a></td>
+<td><a href="../License/">License</a></td>
 <td></td>
 <td>no</td>
 </tr>
 <tr>
-<td><a href="../StressorLog/">StressorLog</a></td>
+<td><a href="../OecdStatus/">OecdStatus</a></td>
+<td></td>
+<td>no</td>
+</tr>
+<tr>
+<td><a href="../BatchImport/">BatchImport</a></td>
+<td></td>
+<td>no</td>
+</tr>
+<tr>
+<td><a href="../OrganTerm/">OrganTerm</a></td>
+<td></td>
+<td>no</td>
+</tr>
+<tr>
+<td><a href="../Assay/">Assay</a></td>
+<td></td>
+<td>no</td>
+</tr>
+<tr>
+<td><a href="../CellTerm/">CellTerm</a></td>
 <td></td>
 <td>no</td>
 </tr>
@@ -436,47 +456,7 @@ Alias: description</p>
 <td>no</td>
 </tr>
 <tr>
-<td><a href="../CellTerm/">CellTerm</a></td>
-<td></td>
-<td>no</td>
-</tr>
-<tr>
-<td><a href="../OrganTerm/">OrganTerm</a></td>
-<td></td>
-<td>no</td>
-</tr>
-<tr>
-<td><a href="../RelationshipLog/">RelationshipLog</a></td>
-<td></td>
-<td>no</td>
-</tr>
-<tr>
-<td><a href="../Assay/">Assay</a></td>
-<td></td>
-<td>no</td>
-</tr>
-<tr>
-<td><a href="../BatchImport/">BatchImport</a></td>
-<td></td>
-<td>no</td>
-</tr>
-<tr>
-<td><a href="../EventLog/">EventLog</a></td>
-<td></td>
-<td>no</td>
-</tr>
-<tr>
-<td><a href="../AopLog/">AopLog</a></td>
-<td></td>
-<td>no</td>
-</tr>
-<tr>
-<td><a href="../OecdStatus/">OecdStatus</a></td>
-<td></td>
-<td>no</td>
-</tr>
-<tr>
-<td><a href="../License/">License</a></td>
+<td><a href="../BiologicalProcess/">BiologicalProcess</a></td>
 <td></td>
 <td>no</td>
 </tr>
@@ -498,7 +478,7 @@ Alias: description</p>
 </tr>
 <tr>
 <td>Domain Of</td>
-<td><a href="../AopLog/">AopLog</a>, <a href="../Assay/">Assay</a>, <a href="../BatchImport/">BatchImport</a>, <a href="../BiologicalObject/">BiologicalObject</a>, <a href="../BiologicalProcess/">BiologicalProcess</a>, <a href="../CellTerm/">CellTerm</a>, <a href="../Directness/">Directness</a>, <a href="../EventLog/">EventLog</a>, <a href="../License/">License</a>, <a href="../OecdStatus/">OecdStatus</a>, <a href="../OrganTerm/">OrganTerm</a>, <a href="../RelationshipLog/">RelationshipLog</a>, <a href="../StressorLog/">StressorLog</a></td>
+<td><a href="../Assay/">Assay</a>, <a href="../BiologicalObject/">BiologicalObject</a>, <a href="../BiologicalProcess/">BiologicalProcess</a>, <a href="../BatchImport/">BatchImport</a>, <a href="../CellTerm/">CellTerm</a>, <a href="../Directness/">Directness</a>, <a href="../License/">License</a>, <a href="../OecdStatus/">OecdStatus</a>, <a href="../OrganTerm/">OrganTerm</a></td>
 </tr>
 </tbody>
 </table>
@@ -543,19 +523,15 @@ Alias: description</p>
 <pre><code class="language-yaml">name: description
 alias: description
 domain_of:
-- AopLog
 - Assay
-- BatchImport
 - BiologicalObject
 - BiologicalProcess
+- BatchImport
 - CellTerm
 - Directness
-- EventLog
 - License
 - OecdStatus
 - OrganTerm
-- RelationshipLog
-- StressorLog
 range: string
 
 </code></pre>

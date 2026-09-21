@@ -416,37 +416,17 @@ Alias: events</p>
 </thead>
 <tbody>
 <tr>
-<td><a href="../TaxonTerm/">TaxonTerm</a></td>
-<td></td>
-<td>no</td>
-</tr>
-<tr>
-<td><a href="../LifeStageTerm/">LifeStageTerm</a></td>
-<td></td>
-<td>no</td>
-</tr>
-<tr>
-<td><a href="../Observation/">Observation</a></td>
-<td></td>
-<td>no</td>
-</tr>
-<tr>
-<td><a href="../SexTerm/">SexTerm</a></td>
-<td></td>
-<td>no</td>
-</tr>
-<tr>
 <td><a href="../Assay/">Assay</a></td>
 <td></td>
 <td>no</td>
 </tr>
 <tr>
-<td><a href="../BioTargetFamily/">BioTargetFamily</a></td>
-<td></td>
+<td><a href="../Aop/">Aop</a></td>
+<td>An AOP describes a sequence of events starting with initial interaction(s) be...</td>
 <td>no</td>
 </tr>
 <tr>
-<td><a href="../Aop/">Aop</a></td>
+<td><a href="../Observation/">Observation</a></td>
 <td></td>
 <td>no</td>
 </tr>
@@ -468,7 +448,7 @@ Alias: events</p>
 </tr>
 <tr>
 <td>Domain Of</td>
-<td><a href="../Aop/">Aop</a>, <a href="../BioTargetFamily/">BioTargetFamily</a>, <a href="../Observation/">Observation</a>, <a href="../Assay/">Assay</a>, <a href="../LifeStageTerm/">LifeStageTerm</a>, <a href="../SexTerm/">SexTerm</a>, <a href="../TaxonTerm/">TaxonTerm</a></td>
+<td><a href="../Aop/">Aop</a>, <a href="../Assay/">Assay</a>, <a href="../Observation/">Observation</a></td>
 </tr>
 </tbody>
 </table>
@@ -514,12 +494,8 @@ Alias: events</p>
 alias: events
 domain_of:
 - Aop
-- BioTargetFamily
-- Observation
 - Assay
-- LifeStageTerm
-- SexTerm
-- TaxonTerm
+- Observation
 range: string
 
 </code></pre>

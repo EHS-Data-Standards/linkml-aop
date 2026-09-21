@@ -416,17 +416,17 @@ Alias: taxon_term_id</p>
 </thead>
 <tbody>
 <tr>
-<td><a href="../RelationshipTaxon/">RelationshipTaxon</a></td>
+<td><a href="../AopToTaxon/">AopToTaxon</a></td>
 <td></td>
 <td>no</td>
 </tr>
 <tr>
-<td><a href="../EventTaxon/">EventTaxon</a></td>
+<td><a href="../EventToTaxon/">EventToTaxon</a></td>
 <td></td>
 <td>no</td>
 </tr>
 <tr>
-<td><a href="../AopTaxon/">AopTaxon</a></td>
+<td><a href="../KeRelationshipToTaxon/">KeRelationshipToTaxon</a></td>
 <td></td>
 <td>no</td>
 </tr>
@@ -453,7 +453,7 @@ Alias: taxon_term_id</p>
 </tr>
 <tr>
 <td>Domain Of</td>
-<td><a href="../AopTaxon/">AopTaxon</a>, <a href="../EventTaxon/">EventTaxon</a>, <a href="../Evidence/">Evidence</a>, <a href="../RelationshipTaxon/">RelationshipTaxon</a></td>
+<td><a href="../Evidence/">Evidence</a>, <a href="../AopToTaxon/">AopToTaxon</a>, <a href="../EventToTaxon/">EventToTaxon</a>, <a href="../KeRelationshipToTaxon/">KeRelationshipToTaxon</a></td>
 </tr>
 </tbody>
 </table>
@@ -498,10 +498,10 @@ Alias: taxon_term_id</p>
 <pre><code class="language-yaml">name: taxon_term_id
 alias: taxon_term_id
 domain_of:
-- AopTaxon
-- EventTaxon
 - Evidence
-- RelationshipTaxon
+- AopToTaxon
+- EventToTaxon
+- KeRelationshipToTaxon
 range: string
 
 </code></pre>

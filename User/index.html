@@ -250,28 +250,6 @@
 <div class="mermaid"> classDiagram
     class User
     click User href "../User/"
-      User : coached_aops
-
-
-
-
-
-        User --&gt; "*" Aop : coached_aops
-        click Aop href "../Aop/"
-
-
-
-      User : contributed_aops
-
-
-
-
-
-        User --&gt; "*" Aop : contributed_aops
-        click Aop href "../Aop/"
-
-
-
       User : email
 
       User : id
@@ -302,18 +280,6 @@
 <td></td>
 <td>direct</td>
 </tr>
-<tr>
-<td><a href="../coached_aops/">coached_aops</a></td>
-<td>* <br/> <a href="../Aop/">Aop</a></td>
-<td></td>
-<td>direct</td>
-</tr>
-<tr>
-<td><a href="../contributed_aops/">contributed_aops</a></td>
-<td>* <br/> <a href="../Aop/">Aop</a></td>
-<td></td>
-<td>direct</td>
-</tr>
 </tbody>
 </table>
 <h2 id="usages">Usages</h2>
@@ -334,50 +300,8 @@
 <td><a href="./">User</a></td>
 </tr>
 <tr>
-<td><a href="../Aop/">Aop</a></td>
-<td><a href="../coaches/">coaches</a></td>
-<td>range</td>
-<td><a href="./">User</a></td>
-</tr>
-<tr>
-<td><a href="../Aop/">Aop</a></td>
-<td><a href="../contributors/">contributors</a></td>
-<td>range</td>
-<td><a href="./">User</a></td>
-</tr>
-<tr>
-<td><a href="../AopLog/">AopLog</a></td>
-<td><a href="../user_id/">user_id</a></td>
-<td>range</td>
-<td><a href="./">User</a></td>
-</tr>
-<tr>
 <td><a href="../BatchImport/">BatchImport</a></td>
 <td><a href="../contributor_id/">contributor_id</a></td>
-<td>range</td>
-<td><a href="./">User</a></td>
-</tr>
-<tr>
-<td><a href="../EventLog/">EventLog</a></td>
-<td><a href="../user_id/">user_id</a></td>
-<td>range</td>
-<td><a href="./">User</a></td>
-</tr>
-<tr>
-<td><a href="../Profile/">Profile</a></td>
-<td><a href="../user_id/">user_id</a></td>
-<td>range</td>
-<td><a href="./">User</a></td>
-</tr>
-<tr>
-<td><a href="../RelationshipLog/">RelationshipLog</a></td>
-<td><a href="../user_id/">user_id</a></td>
-<td>range</td>
-<td><a href="./">User</a></td>
-</tr>
-<tr>
-<td><a href="../StressorLog/">StressorLog</a></td>
-<td><a href="../user_id/">user_id</a></td>
 <td>range</td>
 <td><a href="./">User</a></td>
 </tr>
@@ -421,59 +345,48 @@ attributes:
     domain_of:
     - Aop
     - Event
-    - Relationship
-    - Stressor
-    - BioTargetFamily
-    - Observation
-    - Citation
-    - AopEvent
-    - AopLifeStage
-    - AopLog
-    - AopRelationship
-    - AopSex
-    - AopStressor
-    - AopTaxon
-    - AssayBioTargetFamily
+    - KeRelationship
     - Assay
-    - AssignedLicense
-    - BatchImport
+    - Observation
+    - Evidence
+    - Stressor
+    - Citation
     - BiologicalAction
     - BiologicalObject
-    - BiologicalOrganization
     - BiologicalProcess
+    - LevelOfBiologicalOrganization
+    - BatchImport
+    - AopToEvent
+    - AopToLifeStage
+    - AopToKeRelationship
+    - AopToSex
+    - AopToPrototypicalStressor
+    - AopToTaxon
+    - AssayToBioTargetFamily
+    - AssignedLicense
+    - BioTargetFamily
     - CellTerm
-    - ChemicalSynonym
-    - Chemical
-    - CitationBioTargetFamily
-    - CitationRelationship
     - ConfidenceLevel
     - Directness
-    - EventLifeStage
-    - EventLog
-    - EventSex
-    - EventBioTargetFamily
-    - EventTaxon
-    - Evidence
+    - EventToLifeStage
+    - EventToSex
+    - EventToBioTargetFamily
+    - EventToTaxon
     - ExperimentType
     - Handbook
     - HarmonizedAop
     - HarmonizedEvent
     - License
     - LifeStageTerm
-    - ObservationCitation
+    - ObservationToCitation
     - OecdStatus
     - OrganTerm
-    - Profile
-    - RelationshipLifeStage
-    - RelationshipLog
-    - RelationshipSex
-    - RelationshipTaxon
+    - KeRelationshipToLifeStage
+    - KeRelationshipToSex
+    - KeRelationshipToTaxon
     - SexTerm
-    - StressorChemical
-    - StressorLog
     - EventComponent
     - TaxonTerm
-    - UrlLink
     - User
     range: integer
     required: true
@@ -483,22 +396,6 @@ attributes:
     rank: 1000
     domain_of:
     - User
-  coached_aops:
-    name: coached_aops
-    from_schema: http://example.org/aopwiki-emod
-    rank: 1000
-    domain_of:
-    - User
-    range: Aop
-    multivalued: true
-  contributed_aops:
-    name: contributed_aops
-    from_schema: http://example.org/aopwiki-emod
-    rank: 1000
-    domain_of:
-    - User
-    range: Aop
-    multivalued: true
 
 </code></pre>
 </details>
@@ -516,59 +413,48 @@ attributes:
     domain_of:
     - Aop
     - Event
-    - Relationship
-    - Stressor
-    - BioTargetFamily
-    - Observation
-    - Citation
-    - AopEvent
-    - AopLifeStage
-    - AopLog
-    - AopRelationship
-    - AopSex
-    - AopStressor
-    - AopTaxon
-    - AssayBioTargetFamily
+    - KeRelationship
     - Assay
-    - AssignedLicense
-    - BatchImport
+    - Observation
+    - Evidence
+    - Stressor
+    - Citation
     - BiologicalAction
     - BiologicalObject
-    - BiologicalOrganization
     - BiologicalProcess
+    - LevelOfBiologicalOrganization
+    - BatchImport
+    - AopToEvent
+    - AopToLifeStage
+    - AopToKeRelationship
+    - AopToSex
+    - AopToPrototypicalStressor
+    - AopToTaxon
+    - AssayToBioTargetFamily
+    - AssignedLicense
+    - BioTargetFamily
     - CellTerm
-    - ChemicalSynonym
-    - Chemical
-    - CitationBioTargetFamily
-    - CitationRelationship
     - ConfidenceLevel
     - Directness
-    - EventLifeStage
-    - EventLog
-    - EventSex
-    - EventBioTargetFamily
-    - EventTaxon
-    - Evidence
+    - EventToLifeStage
+    - EventToSex
+    - EventToBioTargetFamily
+    - EventToTaxon
     - ExperimentType
     - Handbook
     - HarmonizedAop
     - HarmonizedEvent
     - License
     - LifeStageTerm
-    - ObservationCitation
+    - ObservationToCitation
     - OecdStatus
     - OrganTerm
-    - Profile
-    - RelationshipLifeStage
-    - RelationshipLog
-    - RelationshipSex
-    - RelationshipTaxon
+    - KeRelationshipToLifeStage
+    - KeRelationshipToSex
+    - KeRelationshipToTaxon
     - SexTerm
-    - StressorChemical
-    - StressorLog
     - EventComponent
     - TaxonTerm
-    - UrlLink
     - User
     range: integer
     required: true
@@ -581,26 +467,6 @@ attributes:
     domain_of:
     - User
     range: string
-  coached_aops:
-    name: coached_aops
-    from_schema: http://example.org/aopwiki-emod
-    rank: 1000
-    alias: coached_aops
-    owner: User
-    domain_of:
-    - User
-    range: Aop
-    multivalued: true
-  contributed_aops:
-    name: contributed_aops
-    from_schema: http://example.org/aopwiki-emod
-    rank: 1000
-    alias: contributed_aops
-    owner: User
-    domain_of:
-    - User
-    range: Aop
-    multivalued: true
 
 </code></pre>
 </details>

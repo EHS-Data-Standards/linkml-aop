@@ -258,8 +258,8 @@
 
 
 
-        Assay --&gt; "*" AssayBioTargetFamily : bio_target_families
-        click AssayBioTargetFamily href "../AssayBioTargetFamily/"
+        Assay --&gt; "*" AssayToBioTargetFamily : bio_target_families
+        click AssayToBioTargetFamily href "../AssayToBioTargetFamily/"
 
 
 
@@ -434,7 +434,7 @@
 </tr>
 <tr>
 <td><a href="../bio_target_families/">bio_target_families</a></td>
-<td>* <br/> <a href="../AssayBioTargetFamily/">AssayBioTargetFamily</a></td>
+<td>* <br/> <a href="../AssayToBioTargetFamily/">AssayToBioTargetFamily</a></td>
 <td></td>
 <td>direct</td>
 </tr>
@@ -464,7 +464,7 @@
 <td><a href="./">Assay</a></td>
 </tr>
 <tr>
-<td><a href="../AssayBioTargetFamily/">AssayBioTargetFamily</a></td>
+<td><a href="../AssayToBioTargetFamily/">AssayToBioTargetFamily</a></td>
 <td><a href="../assay_id/">assay_id</a></td>
 <td>range</td>
 <td><a href="./">Assay</a></td>
@@ -512,59 +512,48 @@ attributes:
     domain_of:
     - Aop
     - Event
-    - Relationship
-    - Stressor
-    - BioTargetFamily
-    - Observation
-    - Citation
-    - AopEvent
-    - AopLifeStage
-    - AopLog
-    - AopRelationship
-    - AopSex
-    - AopStressor
-    - AopTaxon
-    - AssayBioTargetFamily
+    - KeRelationship
     - Assay
-    - AssignedLicense
-    - BatchImport
+    - Observation
+    - Evidence
+    - Stressor
+    - Citation
     - BiologicalAction
     - BiologicalObject
-    - BiologicalOrganization
     - BiologicalProcess
+    - LevelOfBiologicalOrganization
+    - BatchImport
+    - AopToEvent
+    - AopToLifeStage
+    - AopToKeRelationship
+    - AopToSex
+    - AopToPrototypicalStressor
+    - AopToTaxon
+    - AssayToBioTargetFamily
+    - AssignedLicense
+    - BioTargetFamily
     - CellTerm
-    - ChemicalSynonym
-    - Chemical
-    - CitationBioTargetFamily
-    - CitationRelationship
     - ConfidenceLevel
     - Directness
-    - EventLifeStage
-    - EventLog
-    - EventSex
-    - EventBioTargetFamily
-    - EventTaxon
-    - Evidence
+    - EventToLifeStage
+    - EventToSex
+    - EventToBioTargetFamily
+    - EventToTaxon
     - ExperimentType
     - Handbook
     - HarmonizedAop
     - HarmonizedEvent
     - License
     - LifeStageTerm
-    - ObservationCitation
+    - ObservationToCitation
     - OecdStatus
     - OrganTerm
-    - Profile
-    - RelationshipLifeStage
-    - RelationshipLog
-    - RelationshipSex
-    - RelationshipTaxon
+    - KeRelationshipToLifeStage
+    - KeRelationshipToSex
+    - KeRelationshipToTaxon
     - SexTerm
-    - StressorChemical
-    - StressorLog
     - EventComponent
     - TaxonTerm
-    - UrlLink
     - User
     range: integer
     required: true
@@ -574,38 +563,31 @@ attributes:
     domain_of:
     - Aop
     - Event
-    - Citation
     - Assay
-    - Profile
-    - UrlLink
+    - Citation
   description:
     name: description
     from_schema: http://example.org/aopwiki-emod
+    rank: 1000
     domain_of:
-    - AopLog
     - Assay
-    - BatchImport
     - BiologicalObject
     - BiologicalProcess
+    - BatchImport
     - CellTerm
     - Directness
-    - EventLog
     - License
     - OecdStatus
     - OrganTerm
-    - RelationshipLog
-    - StressorLog
   citation_id:
     name: citation_id
     from_schema: http://example.org/aopwiki-emod
     rank: 1000
     domain_of:
     - Assay
-    - BatchImport
-    - CitationBioTargetFamily
-    - CitationRelationship
     - Evidence
-    - ObservationCitation
+    - BatchImport
+    - ObservationToCitation
   detection_technology:
     name: detection_technology
     from_schema: http://example.org/aopwiki-emod
@@ -615,11 +597,13 @@ attributes:
   biological_action_id:
     name: biological_action_id
     from_schema: http://example.org/aopwiki-emod
+    rank: 1000
     domain_of:
-    - Observation
     - Assay
+    - Observation
     - EventComponent
     range: BiologicalAction
+    inlined: true
   external_assay_id:
     name: external_assay_id
     from_schema: http://example.org/aopwiki-emod
@@ -629,17 +613,17 @@ attributes:
   batch_import_id:
     name: batch_import_id
     from_schema: http://example.org/aopwiki-emod
+    rank: 1000
     domain_of:
-    - BioTargetFamily
-    - Observation
-    - AopEvent
-    - AssayBioTargetFamily
     - Assay
-    - CitationBioTargetFamily
-    - EventBioTargetFamily
+    - Observation
+    - AopToEvent
+    - AssayToBioTargetFamily
+    - BioTargetFamily
+    - EventToBioTargetFamily
     - HarmonizedAop
     - HarmonizedEvent
-    - ObservationCitation
+    - ObservationToCitation
   objects:
     name: objects
     from_schema: http://example.org/aopwiki-emod
@@ -648,6 +632,8 @@ attributes:
     - Assay
     range: BiologicalObject
     multivalued: true
+    inlined: true
+    inlined_as_list: true
   processes:
     name: processes
     from_schema: http://example.org/aopwiki-emod
@@ -656,6 +642,8 @@ attributes:
     - Assay
     range: BiologicalProcess
     multivalued: true
+    inlined: true
+    inlined_as_list: true
   taxon_terms:
     name: taxon_terms
     from_schema: http://example.org/aopwiki-emod
@@ -664,28 +652,29 @@ attributes:
     - Assay
     range: TaxonTerm
     multivalued: true
+    inlined: true
+    inlined_as_list: true
   events:
     name: events
     from_schema: http://example.org/aopwiki-emod
     domain_of:
     - Aop
-    - BioTargetFamily
-    - Observation
     - Assay
-    - LifeStageTerm
-    - SexTerm
-    - TaxonTerm
+    - Observation
     range: Event
     multivalued: true
+    inlined: true
+    inlined_as_list: true
   bio_target_families:
     name: bio_target_families
     from_schema: http://example.org/aopwiki-emod
     domain_of:
     - Event
-    - Citation
     - Assay
-    range: AssayBioTargetFamily
+    range: AssayToBioTargetFamily
     multivalued: true
+    inlined: true
+    inlined_as_list: true
 
 </code></pre>
 </details>
@@ -703,59 +692,48 @@ attributes:
     domain_of:
     - Aop
     - Event
-    - Relationship
-    - Stressor
-    - BioTargetFamily
-    - Observation
-    - Citation
-    - AopEvent
-    - AopLifeStage
-    - AopLog
-    - AopRelationship
-    - AopSex
-    - AopStressor
-    - AopTaxon
-    - AssayBioTargetFamily
+    - KeRelationship
     - Assay
-    - AssignedLicense
-    - BatchImport
+    - Observation
+    - Evidence
+    - Stressor
+    - Citation
     - BiologicalAction
     - BiologicalObject
-    - BiologicalOrganization
     - BiologicalProcess
+    - LevelOfBiologicalOrganization
+    - BatchImport
+    - AopToEvent
+    - AopToLifeStage
+    - AopToKeRelationship
+    - AopToSex
+    - AopToPrototypicalStressor
+    - AopToTaxon
+    - AssayToBioTargetFamily
+    - AssignedLicense
+    - BioTargetFamily
     - CellTerm
-    - ChemicalSynonym
-    - Chemical
-    - CitationBioTargetFamily
-    - CitationRelationship
     - ConfidenceLevel
     - Directness
-    - EventLifeStage
-    - EventLog
-    - EventSex
-    - EventBioTargetFamily
-    - EventTaxon
-    - Evidence
+    - EventToLifeStage
+    - EventToSex
+    - EventToBioTargetFamily
+    - EventToTaxon
     - ExperimentType
     - Handbook
     - HarmonizedAop
     - HarmonizedEvent
     - License
     - LifeStageTerm
-    - ObservationCitation
+    - ObservationToCitation
     - OecdStatus
     - OrganTerm
-    - Profile
-    - RelationshipLifeStage
-    - RelationshipLog
-    - RelationshipSex
-    - RelationshipTaxon
+    - KeRelationshipToLifeStage
+    - KeRelationshipToSex
+    - KeRelationshipToTaxon
     - SexTerm
-    - StressorChemical
-    - StressorLog
     - EventComponent
     - TaxonTerm
-    - UrlLink
     - User
     range: integer
     required: true
@@ -767,30 +745,25 @@ attributes:
     domain_of:
     - Aop
     - Event
-    - Citation
     - Assay
-    - Profile
-    - UrlLink
+    - Citation
     range: string
   description:
     name: description
     from_schema: http://example.org/aopwiki-emod
+    rank: 1000
     alias: description
     owner: Assay
     domain_of:
-    - AopLog
     - Assay
-    - BatchImport
     - BiologicalObject
     - BiologicalProcess
+    - BatchImport
     - CellTerm
     - Directness
-    - EventLog
     - License
     - OecdStatus
     - OrganTerm
-    - RelationshipLog
-    - StressorLog
     range: string
   citation_id:
     name: citation_id
@@ -800,11 +773,9 @@ attributes:
     owner: Assay
     domain_of:
     - Assay
-    - BatchImport
-    - CitationBioTargetFamily
-    - CitationRelationship
     - Evidence
-    - ObservationCitation
+    - BatchImport
+    - ObservationToCitation
     range: string
   detection_technology:
     name: detection_technology
@@ -818,13 +789,15 @@ attributes:
   biological_action_id:
     name: biological_action_id
     from_schema: http://example.org/aopwiki-emod
+    rank: 1000
     alias: biological_action_id
     owner: Assay
     domain_of:
-    - Observation
     - Assay
+    - Observation
     - EventComponent
     range: BiologicalAction
+    inlined: true
   external_assay_id:
     name: external_assay_id
     from_schema: http://example.org/aopwiki-emod
@@ -837,19 +810,19 @@ attributes:
   batch_import_id:
     name: batch_import_id
     from_schema: http://example.org/aopwiki-emod
+    rank: 1000
     alias: batch_import_id
     owner: Assay
     domain_of:
-    - BioTargetFamily
-    - Observation
-    - AopEvent
-    - AssayBioTargetFamily
     - Assay
-    - CitationBioTargetFamily
-    - EventBioTargetFamily
+    - Observation
+    - AopToEvent
+    - AssayToBioTargetFamily
+    - BioTargetFamily
+    - EventToBioTargetFamily
     - HarmonizedAop
     - HarmonizedEvent
-    - ObservationCitation
+    - ObservationToCitation
     range: string
   objects:
     name: objects
@@ -861,6 +834,8 @@ attributes:
     - Assay
     range: BiologicalObject
     multivalued: true
+    inlined: true
+    inlined_as_list: true
   processes:
     name: processes
     from_schema: http://example.org/aopwiki-emod
@@ -871,6 +846,8 @@ attributes:
     - Assay
     range: BiologicalProcess
     multivalued: true
+    inlined: true
+    inlined_as_list: true
   taxon_terms:
     name: taxon_terms
     from_schema: http://example.org/aopwiki-emod
@@ -881,6 +858,8 @@ attributes:
     - Assay
     range: TaxonTerm
     multivalued: true
+    inlined: true
+    inlined_as_list: true
   events:
     name: events
     from_schema: http://example.org/aopwiki-emod
@@ -888,14 +867,12 @@ attributes:
     owner: Assay
     domain_of:
     - Aop
-    - BioTargetFamily
-    - Observation
     - Assay
-    - LifeStageTerm
-    - SexTerm
-    - TaxonTerm
+    - Observation
     range: Event
     multivalued: true
+    inlined: true
+    inlined_as_list: true
   bio_target_families:
     name: bio_target_families
     from_schema: http://example.org/aopwiki-emod
@@ -903,10 +880,11 @@ attributes:
     owner: Assay
     domain_of:
     - Event
-    - Citation
     - Assay
-    range: AssayBioTargetFamily
+    range: AssayToBioTargetFamily
     multivalued: true
+    inlined: true
+    inlined_as_list: true
   created_at:
     name: created_at
     description: Timestamp of when the record was created
@@ -917,59 +895,48 @@ attributes:
     domain_of:
     - Aop
     - Event
-    - Relationship
-    - Stressor
-    - BioTargetFamily
-    - Observation
-    - Citation
-    - AopEvent
-    - AopLifeStage
-    - AopLog
-    - AopRelationship
-    - AopSex
-    - AopStressor
-    - AopTaxon
-    - AssayBioTargetFamily
+    - KeRelationship
     - Assay
-    - AssignedLicense
-    - BatchImport
+    - Observation
+    - Evidence
+    - Stressor
+    - Citation
     - BiologicalAction
     - BiologicalObject
-    - BiologicalOrganization
     - BiologicalProcess
+    - LevelOfBiologicalOrganization
+    - BatchImport
+    - AopToEvent
+    - AopToLifeStage
+    - AopToKeRelationship
+    - AopToSex
+    - AopToPrototypicalStressor
+    - AopToTaxon
+    - AssayToBioTargetFamily
+    - AssignedLicense
+    - BioTargetFamily
     - CellTerm
-    - ChemicalSynonym
-    - Chemical
-    - CitationBioTargetFamily
-    - CitationRelationship
     - ConfidenceLevel
     - Directness
-    - EventLifeStage
-    - EventLog
-    - EventSex
-    - EventBioTargetFamily
-    - EventTaxon
-    - Evidence
+    - EventToLifeStage
+    - EventToSex
+    - EventToBioTargetFamily
+    - EventToTaxon
     - ExperimentType
     - Handbook
     - HarmonizedAop
     - HarmonizedEvent
     - License
     - LifeStageTerm
-    - ObservationCitation
+    - ObservationToCitation
     - OecdStatus
     - OrganTerm
-    - Profile
-    - RelationshipLifeStage
-    - RelationshipLog
-    - RelationshipSex
-    - RelationshipTaxon
+    - KeRelationshipToLifeStage
+    - KeRelationshipToSex
+    - KeRelationshipToTaxon
     - SexTerm
-    - StressorChemical
-    - StressorLog
     - EventComponent
     - TaxonTerm
-    - UrlLink
     range: datetime
   updated_at:
     name: updated_at
@@ -981,59 +948,48 @@ attributes:
     domain_of:
     - Aop
     - Event
-    - Relationship
-    - Stressor
-    - BioTargetFamily
-    - Observation
-    - Citation
-    - AopEvent
-    - AopLifeStage
-    - AopLog
-    - AopRelationship
-    - AopSex
-    - AopStressor
-    - AopTaxon
-    - AssayBioTargetFamily
+    - KeRelationship
     - Assay
-    - AssignedLicense
-    - BatchImport
+    - Observation
+    - Evidence
+    - Stressor
+    - Citation
     - BiologicalAction
     - BiologicalObject
-    - BiologicalOrganization
     - BiologicalProcess
+    - LevelOfBiologicalOrganization
+    - BatchImport
+    - AopToEvent
+    - AopToLifeStage
+    - AopToKeRelationship
+    - AopToSex
+    - AopToPrototypicalStressor
+    - AopToTaxon
+    - AssayToBioTargetFamily
+    - AssignedLicense
+    - BioTargetFamily
     - CellTerm
-    - ChemicalSynonym
-    - Chemical
-    - CitationBioTargetFamily
-    - CitationRelationship
     - ConfidenceLevel
     - Directness
-    - EventLifeStage
-    - EventLog
-    - EventSex
-    - EventBioTargetFamily
-    - EventTaxon
-    - Evidence
+    - EventToLifeStage
+    - EventToSex
+    - EventToBioTargetFamily
+    - EventToTaxon
     - ExperimentType
     - Handbook
     - HarmonizedAop
     - HarmonizedEvent
     - License
     - LifeStageTerm
-    - ObservationCitation
+    - ObservationToCitation
     - OecdStatus
     - OrganTerm
-    - Profile
-    - RelationshipLifeStage
-    - RelationshipLog
-    - RelationshipSex
-    - RelationshipTaxon
+    - KeRelationshipToLifeStage
+    - KeRelationshipToSex
+    - KeRelationshipToTaxon
     - SexTerm
-    - StressorChemical
-    - StressorLog
     - EventComponent
     - TaxonTerm
-    - UrlLink
     range: datetime
 
 </code></pre>
