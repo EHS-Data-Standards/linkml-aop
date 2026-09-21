@@ -1,7 +1,13 @@
 ---
+# ARCHIVED. This is the original hand-written AOP schema for linkml-aop. It is kept for
+# reference and is no longer built, tested, or maintained. The current schema is
+# aop_emod_linkml.yaml in this directory, generated from the AOP-Wiki EMOD 3.0 database
+# and curated by src/linkml_aop/scripts/curate_emod_linkml.py.
 id: https://w3id.org/caufieldjh/linkml-aop
 name: linkml-aop
 title: linkml-aop
+deprecated: >-
+  Archived 2026-09-21. Superseded by aop_emod_linkml.yaml; kept for reference only.
 description: |-
   A LinkML schema for Adverse Outcome Pathways,
   based off AOP-Wiki.

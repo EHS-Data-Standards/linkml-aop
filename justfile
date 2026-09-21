@@ -43,6 +43,9 @@ gen_ts_args := env_var_or_default("LINKML_GENERATORS_TYPESCRIPT_ARGS", "")
 src := "src"
 dest := "project"
 pymodel := src / schema_name / "datamodel"
+# Generated artifacts are named after the schema file (e.g. aop_emod_linkml),
+# matching what gen-project produces; schema_name is the Python package name.
+schema_stem := file_stem(source_schema_path)
 docdir := "docs"
 exampledir := "examples"
 
@@ -108,15 +111,15 @@ _gen-examples:
 _gen-project: _ensure_pymodel_dir _compile_sheets
     uv run gen-project {{config_yaml}} -d {{dest}} {{source_schema_path}} && \
     mv {{dest}}/*.py {{pymodel}}
-    @if [ ! -z "${{gen_owl_args}}" ]; then \
+    @if [ ! -z "{{gen_owl_args}}" ]; then \
       mkdir -p {{dest}}/owl || true && \
-      uv run gen-owl {{gen_owl_args}} {{source_schema_path}} > {{dest}}/owl/{{schema_name}}.owl.ttl || true ; \
+      uv run gen-owl {{gen_owl_args}} {{source_schema_path}} > {{dest}}/owl/{{schema_stem}}.owl.ttl || true ; \
     fi
-    @if [ ! ${{gen_java_args}} ]; then \
+    @if [ ! -z "{{gen_java_args}}" ]; then \
       uv run gen-java {{gen_java_args}} --output-directory {{dest}}/java/ {{source_schema_path}} || true ; \
     fi
-    @if [ ! ${{gen_ts_args}} ]; then \
-      uv run gen-typescript {{gen_ts_args}} {{source_schema_path}} > {{dest}}/typescript/{{schema_name}}.ts || true ; \
+    @if [ ! -z "{{gen_ts_args}}" ]; then \
+      uv run gen-typescript {{gen_ts_args}} {{source_schema_path}} > {{dest}}/typescript/{{schema_stem}}.ts || true ; \
     fi
 
 # Run all tests
