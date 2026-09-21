@@ -219,7 +219,7 @@ classes:
         inlined: true
         inlined_as_list: true
   KeRelationship:
-    description: A scientifically-based relationship that connects one key event to another, defines a causal and predictive relationship between the upstream and downstream event, and thereby facilitates inference or extrapolation of the state of the downstream key event from the known, measured,or predicted state of the upstream key event.
+    description: A scientifically-based relationship that connects one key event to another, defines a causal and predictive relationship between the upstream and downstream event, and thereby facilitates inference or extrapolation of the state of the downstream key event from the known, measured, or predicted state of the upstream key event.
     slots:
       - created_at
       - updated_at

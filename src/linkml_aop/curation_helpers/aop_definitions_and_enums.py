@@ -223,7 +223,7 @@ CLASS_DESCRIPTIONS = {
         "A scientifically-based relationship that connects one key event to another, defines a causal"
         " and predictive relationship between the upstream and downstream event, and thereby facilitates"
         " inference or extrapolation of the state of the downstream key event from the known, measured,"
-        "or predicted state of the upstream key event."
+        " or predicted state of the upstream key event."
     ),
     "stressors": (
         "An external or internal factor that induces a perturbation to a biological system, potentially"

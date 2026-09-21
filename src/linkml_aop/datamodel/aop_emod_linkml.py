@@ -1,5 +1,5 @@
 # Auto generated from aop_emod_linkml.yaml by pythongen.py version: 0.0.1
-# Generation date: 2026-09-21T18:19:09
+# Generation date: 2026-09-21T18:27:14
 # Schema: aopwiki-emod
 #
 # id: http://example.org/aopwiki-emod
@@ -574,7 +574,7 @@ class KeRelationship(YAMLRoot):
     """
     A scientifically-based relationship that connects one key event to another, defines a causal and predictive
     relationship between the upstream and downstream event, and thereby facilitates inference or extrapolation of the
-    state of the downstream key event from the known, measured,or predicted state of the upstream key event.
+    state of the downstream key event from the known, measured, or predicted state of the upstream key event.
     """
     _inherited_slots: ClassVar[list[str]] = []
 
