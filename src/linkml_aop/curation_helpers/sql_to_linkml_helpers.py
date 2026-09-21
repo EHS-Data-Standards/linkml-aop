@@ -4,6 +4,7 @@ __all__ = [
     "LINKML_BUILTIN_TYPES",
     "WIKI_TABLES_TO_DROP",
     "DROPPED_ATTRS",
+    "DROPPED_ATTRS_ALL_CLASSES",
     "PURE_PIVOT_UNIDIRECTIONAL",
     "BIDIRECTIONAL_INVERSE",
     "JOIN_TABLES_TO_BIDIRECTIONAL_RELS",
@@ -21,8 +22,14 @@ id: http://example.org/aopwiki-emod
 default_prefix: http://example.org/aopwiki-emod/
 title: AOP Wiki Data Model with EMOD
 description: >-
-  This is a LinkML schema for the AOP-Wiki data model,
-  extended with EMOD concepts.
+  A LinkML schema for the AOP-Wiki data model, extended with the EMOD (Evidence Model)
+  concepts of Assays, Observations, Evidence, and Biological Target Families. It serves
+  two purposes: validating content already curated in the AOP-Wiki, and providing a
+  structure for Adverse Outcome Pathways derived by automated approaches, including
+  analysis of multimodal data and text mining. Both purposes depend on being able to tell
+  what evidence supports from what has been inferred, so the classes and slots are
+  defined to keep an observation, the method that produced it, and the mechanism inferred
+  from it distinct from one another.
 prefixes:
   linkml: https://w3id.org/linkml/
   xsd: http://www.w3.org/2001/XMLSchema#
@@ -68,7 +75,6 @@ WIKI_TABLES_TO_DROP = [
     "roles",
     "assignments",
     "event_stressors",
-    "citation_biological_target_families",      # redundant: BioTargetFamily.batch_import_id -> BatchImport -> citation
     "chemical_synonyms",                        # should be handled in future using external references
     "citation_relationships",                   # no content at present so skip
     "profiles",                                 # properties should be combined with User class
@@ -82,10 +88,18 @@ WIKI_TABLES_TO_DROP = [
     "aop_logs",
     "event_logs",
     "stressor_logs",
+    "batch_imports",                            # import bookkeeping; provenance to be modelled on DisMech
+    "aop_batch_imports",                        # join to batch_imports
+    "can_event_merge_groups",                   # curation working data, not part of the published model
+    "can_event_merge_group_members",            # join to can_event_merge_groups
 ]
 
 # TODO: Add ATTR_RENAMES support to strip "_id" suffix from attributes that reference
 # other classes (e.g. upstream_event_id → upstream_event, downstream_event_id → downstream_event).
+
+# Attributes to drop from every class. batch_import_id is EMOD import bookkeeping, not
+# part of the data model; provenance is to be modelled on DisMech instead.
+DROPPED_ATTRS_ALL_CLASSES: list[str] = ["batch_import_id"]
 
 # Attributes to drop from specific classes. Keys are sql-based class names.
 DROPPED_ATTRS: dict[str, list[str]] = {
@@ -102,7 +116,8 @@ PURE_PIVOT_UNIDIRECTIONAL: dict[str, tuple[str, str, str]] = {
     "assay_processes": ("assays", "processes", "biological_processes"),
     "assay_taxon_terms": ("assays", "taxon_terms", "taxon_terms"),
     # "aop_url_links": ("aops", "url_links", "url_links"),
-    "event_sub_events": ("events", "event_components", "sub_events")
+    "event_sub_events": ("events", "event_components", "sub_events"),
+    "experiment_setup_cell_terms": ("experiment_setups", "cell_terms", "cell_terms"),
 }
 
 # Join tables that collapse to bidirectional inverse multivalued refs.
@@ -110,6 +125,14 @@ PURE_PIVOT_UNIDIRECTIONAL: dict[str, tuple[str, str, str]] = {
 BIDIRECTIONAL_INVERSE: dict[str, tuple[str, str, str, str]] = {
     "event_assays": ("events", "assays", "assays", "events"),
     "observation_events": ("observations", "events", "events", "observations"),
+    "assay_target_families": ("assays", "bio_target_families", "biological_target_families", "assays"),
+    "event_target_families": ("events", "bio_target_families", "biological_target_families", "events"),
+    "citation_biological_target_families": ("citations", "bio_target_families", "biological_target_families", "citations"),
+    "observation_citations": ("observations", "citations", "citations", "observations"),
+    "aop_assays": ("aops", "assays", "assays", "aops"),
+    "assay_citations": ("assays", "citations", "citations", "assays"),
+    "test_guideline_assays": ("test_guidelines", "assays", "assays", "test_guidelines"),
+    "test_guideline_events": ("test_guidelines", "events", "events", "test_guidelines"),
 }
 
 # Join tables that stay as top-level classes; both class_a and class_b get a
@@ -122,7 +145,6 @@ JOIN_TABLES_TO_BIDIRECTIONAL_RELS: dict[str, tuple[str, str, str]] = {
     "aop_stressors":         ("aops",   "prototypical_stressors",   "stressors"),
     "aop_events":            ("aops",   "events",                   "events"),
     "aop_relationships":     ("aops",   "ke_relationships",         "relationships"),
-    "assay_target_families": ("assays", "bio_target_families",      "biological_target_families"),
 }
 
 # Join tables that stay as top-level classes; only class_a gets a multivalued attr
@@ -136,11 +158,9 @@ JOIN_TABLES_TO_UNIDIRECTIONAL_RELS: dict[str, tuple[str, str, str]] = {
     "event_life_stages":         ("events",        "life_stages",        "life_stage_terms"),
     "event_sexes":               ("events",        "sexes",              "sex_terms"),
     "event_taxons":              ("events",        "taxons",             "taxon_terms"),
-    "event_target_families":     ("events",        "bio_target_families","biological_target_families"),
     "relationship_taxons":       ("relationships", "taxons",             "taxon_terms"),
     "relationship_sexes":        ("relationships", "sexes",              "sex_terms"),
     "relationship_life_stages":  ("relationships", "life_stages",        "life_stage_terms"),
-    "observation_citations":     ("observations",  "citations",          "citations"),
 }
 
 # Hand-curated FK and type ranges for class attributes.
@@ -159,7 +179,7 @@ CURATED_RANGES: dict[str, dict[str, str]] = {
     "aop_life_stages": {
         "aop_id": "aops",
         "life_stage_term_id": "life_stage_terms",
-        "evidence_id": "confidence_levels",
+        "confidence_id": "confidence_levels",
     },
     "aop_logs": {
         "aop_id": "aops",
@@ -168,7 +188,7 @@ CURATED_RANGES: dict[str, dict[str, str]] = {
     "aop_relationships": {
         "aop_id": "aops",
         "relationship_id": "relationships",
-        "evidence_id": "confidence_levels",
+        "confidence_id": "confidence_levels",
         "quantitative_understanding_id": "confidence_levels",
         "row_order": "integer",
         "directness_id": "directnesses",
@@ -176,17 +196,17 @@ CURATED_RANGES: dict[str, dict[str, str]] = {
     "aop_sexes": {
         "aop_id": "aops",
         "sex_term_id": "sex_terms",
-        "evidence_id": "confidence_levels",
+        "confidence_id": "confidence_levels",
     },
     "aop_stressors": {
         "aop_id": "aops",
         "stressor_id": "stressors",
-        "evidence_id": "confidence_levels",
+        "confidence_id": "confidence_levels",
     },
     "aop_taxons": {
         "aop_id": "aops",
         "taxon_term_id": "taxon_terms",
-        "evidence_id": "confidence_levels",
+        "confidence_id": "confidence_levels",
     },
     "aops": {
         "corresponding_author_id": "users",
@@ -194,11 +214,6 @@ CURATED_RANGES: dict[str, dict[str, str]] = {
         "legacy": "integer",
         "assigned_license_id": "assigned_licenses",
         "handbook_id": "handbooks",
-    },
-    "assay_target_families": {
-        "assay_id": "assays",
-        "biological_target_family_id": "biological_target_families",
-        "batch_import_id": "batch_imports",
     },
     "assays": {
         "reference_id": "citations",
@@ -208,20 +223,8 @@ CURATED_RANGES: dict[str, dict[str, str]] = {
     "assigned_licenses": {
         "license_id": "licenses",
     },
-    "batch_imports": {
-        "contributor_id": "users",
-        "citation_id": "citations",
-    },
-    "biological_target_families": {
-        "batch_import_id": "batch_imports",
-    },
     "chemical_synonyms": {
         "chemical_id": "chemicals",
-    },
-    "citation_biological_target_families": {
-        "citation_id": "citations",
-        "biological_target_family_id": "biological_target_families",
-        "batch_import_id": "batch_imports",
     },
     "citation_relationships": {
         "citation_id": "citations",
@@ -230,7 +233,7 @@ CURATED_RANGES: dict[str, dict[str, str]] = {
     "event_life_stages": {
         "event_id": "events",
         "life_stage_term_id": "life_stage_terms",
-        "evidence_id": "confidence_levels",
+        "confidence_id": "confidence_levels",
     },
     "event_logs": {
         "event_id": "events",
@@ -239,17 +242,12 @@ CURATED_RANGES: dict[str, dict[str, str]] = {
     "event_sexes": {
         "event_id": "events",
         "sex_term_id": "sex_terms",
-        "evidence_id": "confidence_levels",
-    },
-    "event_target_families": {
-        "event_id": "events",
-        "biological_target_family_id": "biological_target_families",
-        "batch_import_id": "batch_imports",
+        "confidence_id": "confidence_levels",
     },
     "event_taxons": {
         "event_id": "events",
         "taxon_term_id": "taxon_terms",
-        "evidence_id": "confidence_levels",
+        "confidence_id": "confidence_levels",
     },
     "events": {
         "biological_organization_id": "biological_organizations",
@@ -259,11 +257,15 @@ CURATED_RANGES: dict[str, dict[str, str]] = {
     "evidences": {
         "upstream_observation_id": "observations",
         "downstream_observation_id": "observations",
-        "reference_id": "citations",
+        "citation_id": "citations",
         "taxon_term_id": "taxon_terms",
         "sex_term_id": "sex_terms",
         "life_stage_term_id": "life_stage_terms",
         "relationship_id": "relationships",
+    },
+    "experiment_setups": {
+        "assay_id": "assays",
+        "causal_agent_id": "stressors",
     },
     "handbooks": {
         "version": "float",
@@ -271,23 +273,18 @@ CURATED_RANGES: dict[str, dict[str, str]] = {
     "harmonized_aops": {
         "new_aop_id": "aops",
         "source_aop_id": "aops",
-        "batch_import_id": "batch_imports",
     },
     "harmonized_events": {
         "source_event_id": "events",
         "harmonized_event_id": "events",
-        "batch_import_id": "batch_imports",
-    },
-    "observation_citations": {
-        "observation_id": "observations",
-        "citation_id": "citations",
-        "batch_import_id": "batch_imports",
     },
     "observations": {
         "biological_action_id": "biological_actions",
         "biological_process_id": "biological_processes",
         "biological_object_id": "biological_objects",
         "assay_id": "assays",
+        "experiment_setup_id": "experiment_setups",
+        "stressor_id": "stressors",
     },
     "oecd_statuses": {
         "sort": "integer",
@@ -298,7 +295,7 @@ CURATED_RANGES: dict[str, dict[str, str]] = {
     "relationship_life_stages": {
         "relationship_id": "relationships",
         "life_stage_term_id": "life_stage_terms",
-        "evidence_id": "confidence_levels",
+        "confidence_id": "confidence_levels",
     },
     "relationship_logs": {
         "relationship_id": "relationships",
@@ -307,12 +304,12 @@ CURATED_RANGES: dict[str, dict[str, str]] = {
     "relationship_sexes": {
         "relationship_id": "relationships",
         "sex_term_id": "sex_terms",
-        "evidence_id": "confidence_levels",
+        "confidence_id": "confidence_levels",
     },
     "relationship_taxons": {
         "relationship_id": "relationships",
         "taxon_term_id": "taxon_terms",
-        "evidence_id": "confidence_levels",
+        "confidence_id": "confidence_levels",
     },
     "relationships": {
         "upstream_event_id": "events",
@@ -333,7 +330,10 @@ CURATED_RANGES: dict[str, dict[str, str]] = {
         "biological_action_id": "biological_actions",
         "biological_object_id": "biological_objects",
         "biological_process_id": "biological_processes",
-    }
+    },
+    "test_guidelines": {
+        "citation_id": "citations",
+    },
 }
 
 # Classes that appear first in the output, in this order. All other classes follow alphabetically.
@@ -352,7 +352,6 @@ CLASS_ORDER = [
     "biological_objects",
     "biological_processes",
     "biological_organizations",
-    "batch_imports"
 ]
 
 # All class name substitutions applied to headers and range: references in the output.
@@ -368,17 +367,13 @@ CLASS_RENAMES = {
     "aop_stressors":                        "aop_to_prototypical_stressor",
     "aop_events":                           "aop_to_event",
     "aop_relationships":                    "aop_to_ke_relationship",
-    "assay_target_families":                "assay_to_bio_target_family",
     "aop_life_stages":                      "aop_to_life_stage",
     "aop_sexes":                            "aop_to_sex",
     "aop_taxons":                           "aop_to_taxon",
-    "citation_biological_target_families":  "citation_to_bio_target_family",
     "event_life_stages":                    "event_to_life_stage",
     "event_sexes":                          "event_to_sex",
     "event_taxons":                         "event_to_taxon",
-    "event_target_families":                "event_to_bio_target_family",
     "relationship_taxons":                  "ke_relationship_to_taxon",
     "relationship_sexes":                   "ke_relationship_to_sex",
     "relationship_life_stages":             "ke_relationship_to_life_stage",
-    "observation_citations":                "observation_to_citation",
 }

@@ -1,3 +1,18 @@
+# Attribute definitions for TestGuidelines, keyed by attribute name.
+test_guideline_definitions = {
+    "short_title": (
+        "A short identifier for the test guideline, combining the issuing body and its "
+        "guideline number (e.g. OECD TG 442C, EPA OCSPP 890.1250). Unique within EMOD and "
+        "used to reference the guideline."
+    ),
+    "full_title": (
+        "The official title of the test guideline as published by the issuing body "
+        "(e.g. Test No. 442C: In Chemico Skin Sensitisation: Assays addressing the Adverse "
+        "Outcome Pathway key event on covalent binding to proteins)."
+    ),
+    "citation_id": "The citation for the published test guideline document.",
+}
+
 event_definitions = {
     "title": "A descriptive phrase which defines a discrete biological change that can be measured.",
     "short_name": "A reasonable abbreviation of the Key Event title, used in labelling throughout AOP-Wiki.",
@@ -157,7 +172,9 @@ oecd_status_enum_list = [
     "Under Review",
 ]
 
-# Class-level descriptions sourced from AOP-Wiki handbook and info pages.
+# Class-level descriptions. Aop, KeRelationship, and Stressor are sourced from the AOP-Wiki
+# handbook and info pages; the reasoning behind the Event, Assay, and TestGuideline
+# definitions is in src/docs/dev/definition_rationale.md.
 # Keys are sql-based class names (pre-rename, pre-PascalCase).
 CLASS_DESCRIPTIONS = {
     "aops": (
@@ -172,8 +189,35 @@ CLASS_DESCRIPTIONS = {
         " to adversity, which are both measurable and have potential predictive value for regulatory application."
     ),
     "events": (
-        "A change in biological or physiological state that is both measurable and essential to the progression"
-        " of a defined biological perturbation leading to a specific adverse outcome."
+        "An Event is a measurable biological change at a defined level of biological "
+        "organization, described in the abstract so that it can be measured and supported "
+        "by evidence. An Event may be described in the AOP-Wiki before it is used "
+        "anywhere, and becomes a Key Event when it is incorporated into an Adverse Outcome "
+        "Pathway. The AOP-Wiki defines a Key Event as \"a change in biological or "
+        "physiological state that is both measurable and essential to the progression of a "
+        "defined biological perturbation leading to a specific adverse outcome.\" Within a "
+        "pathway, the Key Events at the starting and ending positions are Molecular "
+        "Initiating Events and Adverse Outcomes, and those between them are intermediate "
+        "Key Events. These positions are recorded per pathway and rest on the mechanistic "
+        "evidence available to the authors of that pathway, so one Event may serve as a "
+        "Molecular Initiating Event in one Adverse Outcome Pathway and as an intermediate "
+        "Key Event in another."
+        "\n\n"
+        "Whether an Event's change can be measured experimentally depends on factors such "
+        "as the level of biological organization and the species. Molecular and cellular "
+        "changes can be tested and measured in model organisms in a laboratory context. "
+        "Changes up to the population level can be observed in model organisms in a lab "
+        "and in ecological indicator species. Changes at the individual or population "
+        "level in humans are observed through epidemiological and clinical studies rather "
+        "than tested."
+        "\n\n"
+        "An Event is a type of change rather than a particular occurrence of one, and is "
+        "therefore not an exposure event in an open system: the exposure of a population "
+        "to a pollutant in air or water is not an Event. Such real-world exposures can "
+        "rarely be observed at the molecular level, so the Molecular Initiating Event that "
+        "follows one is not usually observable at the time of the exposure event. "
+        "Describing Events in the abstract keeps supporting evidence separate from what is "
+        "inferred."
     ),
     "relationships": (
         "A scientifically-based relationship that connects one key event to another, defines a causal"
@@ -190,7 +234,24 @@ CLASS_DESCRIPTIONS = {
     "citations": (),
     "evidences": (),
     "observations": (),
-    "assays": (),
+    "assays": (
+        "A defined experimental method for measuring a biological change, structured so "
+        "that its elements - the biological object measured, the process it takes part in, "
+        "the detection technology, and the taxa and biological target families it applies "
+        "to - can be matched against the Key Events the assay can inform. Assays are how "
+        "New Approach Methodologies (NAMs) connect to Adverse Outcome Pathways, and an "
+        "assay may be specified by one or more test guidelines. Some assays have an "
+        "inherent directionality, meaning they are designed to detect change in a specific "
+        "direction, such as an agonist or an antagonist effect on a specific molecular "
+        "target."
+    ),
+    "test_guidelines": (
+        "A standardized test method published by a regulatory or intergovernmental body, "
+        "such as an OECD Test Guideline or an EPA OCSPP test guideline, that specifies how "
+        "to carry out one or more assays so that the resulting data are accepted for "
+        "regulatory hazard assessment of chemicals. In EMOD, a test guideline is linked to "
+        "the Assays it covers and to the Key Events those Assays measure."
+    ),
     "chemicals": (),
     "biological_target_families": (),
     "biological_objects": (),
@@ -213,6 +274,7 @@ CLASS_DESCRIPTIONS = {
 # Attribute descriptions keyed by sql-based class name -> attr name -> description string.
 ATTRIBUTE_DESCRIPTIONS: dict[str, dict[str, str]] = {
     "events": event_definitions,
+    "test_guidelines": test_guideline_definitions,
 }
 
 # Enum definitions used to generate the enums: section of the output YAML.

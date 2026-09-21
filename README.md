@@ -37,7 +37,7 @@ To add or revise schema definitions and enumerations:
 2. Run the curation script to regenerate the schema. Using `just` (date format: MM-DD-YYYY):
 
    ```bash
-   just curate                        # uses the default input date (04-02-2026)
+   just curate                        # uses the default input date (09-18-2026)
    just curate date="MM-DD-YYYY"      # specify a different input file by date
    ```
 
@@ -74,8 +74,9 @@ Experiment Types values used in EMOD 2.0:
 
 ## Future To Do's
 
-* [ ] Refine constraints/rules for how batch_imports and citations are used for prov tracking.
-   Align with principles and standards being developed in other bio-ontology curation spaces.
+* [ ] Model provenance on DisMech's evidence and provenance approach. `batch_imports` and
+   `batch_import_id` are EMOD import bookkeeping and are dropped from the schema; they are not
+   the provenance route.
 
 ## Developer Documentation
 

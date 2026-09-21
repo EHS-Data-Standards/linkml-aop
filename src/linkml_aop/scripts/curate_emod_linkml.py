@@ -224,6 +224,27 @@ def apply_pascal_case_to_classes(text: str) -> str:
     return header + body
 
 
+def description_lines(text: str, indent: int) -> list[str]:
+    """Return description: lines, folded when the text would break an inline scalar.
+
+    A plain inline scalar cannot contain ": ", so such text is written as a folded
+    block scalar (>-) instead. Paragraphs (separated by a blank line in the source
+    string) are kept as paragraphs.
+    """
+    pad = " " * indent
+    paragraphs = [p.strip() for p in text.split("\n\n") if p.strip()]
+    if len(paragraphs) == 1 and ": " not in text:
+        return [f"{pad}description: {text}\n"]
+    lines = [f"{pad}description: >-\n"]
+    for i, paragraph in enumerate(paragraphs):
+        if i:
+            # Two blank lines: a folded scalar turns each into one newline, so the
+            # parsed value keeps the paragraph break.
+            lines.extend(["\n", "\n"])
+        lines.append(f"{pad}  {paragraph}\n")
+    return lines
+
+
 def make_multivalued_attr_lines(attr_name: str, range_name: str) -> list[str]:
     lines = [
         f"      {attr_name}:\n",
@@ -262,7 +283,7 @@ def convert_class_block(
 
     # Inject class-level description after the class header line (first line).
     if class_description and lines:
-        result: list[str] = [lines[0], f"    description: >-\n      {class_description}\n"]
+        result: list[str] = [lines[0], *description_lines(class_description, indent=4)]
         i = 1
     else:
         result = []
@@ -326,7 +347,7 @@ def convert_class_block(
                     new_block.append(f"        inlined: true\n")
             desc = descriptions.get(attr_name)
             if desc and not any("description:" in al for al in new_block):
-                new_block.insert(1, f"        description: {desc}\n")
+                new_block[1:1] = description_lines(desc, indent=8)
             result.extend(new_block)
             i = j
             continue
@@ -470,7 +491,8 @@ def build_classes_yaml(
         if raw_lines is None:
             continue
         converted = convert_class_block(
-            raw_lines, CURATED_RANGES.get(sql_name, {}), DROPPED_ATTRS.get(sql_name),
+            raw_lines, CURATED_RANGES.get(sql_name, {}),
+            DROPPED_ATTRS.get(sql_name, []) + DROPPED_ATTRS_ALL_CLASSES,
             ATTRIBUTE_DESCRIPTIONS.get(sql_name), CLASS_DESCRIPTIONS.get(sql_name),
         )
         converted = apply_class_renames(converted, CLASS_RENAMES)

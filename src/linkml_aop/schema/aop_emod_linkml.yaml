@@ -3,8 +3,14 @@ id: http://example.org/aopwiki-emod
 default_prefix: http://example.org/aopwiki-emod/
 title: AOP Wiki Data Model with EMOD
 description: >-
-  This is a LinkML schema for the AOP-Wiki data model,
-  extended with EMOD concepts.
+  A LinkML schema for the AOP-Wiki data model, extended with the EMOD (Evidence Model)
+  concepts of Assays, Observations, Evidence, and Biological Target Families. It serves
+  two purposes: validating content already curated in the AOP-Wiki, and providing a
+  structure for Adverse Outcome Pathways derived by automated approaches, including
+  analysis of multimodal data and text mining. Both purposes depend on being able to tell
+  what evidence supports from what has been inferred, so the classes and slots are
+  defined to keep an observation, the method that produced it, and the mechanism inferred
+  from it distinct from one another.
 prefixes:
   linkml: https://w3id.org/linkml/
   xsd: http://www.w3.org/2001/XMLSchema#
@@ -32,8 +38,7 @@ slots:
 # Class definitions
 classes:
   Aop:
-    description: >-
-      An AOP describes a sequence of events starting with initial interaction(s) between a stressor and a biomolecule within an organism that causes a perturbation in its biology (i.e., molecular initiating event, MIE), which can progress through a dependent series of intermediate key events (KEs) and culminate in an adverse outcome (AO) considered relevant to risk assessment or regulatory decision-making. AOPs are composed of a causal sequence of upstream to downstream KEs, representing a cascading series of measurable biological changes that can be expected to occur if the perturbation is sufficiently severe (i.e., in terms of potency, duration, frequency) to drive the pathway all the way to the AO. Importantly, AOPs do not describe every detail of the biology but instead focus on describing critical steps or check-points along the path to adversity, which are both measurable and have potential predictive value for regulatory application.
+    description: An AOP describes a sequence of events starting with initial interaction(s) between a stressor and a biomolecule within an organism that causes a perturbation in its biology (i.e., molecular initiating event, MIE), which can progress through a dependent series of intermediate key events (KEs) and culminate in an adverse outcome (AO) considered relevant to risk assessment or regulatory decision-making. AOPs are composed of a causal sequence of upstream to downstream KEs, representing a cascading series of measurable biological changes that can be expected to occur if the perturbation is sufficiently severe (i.e., in terms of potency, duration, frequency) to drive the pathway all the way to the AO. Importantly, AOPs do not describe every detail of the biology but instead focus on describing critical steps or check-points along the path to adversity, which are both measurable and have potential predictive value for regulatory application.
     slots:
       - created_at
       - updated_at
@@ -75,6 +80,14 @@ classes:
       completion_score:
       mean_ker_score:
       mean_event_score:
+      has_references:
+      project_129:
+      has_structured_methods:
+      assays:
+        multivalued: true
+        range: Assay
+        inlined: true
+        inlined_as_list: true
       prototypical_stressors:
         multivalued: true
         range: AopToPrototypicalStressor
@@ -107,7 +120,13 @@ classes:
         inlined_as_list: true
   Event:
     description: >-
-      A change in biological or physiological state that is both measurable and essential to the progression of a defined biological perturbation leading to a specific adverse outcome.
+      An Event is a measurable biological change at a defined level of biological organization, described in the abstract so that it can be measured and supported by evidence. An Event may be described in the AOP-Wiki before it is used anywhere, and becomes a Key Event when it is incorporated into an Adverse Outcome Pathway. The AOP-Wiki defines a Key Event as "a change in biological or physiological state that is both measurable and essential to the progression of a defined biological perturbation leading to a specific adverse outcome." Within a pathway, the Key Events at the starting and ending positions are Molecular Initiating Events and Adverse Outcomes, and those between them are intermediate Key Events. These positions are recorded per pathway and rest on the mechanistic evidence available to the authors of that pathway, so one Event may serve as a Molecular Initiating Event in one Adverse Outcome Pathway and as an intermediate Key Event in another.
+
+
+      Whether an Event's change can be measured experimentally depends on factors such as the level of biological organization and the species. Molecular and cellular changes can be tested and measured in model organisms in a laboratory context. Changes up to the population level can be observed in model organisms in a lab and in ecological indicator species. Changes at the individual or population level in humans are observed through epidemiological and clinical studies rather than tested.
+
+
+      An Event is a type of change rather than a particular occurrence of one, and is therefore not an exposure event in an open system: the exposure of a population to a pollutant in air or water is not an Event. Such real-world exposures can rarely be observed at the molecular level, so the Molecular Initiating Event that follows one is not usually observable at the time of the exposure event. Describing Events in the abstract keeps supporting evidence separate from what is inferred.
     slots:
       - created_at
       - updated_at
@@ -151,6 +170,9 @@ classes:
         description: Calculated metric for integration and priority assessment of the Key Event.
       has_method_text:
         description: Indicates whether method text has been provided for this Key Event.
+      aop_open_for_adoption_count:
+      aop_oecd_program_count:
+      aop_oecd_endorsed_count:
       event_components:
         multivalued: true
         range: EventComponent
@@ -164,6 +186,16 @@ classes:
       observations:
         multivalued: true
         range: Observation
+        inlined: true
+        inlined_as_list: true
+      bio_target_families:
+        multivalued: true
+        range: BioTargetFamily
+        inlined: true
+        inlined_as_list: true
+      test_guidelines:
+        multivalued: true
+        range: TestGuideline
         inlined: true
         inlined_as_list: true
       aops:
@@ -186,14 +218,8 @@ classes:
         range: EventToTaxon
         inlined: true
         inlined_as_list: true
-      bio_target_families:
-        multivalued: true
-        range: EventToBioTargetFamily
-        inlined: true
-        inlined_as_list: true
   KeRelationship:
-    description: >-
-      A scientifically-based relationship that connects one key event to another, defines a causal and predictive relationship between the upstream and downstream event, and thereby facilitates inference or extrapolation of the state of the downstream key event from the known, measured,or predicted state of the upstream key event.
+    description: A scientifically-based relationship that connects one key event to another, defines a causal and predictive relationship between the upstream and downstream event, and thereby facilitates inference or extrapolation of the state of the downstream key event from the known, measured,or predicted state of the upstream key event.
     slots:
       - created_at
       - updated_at
@@ -221,6 +247,7 @@ classes:
       evidence_collection_strategy:
       references:
       completion_score:
+      has_tabulated_evidence:
       aops:
         multivalued: true
         range: AopToKeRelationship
@@ -242,6 +269,7 @@ classes:
         inlined: true
         inlined_as_list: true
   Assay:
+    description: A defined experimental method for measuring a biological change, structured so that its elements - the biological object measured, the process it takes part in, the detection technology, and the taxa and biological target families it applies to - can be matched against the Key Events the assay can inform. Assays are how New Approach Methodologies (NAMs) connect to Adverse Outcome Pathways, and an assay may be specified by one or more test guidelines. Some assays have an inherent directionality, meaning they are designed to detect change in a specific direction, such as an agonist or an antagonist effect on a specific molecular target.
     slots:
       - created_at
       - updated_at
@@ -251,13 +279,12 @@ classes:
         range: integer
       title:
       description:
-      citation_id:
       detection_technology:
       biological_action_id:
         range: BiologicalAction
         inlined: true
       external_assay_id:
-      batch_import_id:
+      classification:
       objects:
         multivalued: true
         range: BiologicalObject
@@ -280,7 +307,22 @@ classes:
         inlined_as_list: true
       bio_target_families:
         multivalued: true
-        range: AssayToBioTargetFamily
+        range: BioTargetFamily
+        inlined: true
+        inlined_as_list: true
+      aops:
+        multivalued: true
+        range: Aop
+        inlined: true
+        inlined_as_list: true
+      citations:
+        multivalued: true
+        range: Citation
+        inlined: true
+        inlined_as_list: true
+      test_guidelines:
+        multivalued: true
+        range: TestGuideline
         inlined: true
         inlined_as_list: true
   Observation:
@@ -303,9 +345,14 @@ classes:
       assay_id:
         range: Assay
         inlined: true
-      batch_import_id:
       stressor_id:
+        range: Stressor
+        inlined: true
       phenotype:
+      experiment_setup_id:
+        range: ExperimentSetup
+        inlined: true
+      biological_object_str:
       events:
         multivalued: true
         range: Event
@@ -313,7 +360,7 @@ classes:
         inlined_as_list: true
       citations:
         multivalued: true
-        range: ObservationToCitation
+        range: Citation
         inlined: true
         inlined_as_list: true
   Evidence:
@@ -331,6 +378,8 @@ classes:
         range: Observation
         inlined: true
       citation_id:
+        range: Citation
+        inlined: true
       taxon_term_id:
         range: TaxonTerm
         inlined: true
@@ -346,8 +395,7 @@ classes:
       experimental_design:
       notes:
   Stressor:
-    description: >-
-      An external or internal factor that induces a perturbation to a biological system, potentially initiating a molecular initiating event (MIE) but could also impact a biological process represented by a key event. Stressors may include chemical, physical, or biological agents capable of eliciting measurable changes in the biological system relevant to the AOP.
+    description: An external or internal factor that induces a perturbation to a biological system, potentially initiating a molecular initiating event (MIE) but could also impact a biological process represented by a key event. Stressors may include chemical, physical, or biological agents capable of eliciting measurable changes in the biological system relevant to the AOP.
     slots:
       - created_at
       - updated_at
@@ -374,6 +422,22 @@ classes:
       authors:
       journal:
       year:
+      publisher:
+      bio_target_families:
+        multivalued: true
+        range: BioTargetFamily
+        inlined: true
+        inlined_as_list: true
+      observations:
+        multivalued: true
+        range: Observation
+        inlined: true
+        inlined_as_list: true
+      assays:
+        multivalued: true
+        range: Assay
+        inlined: true
+        inlined_as_list: true
   BiologicalAction:
     slots:
       - created_at
@@ -424,22 +488,6 @@ classes:
         range: integer
       term:
         range: BiologicalOrganizationEnum
-  BatchImport:
-    slots:
-      - created_at
-      - updated_at
-    attributes:
-      id:
-        identifier: true
-        range: integer
-      batch_code:
-      contributor_id:
-        range: User
-        inlined: true
-      citation_id:
-        range: Citation
-        inlined: true
-      description:
   AopToEvent:
     slots:
       - created_at
@@ -462,7 +510,6 @@ classes:
         range: integer
       sequence:
         range: integer
-      batch_import_id:
   AopToLifeStage:
     slots:
       - created_at
@@ -478,6 +525,8 @@ classes:
         range: LifeStageTerm
         inlined: true
       confidence_id:
+        range: ConfidenceLevel
+        inlined: true
   AopToKeRelationship:
     slots:
       - created_at
@@ -493,6 +542,8 @@ classes:
         range: KeRelationship
         inlined: true
       confidence_id:
+        range: ConfidenceLevel
+        inlined: true
       quantitative_understanding_id:
         range: ConfidenceLevel
         inlined: true
@@ -517,6 +568,8 @@ classes:
         range: SexTerm
         inlined: true
       confidence_id:
+        range: ConfidenceLevel
+        inlined: true
   AopToPrototypicalStressor:
     slots:
       - created_at
@@ -532,6 +585,8 @@ classes:
         range: Stressor
         inlined: true
       confidence_id:
+        range: ConfidenceLevel
+        inlined: true
       evidence_text:
   AopToTaxon:
     slots:
@@ -548,22 +603,7 @@ classes:
         range: TaxonTerm
         inlined: true
       confidence_id:
-  AssayToBioTargetFamily:
-    slots:
-      - created_at
-      - updated_at
-    attributes:
-      id:
-        identifier: true
-        range: integer
-      assay_id:
-        range: Assay
-        inlined: true
-      biological_target_family_id:
-        range: BioTargetFamily
-        inlined: true
-      batch_import_id:
-        range: BatchImport
+        range: ConfidenceLevel
         inlined: true
   AssignedLicense:
     slots:
@@ -585,12 +625,19 @@ classes:
         identifier: true
         range: integer
       name:
-      batch_import_id:
-        range: BatchImport
-        inlined: true
       assays:
         multivalued: true
-        range: AssayToBioTargetFamily
+        range: Assay
+        inlined: true
+        inlined_as_list: true
+      events:
+        multivalued: true
+        range: Event
+        inlined: true
+        inlined_as_list: true
+      citations:
+        multivalued: true
+        range: Citation
         inlined: true
         inlined_as_list: true
   CellTerm:
@@ -643,6 +690,8 @@ classes:
         range: LifeStageTerm
         inlined: true
       confidence_id:
+        range: ConfidenceLevel
+        inlined: true
   EventToSex:
     slots:
       - created_at
@@ -658,22 +707,7 @@ classes:
         range: SexTerm
         inlined: true
       confidence_id:
-  EventToBioTargetFamily:
-    slots:
-      - created_at
-      - updated_at
-    attributes:
-      id:
-        identifier: true
-        range: integer
-      event_id:
-        range: Event
-        inlined: true
-      biological_target_family_id:
-        range: BioTargetFamily
-        inlined: true
-      batch_import_id:
-        range: BatchImport
+        range: ConfidenceLevel
         inlined: true
   EventToTaxon:
     slots:
@@ -690,6 +724,28 @@ classes:
         range: TaxonTerm
         inlined: true
       confidence_id:
+        range: ConfidenceLevel
+        inlined: true
+  ExperimentSetup:
+    slots:
+      - created_at
+      - updated_at
+    attributes:
+      id:
+        identifier: true
+        range: integer
+      assay_id:
+        range: Assay
+        inlined: true
+      causal_agent_id:
+        range: Stressor
+        inlined: true
+      description:
+      cell_terms:
+        multivalued: true
+        range: CellTerm
+        inlined: true
+        inlined_as_list: true
   ExperimentType:
     slots:
       - created_at
@@ -733,9 +789,6 @@ classes:
         range: Aop
         inlined: true
       is_priority:
-      batch_import_id:
-        range: BatchImport
-        inlined: true
   HarmonizedEvent:
     slots:
       - created_at
@@ -756,9 +809,6 @@ classes:
         inlined: true
       raw_mapping_value:
       mapping_status:
-      batch_import_id:
-        range: BatchImport
-        inlined: true
   License:
     slots:
       - created_at
@@ -782,23 +832,6 @@ classes:
         range: integer
       term:
         range: LifeStageTermEnum
-  ObservationToCitation:
-    slots:
-      - created_at
-      - updated_at
-    attributes:
-      id:
-        identifier: true
-        range: integer
-      observation_id:
-        range: Observation
-        inlined: true
-      citation_id:
-        range: Citation
-        inlined: true
-      batch_import_id:
-        range: BatchImport
-        inlined: true
   OecdStatus:
     slots:
       - created_at
@@ -841,6 +874,8 @@ classes:
         range: LifeStageTerm
         inlined: true
       confidence_id:
+        range: ConfidenceLevel
+        inlined: true
   KeRelationshipToSex:
     slots:
       - created_at
@@ -856,6 +891,8 @@ classes:
         range: SexTerm
         inlined: true
       confidence_id:
+        range: ConfidenceLevel
+        inlined: true
   KeRelationshipToTaxon:
     slots:
       - created_at
@@ -871,6 +908,8 @@ classes:
         range: TaxonTerm
         inlined: true
       confidence_id:
+        range: ConfidenceLevel
+        inlined: true
   SexTerm:
     slots:
       - created_at
@@ -913,6 +952,34 @@ classes:
       ncbi_id:
       scientific_term:
       source_id:
+  TestGuideline:
+    description: A standardized test method published by a regulatory or intergovernmental body, such as an OECD Test Guideline or an EPA OCSPP test guideline, that specifies how to carry out one or more assays so that the resulting data are accepted for regulatory hazard assessment of chemicals. In EMOD, a test guideline is linked to the Assays it covers and to the Key Events those Assays measure.
+    slots:
+      - created_at
+      - updated_at
+    attributes:
+      id:
+        identifier: true
+        range: integer
+      short_title:
+        description: A short identifier for the test guideline, combining the issuing body and its guideline number (e.g. OECD TG 442C, EPA OCSPP 890.1250). Unique within EMOD and used to reference the guideline.
+      full_title:
+        description: >-
+          The official title of the test guideline as published by the issuing body (e.g. Test No. 442C: In Chemico Skin Sensitisation: Assays addressing the Adverse Outcome Pathway key event on covalent binding to proteins).
+      citation_id:
+        description: The citation for the published test guideline document.
+        range: Citation
+        inlined: true
+      assays:
+        multivalued: true
+        range: Assay
+        inlined: true
+        inlined_as_list: true
+      events:
+        multivalued: true
+        range: Event
+        inlined: true
+        inlined_as_list: true
   User:
     attributes:
       id:
