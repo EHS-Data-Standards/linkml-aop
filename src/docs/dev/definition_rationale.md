@@ -4,6 +4,24 @@ Background, sources, and reasoning for the class and attribute definitions in
 [`aop_definitions_and_enums.py`](../../linkml_aop/curation_helpers/aop_definitions_and_enums.py). The Python file holds the
 text that goes into the schema; this file records why that text says what it says.
 
+## Aop, KeRelationship, and Stressor
+
+These descriptions came with the `join-classes` work and are quoted, not written here.
+Checked against the
+[AOP Developers' Handbook 2.8](https://aopwiki.org/handbooks/6) (released 2026-03-12) on
+2026-09-21:
+
+- **Aop:** verbatim from the handbook's introduction to AOPs, three sentences. The first
+  sentence had been paraphrased ("starting with initial interaction(s) between a stressor
+  and a biomolecule"); it now matches the handbook ("commencing with initial
+  interaction(s) of a stressor with a biomolecule").
+- **KeRelationship:** verbatim from the handbook's Table 1 definition of a Key Event
+  Relationship.
+- **Stressor:** *source not found.* The handbook has no formal stressor definition, and
+  the text ("An external or internal factor that induces a perturbation...") does not
+  appear in it. Its nearest statement is about prototypical stressors: "stressors for
+  which responses at multiple KEs in addition to the MIE have been well documented."
+
 ## Event
 
 **Definition** (`CLASS_DESCRIPTIONS["events"]`, revised 2026-09-21):

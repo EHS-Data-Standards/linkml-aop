@@ -1,5 +1,5 @@
 # Auto generated from aop_emod_linkml.yaml by pythongen.py version: 0.0.1
-# Generation date: 2026-09-21T18:27:14
+# Generation date: 2026-09-21T18:31:35
 # Schema: aopwiki-emod
 #
 # id: http://example.org/aopwiki-emod
@@ -250,7 +250,7 @@ class UserId(extended_int):
 @dataclass(repr=False)
 class Aop(YAMLRoot):
     """
-    An AOP describes a sequence of events starting with initial interaction(s) between a stressor and a biomolecule
+    An AOP describes a sequence of events commencing with initial interaction(s) of a stressor with a biomolecule
     within an organism that causes a perturbation in its biology (i.e., molecular initiating event, MIE), which can
     progress through a dependent series of intermediate key events (KEs) and culminate in an adverse outcome (AO)
     considered relevant to risk assessment or regulatory decision-making. AOPs are composed of a causal sequence of

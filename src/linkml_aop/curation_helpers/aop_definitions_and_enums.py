@@ -178,7 +178,7 @@ oecd_status_enum_list = [
 # Keys are sql-based class names (pre-rename, pre-PascalCase).
 CLASS_DESCRIPTIONS = {
     "aops": (
-        "An AOP describes a sequence of events starting with initial interaction(s) between a stressor and a"
+        "An AOP describes a sequence of events commencing with initial interaction(s) of a stressor with a"
         " biomolecule within an organism that causes a perturbation in its biology (i.e., molecular initiating"
         " event, MIE), which can progress through a dependent series of intermediate key events (KEs) and culminate"
         " in an adverse outcome (AO) considered relevant to risk assessment or regulatory decision-making. AOPs are"
