@@ -45,7 +45,7 @@ dest := "project"
 pymodel := src / schema_name / "datamodel"
 # Generated artifacts are named after the schema file (e.g. aop_emod_linkml),
 # matching what gen-project produces; schema_name is the Python package name.
-schema_stem := file_stem(source_schema_path)
+schema_stem := if source_schema_path == "" { "" } else { file_stem(source_schema_path) }
 docdir := "docs"
 exampledir := "examples"
 
