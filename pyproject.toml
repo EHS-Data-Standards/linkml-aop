@@ -10,7 +10,7 @@ authors = [
 ]
 license = "BSD-3"
 readme = "README.md"
-include = ["README.md", "src/linkml_aop/schema", "project"]
+include = ["README.md", "src/linkml_aop/schema"]
 
 requires-python = ">=3.9,<4.0"
 
