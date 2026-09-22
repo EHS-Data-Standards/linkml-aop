@@ -211,10 +211,10 @@ CURATED_RANGES: dict[str, dict[str, str]] = {
     "aops": {
         "corresponding_author_id": "users",
         "oecd_status_id": "oecd_statuses",
-        "legacy": "integer",
         "assigned_license_id": "assigned_licenses",
         "handbook_id": "handbooks",
         # TINYINT(1) columns; schemauto reads them as string
+        "legacy": "boolean",
         "project_129": "boolean",
         "has_references": "boolean",
         "has_structured_methods": "boolean",

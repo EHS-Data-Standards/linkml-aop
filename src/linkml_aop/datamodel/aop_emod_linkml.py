@@ -1,5 +1,5 @@
 # Auto generated from aop_emod_linkml.yaml by pythongen.py version: 0.0.1
-# Generation date: 2026-09-21T22:19:53
+# Generation date: 2026-09-21T22:31:15
 # Schema: aopwiki-emod
 #
 # id: http://example.org/aopwiki-emod
@@ -285,7 +285,7 @@ class Aop(YAMLRoot):
     oecd_project: Optional[str] = None
     oecd_status_id: Optional[Union[dict, "OecdStatus"]] = None
     graphical_representation_image_uid: Optional[str] = None
-    legacy: Optional[int] = None
+    legacy: Optional[Union[bool, Bool]] = None
     overall_assessment_file_uid: Optional[str] = None
     changed_at: Optional[str] = None
     development_strategy: Optional[str] = None
@@ -363,8 +363,8 @@ class Aop(YAMLRoot):
         if self.graphical_representation_image_uid is not None and not isinstance(self.graphical_representation_image_uid, str):
             self.graphical_representation_image_uid = str(self.graphical_representation_image_uid)
 
-        if self.legacy is not None and not isinstance(self.legacy, int):
-            self.legacy = int(self.legacy)
+        if self.legacy is not None and not isinstance(self.legacy, Bool):
+            self.legacy = Bool(self.legacy)
 
         if self.overall_assessment_file_uid is not None and not isinstance(self.overall_assessment_file_uid, str):
             self.overall_assessment_file_uid = str(self.overall_assessment_file_uid)
@@ -2822,7 +2822,7 @@ slots.aop__graphical_representation_image_uid = Slot(uri=DEFAULT_.graphical_repr
                    model_uri=DEFAULT_.aop__graphical_representation_image_uid, domain=None, range=Optional[str])
 
 slots.aop__legacy = Slot(uri=DEFAULT_.legacy, name="aop__legacy", curie=DEFAULT_.curie('legacy'),
-                   model_uri=DEFAULT_.aop__legacy, domain=None, range=Optional[int])
+                   model_uri=DEFAULT_.aop__legacy, domain=None, range=Optional[Union[bool, Bool]])
 
 slots.aop__overall_assessment_file_uid = Slot(uri=DEFAULT_.overall_assessment_file_uid, name="aop__overall_assessment_file_uid", curie=DEFAULT_.curie('overall_assessment_file_uid'),
                    model_uri=DEFAULT_.aop__overall_assessment_file_uid, domain=None, range=Optional[str])
