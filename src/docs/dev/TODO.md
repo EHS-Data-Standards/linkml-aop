@@ -1,7 +1,9 @@
 # To do: schema update for new EMOD tables
 
-Branch: `update-schema-new-emod-tables` (no upstream set). Nothing committed yet.
-Full work record: `/Users/ginniehench/Developer/ehmech/docs/linkml_aop_schema_update_plan.md`.
+Branch: `update-schema-new-emod-tables`, under review as
+[PR #8](https://github.com/EHS-Data-Standards/linkml-aop/pull/8). Rebased onto the
+`join-classes` work (#5) on 2026-09-21. The full work record is kept in the EnviroHealthMech
+repository (`docs/linkml_aop_schema_update_plan.md`).
 
 ## Done
 
@@ -10,7 +12,9 @@ Full work record: `/Users/ginniehench/Developer/ehmech/docs/linkml_aop_schema_up
       `api` containers are left running in `aopwiki_emod_web_app`.
 - [x] **Step 2: generate the base schema.** `outputs/linkml_schemas/aop_wiki_emod_linkml.yml`
       in the web app (81 classes).
-- [x] **Step 3: copy into linkml-aop.** `inputs/schemauto_generated_emod_linkml_09-18-2026.yml`.
+- [x] **Step 3: copy into linkml-aop.** `inputs/schemauto_generated_emod_linkml_09-18-2026.yml`,
+      the untouched schemauto output. The script applies `WIKI_TABLES_TO_DROP` at curation
+      time and does not modify the input.
 - [x] **Step 4: update curation constants** in `curate_emod_linkml.py`:
   - [x] dropped `aop_batch_imports`, `batch_imports`, `can_event_merge_groups`,
         `can_event_merge_group_members`
@@ -52,11 +56,10 @@ Full work record: `/Users/ginniehench/Developer/ehmech/docs/linkml_aop_schema_up
       until after this work is committed.
 - [ ] **Step 6: regenerate and verify.**
   - [x] `just curate`
-        (rewrites the input file in place; the web-app copy is the clean original)
   - [x] `just test` (0 lint errors; example data validates)
   - [x] `just site`
-  - [ ] review the schema diff
-  - [ ] commit
+  - [x] review the schema diff
+  - [x] commit (PR #8)
 
 ## Noted, not scheduled
 

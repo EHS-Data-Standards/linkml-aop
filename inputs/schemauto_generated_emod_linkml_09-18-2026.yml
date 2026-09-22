@@ -2,6 +2,11 @@ name: test-schema
 id: http://example.org/test-schema
 default_prefix: http://example.org/test-schema/
 classes:
+  alembic_version:
+    attributes:
+      version_num:
+        identifier: true
+        range: string
   biological_actions:
     attributes:
       id:
@@ -161,6 +166,23 @@ classes:
         range: string
       description:
         range: string
+  entity_counts:
+    attributes:
+      id:
+        identifier: true
+        range: string
+      created_at:
+        range: string
+      updated_at:
+        range: string
+      date_string:
+        range: string
+      aops:
+        range: string
+      key_events:
+        range: string
+      kers:
+        range: string
   experiment_types:
     attributes:
       id:
@@ -229,6 +251,29 @@ classes:
         range: string
       updated_at:
         range: string
+  oecd_metrics:
+    attributes:
+      id:
+        identifier: true
+        range: string
+      created_at:
+        range: string
+      updated_at:
+        range: string
+      date_string:
+        range: string
+      wpha_wnt_endorsed:
+        range: string
+      esca_approved:
+        range: string
+      esca_under_review:
+        range: string
+      under_development:
+        range: string
+      not_specified:
+        range: string
+      archived:
+        range: string
   oecd_statuses:
     attributes:
       id:
@@ -264,6 +309,17 @@ classes:
       description:
         range: string
       url:
+        range: string
+  roles:
+    attributes:
+      id:
+        identifier: true
+        range: string
+      created_at:
+        range: string
+      updated_at:
+        range: string
+      role:
         range: string
   sex_terms:
     attributes:
@@ -347,6 +403,36 @@ classes:
         range: string
       license_id:
         range: licenses
+  assignments:
+    attributes:
+      id:
+        identifier: true
+        range: string
+      created_at:
+        range: string
+      updated_at:
+        range: string
+      user_id:
+        range: users
+      role_id:
+        range: roles
+  batch_imports:
+    attributes:
+      id:
+        identifier: true
+        range: string
+      batch_code:
+        range: string
+      contributor_id:
+        range: users
+      citation_id:
+        range: citations
+      created_at:
+        range: string
+      updated_at:
+        range: string
+      description:
+        range: string
   chemical_synonyms:
     attributes:
       id:
@@ -592,6 +678,31 @@ classes:
         range: string
       updated_at:
         range: string
+  can_event_merge_groups:
+    attributes:
+      id:
+        identifier: true
+        range: string
+      name:
+        range: string
+      recommended_harmonized_event_id:
+        range: events
+      rationale_for_group:
+        range: string
+      batch_import_id:
+        range: batch_imports
+      created_at:
+        range: string
+      updated_at:
+        range: string
+      group_type:
+        range: string
+      events_in_same_aop:
+        range: string
+      manual_rating:
+        range: string
+      rationale_for_harmonized_event:
+        range: string
   event_life_stages:
     attributes:
       id:
@@ -637,6 +748,23 @@ classes:
         range: sex_terms
       confidence_id:
         range: confidence_levels
+  event_stressors:
+    attributes:
+      id:
+        identifier: true
+        range: string
+      created_at:
+        range: string
+      updated_at:
+        range: string
+      event_id:
+        range: events
+      stressor_id:
+        range: stressors
+      evidence_text:
+        range: string
+      user_id:
+        range: users
   event_sub_events:
     attributes:
       id:
@@ -761,6 +889,19 @@ classes:
         range: aops
       assay_id:
         range: assays
+      batch_import_id:
+        range: batch_imports
+      created_at:
+        range: string
+      updated_at:
+        range: string
+  aop_batch_imports:
+    attributes:
+      id:
+        identifier: true
+        range: string
+      aop_id:
+        range: aops
       batch_import_id:
         range: batch_imports
       created_at:
@@ -994,6 +1135,19 @@ classes:
         range: assays
       taxon_term_id:
         range: taxon_terms
+      created_at:
+        range: string
+      updated_at:
+        range: string
+  can_event_merge_group_members:
+    attributes:
+      id:
+        identifier: true
+        range: string
+      merge_group_id:
+        range: can_event_merge_groups
+      event_id:
+        range: events
       created_at:
         range: string
       updated_at:
