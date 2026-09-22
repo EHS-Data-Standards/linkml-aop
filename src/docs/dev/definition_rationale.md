@@ -137,6 +137,29 @@ Stressor was written for EMOD. Checked against the
   `Assay.biological_action_id`, whose enum includes `increased` and `decreased`; the
   definition says why that attribute matters rather than restating its values.
 
+## HarmonizedEvent
+
+**Definition** (`CLASS_DESCRIPTIONS["harmonized_events"]`, adopted 2026-09-21):
+
+> A record that tracks the provenance of a harmonized Key Event back to the Key Event held
+> in the AOP-Wiki that it was derived from. Each record pairs one source Event
+> (source_event_id, with its label and identifier as found in the source) with the
+> harmonized Event it maps to (harmonized_event_id), and carries the mapping status and the
+> raw mapping value from the harmonization process. A harmonized Key Event is a
+> consolidation of one or more conceptually similar or redundant AOP-Wiki Key Events; these
+> records are what make that consolidation auditable.
+
+**Rationale:**
+
+- *Provenance is the point.* The class is a mapping table between a harmonized Event and
+  its source Event, not a kind of Event. The definition says so first, so it is not read
+  as a subclass of `Event`.
+- *The attributes are named* (`source_event_id`, `harmonized_event_id`, mapping status,
+  raw mapping value) because they are exactly the fields that carry the provenance.
+- *"Conceptually similar or redundant"* follows the EMOD 3.0 feature description, which
+  presents harmonized Events and candidate merger groups as the response to conceptually
+  similar and redundant Key Events in the seizure and lung-fibrosis use cases.
+
 ## TestGuideline
 
 **Definition** (`CLASS_DESCRIPTIONS["test_guidelines"]`, adopted 2026-09-18):
