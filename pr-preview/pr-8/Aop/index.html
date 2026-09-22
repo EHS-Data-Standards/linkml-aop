@@ -550,7 +550,7 @@
 </tr>
 <tr>
 <td><a href="../legacy/">legacy</a></td>
-<td>0..1 <br/> <a href="../Integer/">Integer</a></td>
+<td>0..1 <br/> <a href="../Boolean/">Boolean</a></td>
 <td></td>
 <td>direct</td>
 </tr>
@@ -592,37 +592,37 @@
 </tr>
 <tr>
 <td><a href="../completion_score/">completion_score</a></td>
-<td>0..1 <br/> <a href="../String/">String</a></td>
+<td>0..1 <br/> <a href="../Float/">Float</a></td>
 <td></td>
 <td>direct</td>
 </tr>
 <tr>
 <td><a href="../mean_ker_score/">mean_ker_score</a></td>
-<td>0..1 <br/> <a href="../String/">String</a></td>
+<td>0..1 <br/> <a href="../Float/">Float</a></td>
 <td></td>
 <td>direct</td>
 </tr>
 <tr>
 <td><a href="../mean_event_score/">mean_event_score</a></td>
-<td>0..1 <br/> <a href="../String/">String</a></td>
+<td>0..1 <br/> <a href="../Float/">Float</a></td>
 <td></td>
 <td>direct</td>
 </tr>
 <tr>
 <td><a href="../has_references/">has_references</a></td>
-<td>0..1 <br/> <a href="../String/">String</a></td>
+<td>0..1 <br/> <a href="../Boolean/">Boolean</a></td>
 <td></td>
 <td>direct</td>
 </tr>
 <tr>
 <td><a href="../project_129/">project_129</a></td>
-<td>0..1 <br/> <a href="../String/">String</a></td>
+<td>0..1 <br/> <a href="../Boolean/">Boolean</a></td>
 <td></td>
 <td>direct</td>
 </tr>
 <tr>
 <td><a href="../has_structured_methods/">has_structured_methods</a></td>
-<td>0..1 <br/> <a href="../String/">String</a></td>
+<td>0..1 <br/> <a href="../Boolean/">Boolean</a></td>
 <td></td>
 <td>direct</td>
 </tr>
@@ -939,7 +939,7 @@ attributes:
     rank: 1000
     domain_of:
     - Aop
-    range: integer
+    range: boolean
   overall_assessment_file_uid:
     name: overall_assessment_file_uid
     from_schema: http://example.org/aopwiki-emod
@@ -987,36 +987,42 @@ attributes:
     - Aop
     - Event
     - KeRelationship
+    range: float
   mean_ker_score:
     name: mean_ker_score
     from_schema: http://example.org/aopwiki-emod
     rank: 1000
     domain_of:
     - Aop
+    range: float
   mean_event_score:
     name: mean_event_score
     from_schema: http://example.org/aopwiki-emod
     rank: 1000
     domain_of:
     - Aop
+    range: float
   has_references:
     name: has_references
     from_schema: http://example.org/aopwiki-emod
     rank: 1000
     domain_of:
     - Aop
+    range: boolean
   project_129:
     name: project_129
     from_schema: http://example.org/aopwiki-emod
     rank: 1000
     domain_of:
     - Aop
+    range: boolean
   has_structured_methods:
     name: has_structured_methods
     from_schema: http://example.org/aopwiki-emod
     rank: 1000
     domain_of:
     - Aop
+    range: boolean
   assays:
     name: assays
     from_schema: http://example.org/aopwiki-emod
@@ -1029,8 +1035,6 @@ attributes:
     - TestGuideline
     range: Assay
     multivalued: true
-    inlined: true
-    inlined_as_list: true
   prototypical_stressors:
     name: prototypical_stressors
     from_schema: http://example.org/aopwiki-emod
@@ -1323,7 +1327,7 @@ attributes:
     owner: Aop
     domain_of:
     - Aop
-    range: integer
+    range: boolean
   overall_assessment_file_uid:
     name: overall_assessment_file_uid
     from_schema: http://example.org/aopwiki-emod
@@ -1389,7 +1393,7 @@ attributes:
     - Aop
     - Event
     - KeRelationship
-    range: string
+    range: float
   mean_ker_score:
     name: mean_ker_score
     from_schema: http://example.org/aopwiki-emod
@@ -1398,7 +1402,7 @@ attributes:
     owner: Aop
     domain_of:
     - Aop
-    range: string
+    range: float
   mean_event_score:
     name: mean_event_score
     from_schema: http://example.org/aopwiki-emod
@@ -1407,7 +1411,7 @@ attributes:
     owner: Aop
     domain_of:
     - Aop
-    range: string
+    range: float
   has_references:
     name: has_references
     from_schema: http://example.org/aopwiki-emod
@@ -1416,7 +1420,7 @@ attributes:
     owner: Aop
     domain_of:
     - Aop
-    range: string
+    range: boolean
   project_129:
     name: project_129
     from_schema: http://example.org/aopwiki-emod
@@ -1425,7 +1429,7 @@ attributes:
     owner: Aop
     domain_of:
     - Aop
-    range: string
+    range: boolean
   has_structured_methods:
     name: has_structured_methods
     from_schema: http://example.org/aopwiki-emod
@@ -1434,7 +1438,7 @@ attributes:
     owner: Aop
     domain_of:
     - Aop
-    range: string
+    range: boolean
   assays:
     name: assays
     from_schema: http://example.org/aopwiki-emod
@@ -1449,8 +1453,6 @@ attributes:
     - TestGuideline
     range: Assay
     multivalued: true
-    inlined: true
-    inlined_as_list: true
   prototypical_stressors:
     name: prototypical_stressors
     from_schema: http://example.org/aopwiki-emod

@@ -477,13 +477,13 @@
 </tr>
 <tr>
 <td><a href="../completion_score/">completion_score</a></td>
-<td>0..1 <br/> <a href="../String/">String</a></td>
+<td>0..1 <br/> <a href="../Float/">Float</a></td>
 <td></td>
 <td>direct</td>
 </tr>
 <tr>
 <td><a href="../has_tabulated_evidence/">has_tabulated_evidence</a></td>
-<td>0..1 <br/> <a href="../String/">String</a></td>
+<td>0..1 <br/> <a href="../Boolean/">Boolean</a></td>
 <td></td>
 <td>direct</td>
 </tr>
@@ -745,12 +745,14 @@ attributes:
     - Aop
     - Event
     - KeRelationship
+    range: float
   has_tabulated_evidence:
     name: has_tabulated_evidence
     from_schema: http://example.org/aopwiki-emod
     rank: 1000
     domain_of:
     - KeRelationship
+    range: boolean
   aops:
     name: aops
     from_schema: http://example.org/aopwiki-emod
@@ -1006,7 +1008,7 @@ attributes:
     - Aop
     - Event
     - KeRelationship
-    range: string
+    range: float
   has_tabulated_evidence:
     name: has_tabulated_evidence
     from_schema: http://example.org/aopwiki-emod
@@ -1015,7 +1017,7 @@ attributes:
     owner: KeRelationship
     domain_of:
     - KeRelationship
-    range: string
+    range: boolean
   aops:
     name: aops
     from_schema: http://example.org/aopwiki-emod

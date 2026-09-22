@@ -237,6 +237,7 @@
 <div class="md-content" data-md-component="content">
 <article class="md-content__inner md-typeset">
 <h1 id="class-harmonizedevent">Class: HarmonizedEvent</h1>
+<p><em>A record that tracks the provenance of a harmonized Key Event back to the Key Event held in the AOP-Wiki that it was derived from. Each record pairs one source Event (source_event_id, with its label and identifier as found in the source) with the harmonized Event it maps to (harmonized_event_id), and carries the mapping status and the raw mapping value from the harmonization process. A harmonized Key Event is a consolidation of one or more conceptually similar or redundant AOP-Wiki Key Events; these records are what make that consolidation auditable.</em></p>
 <p>URI: <a href="http://example.org/aopwiki-emod/HarmonizedEvent">http://example.org/aopwiki-emod/HarmonizedEvent</a></p>
 <div class="mermaid"> classDiagram
     class HarmonizedEvent
@@ -392,6 +393,13 @@
 <h3 id="direct">Direct</h3>
 <details>
 <pre><code class="language-yaml">name: HarmonizedEvent
+description: A record that tracks the provenance of a harmonized Key Event back to
+  the Key Event held in the AOP-Wiki that it was derived from. Each record pairs one
+  source Event (source_event_id, with its label and identifier as found in the source)
+  with the harmonized Event it maps to (harmonized_event_id), and carries the mapping
+  status and the raw mapping value from the harmonization process. A harmonized Key
+  Event is a consolidation of one or more conceptually similar or redundant AOP-Wiki
+  Key Events; these records are what make that consolidation auditable.
 from_schema: http://example.org/aopwiki-emod
 slots:
 - created_at
@@ -505,6 +513,13 @@ attributes:
 <h3 id="induced">Induced</h3>
 <details>
 <pre><code class="language-yaml">name: HarmonizedEvent
+description: A record that tracks the provenance of a harmonized Key Event back to
+  the Key Event held in the AOP-Wiki that it was derived from. Each record pairs one
+  source Event (source_event_id, with its label and identifier as found in the source)
+  with the harmonized Event it maps to (harmonized_event_id), and carries the mapping
+  status and the raw mapping value from the harmonization process. A harmonized Key
+  Event is a consolidation of one or more conceptually similar or redundant AOP-Wiki
+  Key Events; these records are what make that consolidation auditable.
 from_schema: http://example.org/aopwiki-emod
 attributes:
   id:

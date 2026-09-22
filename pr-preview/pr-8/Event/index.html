@@ -529,13 +529,13 @@
 </tr>
 <tr>
 <td><a href="../completion_score/">completion_score</a></td>
-<td>0..1 <br/> <a href="../String/">String</a></td>
+<td>0..1 <br/> <a href="../Float/">Float</a></td>
 <td>Calculated metric indicating how complete the Key Event documentation is</td>
 <td>direct</td>
 </tr>
 <tr>
 <td><a href="../integration_score/">integration_score</a></td>
-<td>0..1 <br/> <a href="../String/">String</a></td>
+<td>0..1 <br/> <a href="../Float/">Float</a></td>
 <td>Calculated metric for integration and priority assessment of the Key Event</td>
 <td>direct</td>
 </tr>
@@ -547,19 +547,19 @@
 </tr>
 <tr>
 <td><a href="../aop_open_for_adoption_count/">aop_open_for_adoption_count</a></td>
-<td>0..1 <br/> <a href="../String/">String</a></td>
+<td>0..1 <br/> <a href="../Integer/">Integer</a></td>
 <td></td>
 <td>direct</td>
 </tr>
 <tr>
 <td><a href="../aop_oecd_program_count/">aop_oecd_program_count</a></td>
-<td>0..1 <br/> <a href="../String/">String</a></td>
+<td>0..1 <br/> <a href="../Integer/">Integer</a></td>
 <td></td>
 <td>direct</td>
 </tr>
 <tr>
 <td><a href="../aop_oecd_endorsed_count/">aop_oecd_endorsed_count</a></td>
-<td>0..1 <br/> <a href="../String/">String</a></td>
+<td>0..1 <br/> <a href="../Integer/">Integer</a></td>
 <td></td>
 <td>direct</td>
 </tr>
@@ -930,6 +930,7 @@ attributes:
     - Aop
     - Event
     - KeRelationship
+    range: float
   integration_score:
     name: integration_score
     description: Calculated metric for integration and priority assessment of the
@@ -938,6 +939,7 @@ attributes:
     rank: 1000
     domain_of:
     - Event
+    range: float
   has_method_text:
     name: has_method_text
     description: Indicates whether method text has been provided for this Key Event.
@@ -951,18 +953,21 @@ attributes:
     rank: 1000
     domain_of:
     - Event
+    range: integer
   aop_oecd_program_count:
     name: aop_oecd_program_count
     from_schema: http://example.org/aopwiki-emod
     rank: 1000
     domain_of:
     - Event
+    range: integer
   aop_oecd_endorsed_count:
     name: aop_oecd_endorsed_count
     from_schema: http://example.org/aopwiki-emod
     rank: 1000
     domain_of:
     - Event
+    range: integer
   event_components:
     name: event_components
     from_schema: http://example.org/aopwiki-emod
@@ -984,8 +989,6 @@ attributes:
     - TestGuideline
     range: Assay
     multivalued: true
-    inlined: true
-    inlined_as_list: true
   observations:
     name: observations
     from_schema: http://example.org/aopwiki-emod
@@ -995,8 +998,6 @@ attributes:
     - Citation
     range: Observation
     multivalued: true
-    inlined: true
-    inlined_as_list: true
   bio_target_families:
     name: bio_target_families
     from_schema: http://example.org/aopwiki-emod
@@ -1007,8 +1008,6 @@ attributes:
     - Citation
     range: BioTargetFamily
     multivalued: true
-    inlined: true
-    inlined_as_list: true
   test_guidelines:
     name: test_guidelines
     from_schema: http://example.org/aopwiki-emod
@@ -1018,8 +1017,6 @@ attributes:
     - Assay
     range: TestGuideline
     multivalued: true
-    inlined: true
-    inlined_as_list: true
   aops:
     name: aops
     from_schema: http://example.org/aopwiki-emod
@@ -1303,7 +1300,7 @@ attributes:
     - Aop
     - Event
     - KeRelationship
-    range: string
+    range: float
   integration_score:
     name: integration_score
     description: Calculated metric for integration and priority assessment of the
@@ -1314,7 +1311,7 @@ attributes:
     owner: Event
     domain_of:
     - Event
-    range: string
+    range: float
   has_method_text:
     name: has_method_text
     description: Indicates whether method text has been provided for this Key Event.
@@ -1333,7 +1330,7 @@ attributes:
     owner: Event
     domain_of:
     - Event
-    range: string
+    range: integer
   aop_oecd_program_count:
     name: aop_oecd_program_count
     from_schema: http://example.org/aopwiki-emod
@@ -1342,7 +1339,7 @@ attributes:
     owner: Event
     domain_of:
     - Event
-    range: string
+    range: integer
   aop_oecd_endorsed_count:
     name: aop_oecd_endorsed_count
     from_schema: http://example.org/aopwiki-emod
@@ -1351,7 +1348,7 @@ attributes:
     owner: Event
     domain_of:
     - Event
-    range: string
+    range: integer
   event_components:
     name: event_components
     from_schema: http://example.org/aopwiki-emod
@@ -1377,8 +1374,6 @@ attributes:
     - TestGuideline
     range: Assay
     multivalued: true
-    inlined: true
-    inlined_as_list: true
   observations:
     name: observations
     from_schema: http://example.org/aopwiki-emod
@@ -1390,8 +1385,6 @@ attributes:
     - Citation
     range: Observation
     multivalued: true
-    inlined: true
-    inlined_as_list: true
   bio_target_families:
     name: bio_target_families
     from_schema: http://example.org/aopwiki-emod
@@ -1404,8 +1397,6 @@ attributes:
     - Citation
     range: BioTargetFamily
     multivalued: true
-    inlined: true
-    inlined_as_list: true
   test_guidelines:
     name: test_guidelines
     from_schema: http://example.org/aopwiki-emod
@@ -1417,8 +1408,6 @@ attributes:
     - Assay
     range: TestGuideline
     multivalued: true
-    inlined: true
-    inlined_as_list: true
   aops:
     name: aops
     from_schema: http://example.org/aopwiki-emod
