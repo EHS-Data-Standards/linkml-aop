@@ -10,7 +10,7 @@ A LinkML schema for Adverse Outcome Pathways, with EMOD - Evidence Model - expan
 
 * [examples/](examples/) - example data
 * [inputs/](inputs/) - raw input files (e.g. schemauto-generated YAML)
-* [project/](project/) - project files (do not edit these)
+* `project/` - generated schema artifacts, written by `just site` (gitignored; do not edit)
 * [src/](src/) - source files (edit these)
   * [linkml_aop](src/linkml_aop)
     * [schema](src/linkml_aop/schema) -- LinkML schemas

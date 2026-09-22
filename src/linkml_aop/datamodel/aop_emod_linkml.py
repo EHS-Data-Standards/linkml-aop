@@ -1,5 +1,5 @@
 # Auto generated from aop_emod_linkml.yaml by pythongen.py version: 0.0.1
-# Generation date: 2026-09-21T22:59:40
+# Generation date: 2026-09-21T23:11:42
 # Schema: aopwiki-emod
 #
 # id: http://example.org/aopwiki-emod
@@ -1972,6 +1972,13 @@ class HarmonizedAop(YAMLRoot):
 
 @dataclass(repr=False)
 class HarmonizedEvent(YAMLRoot):
+    """
+    A record that tracks the provenance of a harmonized Key Event back to the Key Event held in the AOP-Wiki that it
+    was derived from. Each record pairs one source Event (source_event_id, with its label and identifier as found in
+    the source) with the harmonized Event it maps to (harmonized_event_id), and carries the mapping status and the raw
+    mapping value from the harmonization process. A harmonized Key Event is a consolidation of one or more
+    conceptually similar or redundant AOP-Wiki Key Events; these records are what make that consolidation auditable.
+    """
     _inherited_slots: ClassVar[list[str]] = []
 
     class_class_uri: ClassVar[URIRef] = URIRef("http://example.org/aopwiki-emod/HarmonizedEvent")

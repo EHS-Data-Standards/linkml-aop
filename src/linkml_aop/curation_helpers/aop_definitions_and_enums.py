@@ -245,6 +245,16 @@ CLASS_DESCRIPTIONS = {
         "direction, such as an agonist or an antagonist effect on a specific molecular "
         "target."
     ),
+    "harmonized_events": (
+        "A record that tracks the provenance of a harmonized Key Event back to the Key "
+        "Event held in the AOP-Wiki that it was derived from. Each record pairs one source "
+        "Event (source_event_id, with its label and identifier as found in the source) "
+        "with the harmonized Event it maps to (harmonized_event_id), and carries the "
+        "mapping status and the raw mapping value from the harmonization process. A "
+        "harmonized Key Event is a consolidation of one or more conceptually similar or "
+        "redundant AOP-Wiki Key Events; these records are what make that consolidation "
+        "auditable."
+    ),
     "test_guidelines": (
         "A standardized test method published by a regulatory or intergovernmental body, "
         "such as an OECD Test Guideline or an EPA OCSPP test guideline, that specifies how "
