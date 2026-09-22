@@ -246,11 +246,21 @@
 <div class="md-content" data-md-component="content">
 <article class="md-content__inner md-typeset">
 <h1 id="class-event">Class: Event</h1>
-<p><em>A change in biological or physiological state that is both measurable and essential to the progression of a defined biological perturbation leading to a specific adverse outcome.</em></p>
+<p><em>An Event is a measurable biological change at a defined level of biological organization, described in the abstract so that it can be measured and supported by evidence. An Event may be described in the AOP-Wiki before it is used anywhere, and becomes a Key Event when it is incorporated into an Adverse Outcome Pathway. The AOP-Wiki defines a Key Event as "a change in biological or physiological state that is both measurable and essential to the progression of a defined biological perturbation leading to a specific adverse outcome." Within a pathway, the Key Events at the starting and ending positions are Molecular Initiating Events and Adverse Outcomes, and those between them are intermediate Key Events. These positions are recorded per pathway and rest on the mechanistic evidence available to the authors of that pathway, so one Event may serve as a Molecular Initiating Event in one Adverse Outcome Pathway and as an intermediate Key Event in another.</em></p>
+<p>__</p>
+<p><em>Whether an Event's change can be measured experimentally depends on factors such as the level of biological organization and the species. Molecular and cellular changes can be tested and measured in model organisms in a laboratory context. Changes up to the population level can be observed in model organisms in a lab and in ecological indicator species. Changes at the individual or population level in humans are observed through epidemiological and clinical studies rather than tested.</em></p>
+<p>__</p>
+<p><em>An Event is a type of change rather than a particular occurrence of one, and is therefore not an exposure event in an open system: the exposure of a population to a pollutant in air or water is not an Event. Such real-world exposures can rarely be observed at the molecular level, so the Molecular Initiating Event that follows one is not usually observable at the time of the exposure event. Describing Events in the abstract keeps supporting evidence separate from what is inferred.</em></p>
 <p>URI: <a href="http://example.org/aopwiki-emod/Event">http://example.org/aopwiki-emod/Event</a></p>
 <div class="mermaid"> classDiagram
     class Event
     click Event href "../Event/"
+      Event : aop_oecd_endorsed_count
+
+      Event : aop_oecd_program_count
+
+      Event : aop_open_for_adoption_count
+
       Event : aops
 
 
@@ -279,8 +289,8 @@
 
 
 
-        Event --&gt; "*" EventToBioTargetFamily : bio_target_families
-        click EventToBioTargetFamily href "../EventToBioTargetFamily/"
+        Event --&gt; "*" BioTargetFamily : bio_target_families
+        click BioTargetFamily href "../BioTargetFamily/"
 
 
 
@@ -398,6 +408,17 @@
 
 
 
+      Event : test_guidelines
+
+
+
+
+
+        Event --&gt; "*" TestGuideline : test_guidelines
+        click TestGuideline href "../TestGuideline/"
+
+
+
       Event : title
 
       Event : updated_at
@@ -508,13 +529,13 @@
 </tr>
 <tr>
 <td><a href="../completion_score/">completion_score</a></td>
-<td>0..1 <br/> <a href="../String/">String</a></td>
+<td>0..1 <br/> <a href="../Float/">Float</a></td>
 <td>Calculated metric indicating how complete the Key Event documentation is</td>
 <td>direct</td>
 </tr>
 <tr>
 <td><a href="../integration_score/">integration_score</a></td>
-<td>0..1 <br/> <a href="../String/">String</a></td>
+<td>0..1 <br/> <a href="../Float/">Float</a></td>
 <td>Calculated metric for integration and priority assessment of the Key Event</td>
 <td>direct</td>
 </tr>
@@ -522,6 +543,24 @@
 <td><a href="../has_method_text/">has_method_text</a></td>
 <td>0..1 <br/> <a href="../String/">String</a></td>
 <td>Indicates whether method text has been provided for this Key Event</td>
+<td>direct</td>
+</tr>
+<tr>
+<td><a href="../aop_open_for_adoption_count/">aop_open_for_adoption_count</a></td>
+<td>0..1 <br/> <a href="../Integer/">Integer</a></td>
+<td></td>
+<td>direct</td>
+</tr>
+<tr>
+<td><a href="../aop_oecd_program_count/">aop_oecd_program_count</a></td>
+<td>0..1 <br/> <a href="../Integer/">Integer</a></td>
+<td></td>
+<td>direct</td>
+</tr>
+<tr>
+<td><a href="../aop_oecd_endorsed_count/">aop_oecd_endorsed_count</a></td>
+<td>0..1 <br/> <a href="../Integer/">Integer</a></td>
+<td></td>
 <td>direct</td>
 </tr>
 <tr>
@@ -539,6 +578,18 @@
 <tr>
 <td><a href="../observations/">observations</a></td>
 <td>* <br/> <a href="../Observation/">Observation</a></td>
+<td></td>
+<td>direct</td>
+</tr>
+<tr>
+<td><a href="../bio_target_families/">bio_target_families</a></td>
+<td>* <br/> <a href="../BioTargetFamily/">BioTargetFamily</a></td>
+<td></td>
+<td>direct</td>
+</tr>
+<tr>
+<td><a href="../test_guidelines/">test_guidelines</a></td>
+<td>* <br/> <a href="../TestGuideline/">TestGuideline</a></td>
 <td></td>
 <td>direct</td>
 </tr>
@@ -563,12 +614,6 @@
 <tr>
 <td><a href="../taxons/">taxons</a></td>
 <td>* <br/> <a href="../EventToTaxon/">EventToTaxon</a></td>
-<td></td>
-<td>direct</td>
-</tr>
-<tr>
-<td><a href="../bio_target_families/">bio_target_families</a></td>
-<td>* <br/> <a href="../EventToBioTargetFamily/">EventToBioTargetFamily</a></td>
 <td></td>
 <td>direct</td>
 </tr>
@@ -616,6 +661,12 @@
 <td><a href="./">Event</a></td>
 </tr>
 <tr>
+<td><a href="../BioTargetFamily/">BioTargetFamily</a></td>
+<td><a href="../events/">events</a></td>
+<td>range</td>
+<td><a href="./">Event</a></td>
+</tr>
+<tr>
 <td><a href="../EventToLifeStage/">EventToLifeStage</a></td>
 <td><a href="../event_id/">event_id</a></td>
 <td>range</td>
@@ -623,12 +674,6 @@
 </tr>
 <tr>
 <td><a href="../EventToSex/">EventToSex</a></td>
-<td><a href="../event_id/">event_id</a></td>
-<td>range</td>
-<td><a href="./">Event</a></td>
-</tr>
-<tr>
-<td><a href="../EventToBioTargetFamily/">EventToBioTargetFamily</a></td>
 <td><a href="../event_id/">event_id</a></td>
 <td>range</td>
 <td><a href="./">Event</a></td>
@@ -648,6 +693,12 @@
 <tr>
 <td><a href="../HarmonizedEvent/">HarmonizedEvent</a></td>
 <td><a href="../harmonized_event_id/">harmonized_event_id</a></td>
+<td>range</td>
+<td><a href="./">Event</a></td>
+</tr>
+<tr>
+<td><a href="../TestGuideline/">TestGuideline</a></td>
+<td><a href="../events/">events</a></td>
 <td>range</td>
 <td><a href="./">Event</a></td>
 </tr>
@@ -682,9 +733,34 @@
 <h3 id="direct">Direct</h3>
 <details>
 <pre><code class="language-yaml">name: Event
-description: A change in biological or physiological state that is both measurable
-  and essential to the progression of a defined biological perturbation leading to
-  a specific adverse outcome.
+description: 'An Event is a measurable biological change at a defined level of biological
+  organization, described in the abstract so that it can be measured and supported
+  by evidence. An Event may be described in the AOP-Wiki before it is used anywhere,
+  and becomes a Key Event when it is incorporated into an Adverse Outcome Pathway.
+  The AOP-Wiki defines a Key Event as "a change in biological or physiological state
+  that is both measurable and essential to the progression of a defined biological
+  perturbation leading to a specific adverse outcome." Within a pathway, the Key Events
+  at the starting and ending positions are Molecular Initiating Events and Adverse
+  Outcomes, and those between them are intermediate Key Events. These positions are
+  recorded per pathway and rest on the mechanistic evidence available to the authors
+  of that pathway, so one Event may serve as a Molecular Initiating Event in one Adverse
+  Outcome Pathway and as an intermediate Key Event in another.
+
+
+  Whether an Event''s change can be measured experimentally depends on factors such
+  as the level of biological organization and the species. Molecular and cellular
+  changes can be tested and measured in model organisms in a laboratory context. Changes
+  up to the population level can be observed in model organisms in a lab and in ecological
+  indicator species. Changes at the individual or population level in humans are observed
+  through epidemiological and clinical studies rather than tested.
+
+
+  An Event is a type of change rather than a particular occurrence of one, and is
+  therefore not an exposure event in an open system: the exposure of a population
+  to a pollutant in air or water is not an Event. Such real-world exposures can rarely
+  be observed at the molecular level, so the Molecular Initiating Event that follows
+  one is not usually observable at the time of the exposure event. Describing Events
+  in the abstract keeps supporting evidence separate from what is inferred.'
 from_schema: http://example.org/aopwiki-emod
 slots:
 - created_at
@@ -707,14 +783,12 @@ attributes:
     - BiologicalObject
     - BiologicalProcess
     - LevelOfBiologicalOrganization
-    - BatchImport
     - AopToEvent
     - AopToLifeStage
     - AopToKeRelationship
     - AopToSex
     - AopToPrototypicalStressor
     - AopToTaxon
-    - AssayToBioTargetFamily
     - AssignedLicense
     - BioTargetFamily
     - CellTerm
@@ -722,15 +796,14 @@ attributes:
     - Directness
     - EventToLifeStage
     - EventToSex
-    - EventToBioTargetFamily
     - EventToTaxon
+    - ExperimentSetup
     - ExperimentType
     - Handbook
     - HarmonizedAop
     - HarmonizedEvent
     - License
     - LifeStageTerm
-    - ObservationToCitation
     - OecdStatus
     - OrganTerm
     - KeRelationshipToLifeStage
@@ -739,6 +812,7 @@ attributes:
     - SexTerm
     - EventComponent
     - TaxonTerm
+    - TestGuideline
     - User
     range: integer
     required: true
@@ -856,6 +930,7 @@ attributes:
     - Aop
     - Event
     - KeRelationship
+    range: float
   integration_score:
     name: integration_score
     description: Calculated metric for integration and priority assessment of the
@@ -864,6 +939,7 @@ attributes:
     rank: 1000
     domain_of:
     - Event
+    range: float
   has_method_text:
     name: has_method_text
     description: Indicates whether method text has been provided for this Key Event.
@@ -871,6 +947,27 @@ attributes:
     rank: 1000
     domain_of:
     - Event
+  aop_open_for_adoption_count:
+    name: aop_open_for_adoption_count
+    from_schema: http://example.org/aopwiki-emod
+    rank: 1000
+    domain_of:
+    - Event
+    range: integer
+  aop_oecd_program_count:
+    name: aop_oecd_program_count
+    from_schema: http://example.org/aopwiki-emod
+    rank: 1000
+    domain_of:
+    - Event
+    range: integer
+  aop_oecd_endorsed_count:
+    name: aop_oecd_endorsed_count
+    from_schema: http://example.org/aopwiki-emod
+    rank: 1000
+    domain_of:
+    - Event
+    range: integer
   event_components:
     name: event_components
     from_schema: http://example.org/aopwiki-emod
@@ -884,24 +981,42 @@ attributes:
   assays:
     name: assays
     from_schema: http://example.org/aopwiki-emod
-    rank: 1000
     domain_of:
+    - Aop
     - Event
+    - Citation
     - BioTargetFamily
+    - TestGuideline
     range: Assay
     multivalued: true
-    inlined: true
-    inlined_as_list: true
   observations:
     name: observations
     from_schema: http://example.org/aopwiki-emod
     rank: 1000
     domain_of:
     - Event
+    - Citation
     range: Observation
     multivalued: true
-    inlined: true
-    inlined_as_list: true
+  bio_target_families:
+    name: bio_target_families
+    from_schema: http://example.org/aopwiki-emod
+    rank: 1000
+    domain_of:
+    - Event
+    - Assay
+    - Citation
+    range: BioTargetFamily
+    multivalued: true
+  test_guidelines:
+    name: test_guidelines
+    from_schema: http://example.org/aopwiki-emod
+    rank: 1000
+    domain_of:
+    - Event
+    - Assay
+    range: TestGuideline
+    multivalued: true
   aops:
     name: aops
     from_schema: http://example.org/aopwiki-emod
@@ -909,6 +1024,7 @@ attributes:
     domain_of:
     - Event
     - KeRelationship
+    - Assay
     - Stressor
     range: AopToEvent
     multivalued: true
@@ -947,26 +1063,40 @@ attributes:
     multivalued: true
     inlined: true
     inlined_as_list: true
-  bio_target_families:
-    name: bio_target_families
-    from_schema: http://example.org/aopwiki-emod
-    rank: 1000
-    domain_of:
-    - Event
-    - Assay
-    range: EventToBioTargetFamily
-    multivalued: true
-    inlined: true
-    inlined_as_list: true
 
 </code></pre>
 </details>
 <h3 id="induced">Induced</h3>
 <details>
 <pre><code class="language-yaml">name: Event
-description: A change in biological or physiological state that is both measurable
-  and essential to the progression of a defined biological perturbation leading to
-  a specific adverse outcome.
+description: 'An Event is a measurable biological change at a defined level of biological
+  organization, described in the abstract so that it can be measured and supported
+  by evidence. An Event may be described in the AOP-Wiki before it is used anywhere,
+  and becomes a Key Event when it is incorporated into an Adverse Outcome Pathway.
+  The AOP-Wiki defines a Key Event as "a change in biological or physiological state
+  that is both measurable and essential to the progression of a defined biological
+  perturbation leading to a specific adverse outcome." Within a pathway, the Key Events
+  at the starting and ending positions are Molecular Initiating Events and Adverse
+  Outcomes, and those between them are intermediate Key Events. These positions are
+  recorded per pathway and rest on the mechanistic evidence available to the authors
+  of that pathway, so one Event may serve as a Molecular Initiating Event in one Adverse
+  Outcome Pathway and as an intermediate Key Event in another.
+
+
+  Whether an Event''s change can be measured experimentally depends on factors such
+  as the level of biological organization and the species. Molecular and cellular
+  changes can be tested and measured in model organisms in a laboratory context. Changes
+  up to the population level can be observed in model organisms in a lab and in ecological
+  indicator species. Changes at the individual or population level in humans are observed
+  through epidemiological and clinical studies rather than tested.
+
+
+  An Event is a type of change rather than a particular occurrence of one, and is
+  therefore not an exposure event in an open system: the exposure of a population
+  to a pollutant in air or water is not an Event. Such real-world exposures can rarely
+  be observed at the molecular level, so the Molecular Initiating Event that follows
+  one is not usually observable at the time of the exposure event. Describing Events
+  in the abstract keeps supporting evidence separate from what is inferred.'
 from_schema: http://example.org/aopwiki-emod
 attributes:
   id:
@@ -988,14 +1118,12 @@ attributes:
     - BiologicalObject
     - BiologicalProcess
     - LevelOfBiologicalOrganization
-    - BatchImport
     - AopToEvent
     - AopToLifeStage
     - AopToKeRelationship
     - AopToSex
     - AopToPrototypicalStressor
     - AopToTaxon
-    - AssayToBioTargetFamily
     - AssignedLicense
     - BioTargetFamily
     - CellTerm
@@ -1003,15 +1131,14 @@ attributes:
     - Directness
     - EventToLifeStage
     - EventToSex
-    - EventToBioTargetFamily
     - EventToTaxon
+    - ExperimentSetup
     - ExperimentType
     - Handbook
     - HarmonizedAop
     - HarmonizedEvent
     - License
     - LifeStageTerm
-    - ObservationToCitation
     - OecdStatus
     - OrganTerm
     - KeRelationshipToLifeStage
@@ -1020,6 +1147,7 @@ attributes:
     - SexTerm
     - EventComponent
     - TaxonTerm
+    - TestGuideline
     - User
     range: integer
     required: true
@@ -1172,7 +1300,7 @@ attributes:
     - Aop
     - Event
     - KeRelationship
-    range: string
+    range: float
   integration_score:
     name: integration_score
     description: Calculated metric for integration and priority assessment of the
@@ -1183,7 +1311,7 @@ attributes:
     owner: Event
     domain_of:
     - Event
-    range: string
+    range: float
   has_method_text:
     name: has_method_text
     description: Indicates whether method text has been provided for this Key Event.
@@ -1194,6 +1322,33 @@ attributes:
     domain_of:
     - Event
     range: string
+  aop_open_for_adoption_count:
+    name: aop_open_for_adoption_count
+    from_schema: http://example.org/aopwiki-emod
+    rank: 1000
+    alias: aop_open_for_adoption_count
+    owner: Event
+    domain_of:
+    - Event
+    range: integer
+  aop_oecd_program_count:
+    name: aop_oecd_program_count
+    from_schema: http://example.org/aopwiki-emod
+    rank: 1000
+    alias: aop_oecd_program_count
+    owner: Event
+    domain_of:
+    - Event
+    range: integer
+  aop_oecd_endorsed_count:
+    name: aop_oecd_endorsed_count
+    from_schema: http://example.org/aopwiki-emod
+    rank: 1000
+    alias: aop_oecd_endorsed_count
+    owner: Event
+    domain_of:
+    - Event
+    range: integer
   event_components:
     name: event_components
     from_schema: http://example.org/aopwiki-emod
@@ -1209,16 +1364,16 @@ attributes:
   assays:
     name: assays
     from_schema: http://example.org/aopwiki-emod
-    rank: 1000
     alias: assays
     owner: Event
     domain_of:
+    - Aop
     - Event
+    - Citation
     - BioTargetFamily
+    - TestGuideline
     range: Assay
     multivalued: true
-    inlined: true
-    inlined_as_list: true
   observations:
     name: observations
     from_schema: http://example.org/aopwiki-emod
@@ -1227,10 +1382,32 @@ attributes:
     owner: Event
     domain_of:
     - Event
+    - Citation
     range: Observation
     multivalued: true
-    inlined: true
-    inlined_as_list: true
+  bio_target_families:
+    name: bio_target_families
+    from_schema: http://example.org/aopwiki-emod
+    rank: 1000
+    alias: bio_target_families
+    owner: Event
+    domain_of:
+    - Event
+    - Assay
+    - Citation
+    range: BioTargetFamily
+    multivalued: true
+  test_guidelines:
+    name: test_guidelines
+    from_schema: http://example.org/aopwiki-emod
+    rank: 1000
+    alias: test_guidelines
+    owner: Event
+    domain_of:
+    - Event
+    - Assay
+    range: TestGuideline
+    multivalued: true
   aops:
     name: aops
     from_schema: http://example.org/aopwiki-emod
@@ -1240,6 +1417,7 @@ attributes:
     domain_of:
     - Event
     - KeRelationship
+    - Assay
     - Stressor
     range: AopToEvent
     multivalued: true
@@ -1284,19 +1462,6 @@ attributes:
     multivalued: true
     inlined: true
     inlined_as_list: true
-  bio_target_families:
-    name: bio_target_families
-    from_schema: http://example.org/aopwiki-emod
-    rank: 1000
-    alias: bio_target_families
-    owner: Event
-    domain_of:
-    - Event
-    - Assay
-    range: EventToBioTargetFamily
-    multivalued: true
-    inlined: true
-    inlined_as_list: true
   created_at:
     name: created_at
     description: Timestamp of when the record was created
@@ -1317,14 +1482,12 @@ attributes:
     - BiologicalObject
     - BiologicalProcess
     - LevelOfBiologicalOrganization
-    - BatchImport
     - AopToEvent
     - AopToLifeStage
     - AopToKeRelationship
     - AopToSex
     - AopToPrototypicalStressor
     - AopToTaxon
-    - AssayToBioTargetFamily
     - AssignedLicense
     - BioTargetFamily
     - CellTerm
@@ -1332,15 +1495,14 @@ attributes:
     - Directness
     - EventToLifeStage
     - EventToSex
-    - EventToBioTargetFamily
     - EventToTaxon
+    - ExperimentSetup
     - ExperimentType
     - Handbook
     - HarmonizedAop
     - HarmonizedEvent
     - License
     - LifeStageTerm
-    - ObservationToCitation
     - OecdStatus
     - OrganTerm
     - KeRelationshipToLifeStage
@@ -1349,6 +1511,7 @@ attributes:
     - SexTerm
     - EventComponent
     - TaxonTerm
+    - TestGuideline
     range: datetime
   updated_at:
     name: updated_at
@@ -1370,14 +1533,12 @@ attributes:
     - BiologicalObject
     - BiologicalProcess
     - LevelOfBiologicalOrganization
-    - BatchImport
     - AopToEvent
     - AopToLifeStage
     - AopToKeRelationship
     - AopToSex
     - AopToPrototypicalStressor
     - AopToTaxon
-    - AssayToBioTargetFamily
     - AssignedLicense
     - BioTargetFamily
     - CellTerm
@@ -1385,15 +1546,14 @@ attributes:
     - Directness
     - EventToLifeStage
     - EventToSex
-    - EventToBioTargetFamily
     - EventToTaxon
+    - ExperimentSetup
     - ExperimentType
     - Handbook
     - HarmonizedAop
     - HarmonizedEvent
     - License
     - LifeStageTerm
-    - ObservationToCitation
     - OecdStatus
     - OrganTerm
     - KeRelationshipToLifeStage
@@ -1402,6 +1562,7 @@ attributes:
     - SexTerm
     - EventComponent
     - TaxonTerm
+    - TestGuideline
     range: datetime
 
 </code></pre>

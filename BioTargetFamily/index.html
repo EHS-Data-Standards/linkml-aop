@@ -256,23 +256,34 @@
 
 
 
-        BioTargetFamily --&gt; "*" AssayToBioTargetFamily : assays
-        click AssayToBioTargetFamily href "../AssayToBioTargetFamily/"
+        BioTargetFamily --&gt; "*" Assay : assays
+        click Assay href "../Assay/"
 
 
 
-      BioTargetFamily : batch_import_id
+      BioTargetFamily : citations
 
 
 
 
 
-        BioTargetFamily --&gt; "0..1" BatchImport : batch_import_id
-        click BatchImport href "../BatchImport/"
+        BioTargetFamily --&gt; "*" Citation : citations
+        click Citation href "../Citation/"
 
 
 
       BioTargetFamily : created_at
+
+      BioTargetFamily : events
+
+
+
+
+
+        BioTargetFamily --&gt; "*" Event : events
+        click Event href "../Event/"
+
+
 
       BioTargetFamily : id
 
@@ -319,14 +330,20 @@
 <td>direct</td>
 </tr>
 <tr>
-<td><a href="../batch_import_id/">batch_import_id</a></td>
-<td>0..1 <br/> <a href="../BatchImport/">BatchImport</a></td>
+<td><a href="../assays/">assays</a></td>
+<td>* <br/> <a href="../Assay/">Assay</a></td>
 <td></td>
 <td>direct</td>
 </tr>
 <tr>
-<td><a href="../assays/">assays</a></td>
-<td>* <br/> <a href="../AssayToBioTargetFamily/">AssayToBioTargetFamily</a></td>
+<td><a href="../events/">events</a></td>
+<td>* <br/> <a href="../Event/">Event</a></td>
+<td></td>
+<td>direct</td>
+</tr>
+<tr>
+<td><a href="../citations/">citations</a></td>
+<td>* <br/> <a href="../Citation/">Citation</a></td>
 <td></td>
 <td>direct</td>
 </tr>
@@ -344,14 +361,20 @@
 </thead>
 <tbody>
 <tr>
-<td><a href="../AssayToBioTargetFamily/">AssayToBioTargetFamily</a></td>
-<td><a href="../biological_target_family_id/">biological_target_family_id</a></td>
+<td><a href="../Event/">Event</a></td>
+<td><a href="../bio_target_families/">bio_target_families</a></td>
 <td>range</td>
 <td><a href="./">BioTargetFamily</a></td>
 </tr>
 <tr>
-<td><a href="../EventToBioTargetFamily/">EventToBioTargetFamily</a></td>
-<td><a href="../biological_target_family_id/">biological_target_family_id</a></td>
+<td><a href="../Assay/">Assay</a></td>
+<td><a href="../bio_target_families/">bio_target_families</a></td>
+<td>range</td>
+<td><a href="./">BioTargetFamily</a></td>
+</tr>
+<tr>
+<td><a href="../Citation/">Citation</a></td>
+<td><a href="../bio_target_families/">bio_target_families</a></td>
 <td>range</td>
 <td><a href="./">BioTargetFamily</a></td>
 </tr>
@@ -408,14 +431,12 @@ attributes:
     - BiologicalObject
     - BiologicalProcess
     - LevelOfBiologicalOrganization
-    - BatchImport
     - AopToEvent
     - AopToLifeStage
     - AopToKeRelationship
     - AopToSex
     - AopToPrototypicalStressor
     - AopToTaxon
-    - AssayToBioTargetFamily
     - AssignedLicense
     - BioTargetFamily
     - CellTerm
@@ -423,15 +444,14 @@ attributes:
     - Directness
     - EventToLifeStage
     - EventToSex
-    - EventToBioTargetFamily
     - EventToTaxon
+    - ExperimentSetup
     - ExperimentType
     - Handbook
     - HarmonizedAop
     - HarmonizedEvent
     - License
     - LifeStageTerm
-    - ObservationToCitation
     - OecdStatus
     - OrganTerm
     - KeRelationshipToLifeStage
@@ -440,6 +460,7 @@ attributes:
     - SexTerm
     - EventComponent
     - TaxonTerm
+    - TestGuideline
     - User
     range: integer
     required: true
@@ -450,31 +471,37 @@ attributes:
     - Stressor
     - BioTargetFamily
     - OecdStatus
-  batch_import_id:
-    name: batch_import_id
-    from_schema: http://example.org/aopwiki-emod
-    domain_of:
-    - Assay
-    - Observation
-    - AopToEvent
-    - AssayToBioTargetFamily
-    - BioTargetFamily
-    - EventToBioTargetFamily
-    - HarmonizedAop
-    - HarmonizedEvent
-    - ObservationToCitation
-    range: BatchImport
-    inlined: true
   assays:
     name: assays
     from_schema: http://example.org/aopwiki-emod
     domain_of:
+    - Aop
     - Event
+    - Citation
     - BioTargetFamily
-    range: AssayToBioTargetFamily
+    - TestGuideline
+    range: Assay
     multivalued: true
-    inlined: true
-    inlined_as_list: true
+  events:
+    name: events
+    from_schema: http://example.org/aopwiki-emod
+    domain_of:
+    - Aop
+    - Assay
+    - Observation
+    - BioTargetFamily
+    - TestGuideline
+    range: Event
+    multivalued: true
+  citations:
+    name: citations
+    from_schema: http://example.org/aopwiki-emod
+    domain_of:
+    - Assay
+    - Observation
+    - BioTargetFamily
+    range: Citation
+    multivalued: true
 
 </code></pre>
 </details>
@@ -502,14 +529,12 @@ attributes:
     - BiologicalObject
     - BiologicalProcess
     - LevelOfBiologicalOrganization
-    - BatchImport
     - AopToEvent
     - AopToLifeStage
     - AopToKeRelationship
     - AopToSex
     - AopToPrototypicalStressor
     - AopToTaxon
-    - AssayToBioTargetFamily
     - AssignedLicense
     - BioTargetFamily
     - CellTerm
@@ -517,15 +542,14 @@ attributes:
     - Directness
     - EventToLifeStage
     - EventToSex
-    - EventToBioTargetFamily
     - EventToTaxon
+    - ExperimentSetup
     - ExperimentType
     - Handbook
     - HarmonizedAop
     - HarmonizedEvent
     - License
     - LifeStageTerm
-    - ObservationToCitation
     - OecdStatus
     - OrganTerm
     - KeRelationshipToLifeStage
@@ -534,6 +558,7 @@ attributes:
     - SexTerm
     - EventComponent
     - TaxonTerm
+    - TestGuideline
     - User
     range: integer
     required: true
@@ -547,35 +572,43 @@ attributes:
     - BioTargetFamily
     - OecdStatus
     range: string
-  batch_import_id:
-    name: batch_import_id
-    from_schema: http://example.org/aopwiki-emod
-    alias: batch_import_id
-    owner: BioTargetFamily
-    domain_of:
-    - Assay
-    - Observation
-    - AopToEvent
-    - AssayToBioTargetFamily
-    - BioTargetFamily
-    - EventToBioTargetFamily
-    - HarmonizedAop
-    - HarmonizedEvent
-    - ObservationToCitation
-    range: BatchImport
-    inlined: true
   assays:
     name: assays
     from_schema: http://example.org/aopwiki-emod
     alias: assays
     owner: BioTargetFamily
     domain_of:
+    - Aop
     - Event
+    - Citation
     - BioTargetFamily
-    range: AssayToBioTargetFamily
+    - TestGuideline
+    range: Assay
     multivalued: true
-    inlined: true
-    inlined_as_list: true
+  events:
+    name: events
+    from_schema: http://example.org/aopwiki-emod
+    alias: events
+    owner: BioTargetFamily
+    domain_of:
+    - Aop
+    - Assay
+    - Observation
+    - BioTargetFamily
+    - TestGuideline
+    range: Event
+    multivalued: true
+  citations:
+    name: citations
+    from_schema: http://example.org/aopwiki-emod
+    alias: citations
+    owner: BioTargetFamily
+    domain_of:
+    - Assay
+    - Observation
+    - BioTargetFamily
+    range: Citation
+    multivalued: true
   created_at:
     name: created_at
     description: Timestamp of when the record was created
@@ -596,14 +629,12 @@ attributes:
     - BiologicalObject
     - BiologicalProcess
     - LevelOfBiologicalOrganization
-    - BatchImport
     - AopToEvent
     - AopToLifeStage
     - AopToKeRelationship
     - AopToSex
     - AopToPrototypicalStressor
     - AopToTaxon
-    - AssayToBioTargetFamily
     - AssignedLicense
     - BioTargetFamily
     - CellTerm
@@ -611,15 +642,14 @@ attributes:
     - Directness
     - EventToLifeStage
     - EventToSex
-    - EventToBioTargetFamily
     - EventToTaxon
+    - ExperimentSetup
     - ExperimentType
     - Handbook
     - HarmonizedAop
     - HarmonizedEvent
     - License
     - LifeStageTerm
-    - ObservationToCitation
     - OecdStatus
     - OrganTerm
     - KeRelationshipToLifeStage
@@ -628,6 +658,7 @@ attributes:
     - SexTerm
     - EventComponent
     - TaxonTerm
+    - TestGuideline
     range: datetime
   updated_at:
     name: updated_at
@@ -649,14 +680,12 @@ attributes:
     - BiologicalObject
     - BiologicalProcess
     - LevelOfBiologicalOrganization
-    - BatchImport
     - AopToEvent
     - AopToLifeStage
     - AopToKeRelationship
     - AopToSex
     - AopToPrototypicalStressor
     - AopToTaxon
-    - AssayToBioTargetFamily
     - AssignedLicense
     - BioTargetFamily
     - CellTerm
@@ -664,15 +693,14 @@ attributes:
     - Directness
     - EventToLifeStage
     - EventToSex
-    - EventToBioTargetFamily
     - EventToTaxon
+    - ExperimentSetup
     - ExperimentType
     - Handbook
     - HarmonizedAop
     - HarmonizedEvent
     - License
     - LifeStageTerm
-    - ObservationToCitation
     - OecdStatus
     - OrganTerm
     - KeRelationshipToLifeStage
@@ -681,6 +709,7 @@ attributes:
     - SexTerm
     - EventComponent
     - TaxonTerm
+    - TestGuideline
     range: datetime
 
 </code></pre>

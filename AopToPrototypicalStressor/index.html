@@ -263,6 +263,15 @@
 
       AopToPrototypicalStressor : confidence_id
 
+
+
+
+
+        AopToPrototypicalStressor --&gt; "0..1" ConfidenceLevel : confidence_id
+        click ConfidenceLevel href "../ConfidenceLevel/"
+
+
+
       AopToPrototypicalStressor : created_at
 
       AopToPrototypicalStressor : evidence_text
@@ -328,7 +337,7 @@
 </tr>
 <tr>
 <td><a href="../confidence_id/">confidence_id</a></td>
-<td>0..1 <br/> <a href="../String/">String</a></td>
+<td>0..1 <br/> <a href="../ConfidenceLevel/">ConfidenceLevel</a></td>
 <td></td>
 <td>direct</td>
 </tr>
@@ -416,14 +425,12 @@ attributes:
     - BiologicalObject
     - BiologicalProcess
     - LevelOfBiologicalOrganization
-    - BatchImport
     - AopToEvent
     - AopToLifeStage
     - AopToKeRelationship
     - AopToSex
     - AopToPrototypicalStressor
     - AopToTaxon
-    - AssayToBioTargetFamily
     - AssignedLicense
     - BioTargetFamily
     - CellTerm
@@ -431,15 +438,14 @@ attributes:
     - Directness
     - EventToLifeStage
     - EventToSex
-    - EventToBioTargetFamily
     - EventToTaxon
+    - ExperimentSetup
     - ExperimentType
     - Handbook
     - HarmonizedAop
     - HarmonizedEvent
     - License
     - LifeStageTerm
-    - ObservationToCitation
     - OecdStatus
     - OrganTerm
     - KeRelationshipToLifeStage
@@ -448,6 +454,7 @@ attributes:
     - SexTerm
     - EventComponent
     - TaxonTerm
+    - TestGuideline
     - User
     range: integer
     required: true
@@ -486,6 +493,8 @@ attributes:
     - KeRelationshipToLifeStage
     - KeRelationshipToSex
     - KeRelationshipToTaxon
+    range: ConfidenceLevel
+    inlined: true
   evidence_text:
     name: evidence_text
     from_schema: http://example.org/aopwiki-emod
@@ -519,14 +528,12 @@ attributes:
     - BiologicalObject
     - BiologicalProcess
     - LevelOfBiologicalOrganization
-    - BatchImport
     - AopToEvent
     - AopToLifeStage
     - AopToKeRelationship
     - AopToSex
     - AopToPrototypicalStressor
     - AopToTaxon
-    - AssayToBioTargetFamily
     - AssignedLicense
     - BioTargetFamily
     - CellTerm
@@ -534,15 +541,14 @@ attributes:
     - Directness
     - EventToLifeStage
     - EventToSex
-    - EventToBioTargetFamily
     - EventToTaxon
+    - ExperimentSetup
     - ExperimentType
     - Handbook
     - HarmonizedAop
     - HarmonizedEvent
     - License
     - LifeStageTerm
-    - ObservationToCitation
     - OecdStatus
     - OrganTerm
     - KeRelationshipToLifeStage
@@ -551,6 +557,7 @@ attributes:
     - SexTerm
     - EventComponent
     - TaxonTerm
+    - TestGuideline
     - User
     range: integer
     required: true
@@ -595,7 +602,8 @@ attributes:
     - KeRelationshipToLifeStage
     - KeRelationshipToSex
     - KeRelationshipToTaxon
-    range: string
+    range: ConfidenceLevel
+    inlined: true
   evidence_text:
     name: evidence_text
     from_schema: http://example.org/aopwiki-emod
@@ -625,14 +633,12 @@ attributes:
     - BiologicalObject
     - BiologicalProcess
     - LevelOfBiologicalOrganization
-    - BatchImport
     - AopToEvent
     - AopToLifeStage
     - AopToKeRelationship
     - AopToSex
     - AopToPrototypicalStressor
     - AopToTaxon
-    - AssayToBioTargetFamily
     - AssignedLicense
     - BioTargetFamily
     - CellTerm
@@ -640,15 +646,14 @@ attributes:
     - Directness
     - EventToLifeStage
     - EventToSex
-    - EventToBioTargetFamily
     - EventToTaxon
+    - ExperimentSetup
     - ExperimentType
     - Handbook
     - HarmonizedAop
     - HarmonizedEvent
     - License
     - LifeStageTerm
-    - ObservationToCitation
     - OecdStatus
     - OrganTerm
     - KeRelationshipToLifeStage
@@ -657,6 +662,7 @@ attributes:
     - SexTerm
     - EventComponent
     - TaxonTerm
+    - TestGuideline
     range: datetime
   updated_at:
     name: updated_at
@@ -678,14 +684,12 @@ attributes:
     - BiologicalObject
     - BiologicalProcess
     - LevelOfBiologicalOrganization
-    - BatchImport
     - AopToEvent
     - AopToLifeStage
     - AopToKeRelationship
     - AopToSex
     - AopToPrototypicalStressor
     - AopToTaxon
-    - AssayToBioTargetFamily
     - AssignedLicense
     - BioTargetFamily
     - CellTerm
@@ -693,15 +697,14 @@ attributes:
     - Directness
     - EventToLifeStage
     - EventToSex
-    - EventToBioTargetFamily
     - EventToTaxon
+    - ExperimentSetup
     - ExperimentType
     - Handbook
     - HarmonizedAop
     - HarmonizedEvent
     - License
     - LifeStageTerm
-    - ObservationToCitation
     - OecdStatus
     - OrganTerm
     - KeRelationshipToLifeStage
@@ -710,6 +713,7 @@ attributes:
     - SexTerm
     - EventComponent
     - TaxonTerm
+    - TestGuideline
     range: datetime
 
 </code></pre>

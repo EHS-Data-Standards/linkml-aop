@@ -262,6 +262,24 @@
         
       
       
+        <label class="md-nav__link md-nav__link--active" for="__toc">
+          
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    About
+  
+
+    
+  </span>
+  
+  
+
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
       <a href="./" class="md-nav__link md-nav__link--active">
         
   
@@ -278,6 +296,47 @@
   
 
       </a>
+      
+        
+
+<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Table of contents
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#purpose" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Purpose
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#source-of-the-schema" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Source of the schema
+      
+    </span>
+  </a>
+  
+</li>
+      
+    </ul>
+  
+</nav>
       
     </li>
   
@@ -303,6 +362,36 @@
     
   
   
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Table of contents
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#purpose" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Purpose
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#source-of-the-schema" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Source of the schema
+      
+    </span>
+  </a>
+  
+</li>
+      
+    </ul>
+  
 </nav>
                   </div>
                 </div>
@@ -322,7 +411,29 @@
 
 
 <h1 id="linkml-aop">linkml-aop</h1>
-<p>A LinkML schema for Adverse Outcome Pathways</p>
+<p>A LinkML schema for Adverse Outcome Pathways, with EMOD (Evidence Model) expansions.</p>
+<h2 id="purpose">Purpose</h2>
+<p>The schema serves two purposes at once.</p>
+<p><strong>Validating content already in the AOP-Wiki.</strong> AOP-Wiki content is curated by people, in
+free text as much as in structured fields. Expressing the data model as a LinkML schema
+makes it possible to check that content against stated expectations - that a referenced
+Key Event exists, that a controlled vocabulary is used where one applies, that an
+assertion carries the evidence it claims.</p>
+<p><strong>Providing a basis for AOPs derived by automated approaches.</strong> Adverse Outcome Pathways
+can be assembled from analysis of multimodal data and from text mining. Such a pathway is
+only as useful as the record of where each of its parts came from, so the schema has to
+be able to carry that record: which observation was made, by what method, and what was
+inferred from it.</p>
+<p>Both purposes rest on the same requirement - what evidence supports must be
+distinguishable from what has been inferred - which is why <code>Assay</code>, <code>Observation</code>, and
+<code>Evidence</code> are separate classes rather than fields on an Event, and why the definition of
+<code>Event</code> is explicit that a Key Event is an abstraction rather than something that happened.</p>
+<h2 id="source-of-the-schema">Source of the schema</h2>
+<p>The schema is generated from the MySQL database behind
+<a href="https://emod.aopwiki.org">AOP-Wiki EMOD 3.0</a> and then curated. See the repository README
+for the generation and curation workflow, and
+<a href="https://github.com/EHS-Data-Standards/linkml-aop/blob/main/src/docs/dev/definition_rationale.md"><code>src/docs/dev/definition_rationale.md</code></a>
+for the reasoning behind individual class definitions.</p>
 
 
 

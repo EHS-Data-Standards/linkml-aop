@@ -261,8 +261,6 @@
 
 
 
-      Observation : batch_import_id
-
       Observation : biological_action_id
 
 
@@ -285,6 +283,8 @@
 
 
 
+      Observation : biological_object_str
+
       Observation : biological_process_id
 
 
@@ -302,8 +302,8 @@
 
 
 
-        Observation --&gt; "*" ObservationToCitation : citations
-        click ObservationToCitation href "../ObservationToCitation/"
+        Observation --&gt; "*" Citation : citations
+        click Citation href "../Citation/"
 
 
 
@@ -320,11 +320,31 @@
 
 
 
+      Observation : experiment_setup_id
+
+
+
+
+
+        Observation --&gt; "0..1" ExperimentSetup : experiment_setup_id
+        click ExperimentSetup href "../ExperimentSetup/"
+
+
+
       Observation : id
 
       Observation : phenotype
 
       Observation : stressor_id
+
+
+
+
+
+        Observation --&gt; "0..1" Stressor : stressor_id
+        click Stressor href "../Stressor/"
+
+
 
       Observation : updated_at
 
@@ -385,19 +405,25 @@
 <td>direct</td>
 </tr>
 <tr>
-<td><a href="../batch_import_id/">batch_import_id</a></td>
-<td>0..1 <br/> <a href="../String/">String</a></td>
-<td></td>
-<td>direct</td>
-</tr>
-<tr>
 <td><a href="../stressor_id/">stressor_id</a></td>
-<td>0..1 <br/> <a href="../String/">String</a></td>
+<td>0..1 <br/> <a href="../Stressor/">Stressor</a></td>
 <td></td>
 <td>direct</td>
 </tr>
 <tr>
 <td><a href="../phenotype/">phenotype</a></td>
+<td>0..1 <br/> <a href="../String/">String</a></td>
+<td></td>
+<td>direct</td>
+</tr>
+<tr>
+<td><a href="../experiment_setup_id/">experiment_setup_id</a></td>
+<td>0..1 <br/> <a href="../ExperimentSetup/">ExperimentSetup</a></td>
+<td></td>
+<td>direct</td>
+</tr>
+<tr>
+<td><a href="../biological_object_str/">biological_object_str</a></td>
 <td>0..1 <br/> <a href="../String/">String</a></td>
 <td></td>
 <td>direct</td>
@@ -410,7 +436,7 @@
 </tr>
 <tr>
 <td><a href="../citations/">citations</a></td>
-<td>* <br/> <a href="../ObservationToCitation/">ObservationToCitation</a></td>
+<td>* <br/> <a href="../Citation/">Citation</a></td>
 <td></td>
 <td>direct</td>
 </tr>
@@ -446,8 +472,8 @@
 <td><a href="./">Observation</a></td>
 </tr>
 <tr>
-<td><a href="../ObservationToCitation/">ObservationToCitation</a></td>
-<td><a href="../observation_id/">observation_id</a></td>
+<td><a href="../Citation/">Citation</a></td>
+<td><a href="../observations/">observations</a></td>
 <td>range</td>
 <td><a href="./">Observation</a></td>
 </tr>
@@ -504,14 +530,12 @@ attributes:
     - BiologicalObject
     - BiologicalProcess
     - LevelOfBiologicalOrganization
-    - BatchImport
     - AopToEvent
     - AopToLifeStage
     - AopToKeRelationship
     - AopToSex
     - AopToPrototypicalStressor
     - AopToTaxon
-    - AssayToBioTargetFamily
     - AssignedLicense
     - BioTargetFamily
     - CellTerm
@@ -519,15 +543,14 @@ attributes:
     - Directness
     - EventToLifeStage
     - EventToSex
-    - EventToBioTargetFamily
     - EventToTaxon
+    - ExperimentSetup
     - ExperimentType
     - Handbook
     - HarmonizedAop
     - HarmonizedEvent
     - License
     - LifeStageTerm
-    - ObservationToCitation
     - OecdStatus
     - OrganTerm
     - KeRelationshipToLifeStage
@@ -536,6 +559,7 @@ attributes:
     - SexTerm
     - EventComponent
     - TaxonTerm
+    - TestGuideline
     - User
     range: integer
     required: true
@@ -572,22 +596,9 @@ attributes:
     rank: 1000
     domain_of:
     - Observation
-    - AssayToBioTargetFamily
+    - ExperimentSetup
     range: Assay
     inlined: true
-  batch_import_id:
-    name: batch_import_id
-    from_schema: http://example.org/aopwiki-emod
-    domain_of:
-    - Assay
-    - Observation
-    - AopToEvent
-    - AssayToBioTargetFamily
-    - BioTargetFamily
-    - EventToBioTargetFamily
-    - HarmonizedAop
-    - HarmonizedEvent
-    - ObservationToCitation
   stressor_id:
     name: stressor_id
     from_schema: http://example.org/aopwiki-emod
@@ -595,8 +606,24 @@ attributes:
     domain_of:
     - Observation
     - AopToPrototypicalStressor
+    range: Stressor
+    inlined: true
   phenotype:
     name: phenotype
+    from_schema: http://example.org/aopwiki-emod
+    rank: 1000
+    domain_of:
+    - Observation
+  experiment_setup_id:
+    name: experiment_setup_id
+    from_schema: http://example.org/aopwiki-emod
+    rank: 1000
+    domain_of:
+    - Observation
+    range: ExperimentSetup
+    inlined: true
+  biological_object_str:
+    name: biological_object_str
     from_schema: http://example.org/aopwiki-emod
     rank: 1000
     domain_of:
@@ -608,20 +635,19 @@ attributes:
     - Aop
     - Assay
     - Observation
+    - BioTargetFamily
+    - TestGuideline
     range: Event
     multivalued: true
-    inlined: true
-    inlined_as_list: true
   citations:
     name: citations
     from_schema: http://example.org/aopwiki-emod
-    rank: 1000
     domain_of:
+    - Assay
     - Observation
-    range: ObservationToCitation
+    - BioTargetFamily
+    range: Citation
     multivalued: true
-    inlined: true
-    inlined_as_list: true
 
 </code></pre>
 </details>
@@ -649,14 +675,12 @@ attributes:
     - BiologicalObject
     - BiologicalProcess
     - LevelOfBiologicalOrganization
-    - BatchImport
     - AopToEvent
     - AopToLifeStage
     - AopToKeRelationship
     - AopToSex
     - AopToPrototypicalStressor
     - AopToTaxon
-    - AssayToBioTargetFamily
     - AssignedLicense
     - BioTargetFamily
     - CellTerm
@@ -664,15 +688,14 @@ attributes:
     - Directness
     - EventToLifeStage
     - EventToSex
-    - EventToBioTargetFamily
     - EventToTaxon
+    - ExperimentSetup
     - ExperimentType
     - Handbook
     - HarmonizedAop
     - HarmonizedEvent
     - License
     - LifeStageTerm
-    - ObservationToCitation
     - OecdStatus
     - OrganTerm
     - KeRelationshipToLifeStage
@@ -681,6 +704,7 @@ attributes:
     - SexTerm
     - EventComponent
     - TaxonTerm
+    - TestGuideline
     - User
     range: integer
     required: true
@@ -725,25 +749,9 @@ attributes:
     owner: Observation
     domain_of:
     - Observation
-    - AssayToBioTargetFamily
+    - ExperimentSetup
     range: Assay
     inlined: true
-  batch_import_id:
-    name: batch_import_id
-    from_schema: http://example.org/aopwiki-emod
-    alias: batch_import_id
-    owner: Observation
-    domain_of:
-    - Assay
-    - Observation
-    - AopToEvent
-    - AssayToBioTargetFamily
-    - BioTargetFamily
-    - EventToBioTargetFamily
-    - HarmonizedAop
-    - HarmonizedEvent
-    - ObservationToCitation
-    range: string
   stressor_id:
     name: stressor_id
     from_schema: http://example.org/aopwiki-emod
@@ -753,12 +761,32 @@ attributes:
     domain_of:
     - Observation
     - AopToPrototypicalStressor
-    range: string
+    range: Stressor
+    inlined: true
   phenotype:
     name: phenotype
     from_schema: http://example.org/aopwiki-emod
     rank: 1000
     alias: phenotype
+    owner: Observation
+    domain_of:
+    - Observation
+    range: string
+  experiment_setup_id:
+    name: experiment_setup_id
+    from_schema: http://example.org/aopwiki-emod
+    rank: 1000
+    alias: experiment_setup_id
+    owner: Observation
+    domain_of:
+    - Observation
+    range: ExperimentSetup
+    inlined: true
+  biological_object_str:
+    name: biological_object_str
+    from_schema: http://example.org/aopwiki-emod
+    rank: 1000
+    alias: biological_object_str
     owner: Observation
     domain_of:
     - Observation
@@ -772,22 +800,21 @@ attributes:
     - Aop
     - Assay
     - Observation
+    - BioTargetFamily
+    - TestGuideline
     range: Event
     multivalued: true
-    inlined: true
-    inlined_as_list: true
   citations:
     name: citations
     from_schema: http://example.org/aopwiki-emod
-    rank: 1000
     alias: citations
     owner: Observation
     domain_of:
+    - Assay
     - Observation
-    range: ObservationToCitation
+    - BioTargetFamily
+    range: Citation
     multivalued: true
-    inlined: true
-    inlined_as_list: true
   created_at:
     name: created_at
     description: Timestamp of when the record was created
@@ -808,14 +835,12 @@ attributes:
     - BiologicalObject
     - BiologicalProcess
     - LevelOfBiologicalOrganization
-    - BatchImport
     - AopToEvent
     - AopToLifeStage
     - AopToKeRelationship
     - AopToSex
     - AopToPrototypicalStressor
     - AopToTaxon
-    - AssayToBioTargetFamily
     - AssignedLicense
     - BioTargetFamily
     - CellTerm
@@ -823,15 +848,14 @@ attributes:
     - Directness
     - EventToLifeStage
     - EventToSex
-    - EventToBioTargetFamily
     - EventToTaxon
+    - ExperimentSetup
     - ExperimentType
     - Handbook
     - HarmonizedAop
     - HarmonizedEvent
     - License
     - LifeStageTerm
-    - ObservationToCitation
     - OecdStatus
     - OrganTerm
     - KeRelationshipToLifeStage
@@ -840,6 +864,7 @@ attributes:
     - SexTerm
     - EventComponent
     - TaxonTerm
+    - TestGuideline
     range: datetime
   updated_at:
     name: updated_at
@@ -861,14 +886,12 @@ attributes:
     - BiologicalObject
     - BiologicalProcess
     - LevelOfBiologicalOrganization
-    - BatchImport
     - AopToEvent
     - AopToLifeStage
     - AopToKeRelationship
     - AopToSex
     - AopToPrototypicalStressor
     - AopToTaxon
-    - AssayToBioTargetFamily
     - AssignedLicense
     - BioTargetFamily
     - CellTerm
@@ -876,15 +899,14 @@ attributes:
     - Directness
     - EventToLifeStage
     - EventToSex
-    - EventToBioTargetFamily
     - EventToTaxon
+    - ExperimentSetup
     - ExperimentType
     - Handbook
     - HarmonizedAop
     - HarmonizedEvent
     - License
     - LifeStageTerm
-    - ObservationToCitation
     - OecdStatus
     - OrganTerm
     - KeRelationshipToLifeStage
@@ -893,6 +915,7 @@ attributes:
     - SexTerm
     - EventComponent
     - TaxonTerm
+    - TestGuideline
     range: datetime
 
 </code></pre>

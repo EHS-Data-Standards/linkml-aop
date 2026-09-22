@@ -237,21 +237,11 @@
 <div class="md-content" data-md-component="content">
 <article class="md-content__inner md-typeset">
 <h1 id="class-harmonizedevent">Class: HarmonizedEvent</h1>
+<p><em>A record that tracks the provenance of a harmonized Key Event back to the Key Event held in the AOP-Wiki that it was derived from. Each record pairs one source Event (source_event_id, with its label and identifier as found in the source) with the harmonized Event it maps to (harmonized_event_id), and carries the mapping status and the raw mapping value from the harmonization process. A harmonized Key Event is a consolidation of one or more conceptually similar or redundant AOP-Wiki Key Events; these records are what make that consolidation auditable.</em></p>
 <p>URI: <a href="http://example.org/aopwiki-emod/HarmonizedEvent">http://example.org/aopwiki-emod/HarmonizedEvent</a></p>
 <div class="mermaid"> classDiagram
     class HarmonizedEvent
     click HarmonizedEvent href "../HarmonizedEvent/"
-      HarmonizedEvent : batch_import_id
-
-
-
-
-
-        HarmonizedEvent --&gt; "0..1" BatchImport : batch_import_id
-        click BatchImport href "../BatchImport/"
-
-
-
       HarmonizedEvent : created_at
 
       HarmonizedEvent : harmonized_event_id
@@ -372,12 +362,6 @@
 <td></td>
 <td>direct</td>
 </tr>
-<tr>
-<td><a href="../batch_import_id/">batch_import_id</a></td>
-<td>0..1 <br/> <a href="../BatchImport/">BatchImport</a></td>
-<td></td>
-<td>direct</td>
-</tr>
 </tbody>
 </table>
 <h2 id="identifier-and-mapping-information">Identifier and Mapping Information</h2>
@@ -409,6 +393,13 @@
 <h3 id="direct">Direct</h3>
 <details>
 <pre><code class="language-yaml">name: HarmonizedEvent
+description: A record that tracks the provenance of a harmonized Key Event back to
+  the Key Event held in the AOP-Wiki that it was derived from. Each record pairs one
+  source Event (source_event_id, with its label and identifier as found in the source)
+  with the harmonized Event it maps to (harmonized_event_id), and carries the mapping
+  status and the raw mapping value from the harmonization process. A harmonized Key
+  Event is a consolidation of one or more conceptually similar or redundant AOP-Wiki
+  Key Events; these records are what make that consolidation auditable.
 from_schema: http://example.org/aopwiki-emod
 slots:
 - created_at
@@ -431,14 +422,12 @@ attributes:
     - BiologicalObject
     - BiologicalProcess
     - LevelOfBiologicalOrganization
-    - BatchImport
     - AopToEvent
     - AopToLifeStage
     - AopToKeRelationship
     - AopToSex
     - AopToPrototypicalStressor
     - AopToTaxon
-    - AssayToBioTargetFamily
     - AssignedLicense
     - BioTargetFamily
     - CellTerm
@@ -446,15 +435,14 @@ attributes:
     - Directness
     - EventToLifeStage
     - EventToSex
-    - EventToBioTargetFamily
     - EventToTaxon
+    - ExperimentSetup
     - ExperimentType
     - Handbook
     - HarmonizedAop
     - HarmonizedEvent
     - License
     - LifeStageTerm
-    - ObservationToCitation
     - OecdStatus
     - OrganTerm
     - KeRelationshipToLifeStage
@@ -463,6 +451,7 @@ attributes:
     - SexTerm
     - EventComponent
     - TaxonTerm
+    - TestGuideline
     - User
     range: integer
     required: true
@@ -518,27 +507,19 @@ attributes:
     rank: 1000
     domain_of:
     - HarmonizedEvent
-  batch_import_id:
-    name: batch_import_id
-    from_schema: http://example.org/aopwiki-emod
-    domain_of:
-    - Assay
-    - Observation
-    - AopToEvent
-    - AssayToBioTargetFamily
-    - BioTargetFamily
-    - EventToBioTargetFamily
-    - HarmonizedAop
-    - HarmonizedEvent
-    - ObservationToCitation
-    range: BatchImport
-    inlined: true
 
 </code></pre>
 </details>
 <h3 id="induced">Induced</h3>
 <details>
 <pre><code class="language-yaml">name: HarmonizedEvent
+description: A record that tracks the provenance of a harmonized Key Event back to
+  the Key Event held in the AOP-Wiki that it was derived from. Each record pairs one
+  source Event (source_event_id, with its label and identifier as found in the source)
+  with the harmonized Event it maps to (harmonized_event_id), and carries the mapping
+  status and the raw mapping value from the harmonization process. A harmonized Key
+  Event is a consolidation of one or more conceptually similar or redundant AOP-Wiki
+  Key Events; these records are what make that consolidation auditable.
 from_schema: http://example.org/aopwiki-emod
 attributes:
   id:
@@ -560,14 +541,12 @@ attributes:
     - BiologicalObject
     - BiologicalProcess
     - LevelOfBiologicalOrganization
-    - BatchImport
     - AopToEvent
     - AopToLifeStage
     - AopToKeRelationship
     - AopToSex
     - AopToPrototypicalStressor
     - AopToTaxon
-    - AssayToBioTargetFamily
     - AssignedLicense
     - BioTargetFamily
     - CellTerm
@@ -575,15 +554,14 @@ attributes:
     - Directness
     - EventToLifeStage
     - EventToSex
-    - EventToBioTargetFamily
     - EventToTaxon
+    - ExperimentSetup
     - ExperimentType
     - Handbook
     - HarmonizedAop
     - HarmonizedEvent
     - License
     - LifeStageTerm
-    - ObservationToCitation
     - OecdStatus
     - OrganTerm
     - KeRelationshipToLifeStage
@@ -592,6 +570,7 @@ attributes:
     - SexTerm
     - EventComponent
     - TaxonTerm
+    - TestGuideline
     - User
     range: integer
     required: true
@@ -669,23 +648,6 @@ attributes:
     domain_of:
     - HarmonizedEvent
     range: string
-  batch_import_id:
-    name: batch_import_id
-    from_schema: http://example.org/aopwiki-emod
-    alias: batch_import_id
-    owner: HarmonizedEvent
-    domain_of:
-    - Assay
-    - Observation
-    - AopToEvent
-    - AssayToBioTargetFamily
-    - BioTargetFamily
-    - EventToBioTargetFamily
-    - HarmonizedAop
-    - HarmonizedEvent
-    - ObservationToCitation
-    range: BatchImport
-    inlined: true
   created_at:
     name: created_at
     description: Timestamp of when the record was created
@@ -706,14 +668,12 @@ attributes:
     - BiologicalObject
     - BiologicalProcess
     - LevelOfBiologicalOrganization
-    - BatchImport
     - AopToEvent
     - AopToLifeStage
     - AopToKeRelationship
     - AopToSex
     - AopToPrototypicalStressor
     - AopToTaxon
-    - AssayToBioTargetFamily
     - AssignedLicense
     - BioTargetFamily
     - CellTerm
@@ -721,15 +681,14 @@ attributes:
     - Directness
     - EventToLifeStage
     - EventToSex
-    - EventToBioTargetFamily
     - EventToTaxon
+    - ExperimentSetup
     - ExperimentType
     - Handbook
     - HarmonizedAop
     - HarmonizedEvent
     - License
     - LifeStageTerm
-    - ObservationToCitation
     - OecdStatus
     - OrganTerm
     - KeRelationshipToLifeStage
@@ -738,6 +697,7 @@ attributes:
     - SexTerm
     - EventComponent
     - TaxonTerm
+    - TestGuideline
     range: datetime
   updated_at:
     name: updated_at
@@ -759,14 +719,12 @@ attributes:
     - BiologicalObject
     - BiologicalProcess
     - LevelOfBiologicalOrganization
-    - BatchImport
     - AopToEvent
     - AopToLifeStage
     - AopToKeRelationship
     - AopToSex
     - AopToPrototypicalStressor
     - AopToTaxon
-    - AssayToBioTargetFamily
     - AssignedLicense
     - BioTargetFamily
     - CellTerm
@@ -774,15 +732,14 @@ attributes:
     - Directness
     - EventToLifeStage
     - EventToSex
-    - EventToBioTargetFamily
     - EventToTaxon
+    - ExperimentSetup
     - ExperimentType
     - Handbook
     - HarmonizedAop
     - HarmonizedEvent
     - License
     - LifeStageTerm
-    - ObservationToCitation
     - OecdStatus
     - OrganTerm
     - KeRelationshipToLifeStage
@@ -791,6 +748,7 @@ attributes:
     - SexTerm
     - EventComponent
     - TaxonTerm
+    - TestGuideline
     range: datetime
 
 </code></pre>

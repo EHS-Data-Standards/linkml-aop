@@ -477,7 +477,7 @@
 
 
 <h1 id="aop-wiki-data-model-with-emod">AOP Wiki Data Model with EMOD</h1>
-<p>This is a LinkML schema for the AOP-Wiki data model, extended with EMOD concepts.</p>
+<p>A LinkML schema for the AOP-Wiki data model, extended with the EMOD (Evidence Model) concepts of Assays, Observations, Evidence, and Biological Target Families. It serves two purposes: validating content already curated in the AOP-Wiki, and providing a structure for Adverse Outcome Pathways derived by automated approaches, including analysis of multimodal data and text mining. Both purposes depend on being able to tell what evidence supports from what has been inferred, so the classes and slots are defined to keep an observation, the method that produced it, and the mechanism inferred from it distinct from one another.</p>
 <p>URI: http://example.org/aopwiki-emod</p>
 <p>Name: aopwiki-emod</p>
 <h2 id="classes">Classes</h2>
@@ -491,7 +491,7 @@
 <tbody>
 <tr>
 <td><a href="Aop/">Aop</a></td>
-<td>An AOP describes a sequence of events starting with initial interaction(s) be...</td>
+<td>An AOP describes a sequence of events commencing with initial interaction(s) ...</td>
 </tr>
 <tr>
 <td><a href="AopToEvent/">AopToEvent</a></td>
@@ -519,18 +519,10 @@
 </tr>
 <tr>
 <td><a href="Assay/">Assay</a></td>
-<td></td>
-</tr>
-<tr>
-<td><a href="AssayToBioTargetFamily/">AssayToBioTargetFamily</a></td>
-<td></td>
+<td>A defined experimental method for measuring a biological change, structured s...</td>
 </tr>
 <tr>
 <td><a href="AssignedLicense/">AssignedLicense</a></td>
-<td></td>
-</tr>
-<tr>
-<td><a href="BatchImport/">BatchImport</a></td>
 <td></td>
 </tr>
 <tr>
@@ -567,14 +559,10 @@
 </tr>
 <tr>
 <td><a href="Event/">Event</a></td>
-<td>A change in biological or physiological state that is both measurable and ess...</td>
+<td>An Event is a measurable biological change at a defined level of biological o...</td>
 </tr>
 <tr>
 <td><a href="EventComponent/">EventComponent</a></td>
-<td></td>
-</tr>
-<tr>
-<td><a href="EventToBioTargetFamily/">EventToBioTargetFamily</a></td>
 <td></td>
 </tr>
 <tr>
@@ -594,6 +582,10 @@
 <td></td>
 </tr>
 <tr>
+<td><a href="ExperimentSetup/">ExperimentSetup</a></td>
+<td></td>
+</tr>
+<tr>
 <td><a href="ExperimentType/">ExperimentType</a></td>
 <td></td>
 </tr>
@@ -607,7 +599,7 @@
 </tr>
 <tr>
 <td><a href="HarmonizedEvent/">HarmonizedEvent</a></td>
-<td></td>
+<td>A record that tracks the provenance of a harmonized Key Event back to the Key...</td>
 </tr>
 <tr>
 <td><a href="KeRelationship/">KeRelationship</a></td>
@@ -642,10 +634,6 @@
 <td></td>
 </tr>
 <tr>
-<td><a href="ObservationToCitation/">ObservationToCitation</a></td>
-<td></td>
-</tr>
-<tr>
 <td><a href="OecdStatus/">OecdStatus</a></td>
 <td></td>
 </tr>
@@ -664,6 +652,10 @@
 <tr>
 <td><a href="TaxonTerm/">TaxonTerm</a></td>
 <td></td>
+</tr>
+<tr>
+<td><a href="TestGuideline/">TestGuideline</a></td>
+<td>A standardized test method published by a regulatory or intergovernmental bod...</td>
 </tr>
 <tr>
 <td><a href="User/">User</a></td>
@@ -690,6 +682,18 @@
 </tr>
 <tr>
 <td><a href="aop_id/">aop_id</a></td>
+<td></td>
+</tr>
+<tr>
+<td><a href="aop_oecd_endorsed_count/">aop_oecd_endorsed_count</a></td>
+<td></td>
+</tr>
+<tr>
+<td><a href="aop_oecd_program_count/">aop_oecd_program_count</a></td>
+<td></td>
+</tr>
+<tr>
+<td><a href="aop_open_for_adoption_count/">aop_open_for_adoption_count</a></td>
 <td></td>
 </tr>
 <tr>
@@ -721,14 +725,6 @@
 <td></td>
 </tr>
 <tr>
-<td><a href="batch_code/">batch_code</a></td>
-<td></td>
-</tr>
-<tr>
-<td><a href="batch_import_id/">batch_import_id</a></td>
-<td></td>
-</tr>
-<tr>
 <td><a href="bio_target_families/">bio_target_families</a></td>
 <td></td>
 </tr>
@@ -738,6 +734,10 @@
 </tr>
 <tr>
 <td><a href="biological_object_id/">biological_object_id</a></td>
+<td></td>
+</tr>
+<tr>
+<td><a href="biological_object_str/">biological_object_str</a></td>
 <td></td>
 </tr>
 <tr>
@@ -753,12 +753,16 @@
 <td></td>
 </tr>
 <tr>
-<td><a href="biological_target_family_id/">biological_target_family_id</a></td>
+<td><a href="causal_agent_id/">causal_agent_id</a></td>
 <td></td>
 </tr>
 <tr>
 <td><a href="cell_term_id/">cell_term_id</a></td>
 <td>The cell type in which the Key Event takes place</td>
+</tr>
+<tr>
+<td><a href="cell_terms/">cell_terms</a></td>
+<td></td>
 </tr>
 <tr>
 <td><a href="changed_at/">changed_at</a></td>
@@ -773,15 +777,15 @@
 <td></td>
 </tr>
 <tr>
+<td><a href="classification/">classification</a></td>
+<td></td>
+</tr>
+<tr>
 <td><a href="completion_score/">completion_score</a></td>
 <td></td>
 </tr>
 <tr>
 <td><a href="confidence_id/">confidence_id</a></td>
-<td></td>
-</tr>
-<tr>
-<td><a href="contributor_id/">contributor_id</a></td>
 <td></td>
 </tr>
 <tr>
@@ -869,6 +873,10 @@
 <td></td>
 </tr>
 <tr>
+<td><a href="experiment_setup_id/">experiment_setup_id</a></td>
+<td></td>
+</tr>
+<tr>
 <td><a href="experimental_design/">experimental_design</a></td>
 <td></td>
 </tr>
@@ -879,6 +887,10 @@
 <tr>
 <td><a href="forum_links/">forum_links</a></td>
 <td></td>
+</tr>
+<tr>
+<td><a href="full_title/">full_title</a></td>
+<td>The official title of the test guideline as published by the issuing body (e</td>
 </tr>
 <tr>
 <td><a href="graphical_representation_image_uid/">graphical_representation_image_uid</a></td>
@@ -903,6 +915,18 @@
 <tr>
 <td><a href="has_method_text/">has_method_text</a></td>
 <td>Indicates whether method text has been provided for this Key Event</td>
+</tr>
+<tr>
+<td><a href="has_references/">has_references</a></td>
+<td></td>
+</tr>
+<tr>
+<td><a href="has_structured_methods/">has_structured_methods</a></td>
+<td></td>
+</tr>
+<tr>
+<td><a href="has_tabulated_evidence/">has_tabulated_evidence</a></td>
+<td></td>
 </tr>
 <tr>
 <td><a href="how_it_works/">how_it_works</a></td>
@@ -1009,10 +1033,6 @@
 <td></td>
 </tr>
 <tr>
-<td><a href="observation_id/">observation_id</a></td>
-<td></td>
-</tr>
-<tr>
 <td><a href="observations/">observations</a></td>
 <td></td>
 </tr>
@@ -1061,7 +1081,15 @@
 <td></td>
 </tr>
 <tr>
+<td><a href="project_129/">project_129</a></td>
+<td></td>
+</tr>
+<tr>
 <td><a href="prototypical_stressors/">prototypical_stressors</a></td>
+<td></td>
+</tr>
+<tr>
+<td><a href="publisher/">publisher</a></td>
 <td></td>
 </tr>
 <tr>
@@ -1137,6 +1165,10 @@
 <td></td>
 </tr>
 <tr>
+<td><a href="short_title/">short_title</a></td>
+<td>A short identifier for the test guideline, combining the issuing body and its...</td>
+</tr>
+<tr>
 <td><a href="sort/">sort</a></td>
 <td></td>
 </tr>
@@ -1198,6 +1230,10 @@
 </tr>
 <tr>
 <td><a href="term_class/">term_class</a></td>
+<td></td>
+</tr>
+<tr>
+<td><a href="test_guidelines/">test_guidelines</a></td>
 <td></td>
 </tr>
 <tr>

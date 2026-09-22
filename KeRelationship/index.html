@@ -246,7 +246,7 @@
 <div class="md-content" data-md-component="content">
 <article class="md-content__inner md-typeset">
 <h1 id="class-kerelationship">Class: KeRelationship</h1>
-<p><em>A scientifically-based relationship that connects one key event to another, defines a causal and predictive relationship between the upstream and downstream event, and thereby facilitates inference or extrapolation of the state of the downstream key event from the known, measured,or predicted state of the upstream key event.</em></p>
+<p><em>A scientifically-based relationship that connects one key event to another, defines a causal and predictive relationship between the upstream and downstream event, and thereby facilitates inference or extrapolation of the state of the downstream key event from the known, measured, or predicted state of the upstream key event.</em></p>
 <p>URI: <a href="http://example.org/aopwiki-emod/KeRelationship">http://example.org/aopwiki-emod/KeRelationship</a></p>
 <div class="mermaid"> classDiagram
     class KeRelationship
@@ -282,6 +282,8 @@
       KeRelationship : empirical_support
 
       KeRelationship : evidence_collection_strategy
+
+      KeRelationship : has_tabulated_evidence
 
       KeRelationship : how_it_works
 
@@ -475,7 +477,13 @@
 </tr>
 <tr>
 <td><a href="../completion_score/">completion_score</a></td>
-<td>0..1 <br/> <a href="../String/">String</a></td>
+<td>0..1 <br/> <a href="../Float/">Float</a></td>
+<td></td>
+<td>direct</td>
+</tr>
+<tr>
+<td><a href="../has_tabulated_evidence/">has_tabulated_evidence</a></td>
+<td>0..1 <br/> <a href="../Boolean/">Boolean</a></td>
 <td></td>
 <td>direct</td>
 </tr>
@@ -580,7 +588,7 @@
 description: A scientifically-based relationship that connects one key event to another,
   defines a causal and predictive relationship between the upstream and downstream
   event, and thereby facilitates inference or extrapolation of the state of the downstream
-  key event from the known, measured,or predicted state of the upstream key event.
+  key event from the known, measured, or predicted state of the upstream key event.
 from_schema: http://example.org/aopwiki-emod
 slots:
 - created_at
@@ -603,14 +611,12 @@ attributes:
     - BiologicalObject
     - BiologicalProcess
     - LevelOfBiologicalOrganization
-    - BatchImport
     - AopToEvent
     - AopToLifeStage
     - AopToKeRelationship
     - AopToSex
     - AopToPrototypicalStressor
     - AopToTaxon
-    - AssayToBioTargetFamily
     - AssignedLicense
     - BioTargetFamily
     - CellTerm
@@ -618,15 +624,14 @@ attributes:
     - Directness
     - EventToLifeStage
     - EventToSex
-    - EventToBioTargetFamily
     - EventToTaxon
+    - ExperimentSetup
     - ExperimentType
     - Handbook
     - HarmonizedAop
     - HarmonizedEvent
     - License
     - LifeStageTerm
-    - ObservationToCitation
     - OecdStatus
     - OrganTerm
     - KeRelationshipToLifeStage
@@ -635,6 +640,7 @@ attributes:
     - SexTerm
     - EventComponent
     - TaxonTerm
+    - TestGuideline
     - User
     range: integer
     required: true
@@ -739,12 +745,21 @@ attributes:
     - Aop
     - Event
     - KeRelationship
+    range: float
+  has_tabulated_evidence:
+    name: has_tabulated_evidence
+    from_schema: http://example.org/aopwiki-emod
+    rank: 1000
+    domain_of:
+    - KeRelationship
+    range: boolean
   aops:
     name: aops
     from_schema: http://example.org/aopwiki-emod
     domain_of:
     - Event
     - KeRelationship
+    - Assay
     - Stressor
     range: AopToKeRelationship
     multivalued: true
@@ -792,7 +807,7 @@ attributes:
 description: A scientifically-based relationship that connects one key event to another,
   defines a causal and predictive relationship between the upstream and downstream
   event, and thereby facilitates inference or extrapolation of the state of the downstream
-  key event from the known, measured,or predicted state of the upstream key event.
+  key event from the known, measured, or predicted state of the upstream key event.
 from_schema: http://example.org/aopwiki-emod
 attributes:
   id:
@@ -814,14 +829,12 @@ attributes:
     - BiologicalObject
     - BiologicalProcess
     - LevelOfBiologicalOrganization
-    - BatchImport
     - AopToEvent
     - AopToLifeStage
     - AopToKeRelationship
     - AopToSex
     - AopToPrototypicalStressor
     - AopToTaxon
-    - AssayToBioTargetFamily
     - AssignedLicense
     - BioTargetFamily
     - CellTerm
@@ -829,15 +842,14 @@ attributes:
     - Directness
     - EventToLifeStage
     - EventToSex
-    - EventToBioTargetFamily
     - EventToTaxon
+    - ExperimentSetup
     - ExperimentType
     - Handbook
     - HarmonizedAop
     - HarmonizedEvent
     - License
     - LifeStageTerm
-    - ObservationToCitation
     - OecdStatus
     - OrganTerm
     - KeRelationshipToLifeStage
@@ -846,6 +858,7 @@ attributes:
     - SexTerm
     - EventComponent
     - TaxonTerm
+    - TestGuideline
     - User
     range: integer
     required: true
@@ -995,7 +1008,16 @@ attributes:
     - Aop
     - Event
     - KeRelationship
-    range: string
+    range: float
+  has_tabulated_evidence:
+    name: has_tabulated_evidence
+    from_schema: http://example.org/aopwiki-emod
+    rank: 1000
+    alias: has_tabulated_evidence
+    owner: KeRelationship
+    domain_of:
+    - KeRelationship
+    range: boolean
   aops:
     name: aops
     from_schema: http://example.org/aopwiki-emod
@@ -1004,6 +1026,7 @@ attributes:
     domain_of:
     - Event
     - KeRelationship
+    - Assay
     - Stressor
     range: AopToKeRelationship
     multivalued: true
@@ -1068,14 +1091,12 @@ attributes:
     - BiologicalObject
     - BiologicalProcess
     - LevelOfBiologicalOrganization
-    - BatchImport
     - AopToEvent
     - AopToLifeStage
     - AopToKeRelationship
     - AopToSex
     - AopToPrototypicalStressor
     - AopToTaxon
-    - AssayToBioTargetFamily
     - AssignedLicense
     - BioTargetFamily
     - CellTerm
@@ -1083,15 +1104,14 @@ attributes:
     - Directness
     - EventToLifeStage
     - EventToSex
-    - EventToBioTargetFamily
     - EventToTaxon
+    - ExperimentSetup
     - ExperimentType
     - Handbook
     - HarmonizedAop
     - HarmonizedEvent
     - License
     - LifeStageTerm
-    - ObservationToCitation
     - OecdStatus
     - OrganTerm
     - KeRelationshipToLifeStage
@@ -1100,6 +1120,7 @@ attributes:
     - SexTerm
     - EventComponent
     - TaxonTerm
+    - TestGuideline
     range: datetime
   updated_at:
     name: updated_at
@@ -1121,14 +1142,12 @@ attributes:
     - BiologicalObject
     - BiologicalProcess
     - LevelOfBiologicalOrganization
-    - BatchImport
     - AopToEvent
     - AopToLifeStage
     - AopToKeRelationship
     - AopToSex
     - AopToPrototypicalStressor
     - AopToTaxon
-    - AssayToBioTargetFamily
     - AssignedLicense
     - BioTargetFamily
     - CellTerm
@@ -1136,15 +1155,14 @@ attributes:
     - Directness
     - EventToLifeStage
     - EventToSex
-    - EventToBioTargetFamily
     - EventToTaxon
+    - ExperimentSetup
     - ExperimentType
     - Handbook
     - HarmonizedAop
     - HarmonizedEvent
     - License
     - LifeStageTerm
-    - ObservationToCitation
     - OecdStatus
     - OrganTerm
     - KeRelationshipToLifeStage
@@ -1153,6 +1171,7 @@ attributes:
     - SexTerm
     - EventComponent
     - TaxonTerm
+    - TestGuideline
     range: datetime
 
 </code></pre>

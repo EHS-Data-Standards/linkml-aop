@@ -356,23 +356,6 @@
     </span>
   </a>
   
-    <nav class="md-nav" aria-label="Identifier and Mapping Information">
-      <ul class="md-nav__list">
-        
-          <li class="md-nav__item">
-  <a href="#schema-source" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        Schema Source
-      
-    </span>
-  </a>
-  
-</li>
-        
-      </ul>
-    </nav>
-  
 </li>
       
         <li class="md-nav__item">
@@ -433,7 +416,17 @@ Alias: citations</p>
 </thead>
 <tbody>
 <tr>
+<td><a href="../Assay/">Assay</a></td>
+<td>A defined experimental method for measuring a biological change, structured s...</td>
+<td>no</td>
+</tr>
+<tr>
 <td><a href="../Observation/">Observation</a></td>
+<td></td>
+<td>no</td>
+</tr>
+<tr>
+<td><a href="../BioTargetFamily/">BioTargetFamily</a></td>
 <td></td>
 <td>no</td>
 </tr>
@@ -451,11 +444,11 @@ Alias: citations</p>
 <tbody>
 <tr>
 <td>Range</td>
-<td><a href="../ObservationToCitation/">ObservationToCitation</a></td>
+<td><a href="../String/">String</a></td>
 </tr>
 <tr>
 <td>Domain Of</td>
-<td><a href="../Observation/">Observation</a></td>
+<td><a href="../Assay/">Assay</a>, <a href="../Observation/">Observation</a>, <a href="../BioTargetFamily/">BioTargetFamily</a></td>
 </tr>
 </tbody>
 </table>
@@ -469,34 +462,12 @@ Alias: citations</p>
 </thead>
 <tbody>
 <tr>
-<td>Multivalued</td>
-<td>Yes</td>
-</tr>
-<tr>
-<td>### Slot Characteristics</td>
+<td></td>
 <td></td>
 </tr>
 </tbody>
 </table>
-<table>
-<thead>
-<tr>
-<th>Property</th>
-<th>Value</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td>Owner</td>
-<td><a href="../Observation/">Observation</a></td>
-</tr>
-</tbody>
-</table>
 <h2 id="identifier-and-mapping-information">Identifier and Mapping Information</h2>
-<h3 id="schema-source">Schema Source</h3>
-<ul>
-<li>from schema: http://example.org/aopwiki-emod</li>
-</ul>
 <h2 id="mappings">Mappings</h2>
 <table>
 <thead>
@@ -520,16 +491,12 @@ Alias: citations</p>
 <details>
 
 <pre><code class="language-yaml">name: citations
-from_schema: http://example.org/aopwiki-emod
-rank: 1000
 alias: citations
-owner: Observation
 domain_of:
+- Assay
 - Observation
-range: ObservationToCitation
-multivalued: true
-inlined: true
-inlined_as_list: true
+- BioTargetFamily
+range: string
 
 </code></pre>
 

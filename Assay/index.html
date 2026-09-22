@@ -246,11 +246,21 @@
 <div class="md-content" data-md-component="content">
 <article class="md-content__inner md-typeset">
 <h1 id="class-assay">Class: Assay</h1>
+<p><em>A defined experimental method for measuring a biological change, structured so that its elements - the biological object measured, the process it takes part in, the detection technology, and the taxa and biological target families it applies to - can be matched against the Key Events the assay can inform. Assays are how New Approach Methodologies (NAMs) connect to Adverse Outcome Pathways, and an assay may be specified by one or more test guidelines. Some assays have an inherent directionality, meaning they are designed to detect change in a specific direction, such as an agonist or an antagonist effect on a specific molecular target.</em></p>
 <p>URI: <a href="http://example.org/aopwiki-emod/Assay">http://example.org/aopwiki-emod/Assay</a></p>
 <div class="mermaid"> classDiagram
     class Assay
     click Assay href "../Assay/"
-      Assay : batch_import_id
+      Assay : aops
+
+
+
+
+
+        Assay --&gt; "*" Aop : aops
+        click Aop href "../Aop/"
+
+
 
       Assay : bio_target_families
 
@@ -258,8 +268,8 @@
 
 
 
-        Assay --&gt; "*" AssayToBioTargetFamily : bio_target_families
-        click AssayToBioTargetFamily href "../AssayToBioTargetFamily/"
+        Assay --&gt; "*" BioTargetFamily : bio_target_families
+        click BioTargetFamily href "../BioTargetFamily/"
 
 
 
@@ -274,7 +284,18 @@
 
 
 
-      Assay : citation_id
+      Assay : citations
+
+
+
+
+
+        Assay --&gt; "*" Citation : citations
+        click Citation href "../Citation/"
+
+
+
+      Assay : classification
 
       Assay : created_at
 
@@ -330,6 +351,17 @@
 
 
 
+      Assay : test_guidelines
+
+
+
+
+
+        Assay --&gt; "*" TestGuideline : test_guidelines
+        click TestGuideline href "../TestGuideline/"
+
+
+
       Assay : title
 
       Assay : updated_at
@@ -379,12 +411,6 @@
 <td>direct</td>
 </tr>
 <tr>
-<td><a href="../citation_id/">citation_id</a></td>
-<td>0..1 <br/> <a href="../String/">String</a></td>
-<td></td>
-<td>direct</td>
-</tr>
-<tr>
 <td><a href="../detection_technology/">detection_technology</a></td>
 <td>0..1 <br/> <a href="../String/">String</a></td>
 <td></td>
@@ -403,7 +429,7 @@
 <td>direct</td>
 </tr>
 <tr>
-<td><a href="../batch_import_id/">batch_import_id</a></td>
+<td><a href="../classification/">classification</a></td>
 <td>0..1 <br/> <a href="../String/">String</a></td>
 <td></td>
 <td>direct</td>
@@ -434,7 +460,25 @@
 </tr>
 <tr>
 <td><a href="../bio_target_families/">bio_target_families</a></td>
-<td>* <br/> <a href="../AssayToBioTargetFamily/">AssayToBioTargetFamily</a></td>
+<td>* <br/> <a href="../BioTargetFamily/">BioTargetFamily</a></td>
+<td></td>
+<td>direct</td>
+</tr>
+<tr>
+<td><a href="../aops/">aops</a></td>
+<td>* <br/> <a href="../Aop/">Aop</a></td>
+<td></td>
+<td>direct</td>
+</tr>
+<tr>
+<td><a href="../citations/">citations</a></td>
+<td>* <br/> <a href="../Citation/">Citation</a></td>
+<td></td>
+<td>direct</td>
+</tr>
+<tr>
+<td><a href="../test_guidelines/">test_guidelines</a></td>
+<td>* <br/> <a href="../TestGuideline/">TestGuideline</a></td>
 <td></td>
 <td>direct</td>
 </tr>
@@ -452,6 +496,12 @@
 </thead>
 <tbody>
 <tr>
+<td><a href="../Aop/">Aop</a></td>
+<td><a href="../assays/">assays</a></td>
+<td>range</td>
+<td><a href="./">Assay</a></td>
+</tr>
+<tr>
 <td><a href="../Event/">Event</a></td>
 <td><a href="../assays/">assays</a></td>
 <td>range</td>
@@ -464,8 +514,26 @@
 <td><a href="./">Assay</a></td>
 </tr>
 <tr>
-<td><a href="../AssayToBioTargetFamily/">AssayToBioTargetFamily</a></td>
+<td><a href="../Citation/">Citation</a></td>
+<td><a href="../assays/">assays</a></td>
+<td>range</td>
+<td><a href="./">Assay</a></td>
+</tr>
+<tr>
+<td><a href="../BioTargetFamily/">BioTargetFamily</a></td>
+<td><a href="../assays/">assays</a></td>
+<td>range</td>
+<td><a href="./">Assay</a></td>
+</tr>
+<tr>
+<td><a href="../ExperimentSetup/">ExperimentSetup</a></td>
 <td><a href="../assay_id/">assay_id</a></td>
+<td>range</td>
+<td><a href="./">Assay</a></td>
+</tr>
+<tr>
+<td><a href="../TestGuideline/">TestGuideline</a></td>
+<td><a href="../assays/">assays</a></td>
 <td>range</td>
 <td><a href="./">Assay</a></td>
 </tr>
@@ -500,6 +568,14 @@
 <h3 id="direct">Direct</h3>
 <details>
 <pre><code class="language-yaml">name: Assay
+description: A defined experimental method for measuring a biological change, structured
+  so that its elements - the biological object measured, the process it takes part
+  in, the detection technology, and the taxa and biological target families it applies
+  to - can be matched against the Key Events the assay can inform. Assays are how
+  New Approach Methodologies (NAMs) connect to Adverse Outcome Pathways, and an assay
+  may be specified by one or more test guidelines. Some assays have an inherent directionality,
+  meaning they are designed to detect change in a specific direction, such as an agonist
+  or an antagonist effect on a specific molecular target.
 from_schema: http://example.org/aopwiki-emod
 slots:
 - created_at
@@ -522,14 +598,12 @@ attributes:
     - BiologicalObject
     - BiologicalProcess
     - LevelOfBiologicalOrganization
-    - BatchImport
     - AopToEvent
     - AopToLifeStage
     - AopToKeRelationship
     - AopToSex
     - AopToPrototypicalStressor
     - AopToTaxon
-    - AssayToBioTargetFamily
     - AssignedLicense
     - BioTargetFamily
     - CellTerm
@@ -537,15 +611,14 @@ attributes:
     - Directness
     - EventToLifeStage
     - EventToSex
-    - EventToBioTargetFamily
     - EventToTaxon
+    - ExperimentSetup
     - ExperimentType
     - Handbook
     - HarmonizedAop
     - HarmonizedEvent
     - License
     - LifeStageTerm
-    - ObservationToCitation
     - OecdStatus
     - OrganTerm
     - KeRelationshipToLifeStage
@@ -554,6 +627,7 @@ attributes:
     - SexTerm
     - EventComponent
     - TaxonTerm
+    - TestGuideline
     - User
     range: integer
     required: true
@@ -573,21 +647,12 @@ attributes:
     - Assay
     - BiologicalObject
     - BiologicalProcess
-    - BatchImport
     - CellTerm
     - Directness
+    - ExperimentSetup
     - License
     - OecdStatus
     - OrganTerm
-  citation_id:
-    name: citation_id
-    from_schema: http://example.org/aopwiki-emod
-    rank: 1000
-    domain_of:
-    - Assay
-    - Evidence
-    - BatchImport
-    - ObservationToCitation
   detection_technology:
     name: detection_technology
     from_schema: http://example.org/aopwiki-emod
@@ -610,20 +675,12 @@ attributes:
     rank: 1000
     domain_of:
     - Assay
-  batch_import_id:
-    name: batch_import_id
+  classification:
+    name: classification
     from_schema: http://example.org/aopwiki-emod
     rank: 1000
     domain_of:
     - Assay
-    - Observation
-    - AopToEvent
-    - AssayToBioTargetFamily
-    - BioTargetFamily
-    - EventToBioTargetFamily
-    - HarmonizedAop
-    - HarmonizedEvent
-    - ObservationToCitation
   objects:
     name: objects
     from_schema: http://example.org/aopwiki-emod
@@ -661,26 +718,61 @@ attributes:
     - Aop
     - Assay
     - Observation
+    - BioTargetFamily
+    - TestGuideline
     range: Event
     multivalued: true
-    inlined: true
-    inlined_as_list: true
   bio_target_families:
     name: bio_target_families
     from_schema: http://example.org/aopwiki-emod
     domain_of:
     - Event
     - Assay
-    range: AssayToBioTargetFamily
+    - Citation
+    range: BioTargetFamily
     multivalued: true
-    inlined: true
-    inlined_as_list: true
+  aops:
+    name: aops
+    from_schema: http://example.org/aopwiki-emod
+    domain_of:
+    - Event
+    - KeRelationship
+    - Assay
+    - Stressor
+    range: Aop
+    multivalued: true
+  citations:
+    name: citations
+    from_schema: http://example.org/aopwiki-emod
+    rank: 1000
+    domain_of:
+    - Assay
+    - Observation
+    - BioTargetFamily
+    range: Citation
+    multivalued: true
+  test_guidelines:
+    name: test_guidelines
+    from_schema: http://example.org/aopwiki-emod
+    domain_of:
+    - Event
+    - Assay
+    range: TestGuideline
+    multivalued: true
 
 </code></pre>
 </details>
 <h3 id="induced">Induced</h3>
 <details>
 <pre><code class="language-yaml">name: Assay
+description: A defined experimental method for measuring a biological change, structured
+  so that its elements - the biological object measured, the process it takes part
+  in, the detection technology, and the taxa and biological target families it applies
+  to - can be matched against the Key Events the assay can inform. Assays are how
+  New Approach Methodologies (NAMs) connect to Adverse Outcome Pathways, and an assay
+  may be specified by one or more test guidelines. Some assays have an inherent directionality,
+  meaning they are designed to detect change in a specific direction, such as an agonist
+  or an antagonist effect on a specific molecular target.
 from_schema: http://example.org/aopwiki-emod
 attributes:
   id:
@@ -702,14 +794,12 @@ attributes:
     - BiologicalObject
     - BiologicalProcess
     - LevelOfBiologicalOrganization
-    - BatchImport
     - AopToEvent
     - AopToLifeStage
     - AopToKeRelationship
     - AopToSex
     - AopToPrototypicalStressor
     - AopToTaxon
-    - AssayToBioTargetFamily
     - AssignedLicense
     - BioTargetFamily
     - CellTerm
@@ -717,15 +807,14 @@ attributes:
     - Directness
     - EventToLifeStage
     - EventToSex
-    - EventToBioTargetFamily
     - EventToTaxon
+    - ExperimentSetup
     - ExperimentType
     - Handbook
     - HarmonizedAop
     - HarmonizedEvent
     - License
     - LifeStageTerm
-    - ObservationToCitation
     - OecdStatus
     - OrganTerm
     - KeRelationshipToLifeStage
@@ -734,6 +823,7 @@ attributes:
     - SexTerm
     - EventComponent
     - TaxonTerm
+    - TestGuideline
     - User
     range: integer
     required: true
@@ -758,24 +848,12 @@ attributes:
     - Assay
     - BiologicalObject
     - BiologicalProcess
-    - BatchImport
     - CellTerm
     - Directness
+    - ExperimentSetup
     - License
     - OecdStatus
     - OrganTerm
-    range: string
-  citation_id:
-    name: citation_id
-    from_schema: http://example.org/aopwiki-emod
-    rank: 1000
-    alias: citation_id
-    owner: Assay
-    domain_of:
-    - Assay
-    - Evidence
-    - BatchImport
-    - ObservationToCitation
     range: string
   detection_technology:
     name: detection_technology
@@ -807,22 +885,14 @@ attributes:
     domain_of:
     - Assay
     range: string
-  batch_import_id:
-    name: batch_import_id
+  classification:
+    name: classification
     from_schema: http://example.org/aopwiki-emod
     rank: 1000
-    alias: batch_import_id
+    alias: classification
     owner: Assay
     domain_of:
     - Assay
-    - Observation
-    - AopToEvent
-    - AssayToBioTargetFamily
-    - BioTargetFamily
-    - EventToBioTargetFamily
-    - HarmonizedAop
-    - HarmonizedEvent
-    - ObservationToCitation
     range: string
   objects:
     name: objects
@@ -869,10 +939,10 @@ attributes:
     - Aop
     - Assay
     - Observation
+    - BioTargetFamily
+    - TestGuideline
     range: Event
     multivalued: true
-    inlined: true
-    inlined_as_list: true
   bio_target_families:
     name: bio_target_families
     from_schema: http://example.org/aopwiki-emod
@@ -881,10 +951,43 @@ attributes:
     domain_of:
     - Event
     - Assay
-    range: AssayToBioTargetFamily
+    - Citation
+    range: BioTargetFamily
     multivalued: true
-    inlined: true
-    inlined_as_list: true
+  aops:
+    name: aops
+    from_schema: http://example.org/aopwiki-emod
+    alias: aops
+    owner: Assay
+    domain_of:
+    - Event
+    - KeRelationship
+    - Assay
+    - Stressor
+    range: Aop
+    multivalued: true
+  citations:
+    name: citations
+    from_schema: http://example.org/aopwiki-emod
+    rank: 1000
+    alias: citations
+    owner: Assay
+    domain_of:
+    - Assay
+    - Observation
+    - BioTargetFamily
+    range: Citation
+    multivalued: true
+  test_guidelines:
+    name: test_guidelines
+    from_schema: http://example.org/aopwiki-emod
+    alias: test_guidelines
+    owner: Assay
+    domain_of:
+    - Event
+    - Assay
+    range: TestGuideline
+    multivalued: true
   created_at:
     name: created_at
     description: Timestamp of when the record was created
@@ -905,14 +1008,12 @@ attributes:
     - BiologicalObject
     - BiologicalProcess
     - LevelOfBiologicalOrganization
-    - BatchImport
     - AopToEvent
     - AopToLifeStage
     - AopToKeRelationship
     - AopToSex
     - AopToPrototypicalStressor
     - AopToTaxon
-    - AssayToBioTargetFamily
     - AssignedLicense
     - BioTargetFamily
     - CellTerm
@@ -920,15 +1021,14 @@ attributes:
     - Directness
     - EventToLifeStage
     - EventToSex
-    - EventToBioTargetFamily
     - EventToTaxon
+    - ExperimentSetup
     - ExperimentType
     - Handbook
     - HarmonizedAop
     - HarmonizedEvent
     - License
     - LifeStageTerm
-    - ObservationToCitation
     - OecdStatus
     - OrganTerm
     - KeRelationshipToLifeStage
@@ -937,6 +1037,7 @@ attributes:
     - SexTerm
     - EventComponent
     - TaxonTerm
+    - TestGuideline
     range: datetime
   updated_at:
     name: updated_at
@@ -958,14 +1059,12 @@ attributes:
     - BiologicalObject
     - BiologicalProcess
     - LevelOfBiologicalOrganization
-    - BatchImport
     - AopToEvent
     - AopToLifeStage
     - AopToKeRelationship
     - AopToSex
     - AopToPrototypicalStressor
     - AopToTaxon
-    - AssayToBioTargetFamily
     - AssignedLicense
     - BioTargetFamily
     - CellTerm
@@ -973,15 +1072,14 @@ attributes:
     - Directness
     - EventToLifeStage
     - EventToSex
-    - EventToBioTargetFamily
     - EventToTaxon
+    - ExperimentSetup
     - ExperimentType
     - Handbook
     - HarmonizedAop
     - HarmonizedEvent
     - License
     - LifeStageTerm
-    - ObservationToCitation
     - OecdStatus
     - OrganTerm
     - KeRelationshipToLifeStage
@@ -990,6 +1088,7 @@ attributes:
     - SexTerm
     - EventComponent
     - TaxonTerm
+    - TestGuideline
     range: datetime
 
 </code></pre>

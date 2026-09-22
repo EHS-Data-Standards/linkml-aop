@@ -325,8 +325,74 @@
 <td><a href="./">ConfidenceLevel</a></td>
 </tr>
 <tr>
+<td><a href="../AopToLifeStage/">AopToLifeStage</a></td>
+<td><a href="../confidence_id/">confidence_id</a></td>
+<td>range</td>
+<td><a href="./">ConfidenceLevel</a></td>
+</tr>
+<tr>
+<td><a href="../AopToKeRelationship/">AopToKeRelationship</a></td>
+<td><a href="../confidence_id/">confidence_id</a></td>
+<td>range</td>
+<td><a href="./">ConfidenceLevel</a></td>
+</tr>
+<tr>
 <td><a href="../AopToKeRelationship/">AopToKeRelationship</a></td>
 <td><a href="../quantitative_understanding_id/">quantitative_understanding_id</a></td>
+<td>range</td>
+<td><a href="./">ConfidenceLevel</a></td>
+</tr>
+<tr>
+<td><a href="../AopToSex/">AopToSex</a></td>
+<td><a href="../confidence_id/">confidence_id</a></td>
+<td>range</td>
+<td><a href="./">ConfidenceLevel</a></td>
+</tr>
+<tr>
+<td><a href="../AopToPrototypicalStressor/">AopToPrototypicalStressor</a></td>
+<td><a href="../confidence_id/">confidence_id</a></td>
+<td>range</td>
+<td><a href="./">ConfidenceLevel</a></td>
+</tr>
+<tr>
+<td><a href="../AopToTaxon/">AopToTaxon</a></td>
+<td><a href="../confidence_id/">confidence_id</a></td>
+<td>range</td>
+<td><a href="./">ConfidenceLevel</a></td>
+</tr>
+<tr>
+<td><a href="../EventToLifeStage/">EventToLifeStage</a></td>
+<td><a href="../confidence_id/">confidence_id</a></td>
+<td>range</td>
+<td><a href="./">ConfidenceLevel</a></td>
+</tr>
+<tr>
+<td><a href="../EventToSex/">EventToSex</a></td>
+<td><a href="../confidence_id/">confidence_id</a></td>
+<td>range</td>
+<td><a href="./">ConfidenceLevel</a></td>
+</tr>
+<tr>
+<td><a href="../EventToTaxon/">EventToTaxon</a></td>
+<td><a href="../confidence_id/">confidence_id</a></td>
+<td>range</td>
+<td><a href="./">ConfidenceLevel</a></td>
+</tr>
+<tr>
+<td><a href="../KeRelationshipToLifeStage/">KeRelationshipToLifeStage</a></td>
+<td><a href="../confidence_id/">confidence_id</a></td>
+<td>range</td>
+<td><a href="./">ConfidenceLevel</a></td>
+</tr>
+<tr>
+<td><a href="../KeRelationshipToSex/">KeRelationshipToSex</a></td>
+<td><a href="../confidence_id/">confidence_id</a></td>
+<td>range</td>
+<td><a href="./">ConfidenceLevel</a></td>
+</tr>
+<tr>
+<td><a href="../KeRelationshipToTaxon/">KeRelationshipToTaxon</a></td>
+<td><a href="../confidence_id/">confidence_id</a></td>
 <td>range</td>
 <td><a href="./">ConfidenceLevel</a></td>
 </tr>
@@ -383,14 +449,12 @@ attributes:
     - BiologicalObject
     - BiologicalProcess
     - LevelOfBiologicalOrganization
-    - BatchImport
     - AopToEvent
     - AopToLifeStage
     - AopToKeRelationship
     - AopToSex
     - AopToPrototypicalStressor
     - AopToTaxon
-    - AssayToBioTargetFamily
     - AssignedLicense
     - BioTargetFamily
     - CellTerm
@@ -398,15 +462,14 @@ attributes:
     - Directness
     - EventToLifeStage
     - EventToSex
-    - EventToBioTargetFamily
     - EventToTaxon
+    - ExperimentSetup
     - ExperimentType
     - Handbook
     - HarmonizedAop
     - HarmonizedEvent
     - License
     - LifeStageTerm
-    - ObservationToCitation
     - OecdStatus
     - OrganTerm
     - KeRelationshipToLifeStage
@@ -415,6 +478,7 @@ attributes:
     - SexTerm
     - EventComponent
     - TaxonTerm
+    - TestGuideline
     - User
     range: integer
     required: true
@@ -461,14 +525,12 @@ attributes:
     - BiologicalObject
     - BiologicalProcess
     - LevelOfBiologicalOrganization
-    - BatchImport
     - AopToEvent
     - AopToLifeStage
     - AopToKeRelationship
     - AopToSex
     - AopToPrototypicalStressor
     - AopToTaxon
-    - AssayToBioTargetFamily
     - AssignedLicense
     - BioTargetFamily
     - CellTerm
@@ -476,15 +538,14 @@ attributes:
     - Directness
     - EventToLifeStage
     - EventToSex
-    - EventToBioTargetFamily
     - EventToTaxon
+    - ExperimentSetup
     - ExperimentType
     - Handbook
     - HarmonizedAop
     - HarmonizedEvent
     - License
     - LifeStageTerm
-    - ObservationToCitation
     - OecdStatus
     - OrganTerm
     - KeRelationshipToLifeStage
@@ -493,6 +554,7 @@ attributes:
     - SexTerm
     - EventComponent
     - TaxonTerm
+    - TestGuideline
     - User
     range: integer
     required: true
@@ -534,14 +596,12 @@ attributes:
     - BiologicalObject
     - BiologicalProcess
     - LevelOfBiologicalOrganization
-    - BatchImport
     - AopToEvent
     - AopToLifeStage
     - AopToKeRelationship
     - AopToSex
     - AopToPrototypicalStressor
     - AopToTaxon
-    - AssayToBioTargetFamily
     - AssignedLicense
     - BioTargetFamily
     - CellTerm
@@ -549,15 +609,14 @@ attributes:
     - Directness
     - EventToLifeStage
     - EventToSex
-    - EventToBioTargetFamily
     - EventToTaxon
+    - ExperimentSetup
     - ExperimentType
     - Handbook
     - HarmonizedAop
     - HarmonizedEvent
     - License
     - LifeStageTerm
-    - ObservationToCitation
     - OecdStatus
     - OrganTerm
     - KeRelationshipToLifeStage
@@ -566,6 +625,7 @@ attributes:
     - SexTerm
     - EventComponent
     - TaxonTerm
+    - TestGuideline
     range: datetime
   updated_at:
     name: updated_at
@@ -587,14 +647,12 @@ attributes:
     - BiologicalObject
     - BiologicalProcess
     - LevelOfBiologicalOrganization
-    - BatchImport
     - AopToEvent
     - AopToLifeStage
     - AopToKeRelationship
     - AopToSex
     - AopToPrototypicalStressor
     - AopToTaxon
-    - AssayToBioTargetFamily
     - AssignedLicense
     - BioTargetFamily
     - CellTerm
@@ -602,15 +660,14 @@ attributes:
     - Directness
     - EventToLifeStage
     - EventToSex
-    - EventToBioTargetFamily
     - EventToTaxon
+    - ExperimentSetup
     - ExperimentType
     - Handbook
     - HarmonizedAop
     - HarmonizedEvent
     - License
     - LifeStageTerm
-    - ObservationToCitation
     - OecdStatus
     - OrganTerm
     - KeRelationshipToLifeStage
@@ -619,6 +676,7 @@ attributes:
     - SexTerm
     - EventComponent
     - TaxonTerm
+    - TestGuideline
     range: datetime
 
 </code></pre>
