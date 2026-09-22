@@ -119,6 +119,7 @@ _gen-project: _ensure_pymodel_dir _compile_sheets
       uv run gen-java {{gen_java_args}} --output-directory {{dest}}/java/ {{source_schema_path}} || true ; \
     fi
     @if [ ! -z "{{gen_ts_args}}" ]; then \
+      mkdir -p {{dest}}/typescript || true && \
       uv run gen-typescript {{gen_ts_args}} {{source_schema_path}} > {{dest}}/typescript/{{schema_stem}}.ts || true ; \
     fi
 
