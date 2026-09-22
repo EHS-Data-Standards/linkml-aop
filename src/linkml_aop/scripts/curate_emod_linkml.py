@@ -243,14 +243,26 @@ def description_lines(text: str, indent: int) -> list[str]:
     return lines
 
 
-def make_multivalued_attr_lines(attr_name: str, range_name: str) -> list[str]:
+def make_multivalued_attr_lines(
+    attr_name: str, range_name: str, inlined: bool = True
+) -> list[str]:
+    """Return attribute lines for a multivalued reference.
+
+    inlined=False emits a reference by identifier. Used for the two sides of a
+    collapsed many-to-many join (BIDIRECTIONAL_INVERSE): both classes carry an
+    identifier, and inlining both sides would require each shared object to be
+    written out in full under every object that references it.
+    """
     lines = [
         f"      {attr_name}:\n",
         f"        multivalued: true\n",
         f"        range: {range_name}\n",
-        f"        inlined: true\n",
-        f"        inlined_as_list: true\n",
     ]
+    if inlined:
+        lines += [
+            f"        inlined: true\n",
+            f"        inlined_as_list: true\n",
+        ]
     return lines
 
 
@@ -449,10 +461,10 @@ def build_extra_attrs(
         )
     for jt, (parent, parent_attr, inv_class, inv_attr) in bidirectional_inv.items():
         extra_attrs.setdefault(parent, []).extend(
-            make_multivalued_attr_lines(parent_attr, inv_class)
+            make_multivalued_attr_lines(parent_attr, inv_class, inlined=False)
         )
         extra_attrs.setdefault(inv_class, []).extend(
-            make_multivalued_attr_lines(inv_attr, parent)
+            make_multivalued_attr_lines(inv_attr, parent, inlined=False)
         )
     for jt, (class_a, class_a_attr, class_b) in bidir_rels.items():
         extra_attrs.setdefault(class_a, []).extend(

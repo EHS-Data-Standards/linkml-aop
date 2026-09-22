@@ -93,8 +93,6 @@ classes:
       assays:
         multivalued: true
         range: Assay
-        inlined: true
-        inlined_as_list: true
       prototypical_stressors:
         multivalued: true
         range: AopToPrototypicalStressor
@@ -208,23 +206,15 @@ classes:
       assays:
         multivalued: true
         range: Assay
-        inlined: true
-        inlined_as_list: true
       observations:
         multivalued: true
         range: Observation
-        inlined: true
-        inlined_as_list: true
       bio_target_families:
         multivalued: true
         range: BioTargetFamily
-        inlined: true
-        inlined_as_list: true
       test_guidelines:
         multivalued: true
         range: TestGuideline
-        inlined: true
-        inlined_as_list: true
       aops:
         multivalued: true
         range: AopToEvent
@@ -334,28 +324,18 @@ classes:
       events:
         multivalued: true
         range: Event
-        inlined: true
-        inlined_as_list: true
       bio_target_families:
         multivalued: true
         range: BioTargetFamily
-        inlined: true
-        inlined_as_list: true
       aops:
         multivalued: true
         range: Aop
-        inlined: true
-        inlined_as_list: true
       citations:
         multivalued: true
         range: Citation
-        inlined: true
-        inlined_as_list: true
       test_guidelines:
         multivalued: true
         range: TestGuideline
-        inlined: true
-        inlined_as_list: true
   Observation:
     slots:
       - created_at
@@ -387,13 +367,9 @@ classes:
       events:
         multivalued: true
         range: Event
-        inlined: true
-        inlined_as_list: true
       citations:
         multivalued: true
         range: Citation
-        inlined: true
-        inlined_as_list: true
   Evidence:
     slots:
       - created_at
@@ -458,18 +434,12 @@ classes:
       bio_target_families:
         multivalued: true
         range: BioTargetFamily
-        inlined: true
-        inlined_as_list: true
       observations:
         multivalued: true
         range: Observation
-        inlined: true
-        inlined_as_list: true
       assays:
         multivalued: true
         range: Assay
-        inlined: true
-        inlined_as_list: true
   BiologicalAction:
     slots:
       - created_at
@@ -660,18 +630,12 @@ classes:
       assays:
         multivalued: true
         range: Assay
-        inlined: true
-        inlined_as_list: true
       events:
         multivalued: true
         range: Event
-        inlined: true
-        inlined_as_list: true
       citations:
         multivalued: true
         range: Citation
-        inlined: true
-        inlined_as_list: true
   CellTerm:
     slots:
       - created_at
@@ -1008,13 +972,9 @@ classes:
       assays:
         multivalued: true
         range: Assay
-        inlined: true
-        inlined_as_list: true
       events:
         multivalued: true
         range: Event
-        inlined: true
-        inlined_as_list: true
   User:
     attributes:
       id:
