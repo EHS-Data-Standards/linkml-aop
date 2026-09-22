@@ -38,7 +38,8 @@ slots:
 # Class definitions
 classes:
   Aop:
-    description: An AOP describes a sequence of events commencing with initial interaction(s) of a stressor with a biomolecule within an organism that causes a perturbation in its biology (i.e., molecular initiating event, MIE), which can progress through a dependent series of intermediate key events (KEs) and culminate in an adverse outcome (AO) considered relevant to risk assessment or regulatory decision-making. AOPs are composed of a causal sequence of upstream to downstream KEs, representing a cascading series of measurable biological changes that can be expected to occur if the perturbation is sufficiently severe (i.e., in terms of potency, duration, frequency) to drive the pathway all the way to the AO. Importantly, AOPs do not describe every detail of the biology but instead focus on describing critical steps or check-points along the path to adversity, which are both measurable and have potential predictive value for regulatory application.
+    description: >-
+      An AOP describes a sequence of events commencing with initial interaction(s) of a stressor with a biomolecule within an organism that causes a perturbation in its biology (i.e., molecular initiating event, MIE), which can progress through a dependent series of intermediate key events (KEs) and culminate in an adverse outcome (AO) considered relevant to risk assessment or regulatory decision-making. AOPs are composed of a causal sequence of upstream to downstream KEs, representing a cascading series of measurable biological changes that can be expected to occur if the perturbation is sufficiently severe (i.e., in terms of potency, duration, frequency) to drive the pathway all the way to the AO. Importantly, AOPs do not describe every detail of the biology but instead focus on describing critical steps or check-points along the path to adversity, which are both measurable and have potential predictive value for regulatory application.
     slots:
       - created_at
       - updated_at
@@ -141,43 +142,58 @@ classes:
         identifier: true
         range: integer
       title:
-        description: A descriptive phrase which defines a discrete biological change that can be measured.
+        description: >-
+          A descriptive phrase which defines a discrete biological change that can be measured.
       short_name:
-        description: A reasonable abbreviation of the Key Event title, used in labelling throughout AOP-Wiki.
+        description: >-
+          A reasonable abbreviation of the Key Event title, used in labelling throughout AOP-Wiki.
       biological_organization_id:
-        description: The level of biological organization at which the Key Event occurs (e.g., molecular, cellular, tissue, organ, organism).
+        description: >-
+          The level of biological organization at which the Key Event occurs (e.g., molecular, cellular, tissue, organ, organism).
         range: LevelOfBiologicalOrganization
         inlined: true
       how_it_works:
-        description: The mechanistic basis explaining how perturbation of this Key Event leads to downstream effects.
+        description: >-
+          The mechanistic basis explaining how perturbation of this Key Event leads to downstream effects.
       measured_or_detected:
-        description: A description of the type(s) of measurements that can be employed to evaluate the Key Event and the relative level of scientific confidence in those measurements.
+        description: >-
+          A description of the type(s) of measurements that can be employed to evaluate the Key Event and the relative level of scientific confidence in those measurements.
       supporting_tax_evidence:
-        description: Evidence describing the taxonomic applicability of the Key Event, using Latin or common names of species or broader taxonomic groupings.
+        description: >-
+          Evidence describing the taxonomic applicability of the Key Event, using Latin or common names of species or broader taxonomic groupings.
       evidence_for_chemical_initiation:
-        description: Documentation of how specific prototypical stressors (generally chemicals) can trigger or perturb this Key Event.
+        description: >-
+          Documentation of how specific prototypical stressors (generally chemicals) can trigger or perturb this Key Event.
       examples_using_ao:
-        description: Examples illustrating the regulatory significance of this Key Event when it serves as an adverse outcome.
+        description: >-
+          Examples illustrating the regulatory significance of this Key Event when it serves as an adverse outcome.
       references:
-        description: Literature cited in support of this Key Event description.
+        description: >-
+          Literature cited in support of this Key Event description.
       definition:
-        description: A description of the biological state being observed or measured, the biological compartment in which it is measured, and its general role in the biology.
+        description: >-
+          A description of the biological state being observed or measured, the biological compartment in which it is measured, and its general role in the biology.
       organ_term_id:
-        description: The organ or tissue in which the Key Event takes place.
+        description: >-
+          The organ or tissue in which the Key Event takes place.
         range: OrganTerm
         inlined: true
       cell_term_id:
-        description: The cell type in which the Key Event takes place.
+        description: >-
+          The cell type in which the Key Event takes place.
         range: CellTerm
         inlined: true
       completion_score:
-        description: Calculated metric indicating how complete the Key Event documentation is.
+        description: >-
+          Calculated metric indicating how complete the Key Event documentation is.
         range: float
       integration_score:
-        description: Calculated metric for integration and priority assessment of the Key Event.
+        description: >-
+          Calculated metric for integration and priority assessment of the Key Event.
         range: float
       has_method_text:
-        description: Indicates whether method text has been provided for this Key Event.
+        description: >-
+          Indicates whether method text has been provided for this Key Event.
       aop_open_for_adoption_count:
         range: integer
       aop_oecd_program_count:
@@ -230,7 +246,8 @@ classes:
         inlined: true
         inlined_as_list: true
   KeRelationship:
-    description: A scientifically-based relationship that connects one key event to another, defines a causal and predictive relationship between the upstream and downstream event, and thereby facilitates inference or extrapolation of the state of the downstream key event from the known, measured, or predicted state of the upstream key event.
+    description: >-
+      A scientifically-based relationship that connects one key event to another, defines a causal and predictive relationship between the upstream and downstream event, and thereby facilitates inference or extrapolation of the state of the downstream key event from the known, measured, or predicted state of the upstream key event.
     slots:
       - created_at
       - updated_at
@@ -282,7 +299,8 @@ classes:
         inlined: true
         inlined_as_list: true
   Assay:
-    description: A defined experimental method for measuring a biological change, structured so that its elements - the biological object measured, the process it takes part in, the detection technology, and the taxa and biological target families it applies to - can be matched against the Key Events the assay can inform. Assays are how New Approach Methodologies (NAMs) connect to Adverse Outcome Pathways, and an assay may be specified by one or more test guidelines. Some assays have an inherent directionality, meaning they are designed to detect change in a specific direction, such as an agonist or an antagonist effect on a specific molecular target.
+    description: >-
+      A defined experimental method for measuring a biological change, structured so that its elements - the biological object measured, the process it takes part in, the detection technology, and the taxa and biological target families it applies to - can be matched against the Key Events the assay can inform. Assays are how New Approach Methodologies (NAMs) connect to Adverse Outcome Pathways, and an assay may be specified by one or more test guidelines. Some assays have an inherent directionality, meaning they are designed to detect change in a specific direction, such as an agonist or an antagonist effect on a specific molecular target.
     slots:
       - created_at
       - updated_at
@@ -408,7 +426,8 @@ classes:
       experimental_design:
       notes:
   Stressor:
-    description: An external or internal factor that induces a perturbation to a biological system, potentially initiating a molecular initiating event (MIE) but could also impact a biological process represented by a key event. Stressors may include chemical, physical, or biological agents capable of eliciting measurable changes in the biological system relevant to the AOP.
+    description: >-
+      An external or internal factor that induces a perturbation to a biological system, potentially initiating a molecular initiating event (MIE) but could also impact a biological process represented by a key event. Stressors may include chemical, physical, or biological agents capable of eliciting measurable changes in the biological system relevant to the AOP.
     slots:
       - created_at
       - updated_at
@@ -966,7 +985,8 @@ classes:
       scientific_term:
       source_id:
   TestGuideline:
-    description: A standardized test method published by a regulatory or intergovernmental body, such as an OECD Test Guideline or an EPA OCSPP test guideline, that specifies how to carry out one or more assays so that the resulting data are accepted for regulatory hazard assessment of chemicals. In EMOD, a test guideline is linked to the Assays it covers and to the Key Events those Assays measure.
+    description: >-
+      A standardized test method published by a regulatory or intergovernmental body, such as an OECD Test Guideline or an EPA OCSPP test guideline, that specifies how to carry out one or more assays so that the resulting data are accepted for regulatory hazard assessment of chemicals. In EMOD, a test guideline is linked to the Assays it covers and to the Key Events those Assays measure.
     slots:
       - created_at
       - updated_at
@@ -975,12 +995,14 @@ classes:
         identifier: true
         range: integer
       short_title:
-        description: A short identifier for the test guideline, combining the issuing body and its guideline number (e.g. OECD TG 442C, EPA OCSPP 890.1250). Unique within EMOD and used to reference the guideline.
+        description: >-
+          A short identifier for the test guideline, combining the issuing body and its guideline number (e.g. OECD TG 442C, EPA OCSPP 890.1250). Unique within EMOD and used to reference the guideline.
       full_title:
         description: >-
           The official title of the test guideline as published by the issuing body (e.g. Test No. 442C: In Chemico Skin Sensitisation: Assays addressing the Adverse Outcome Pathway key event on covalent binding to proteins).
       citation_id:
-        description: The citation for the published test guideline document.
+        description: >-
+          The citation for the published test guideline document.
         range: Citation
         inlined: true
       assays:
@@ -1025,53 +1047,76 @@ enums:
   BiologicalObjectSourceEnum:
     permissible_values:
       GO:
-        description: Gene Ontology
+        description: >-
+          Gene Ontology
       CHEBI:
-        description: Chemical Entities of Biological Interest
+        description: >-
+          Chemical Entities of Biological Interest
       CL:
-        description: Cell Ontology
+        description: >-
+          Cell Ontology
       PR:
-        description: Protein Ontology
+        description: >-
+          Protein Ontology
       UBERON:
-        description: Uber-anatomy Ontology
+        description: >-
+          Uber-anatomy Ontology
       FMA:
-        description: Foundational Model of Anatomy
+        description: >-
+          Foundational Model of Anatomy
       MESH:
-        description: Medical Subject Headings
+        description: >-
+          Medical Subject Headings
       PCO:
-        description: Population and Community Ontology
+        description: >-
+          Population and Community Ontology
       MP:
-        description: Mammalian Phenotype Ontology
+        description: >-
+          Mammalian Phenotype Ontology
       TAIR:
-        description: The Arabidopsis Information Resource
+        description: >-
+          The Arabidopsis Information Resource
       N/A:
-        description: Not applicable or not mapped to an ontology
+        description: >-
+          Not applicable or not mapped to an ontology
   BiologicalProcessSourceEnum:
     permissible_values:
       GO:
-        description: Gene Ontology
+        description: >-
+          Gene Ontology
       HP:
-        description: Human Phenotype Ontology
+        description: >-
+          Human Phenotype Ontology
       MP:
-        description: Mammalian Phenotype Ontology
+        description: >-
+          Mammalian Phenotype Ontology
       NBO:
-        description: Neurobehavior Ontology
+        description: >-
+          Neurobehavior Ontology
       VT:
-        description: Vertebrate Trait Ontology
+        description: >-
+          Vertebrate Trait Ontology
       MESH:
-        description: Medical Subject Headings
+        description: >-
+          Medical Subject Headings
       PCO:
-        description: Population and Community Ontology
+        description: >-
+          Population and Community Ontology
       MI:
-        description: Molecular Interactions Ontology
+        description: >-
+          Molecular Interactions Ontology
       N/A:
-        description: Not applicable or not mapped to an ontology
+        description: >-
+          Not applicable or not mapped to an ontology
       IDO:
-        description: Infectious Disease Ontology
+        description: >-
+          Infectious Disease Ontology
       NCI:
-        description: NCI Thesaurus
+        description: >-
+          NCI Thesaurus
       RBO:
-        description: Radiation Biology Ontology
+        description: >-
+          Radiation Biology Ontology
   SexTermEnum:
     permissible_values:
       Male:

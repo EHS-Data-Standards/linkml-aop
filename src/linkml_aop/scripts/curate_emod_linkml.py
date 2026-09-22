@@ -225,16 +225,14 @@ def apply_pascal_case_to_classes(text: str) -> str:
 
 
 def description_lines(text: str, indent: int) -> list[str]:
-    """Return description: lines, folded when the text would break an inline scalar.
+    """Return description: lines as a folded block scalar (>-).
 
-    A plain inline scalar cannot contain ": ", so such text is written as a folded
-    block scalar (>-) instead. Paragraphs (separated by a blank line in the source
-    string) are kept as paragraphs.
+    A folded scalar is safe for any text: an inline scalar would break on ": ",
+    " #", a leading quote or indicator character, or a trailing colon. Paragraphs
+    (separated by a blank line in the source string) are kept as paragraphs.
     """
     pad = " " * indent
     paragraphs = [p.strip() for p in text.split("\n\n") if p.strip()]
-    if len(paragraphs) == 1 and ": " not in text:
-        return [f"{pad}description: {text}\n"]
     lines = [f"{pad}description: >-\n"]
     for i, paragraph in enumerate(paragraphs):
         if i:
@@ -381,7 +379,7 @@ def build_enums_yaml(enum_definitions: dict) -> str:
         if isinstance(values, dict):
             for k, v in values.items():
                 lines.append(f"      {k}:\n")
-                lines.append(f"        description: {v}\n")
+                lines.extend(description_lines(v, indent=8))
         else:
             for v in values:
                 lines.append(f"      {v}:\n")
