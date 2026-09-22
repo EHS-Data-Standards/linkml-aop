@@ -214,6 +214,10 @@ CURATED_RANGES: dict[str, dict[str, str]] = {
         "legacy": "integer",
         "assigned_license_id": "assigned_licenses",
         "handbook_id": "handbooks",
+        # TINYINT(1) columns; schemauto reads them as string
+        "project_129": "boolean",
+        "has_references": "boolean",
+        "has_structured_methods": "boolean",
     },
     "assays": {
         "reference_id": "citations",
@@ -314,6 +318,7 @@ CURATED_RANGES: dict[str, dict[str, str]] = {
     "relationships": {
         "upstream_event_id": "events",
         "downstream_event_id": "events",
+        "has_tabulated_evidence": "boolean",  # TINYINT(1); schemauto reads it as string
     },
     "statuses": {
         "sort": "integer",

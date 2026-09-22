@@ -1,5 +1,5 @@
 # Auto generated from aop_emod_linkml.yaml by pythongen.py version: 0.0.1
-# Generation date: 2026-09-21T19:37:59
+# Generation date: 2026-09-21T22:19:53
 # Schema: aopwiki-emod
 #
 # id: http://example.org/aopwiki-emod
@@ -56,8 +56,8 @@ from rdflib import (
     URIRef
 )
 
-from linkml_runtime.linkml_model.types import Datetime, Float, Integer, String
-from linkml_runtime.utils.metamodelcore import XSDDateTime
+from linkml_runtime.linkml_model.types import Boolean, Datetime, Float, Integer, String
+from linkml_runtime.utils.metamodelcore import Bool, XSDDateTime
 
 metamodel_version = "1.7.0"
 version = None
@@ -295,9 +295,9 @@ class Aop(YAMLRoot):
     completion_score: Optional[float] = None
     mean_ker_score: Optional[float] = None
     mean_event_score: Optional[float] = None
-    has_references: Optional[str] = None
-    project_129: Optional[str] = None
-    has_structured_methods: Optional[str] = None
+    has_references: Optional[Union[bool, Bool]] = None
+    project_129: Optional[Union[bool, Bool]] = None
+    has_structured_methods: Optional[Union[bool, Bool]] = None
     assays: Optional[Union[dict[Union[int, AssayId], Union[dict, "Assay"]], list[Union[dict, "Assay"]]]] = empty_dict()
     prototypical_stressors: Optional[Union[dict[Union[int, AopToPrototypicalStressorId], Union[dict, "AopToPrototypicalStressor"]], list[Union[dict, "AopToPrototypicalStressor"]]]] = empty_dict()
     events: Optional[Union[dict[Union[int, AopToEventId], Union[dict, "AopToEvent"]], list[Union[dict, "AopToEvent"]]]] = empty_dict()
@@ -393,14 +393,14 @@ class Aop(YAMLRoot):
         if self.mean_event_score is not None and not isinstance(self.mean_event_score, float):
             self.mean_event_score = float(self.mean_event_score)
 
-        if self.has_references is not None and not isinstance(self.has_references, str):
-            self.has_references = str(self.has_references)
+        if self.has_references is not None and not isinstance(self.has_references, Bool):
+            self.has_references = Bool(self.has_references)
 
-        if self.project_129 is not None and not isinstance(self.project_129, str):
-            self.project_129 = str(self.project_129)
+        if self.project_129 is not None and not isinstance(self.project_129, Bool):
+            self.project_129 = Bool(self.project_129)
 
-        if self.has_structured_methods is not None and not isinstance(self.has_structured_methods, str):
-            self.has_structured_methods = str(self.has_structured_methods)
+        if self.has_structured_methods is not None and not isinstance(self.has_structured_methods, Bool):
+            self.has_structured_methods = Bool(self.has_structured_methods)
 
         self._normalize_inlined_as_list(slot_name="assays", slot_type=Assay, key_name="id", keyed=True)
 
@@ -602,7 +602,7 @@ class KeRelationship(YAMLRoot):
     evidence_collection_strategy: Optional[str] = None
     references: Optional[str] = None
     completion_score: Optional[float] = None
-    has_tabulated_evidence: Optional[str] = None
+    has_tabulated_evidence: Optional[Union[bool, Bool]] = None
     aops: Optional[Union[dict[Union[int, AopToKeRelationshipId], Union[dict, "AopToKeRelationship"]], list[Union[dict, "AopToKeRelationship"]]]] = empty_dict()
     taxons: Optional[Union[dict[Union[int, KeRelationshipToTaxonId], Union[dict, "KeRelationshipToTaxon"]], list[Union[dict, "KeRelationshipToTaxon"]]]] = empty_dict()
     sexes: Optional[Union[dict[Union[int, KeRelationshipToSexId], Union[dict, "KeRelationshipToSex"]], list[Union[dict, "KeRelationshipToSex"]]]] = empty_dict()
@@ -668,8 +668,8 @@ class KeRelationship(YAMLRoot):
         if self.completion_score is not None and not isinstance(self.completion_score, float):
             self.completion_score = float(self.completion_score)
 
-        if self.has_tabulated_evidence is not None and not isinstance(self.has_tabulated_evidence, str):
-            self.has_tabulated_evidence = str(self.has_tabulated_evidence)
+        if self.has_tabulated_evidence is not None and not isinstance(self.has_tabulated_evidence, Bool):
+            self.has_tabulated_evidence = Bool(self.has_tabulated_evidence)
 
         self._normalize_inlined_as_list(slot_name="aops", slot_type=AopToKeRelationship, key_name="id", keyed=True)
 
@@ -2852,13 +2852,13 @@ slots.aop__mean_event_score = Slot(uri=DEFAULT_.mean_event_score, name="aop__mea
                    model_uri=DEFAULT_.aop__mean_event_score, domain=None, range=Optional[float])
 
 slots.aop__has_references = Slot(uri=DEFAULT_.has_references, name="aop__has_references", curie=DEFAULT_.curie('has_references'),
-                   model_uri=DEFAULT_.aop__has_references, domain=None, range=Optional[str])
+                   model_uri=DEFAULT_.aop__has_references, domain=None, range=Optional[Union[bool, Bool]])
 
 slots.aop__project_129 = Slot(uri=DEFAULT_.project_129, name="aop__project_129", curie=DEFAULT_.curie('project_129'),
-                   model_uri=DEFAULT_.aop__project_129, domain=None, range=Optional[str])
+                   model_uri=DEFAULT_.aop__project_129, domain=None, range=Optional[Union[bool, Bool]])
 
 slots.aop__has_structured_methods = Slot(uri=DEFAULT_.has_structured_methods, name="aop__has_structured_methods", curie=DEFAULT_.curie('has_structured_methods'),
-                   model_uri=DEFAULT_.aop__has_structured_methods, domain=None, range=Optional[str])
+                   model_uri=DEFAULT_.aop__has_structured_methods, domain=None, range=Optional[Union[bool, Bool]])
 
 slots.aop__assays = Slot(uri=DEFAULT_.assays, name="aop__assays", curie=DEFAULT_.curie('assays'),
                    model_uri=DEFAULT_.aop__assays, domain=None, range=Optional[Union[dict[Union[int, AssayId], Union[dict, Assay]], list[Union[dict, Assay]]]])
@@ -3017,7 +3017,7 @@ slots.keRelationship__completion_score = Slot(uri=DEFAULT_.completion_score, nam
                    model_uri=DEFAULT_.keRelationship__completion_score, domain=None, range=Optional[float])
 
 slots.keRelationship__has_tabulated_evidence = Slot(uri=DEFAULT_.has_tabulated_evidence, name="keRelationship__has_tabulated_evidence", curie=DEFAULT_.curie('has_tabulated_evidence'),
-                   model_uri=DEFAULT_.keRelationship__has_tabulated_evidence, domain=None, range=Optional[str])
+                   model_uri=DEFAULT_.keRelationship__has_tabulated_evidence, domain=None, range=Optional[Union[bool, Bool]])
 
 slots.keRelationship__aops = Slot(uri=DEFAULT_.aops, name="keRelationship__aops", curie=DEFAULT_.curie('aops'),
                    model_uri=DEFAULT_.keRelationship__aops, domain=None, range=Optional[Union[dict[Union[int, AopToKeRelationshipId], Union[dict, AopToKeRelationship]], list[Union[dict, AopToKeRelationship]]]])

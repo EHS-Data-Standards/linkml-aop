@@ -84,8 +84,11 @@ classes:
       mean_event_score:
         range: float
       has_references:
+        range: boolean
       project_129:
+        range: boolean
       has_structured_methods:
+        range: boolean
       assays:
         multivalued: true
         range: Assay
@@ -257,6 +260,7 @@ classes:
       completion_score:
         range: float
       has_tabulated_evidence:
+        range: boolean
       aops:
         multivalued: true
         range: AopToKeRelationship
