@@ -41,7 +41,7 @@ jupyter = ">=1.0.0"
 mknotebooks = ">= 0.8.0"
 
 [tool.pytest.ini_options]
-addopts = ["--ignore=tests/test_data.py"]
+addopts = []
 
 [dependency-groups]
 dev = [

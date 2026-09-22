@@ -41,10 +41,13 @@ Full work record: `/Users/ginniehench/Developer/ehmech/docs/linkml_aop_schema_up
       LinkML `deprecated:` field. (It already failed `gen-python` before archiving:
       `string` range without importing `linkml:types`.)
 
+- [x] **`tests/test_data.py` retargeted at the generated datamodel.** Each
+      `src/data/examples/valid/<Class>-<n>.yaml` must load as that class; each invalid
+      example must be rejected. The `--ignore` in `pyproject.toml` is removed, so pytest
+      collects it (5 tests).
+
 ## Open
 
-- [ ] **`tests/test_data.py`** is skipped and still targets the old `AOPathwayCollection`
-      class, which the EMOD schema does not have.
 - [ ] **`ExperimentSetup` class definition**, the last new class without one. Deferred
       until after this work is committed.
 - [ ] **Step 6: regenerate and verify.**
