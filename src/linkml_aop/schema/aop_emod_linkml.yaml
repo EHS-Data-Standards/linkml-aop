@@ -78,8 +78,11 @@ classes:
         range: Handbook
         inlined: true
       completion_score:
+        range: float
       mean_ker_score:
+        range: float
       mean_event_score:
+        range: float
       has_references:
       project_129:
       has_structured_methods:
@@ -166,13 +169,18 @@ classes:
         inlined: true
       completion_score:
         description: Calculated metric indicating how complete the Key Event documentation is.
+        range: float
       integration_score:
         description: Calculated metric for integration and priority assessment of the Key Event.
+        range: float
       has_method_text:
         description: Indicates whether method text has been provided for this Key Event.
       aop_open_for_adoption_count:
+        range: integer
       aop_oecd_program_count:
+        range: integer
       aop_oecd_endorsed_count:
+        range: integer
       event_components:
         multivalued: true
         range: EventComponent
@@ -247,6 +255,7 @@ classes:
       evidence_collection_strategy:
       references:
       completion_score:
+        range: float
       has_tabulated_evidence:
       aops:
         multivalued: true

@@ -327,17 +327,21 @@ def convert_class_block(
                 i = j
                 continue
 
-            # Apply curated range if available, otherwise strip range: string
+            # Apply curated range if available. Otherwise keep the generated range,
+            # dropping only range: string (the schema default).
             curated = curated_ranges.get(attr_name)
             new_block = []
             replaced = False
             for al in attr_block:
-                if re.match(r"^        range:\s+\S+\s*$", al):
+                range_match = re.match(r"^        range:\s+(\S+)\s*$", al)
+                if range_match:
                     if curated:
                         new_block.append(f"        range: {curated}\n")
                         if curated not in LINKML_BUILTIN_TYPES and not curated.endswith("_enum"):
                             new_block.append(f"        inlined: true\n")
                         replaced = True
+                    elif range_match.group(1) != "string":
+                        new_block.append(al)
                     # else: drop range: string (it's the default)
                 else:
                     new_block.append(al)

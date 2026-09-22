@@ -1,5 +1,5 @@
 # Auto generated from aop_emod_linkml.yaml by pythongen.py version: 0.0.1
-# Generation date: 2026-09-21T18:31:35
+# Generation date: 2026-09-21T19:37:59
 # Schema: aopwiki-emod
 #
 # id: http://example.org/aopwiki-emod
@@ -292,9 +292,9 @@ class Aop(YAMLRoot):
     known_modulating_factors: Optional[str] = None
     assigned_license_id: Optional[Union[dict, "AssignedLicense"]] = None
     handbook_id: Optional[Union[dict, "Handbook"]] = None
-    completion_score: Optional[str] = None
-    mean_ker_score: Optional[str] = None
-    mean_event_score: Optional[str] = None
+    completion_score: Optional[float] = None
+    mean_ker_score: Optional[float] = None
+    mean_event_score: Optional[float] = None
     has_references: Optional[str] = None
     project_129: Optional[str] = None
     has_structured_methods: Optional[str] = None
@@ -384,14 +384,14 @@ class Aop(YAMLRoot):
         if self.handbook_id is not None and not isinstance(self.handbook_id, Handbook):
             self.handbook_id = Handbook(**as_dict(self.handbook_id))
 
-        if self.completion_score is not None and not isinstance(self.completion_score, str):
-            self.completion_score = str(self.completion_score)
+        if self.completion_score is not None and not isinstance(self.completion_score, float):
+            self.completion_score = float(self.completion_score)
 
-        if self.mean_ker_score is not None and not isinstance(self.mean_ker_score, str):
-            self.mean_ker_score = str(self.mean_ker_score)
+        if self.mean_ker_score is not None and not isinstance(self.mean_ker_score, float):
+            self.mean_ker_score = float(self.mean_ker_score)
 
-        if self.mean_event_score is not None and not isinstance(self.mean_event_score, str):
-            self.mean_event_score = str(self.mean_event_score)
+        if self.mean_event_score is not None and not isinstance(self.mean_event_score, float):
+            self.mean_event_score = float(self.mean_event_score)
 
         if self.has_references is not None and not isinstance(self.has_references, str):
             self.has_references = str(self.has_references)
@@ -466,12 +466,12 @@ class Event(YAMLRoot):
     definition: Optional[str] = None
     organ_term_id: Optional[Union[dict, "OrganTerm"]] = None
     cell_term_id: Optional[Union[dict, "CellTerm"]] = None
-    completion_score: Optional[str] = None
-    integration_score: Optional[str] = None
+    completion_score: Optional[float] = None
+    integration_score: Optional[float] = None
     has_method_text: Optional[str] = None
-    aop_open_for_adoption_count: Optional[str] = None
-    aop_oecd_program_count: Optional[str] = None
-    aop_oecd_endorsed_count: Optional[str] = None
+    aop_open_for_adoption_count: Optional[int] = None
+    aop_oecd_program_count: Optional[int] = None
+    aop_oecd_endorsed_count: Optional[int] = None
     event_components: Optional[Union[dict[Union[int, EventComponentId], Union[dict, "EventComponent"]], list[Union[dict, "EventComponent"]]]] = empty_dict()
     assays: Optional[Union[dict[Union[int, AssayId], Union[dict, "Assay"]], list[Union[dict, "Assay"]]]] = empty_dict()
     observations: Optional[Union[dict[Union[int, ObservationId], Union[dict, "Observation"]], list[Union[dict, "Observation"]]]] = empty_dict()
@@ -530,23 +530,23 @@ class Event(YAMLRoot):
         if self.cell_term_id is not None and not isinstance(self.cell_term_id, CellTerm):
             self.cell_term_id = CellTerm(**as_dict(self.cell_term_id))
 
-        if self.completion_score is not None and not isinstance(self.completion_score, str):
-            self.completion_score = str(self.completion_score)
+        if self.completion_score is not None and not isinstance(self.completion_score, float):
+            self.completion_score = float(self.completion_score)
 
-        if self.integration_score is not None and not isinstance(self.integration_score, str):
-            self.integration_score = str(self.integration_score)
+        if self.integration_score is not None and not isinstance(self.integration_score, float):
+            self.integration_score = float(self.integration_score)
 
         if self.has_method_text is not None and not isinstance(self.has_method_text, str):
             self.has_method_text = str(self.has_method_text)
 
-        if self.aop_open_for_adoption_count is not None and not isinstance(self.aop_open_for_adoption_count, str):
-            self.aop_open_for_adoption_count = str(self.aop_open_for_adoption_count)
+        if self.aop_open_for_adoption_count is not None and not isinstance(self.aop_open_for_adoption_count, int):
+            self.aop_open_for_adoption_count = int(self.aop_open_for_adoption_count)
 
-        if self.aop_oecd_program_count is not None and not isinstance(self.aop_oecd_program_count, str):
-            self.aop_oecd_program_count = str(self.aop_oecd_program_count)
+        if self.aop_oecd_program_count is not None and not isinstance(self.aop_oecd_program_count, int):
+            self.aop_oecd_program_count = int(self.aop_oecd_program_count)
 
-        if self.aop_oecd_endorsed_count is not None and not isinstance(self.aop_oecd_endorsed_count, str):
-            self.aop_oecd_endorsed_count = str(self.aop_oecd_endorsed_count)
+        if self.aop_oecd_endorsed_count is not None and not isinstance(self.aop_oecd_endorsed_count, int):
+            self.aop_oecd_endorsed_count = int(self.aop_oecd_endorsed_count)
 
         self._normalize_inlined_as_list(slot_name="event_components", slot_type=EventComponent, key_name="id", keyed=True)
 
@@ -601,7 +601,7 @@ class KeRelationship(YAMLRoot):
     known_loops: Optional[str] = None
     evidence_collection_strategy: Optional[str] = None
     references: Optional[str] = None
-    completion_score: Optional[str] = None
+    completion_score: Optional[float] = None
     has_tabulated_evidence: Optional[str] = None
     aops: Optional[Union[dict[Union[int, AopToKeRelationshipId], Union[dict, "AopToKeRelationship"]], list[Union[dict, "AopToKeRelationship"]]]] = empty_dict()
     taxons: Optional[Union[dict[Union[int, KeRelationshipToTaxonId], Union[dict, "KeRelationshipToTaxon"]], list[Union[dict, "KeRelationshipToTaxon"]]]] = empty_dict()
@@ -665,8 +665,8 @@ class KeRelationship(YAMLRoot):
         if self.references is not None and not isinstance(self.references, str):
             self.references = str(self.references)
 
-        if self.completion_score is not None and not isinstance(self.completion_score, str):
-            self.completion_score = str(self.completion_score)
+        if self.completion_score is not None and not isinstance(self.completion_score, float):
+            self.completion_score = float(self.completion_score)
 
         if self.has_tabulated_evidence is not None and not isinstance(self.has_tabulated_evidence, str):
             self.has_tabulated_evidence = str(self.has_tabulated_evidence)
@@ -2843,13 +2843,13 @@ slots.aop__handbook_id = Slot(uri=DEFAULT_.handbook_id, name="aop__handbook_id",
                    model_uri=DEFAULT_.aop__handbook_id, domain=None, range=Optional[Union[dict, Handbook]])
 
 slots.aop__completion_score = Slot(uri=DEFAULT_.completion_score, name="aop__completion_score", curie=DEFAULT_.curie('completion_score'),
-                   model_uri=DEFAULT_.aop__completion_score, domain=None, range=Optional[str])
+                   model_uri=DEFAULT_.aop__completion_score, domain=None, range=Optional[float])
 
 slots.aop__mean_ker_score = Slot(uri=DEFAULT_.mean_ker_score, name="aop__mean_ker_score", curie=DEFAULT_.curie('mean_ker_score'),
-                   model_uri=DEFAULT_.aop__mean_ker_score, domain=None, range=Optional[str])
+                   model_uri=DEFAULT_.aop__mean_ker_score, domain=None, range=Optional[float])
 
 slots.aop__mean_event_score = Slot(uri=DEFAULT_.mean_event_score, name="aop__mean_event_score", curie=DEFAULT_.curie('mean_event_score'),
-                   model_uri=DEFAULT_.aop__mean_event_score, domain=None, range=Optional[str])
+                   model_uri=DEFAULT_.aop__mean_event_score, domain=None, range=Optional[float])
 
 slots.aop__has_references = Slot(uri=DEFAULT_.has_references, name="aop__has_references", curie=DEFAULT_.curie('has_references'),
                    model_uri=DEFAULT_.aop__has_references, domain=None, range=Optional[str])
@@ -2921,22 +2921,22 @@ slots.event__cell_term_id = Slot(uri=DEFAULT_.cell_term_id, name="event__cell_te
                    model_uri=DEFAULT_.event__cell_term_id, domain=None, range=Optional[Union[dict, CellTerm]])
 
 slots.event__completion_score = Slot(uri=DEFAULT_.completion_score, name="event__completion_score", curie=DEFAULT_.curie('completion_score'),
-                   model_uri=DEFAULT_.event__completion_score, domain=None, range=Optional[str])
+                   model_uri=DEFAULT_.event__completion_score, domain=None, range=Optional[float])
 
 slots.event__integration_score = Slot(uri=DEFAULT_.integration_score, name="event__integration_score", curie=DEFAULT_.curie('integration_score'),
-                   model_uri=DEFAULT_.event__integration_score, domain=None, range=Optional[str])
+                   model_uri=DEFAULT_.event__integration_score, domain=None, range=Optional[float])
 
 slots.event__has_method_text = Slot(uri=DEFAULT_.has_method_text, name="event__has_method_text", curie=DEFAULT_.curie('has_method_text'),
                    model_uri=DEFAULT_.event__has_method_text, domain=None, range=Optional[str])
 
 slots.event__aop_open_for_adoption_count = Slot(uri=DEFAULT_.aop_open_for_adoption_count, name="event__aop_open_for_adoption_count", curie=DEFAULT_.curie('aop_open_for_adoption_count'),
-                   model_uri=DEFAULT_.event__aop_open_for_adoption_count, domain=None, range=Optional[str])
+                   model_uri=DEFAULT_.event__aop_open_for_adoption_count, domain=None, range=Optional[int])
 
 slots.event__aop_oecd_program_count = Slot(uri=DEFAULT_.aop_oecd_program_count, name="event__aop_oecd_program_count", curie=DEFAULT_.curie('aop_oecd_program_count'),
-                   model_uri=DEFAULT_.event__aop_oecd_program_count, domain=None, range=Optional[str])
+                   model_uri=DEFAULT_.event__aop_oecd_program_count, domain=None, range=Optional[int])
 
 slots.event__aop_oecd_endorsed_count = Slot(uri=DEFAULT_.aop_oecd_endorsed_count, name="event__aop_oecd_endorsed_count", curie=DEFAULT_.curie('aop_oecd_endorsed_count'),
-                   model_uri=DEFAULT_.event__aop_oecd_endorsed_count, domain=None, range=Optional[str])
+                   model_uri=DEFAULT_.event__aop_oecd_endorsed_count, domain=None, range=Optional[int])
 
 slots.event__event_components = Slot(uri=DEFAULT_.event_components, name="event__event_components", curie=DEFAULT_.curie('event_components'),
                    model_uri=DEFAULT_.event__event_components, domain=None, range=Optional[Union[dict[Union[int, EventComponentId], Union[dict, EventComponent]], list[Union[dict, EventComponent]]]])
@@ -3014,7 +3014,7 @@ slots.keRelationship__references = Slot(uri=DEFAULT_.references, name="keRelatio
                    model_uri=DEFAULT_.keRelationship__references, domain=None, range=Optional[str])
 
 slots.keRelationship__completion_score = Slot(uri=DEFAULT_.completion_score, name="keRelationship__completion_score", curie=DEFAULT_.curie('completion_score'),
-                   model_uri=DEFAULT_.keRelationship__completion_score, domain=None, range=Optional[str])
+                   model_uri=DEFAULT_.keRelationship__completion_score, domain=None, range=Optional[float])
 
 slots.keRelationship__has_tabulated_evidence = Slot(uri=DEFAULT_.has_tabulated_evidence, name="keRelationship__has_tabulated_evidence", curie=DEFAULT_.curie('has_tabulated_evidence'),
                    model_uri=DEFAULT_.keRelationship__has_tabulated_evidence, domain=None, range=Optional[str])
