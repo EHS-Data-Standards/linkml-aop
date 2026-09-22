@@ -22,7 +22,12 @@ INVALID_FILES = sorted(glob.glob(os.path.join(EXAMPLES_DIR, "invalid", "*.yaml")
 def target_class(path: str):
     """Resolve the datamodel class named by an example file's <Class>-<n>.yaml stem."""
     class_name = os.path.basename(path).rsplit(".", 1)[0].split("-", 1)[0]
-    return getattr(datamodel, class_name)
+    cls = getattr(datamodel, class_name, None)
+    assert cls is not None, (
+        f"{os.path.basename(path)}: no class named {class_name!r} in the datamodel; "
+        "example files must be named <Class>-<n>.yaml"
+    )
+    return cls
 
 
 def test_examples_exist():
@@ -39,5 +44,7 @@ def test_valid_example_loads(path):
 
 @pytest.mark.parametrize("path", INVALID_FILES, ids=os.path.basename)
 def test_invalid_example_is_rejected(path):
-    with pytest.raises(Exception):
-        yaml_loader.load(path, target_class=target_class(path))
+    # Resolve the class first so that only a loader rejection can satisfy the raise.
+    cls = target_class(path)
+    with pytest.raises((ValueError, TypeError)):
+        yaml_loader.load(path, target_class=cls)
