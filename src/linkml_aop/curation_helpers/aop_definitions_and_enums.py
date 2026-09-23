@@ -178,8 +178,10 @@ sex_terms_enum_list = {
     ),
 }
 
-# "Human" was removed from this list on 2026-09-22: it is a taxon, not a life stage, and
-# no AOP-Wiki entity uses it as one (export of 2026-09-15).
+# Removed from the AOP-Wiki list on 2026-09-22: "Human" (a taxon, not a life stage) and
+# the duplicate spellings "Foetal", "Adults", and "Larval development" (use "Fetal",
+# "Adult", and "Larvae"). Data carrying a removed spelling is a validator's concern, not
+# the schema's.
 life_stage_terms_enum_list = [
     "Birth to < 1 month",
     "1 to < 3 months",
@@ -198,14 +200,12 @@ life_stage_terms_enum_list = [
     "Lactating Mother",
     "Conception to < Fetal",
     "Fetal to Parturition",
-    "Foetal",
     "Fetal",
     "Embryo",
     "Juvenile",
     "Prepubertal",
     "Perinatal",
     "Adult, reproductively mature",
-    "Adults",
     "Adult",
     "During development and at adulthood",
     "During brain development, adulthood and aging",
@@ -213,7 +213,6 @@ life_stage_terms_enum_list = [
     "Development",
     "All life stages",
     "Larvae",
-    "Larval development",
     "before or during gonadal sex differentiation",
 ]
 

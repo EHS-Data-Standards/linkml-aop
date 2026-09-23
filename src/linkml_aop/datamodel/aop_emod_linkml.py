@@ -1,5 +1,5 @@
 # Auto generated from aop_emod_linkml.yaml by pythongen.py version: 0.0.1
-# Generation date: 2026-09-22T23:04:01
+# Generation date: 2026-09-22T23:12:27
 # Schema: aopwiki-emod
 #
 # id: http://example.org/aopwiki-emod
@@ -2739,13 +2739,11 @@ class SexTermEnum(EnumDefinitionImpl):
 class LifeStageTermEnum(EnumDefinitionImpl):
 
     Pregnancy = PermissibleValue(text="Pregnancy")
-    Foetal = PermissibleValue(text="Foetal")
     Fetal = PermissibleValue(text="Fetal")
     Embryo = PermissibleValue(text="Embryo")
     Juvenile = PermissibleValue(text="Juvenile")
     Prepubertal = PermissibleValue(text="Prepubertal")
     Perinatal = PermissibleValue(text="Perinatal")
-    Adults = PermissibleValue(text="Adults")
     Adult = PermissibleValue(text="Adult")
     Development = PermissibleValue(text="Development")
     Larvae = PermissibleValue(text="Larvae")
@@ -2798,8 +2796,6 @@ class LifeStageTermEnum(EnumDefinitionImpl):
             PermissibleValue(text="During brain development"))
         setattr(cls, "All life stages",
             PermissibleValue(text="All life stages"))
-        setattr(cls, "Larval development",
-            PermissibleValue(text="Larval development"))
         setattr(cls, "before or during gonadal sex differentiation",
             PermissibleValue(text="before or during gonadal sex differentiation"))
 

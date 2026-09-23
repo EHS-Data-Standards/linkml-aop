@@ -286,6 +286,11 @@ equivalent in both sexes, do not restrict the context by sex."
 - *"Human" removed* (2026-09-22). It is a taxon, not a life stage. It was in the AOP-Wiki's
   life-stage list, but no AOP, Key Event, or Key Event Relationship in the export of
   2026-09-15 uses it as a life stage, so removing it invalidates no data.
+- *Duplicate spellings removed* (2026-09-22): "Foetal" (use "Fetal"), "Adults" (use
+  "Adult"), "Larval development" (use "Larvae"). Each pair named one stage twice. The
+  schema keeps one spelling per stage; AOP-Wiki data carrying the other spelling (in the
+  2026-09-15 export: Foetal 41, Adults 62, Larval development 2) is a conformance
+  question for a validator applied separately, not something the schema should persist.
 
 ## TestGuideline
 

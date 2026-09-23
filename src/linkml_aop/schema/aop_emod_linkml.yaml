@@ -1141,14 +1141,12 @@ enums:
       Lactating Mother:
       Conception to < Fetal:
       Fetal to Parturition:
-      Foetal:
       Fetal:
       Embryo:
       Juvenile:
       Prepubertal:
       Perinatal:
       Adult, reproductively mature:
-      Adults:
       Adult:
       During development and at adulthood:
       During brain development, adulthood and aging:
@@ -1156,7 +1154,6 @@ enums:
       Development:
       All life stages:
       Larvae:
-      Larval development:
       before or during gonadal sex differentiation:
   TaxonTermClassEnum:
     permissible_values:
