@@ -2,7 +2,7 @@
 
 Branch: `update-schema-new-emod-tables`, under review as
 [PR #8](https://github.com/EHS-Data-Standards/linkml-aop/pull/8). Rebased onto the
-`join-classes` work (#5) on 2026-09-21. The full work record is kept in the EnviroHealthMech
+`join-classes` work (#5) on 2026-09-21. The full work record is kept in the EnviroMech
 repository (`docs/linkml_aop_schema_update_plan.md`).
 
 ## Done
@@ -63,7 +63,7 @@ repository (`docs/linkml_aop_schema_update_plan.md`).
 
 ## Noted, not scheduled
 
-- About page: once EnviroHealthMech is further along, add a short "Used by" line pointing
+- About page: once EnviroMech is further along, add a short "Used by" line pointing
   to it. (A section comparing linkml-aop with dismech was removed: dismech does not use
   this schema.)
 - Leftover config with no effect: `CURATED_RANGES["assays"]` keys `reference_id` and
