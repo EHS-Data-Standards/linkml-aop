@@ -145,15 +145,38 @@ biological_process_source_enum_list = {
     "RBO":  "Radiation Biology Ontology",
 }
 
-sex_terms_enum_list = [
-    "Male",
-    "Female",
-    "Mixed",
-    "Asexual",
-    "Third Gender",
-    "Hermaphrodite",
-    "Unspecific",
-]
+# Sex terms. The AOP Developers' Handbook lists these values but does not define them;
+# the definitions were written for EMOD. Rationale: definition_rationale.md.
+sex_terms_enum_list = {
+    "Male": (
+        "Applies to male organisms. May be combined with other sex terms; Male together "
+        "with Female states applicability to both sexes."
+    ),
+    "Female": (
+        "Applies to female organisms. May be combined with other sex terms; Female "
+        "together with Male states applicability to both sexes."
+    ),
+    "Mixed": (
+        "Applies to both males and females as a single term; the evidence or claim covers "
+        "both sexes without distinguishing them. In AOP-Wiki practice, listing Male and "
+        "Female together is used for the same purpose."
+    ),
+    "Asexual": (
+        "Applies to organisms that reproduce without sexes, so a male/female distinction "
+        "does not apply."
+    ),
+    "Third Gender": (
+        "Applies to organisms with a sex or mating type other than male or female."
+    ),
+    "Hermaphrodite": (
+        "Applies to organisms with both male and female reproductive organs, whether "
+        "simultaneously or sequentially."
+    ),
+    "Unspecific": (
+        "The sex is not specified: not reported, not determined, or not considered "
+        "relevant. Distinct from Mixed, which states that both sexes are covered."
+    ),
+}
 
 life_stage_terms_enum_list = [
     "Birth to < 1 month",

@@ -1,5 +1,5 @@
 # Auto generated from aop_emod_linkml.yaml by pythongen.py version: 0.0.1
-# Generation date: 2026-09-22T22:10:17
+# Generation date: 2026-09-22T22:52:08
 # Schema: aopwiki-emod
 #
 # id: http://example.org/aopwiki-emod
@@ -2706,12 +2706,24 @@ class BiologicalProcessSourceEnum(EnumDefinitionImpl):
 
 class SexTermEnum(EnumDefinitionImpl):
 
-    Male = PermissibleValue(text="Male")
-    Female = PermissibleValue(text="Female")
-    Mixed = PermissibleValue(text="Mixed")
-    Asexual = PermissibleValue(text="Asexual")
-    Hermaphrodite = PermissibleValue(text="Hermaphrodite")
-    Unspecific = PermissibleValue(text="Unspecific")
+    Male = PermissibleValue(
+        text="Male",
+        description="""Applies to male organisms. May be combined with other sex terms; Male together with Female states applicability to both sexes.""")
+    Female = PermissibleValue(
+        text="Female",
+        description="""Applies to female organisms. May be combined with other sex terms; Female together with Male states applicability to both sexes.""")
+    Mixed = PermissibleValue(
+        text="Mixed",
+        description="""Applies to both males and females as a single term; the evidence or claim covers both sexes without distinguishing them. In AOP-Wiki practice, listing Male and Female together is used for the same purpose.""")
+    Asexual = PermissibleValue(
+        text="Asexual",
+        description="""Applies to organisms that reproduce without sexes, so a male/female distinction does not apply.""")
+    Hermaphrodite = PermissibleValue(
+        text="Hermaphrodite",
+        description="""Applies to organisms with both male and female reproductive organs, whether simultaneously or sequentially.""")
+    Unspecific = PermissibleValue(
+        text="Unspecific",
+        description="""The sex is not specified: not reported, not determined, or not considered relevant. Distinct from Mixed, which states that both sexes are covered.""")
 
     _defn = EnumDefinition(
         name="SexTermEnum",
@@ -2720,7 +2732,9 @@ class SexTermEnum(EnumDefinitionImpl):
     @classmethod
     def _addvals(cls):
         setattr(cls, "Third Gender",
-            PermissibleValue(text="Third Gender"))
+            PermissibleValue(
+                text="Third Gender",
+                description="Applies to organisms with a sex or mating type other than male or female."))
 
 class LifeStageTermEnum(EnumDefinitionImpl):
 

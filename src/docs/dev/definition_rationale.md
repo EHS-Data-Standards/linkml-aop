@@ -255,6 +255,32 @@ attached, and how an applicability statement may come about.
   leaves tidying the list as a separate job.
 - *"Observation" is capitalized* where it names the EMOD data class.
 
+## SexTermEnum
+
+**Definitions** (`sex_terms_enum_list`, adopted 2026-09-22): one per value. The AOP
+Developers' Handbook lists the values twice ("male, female, mixed, asexual, hermaphrodite,
+or unspecific"; "Male, female, mixed, asexual, third gender, hermaphrodite, or unspecific")
+but defines none of them. Its only semantic guidance is the example that a KE measured in
+ovarian tissue "would be restricted to females" and the KE-title rule "If the function is
+equivalent in both sexes, do not restrict the context by sex."
+
+**Rationale:**
+
+- *Terms combine.* The handbook says authors "must select from one of the following", but
+  the AOP-Wiki export of 2026-09-15 shows entities carrying several terms: Female + Male
+  on 190 entities, and further combinations beyond that. The EMOD join tables are
+  many-to-many, so the schema allows it too. A draft that defined Male and Female as
+  "male organisms only" was therefore wrong; each term states one sex the entity applies
+  to, and the definitions say terms may be combined.
+- *Mixed versus Male + Female.* Mixed alone (227) and Female + Male (190) are used at
+  similar rates for what appears to be the same meaning. The Mixed definition records the
+  overlap as AOP-Wiki practice rather than resolving it; which form is preferred is an
+  editorial question for the AOP-Wiki.
+- *Unspecific* is the most used value (669 mentions) and the easiest to misread, so its
+  definition says what it is not: it does not mean both sexes are covered.
+- *Asexual and Third Gender* do not occur in the export. They are defined for what the
+  words mean; nothing is removed from the list.
+
 ## TestGuideline
 
 **Definition** (`CLASS_DESCRIPTIONS["test_guidelines"]`, adopted 2026-09-18):
