@@ -286,6 +286,31 @@ equivalent in both sexes, do not restrict the context by sex."
 - *"Human" removed* (2026-09-22). It is a taxon, not a life stage. It was in the AOP-Wiki's
   life-stage list, but no AOP, Key Event, or Key Event Relationship in the export of
   2026-09-15 uses it as a life stage, so removing it invalidates no data.
+**Definitions** (`life_stage_terms_enum_list`, adopted 2026-09-23): one per value, 31 in
+all. The AOP Developers' Handbook says life stage is "described ... by selecting from
+structured ontology terms" and that the terms "may still require further
+description/development", but defines none of them. The list is four kinds of term, and
+each definition follows its kind:
+
+- *Named developmental stages* (Embryo, Fetal, Juvenile, Adult, Larvae, Perinatal, Old
+  Age, ...) are defined by their boundaries, e.g. Embryo "from fertilisation to the end of
+  major organogenesis", Juvenile "after birth or hatching and before sexual maturity".
+- *Human age bands* (Birth to < 1 month through 16 to < 21 years) are each "from X up to
+  but not including Y", matching the half-open form of the labels; they are the standard
+  pediatric age groupings.
+- *Reproductive states of the parent* (Pregnancy, Lactating Mother) say they apply to the
+  parent, not the offspring, and Nursing Child says the reverse, because the labels alone
+  leave that open.
+- *Multi-stage windows* (During brain development; During development and at adulthood;
+  During brain development, adulthood and aging) are described as the union of the stages
+  they name. They come from neurotoxicity AOPs and are kept as used.
+- *Broad or unspecified* (All life stages; Development; Not Otherwise Specified) are
+  defined by what they leave open.
+
+Unused values are kept (Lactating Mother, 2 to < 3 years, 11 to < 16 years, 16 to < 21
+years have no uses in the 2026-09-15 export): they are valid stages that happen not to be
+used yet, as with Asexual and Third Gender in `SexTermEnum`.
+
 - *Duplicate spellings removed* (2026-09-22): "Foetal" (use "Fetal"), "Adults" (use
   "Adult"), "Larval development" (use "Larvae"). Each pair named one stage twice. The
   schema keeps one spelling per stage; AOP-Wiki data carrying the other spelling (in the

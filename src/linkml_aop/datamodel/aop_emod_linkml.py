@@ -1,5 +1,5 @@
 # Auto generated from aop_emod_linkml.yaml by pythongen.py version: 0.0.1
-# Generation date: 2026-09-22T23:12:27
+# Generation date: 2026-09-23T00:25:11
 # Schema: aopwiki-emod
 #
 # id: http://example.org/aopwiki-emod
@@ -2738,15 +2738,33 @@ class SexTermEnum(EnumDefinitionImpl):
 
 class LifeStageTermEnum(EnumDefinitionImpl):
 
-    Pregnancy = PermissibleValue(text="Pregnancy")
-    Fetal = PermissibleValue(text="Fetal")
-    Embryo = PermissibleValue(text="Embryo")
-    Juvenile = PermissibleValue(text="Juvenile")
-    Prepubertal = PermissibleValue(text="Prepubertal")
-    Perinatal = PermissibleValue(text="Perinatal")
-    Adult = PermissibleValue(text="Adult")
-    Development = PermissibleValue(text="Development")
-    Larvae = PermissibleValue(text="Larvae")
+    Pregnancy = PermissibleValue(
+        text="Pregnancy",
+        description="A pregnant female. Applies to the pregnant parent, not to the embryo or fetus.")
+    Fetal = PermissibleValue(
+        text="Fetal",
+        description="The fetal stage, from the end of major organogenesis to birth or hatching.")
+    Embryo = PermissibleValue(
+        text="Embryo",
+        description="The embryonic stage, from fertilisation to the end of major organogenesis.")
+    Juvenile = PermissibleValue(
+        text="Juvenile",
+        description="After birth or hatching and before sexual maturity.")
+    Prepubertal = PermissibleValue(
+        text="Prepubertal",
+        description="The juvenile period before the onset of puberty, used where puberty is the relevant boundary.")
+    Perinatal = PermissibleValue(
+        text="Perinatal",
+        description="The period immediately before and after birth.")
+    Adult = PermissibleValue(
+        text="Adult",
+        description="The mature stage, after growth and sexual maturity are complete.")
+    Development = PermissibleValue(
+        text="Development",
+        description="The developmental period generally, from conception to maturity, without a finer stage.")
+    Larvae = PermissibleValue(
+        text="Larvae",
+        description="The larval stage of species with a larval form, such as fish, amphibians, and insects.")
 
     _defn = EnumDefinition(
         name="LifeStageTermEnum",
@@ -2755,49 +2773,93 @@ class LifeStageTermEnum(EnumDefinitionImpl):
     @classmethod
     def _addvals(cls):
         setattr(cls, "Birth to < 1 month",
-            PermissibleValue(text="Birth to < 1 month"))
+            PermissibleValue(
+                text="Birth to < 1 month",
+                description="""Human age band: from birth up to but not including 1 month of age. One of the standard pediatric age groupings used in clinical and regulatory contexts."""))
         setattr(cls, "1 to < 3 months",
-            PermissibleValue(text="1 to < 3 months"))
+            PermissibleValue(
+                text="1 to < 3 months",
+                description="""Human age band: from 1 month up to but not including 3 months of age. One of the standard pediatric age groupings used in clinical and regulatory contexts."""))
         setattr(cls, "3 to < 6 months",
-            PermissibleValue(text="3 to < 6 months"))
+            PermissibleValue(
+                text="3 to < 6 months",
+                description="""Human age band: from 3 months up to but not including 6 months of age. One of the standard pediatric age groupings used in clinical and regulatory contexts."""))
         setattr(cls, "6 to < 12 months",
-            PermissibleValue(text="6 to < 12 months"))
+            PermissibleValue(
+                text="6 to < 12 months",
+                description="""Human age band: from 6 months up to but not including 12 months of age. One of the standard pediatric age groupings used in clinical and regulatory contexts."""))
         setattr(cls, "1 to < 2 years",
-            PermissibleValue(text="1 to < 2 years"))
+            PermissibleValue(
+                text="1 to < 2 years",
+                description="""Human age band: from 1 year up to but not including 2 years of age. One of the standard pediatric age groupings used in clinical and regulatory contexts."""))
         setattr(cls, "2 to < 3 years",
-            PermissibleValue(text="2 to < 3 years"))
+            PermissibleValue(
+                text="2 to < 3 years",
+                description="""Human age band: from 2 years up to but not including 3 years of age. One of the standard pediatric age groupings used in clinical and regulatory contexts."""))
         setattr(cls, "3 to < 6 years",
-            PermissibleValue(text="3 to < 6 years"))
+            PermissibleValue(
+                text="3 to < 6 years",
+                description="""Human age band: from 3 years up to but not including 6 years of age. One of the standard pediatric age groupings used in clinical and regulatory contexts."""))
         setattr(cls, "6 to < 11 years",
-            PermissibleValue(text="6 to < 11 years"))
+            PermissibleValue(
+                text="6 to < 11 years",
+                description="""Human age band: from 6 years up to but not including 11 years of age. One of the standard pediatric age groupings used in clinical and regulatory contexts."""))
         setattr(cls, "11 to < 16 years",
-            PermissibleValue(text="11 to < 16 years"))
+            PermissibleValue(
+                text="11 to < 16 years",
+                description="""Human age band: from 11 years up to but not including 16 years of age. One of the standard pediatric age groupings used in clinical and regulatory contexts."""))
         setattr(cls, "16 to < 21 years",
-            PermissibleValue(text="16 to < 21 years"))
+            PermissibleValue(
+                text="16 to < 21 years",
+                description="""Human age band: from 16 years up to but not including 21 years of age. One of the standard pediatric age groupings used in clinical and regulatory contexts."""))
         setattr(cls, "Nursing Child",
-            PermissibleValue(text="Nursing Child"))
+            PermissibleValue(
+                text="Nursing Child",
+                description="""An infant or young animal that is being nursed. Applies to the offspring, not the nursing parent."""))
         setattr(cls, "Old Age",
-            PermissibleValue(text="Old Age"))
+            PermissibleValue(
+                text="Old Age",
+                description="The later part of adult life, when age-related decline is relevant."))
         setattr(cls, "Not Otherwise Specified",
-            PermissibleValue(text="Not Otherwise Specified"))
+            PermissibleValue(
+                text="Not Otherwise Specified",
+                description="The life stage is not specified beyond what the free text says."))
         setattr(cls, "Lactating Mother",
-            PermissibleValue(text="Lactating Mother"))
+            PermissibleValue(
+                text="Lactating Mother",
+                description="A lactating female. Applies to the nursing parent, not to the offspring."))
         setattr(cls, "Conception to < Fetal",
-            PermissibleValue(text="Conception to < Fetal"))
+            PermissibleValue(
+                text="Conception to < Fetal",
+                description="""From conception up to, but not including, the fetal stage: the embryonic period stated as an interval."""))
         setattr(cls, "Fetal to Parturition",
-            PermissibleValue(text="Fetal to Parturition"))
+            PermissibleValue(
+                text="Fetal to Parturition",
+                description="From the start of the fetal stage to birth."))
         setattr(cls, "Adult, reproductively mature",
-            PermissibleValue(text="Adult, reproductively mature"))
+            PermissibleValue(
+                text="Adult, reproductively mature",
+                description="The adult stage, with reproductive maturity stated explicitly."))
         setattr(cls, "During development and at adulthood",
-            PermissibleValue(text="During development and at adulthood"))
+            PermissibleValue(
+                text="During development and at adulthood",
+                description="Both the developmental period and adulthood."))
         setattr(cls, "During brain development, adulthood and aging",
-            PermissibleValue(text="During brain development, adulthood and aging"))
+            PermissibleValue(
+                text="During brain development, adulthood and aging",
+                description="""Brain development, adulthood, and aging together: across the lifespan with respect to the brain."""))
         setattr(cls, "During brain development",
-            PermissibleValue(text="During brain development"))
+            PermissibleValue(
+                text="During brain development",
+                description="""The period of brain development, from embryonic neurogenesis through postnatal maturation."""))
         setattr(cls, "All life stages",
-            PermissibleValue(text="All life stages"))
+            PermissibleValue(
+                text="All life stages",
+                description="Applies across all life stages; no restriction."))
         setattr(cls, "before or during gonadal sex differentiation",
-            PermissibleValue(text="before or during gonadal sex differentiation"))
+            PermissibleValue(
+                text="before or during gonadal sex differentiation",
+                description="""The developmental window in which the gonads differentiate into testes or ovaries, or the period before it."""))
 
 class TaxonTermClassEnum(EnumDefinitionImpl):
 

@@ -181,40 +181,121 @@ sex_terms_enum_list = {
 # Removed from the AOP-Wiki list on 2026-09-22: "Human" (a taxon, not a life stage) and
 # the duplicate spellings "Foetal", "Adults", and "Larval development" (use "Fetal",
 # "Adult", and "Larvae"). Data carrying a removed spelling is a validator's concern, not
-# the schema's.
-life_stage_terms_enum_list = [
-    "Birth to < 1 month",
-    "1 to < 3 months",
-    "3 to < 6 months",
-    "6 to < 12 months",
-    "1 to < 2 years",
-    "2 to < 3 years",
-    "3 to < 6 years",
-    "6 to < 11 years",
-    "11 to < 16 years",
-    "16 to < 21 years",
-    "Nursing Child",
-    "Pregnancy",
-    "Old Age",
-    "Not Otherwise Specified",
-    "Lactating Mother",
-    "Conception to < Fetal",
-    "Fetal to Parturition",
-    "Fetal",
-    "Embryo",
-    "Juvenile",
-    "Prepubertal",
-    "Perinatal",
-    "Adult, reproductively mature",
-    "Adult",
-    "During development and at adulthood",
-    "During brain development, adulthood and aging",
-    "During brain development",
-    "Development",
-    "All life stages",
-    "Larvae",
-    "before or during gonadal sex differentiation",
-]
+# the schema's. The handbook does not define the stages; the definitions were written for
+# EMOD. Rationale: definition_rationale.md.
+life_stage_terms_enum_list = {
+    "Birth to < 1 month": (
+        "Human age band: from birth up to but not including 1 month of age. One of the "
+        "standard pediatric age groupings used in clinical and regulatory contexts."
+    ),
+    "1 to < 3 months": (
+        "Human age band: from 1 month up to but not including 3 months of age. One of the "
+        "standard pediatric age groupings used in clinical and regulatory contexts."
+    ),
+    "3 to < 6 months": (
+        "Human age band: from 3 months up to but not including 6 months of age. One of the "
+        "standard pediatric age groupings used in clinical and regulatory contexts."
+    ),
+    "6 to < 12 months": (
+        "Human age band: from 6 months up to but not including 12 months of age. One of "
+        "the standard pediatric age groupings used in clinical and regulatory contexts."
+    ),
+    "1 to < 2 years": (
+        "Human age band: from 1 year up to but not including 2 years of age. One of the "
+        "standard pediatric age groupings used in clinical and regulatory contexts."
+    ),
+    "2 to < 3 years": (
+        "Human age band: from 2 years up to but not including 3 years of age. One of the "
+        "standard pediatric age groupings used in clinical and regulatory contexts."
+    ),
+    "3 to < 6 years": (
+        "Human age band: from 3 years up to but not including 6 years of age. One of the "
+        "standard pediatric age groupings used in clinical and regulatory contexts."
+    ),
+    "6 to < 11 years": (
+        "Human age band: from 6 years up to but not including 11 years of age. One of the "
+        "standard pediatric age groupings used in clinical and regulatory contexts."
+    ),
+    "11 to < 16 years": (
+        "Human age band: from 11 years up to but not including 16 years of age. One of the "
+        "standard pediatric age groupings used in clinical and regulatory contexts."
+    ),
+    "16 to < 21 years": (
+        "Human age band: from 16 years up to but not including 21 years of age. One of the "
+        "standard pediatric age groupings used in clinical and regulatory contexts."
+    ),
+    "Nursing Child": (
+        "An infant or young animal that is being nursed. Applies to the offspring, not the "
+        "nursing parent."
+    ),
+    "Pregnancy": (
+        "A pregnant female. Applies to the pregnant parent, not to the embryo or fetus."
+    ),
+    "Old Age": (
+        "The later part of adult life, when age-related decline is relevant."
+    ),
+    "Not Otherwise Specified": (
+        "The life stage is not specified beyond what the free text says."
+    ),
+    "Lactating Mother": (
+        "A lactating female. Applies to the nursing parent, not to the offspring."
+    ),
+    "Conception to < Fetal": (
+        "From conception up to, but not including, the fetal stage: the embryonic period "
+        "stated as an interval."
+    ),
+    "Fetal to Parturition": (
+        "From the start of the fetal stage to birth."
+    ),
+    "Fetal": (
+        "The fetal stage, from the end of major organogenesis to birth or hatching."
+    ),
+    "Embryo": (
+        "The embryonic stage, from fertilisation to the end of major organogenesis."
+    ),
+    "Juvenile": (
+        "After birth or hatching and before sexual maturity."
+    ),
+    "Prepubertal": (
+        "The juvenile period before the onset of puberty, used where puberty is the "
+        "relevant boundary."
+    ),
+    "Perinatal": (
+        "The period immediately before and after birth."
+    ),
+    "Adult, reproductively mature": (
+        "The adult stage, with reproductive maturity stated explicitly."
+    ),
+    "Adult": (
+        "The mature stage, after growth and sexual maturity are complete."
+    ),
+    "During development and at adulthood": (
+        "Both the developmental period and adulthood."
+    ),
+    "During brain development, adulthood and aging": (
+        "Brain development, adulthood, and aging together: across the lifespan with "
+        "respect to the brain."
+    ),
+    "During brain development": (
+        "The period of brain development, from embryonic neurogenesis through postnatal "
+        "maturation."
+    ),
+    "Development": (
+        "The developmental period generally, from conception to maturity, without a finer "
+        "stage."
+    ),
+    "All life stages": (
+        "Applies across all life stages; no restriction."
+    ),
+    "Larvae": (
+        "The larval stage of species with a larval form, such as fish, amphibians, and "
+        "insects."
+    ),
+    "before or during gonadal sex differentiation": (
+        "The developmental window in which the gonads differentiate into testes or "
+        "ovaries, or the period before it."
+    ),
+}
 
 taxon_term_classes_enum_list = [
     "scientific name",

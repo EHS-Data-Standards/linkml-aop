@@ -1125,36 +1125,98 @@ enums:
   LifeStageTermEnum:
     permissible_values:
       Birth to < 1 month:
+        description: >-
+          Human age band: from birth up to but not including 1 month of age. One of the standard pediatric age groupings used in clinical and regulatory contexts.
       1 to < 3 months:
+        description: >-
+          Human age band: from 1 month up to but not including 3 months of age. One of the standard pediatric age groupings used in clinical and regulatory contexts.
       3 to < 6 months:
+        description: >-
+          Human age band: from 3 months up to but not including 6 months of age. One of the standard pediatric age groupings used in clinical and regulatory contexts.
       6 to < 12 months:
+        description: >-
+          Human age band: from 6 months up to but not including 12 months of age. One of the standard pediatric age groupings used in clinical and regulatory contexts.
       1 to < 2 years:
+        description: >-
+          Human age band: from 1 year up to but not including 2 years of age. One of the standard pediatric age groupings used in clinical and regulatory contexts.
       2 to < 3 years:
+        description: >-
+          Human age band: from 2 years up to but not including 3 years of age. One of the standard pediatric age groupings used in clinical and regulatory contexts.
       3 to < 6 years:
+        description: >-
+          Human age band: from 3 years up to but not including 6 years of age. One of the standard pediatric age groupings used in clinical and regulatory contexts.
       6 to < 11 years:
+        description: >-
+          Human age band: from 6 years up to but not including 11 years of age. One of the standard pediatric age groupings used in clinical and regulatory contexts.
       11 to < 16 years:
+        description: >-
+          Human age band: from 11 years up to but not including 16 years of age. One of the standard pediatric age groupings used in clinical and regulatory contexts.
       16 to < 21 years:
+        description: >-
+          Human age band: from 16 years up to but not including 21 years of age. One of the standard pediatric age groupings used in clinical and regulatory contexts.
       Nursing Child:
+        description: >-
+          An infant or young animal that is being nursed. Applies to the offspring, not the nursing parent.
       Pregnancy:
+        description: >-
+          A pregnant female. Applies to the pregnant parent, not to the embryo or fetus.
       Old Age:
+        description: >-
+          The later part of adult life, when age-related decline is relevant.
       Not Otherwise Specified:
+        description: >-
+          The life stage is not specified beyond what the free text says.
       Lactating Mother:
+        description: >-
+          A lactating female. Applies to the nursing parent, not to the offspring.
       Conception to < Fetal:
+        description: >-
+          From conception up to, but not including, the fetal stage: the embryonic period stated as an interval.
       Fetal to Parturition:
+        description: >-
+          From the start of the fetal stage to birth.
       Fetal:
+        description: >-
+          The fetal stage, from the end of major organogenesis to birth or hatching.
       Embryo:
+        description: >-
+          The embryonic stage, from fertilisation to the end of major organogenesis.
       Juvenile:
+        description: >-
+          After birth or hatching and before sexual maturity.
       Prepubertal:
+        description: >-
+          The juvenile period before the onset of puberty, used where puberty is the relevant boundary.
       Perinatal:
+        description: >-
+          The period immediately before and after birth.
       Adult, reproductively mature:
+        description: >-
+          The adult stage, with reproductive maturity stated explicitly.
       Adult:
+        description: >-
+          The mature stage, after growth and sexual maturity are complete.
       During development and at adulthood:
+        description: >-
+          Both the developmental period and adulthood.
       During brain development, adulthood and aging:
+        description: >-
+          Brain development, adulthood, and aging together: across the lifespan with respect to the brain.
       During brain development:
+        description: >-
+          The period of brain development, from embryonic neurogenesis through postnatal maturation.
       Development:
+        description: >-
+          The developmental period generally, from conception to maturity, without a finer stage.
       All life stages:
+        description: >-
+          Applies across all life stages; no restriction.
       Larvae:
+        description: >-
+          The larval stage of species with a larval form, such as fish, amphibians, and insects.
       before or during gonadal sex differentiation:
+        description: >-
+          The developmental window in which the gonads differentiate into testes or ovaries, or the period before it.
   TaxonTermClassEnum:
     permissible_values:
       scientific name:
