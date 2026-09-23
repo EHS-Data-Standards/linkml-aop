@@ -178,6 +178,8 @@ sex_terms_enum_list = {
     ),
 }
 
+# "Human" was removed from this list on 2026-09-22: it is a taxon, not a life stage, and
+# no AOP-Wiki entity uses it as one (export of 2026-09-15).
 life_stage_terms_enum_list = [
     "Birth to < 1 month",
     "1 to < 3 months",
@@ -208,7 +210,6 @@ life_stage_terms_enum_list = [
     "During development and at adulthood",
     "During brain development, adulthood and aging",
     "During brain development",
-    "Human",
     "Development",
     "All life stages",
     "Larvae",

@@ -1,5 +1,5 @@
 # Auto generated from aop_emod_linkml.yaml by pythongen.py version: 0.0.1
-# Generation date: 2026-09-22T22:52:08
+# Generation date: 2026-09-22T23:04:01
 # Schema: aopwiki-emod
 #
 # id: http://example.org/aopwiki-emod
@@ -2747,7 +2747,6 @@ class LifeStageTermEnum(EnumDefinitionImpl):
     Perinatal = PermissibleValue(text="Perinatal")
     Adults = PermissibleValue(text="Adults")
     Adult = PermissibleValue(text="Adult")
-    Human = PermissibleValue(text="Human")
     Development = PermissibleValue(text="Development")
     Larvae = PermissibleValue(text="Larvae")
 

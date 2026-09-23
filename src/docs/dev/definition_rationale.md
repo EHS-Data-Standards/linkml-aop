@@ -281,6 +281,12 @@ equivalent in both sexes, do not restrict the context by sex."
 - *Asexual and Third Gender* do not occur in the export. They are defined for what the
   words mean; nothing is removed from the list.
 
+## LifeStageTermEnum
+
+- *"Human" removed* (2026-09-22). It is a taxon, not a life stage. It was in the AOP-Wiki's
+  life-stage list, but no AOP, Key Event, or Key Event Relationship in the export of
+  2026-09-15 uses it as a life stage, so removing it invalidates no data.
+
 ## TestGuideline
 
 **Definition** (`CLASS_DESCRIPTIONS["test_guidelines"]`, adopted 2026-09-18):
