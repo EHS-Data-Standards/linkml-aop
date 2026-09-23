@@ -60,14 +60,60 @@ biological_action_enum_list = [
     "premature",
 ]
 
-biological_organization_enum_list = [
-    "Molecular",
-    "Cellular",
-    "Tissue",
-    "Organ",
-    "Individual",
-    "Population",
-]
+# Levels of biological organization. The AOP Developers' Handbook does not define these;
+# the definitions were written for EMOD. Rationale and sources: definition_rationale.md.
+biological_organization_enum_list = {
+    "Molecular": (
+        "The level of molecules and molecular interactions: receptors, enzymes, proteins, "
+        "genes and transcripts, and the binding, phosphorylation, and other reactions "
+        "between them. A Key Event at this level occurs in the state, amount, or activity "
+        "of a molecule, described without regard to the cell it occurs in. Examples: "
+        "\"Binding of antagonist, PPAR alpha\"; \"Increase, Nuclear receptor E75b gene "
+        "expression\". Molecular Initiating Events sit at this level."
+    ),
+    "Cellular": (
+        "The level of the cell, or of cells of one type. A Key Event at this level occurs "
+        "in the state or behaviour of cells, such as proliferation, differentiation, "
+        "apoptosis or other cell death, or an intracellular process such as mitochondrial "
+        "function, ion flux, or synaptic transmission. The cell is the unit whose state "
+        "changes; the molecular events inside it are its mechanism, not the Key Event. "
+        "Examples: \"Increase, Cell injury/death\"; \"Reduction, 17beta-estradiol synthesis "
+        "by ovarian granulosa cells\"."
+    ),
+    "Tissue": (
+        "The level of the tissue, an organised assembly of cells and extracellular matrix. "
+        "A Key Event at this level occurs in a tissue's structure, composition, or "
+        "function, such as hyperplasia, inflammation, fibrosis, a histopathological "
+        "lesion, or the amount of a substance a tissue produces. Examples: \"Hyperplasia\"; "
+        "\"Neuroinflammation\"."
+    ),
+    "Organ": (
+        "The level of the whole organ or organ system, such as the liver, kidney, heart, "
+        "lung, brain, or reproductive tract. A Key Event at this level occurs in an "
+        "organ's structure or function: a malformation, a loss of function, or an "
+        "organ-level physiological output such as heart rate, cochlear function, or "
+        "neuronal network activity. Examples: \"Loss, Cochlear function\"; \"Malformation, "
+        "Male reproductive tract\"."
+    ),
+    "Individual": (
+        "The level of the whole organism. A Key Event at this level occurs in the state of "
+        "an individual: survival, growth, body weight, behaviour, fertility or "
+        "reproduction, or a clinical sign, symptom, or disease in a subject or patient. "
+        "Endpoints at this level are typically the apical endpoints of regulatory toxicity "
+        "tests, and most Adverse Outcomes sit here. Examples: \"Increase, Mortality\"; "
+        "\"Parkinsonian motor deficits\"."
+    ),
+    "Population": (
+        "The level of a group of organisms, considered as a group rather than as "
+        "individuals. A Key Event at this level occurs in a property of the population: "
+        "growth rate, abundance, recruitment, sex ratio, the incidence or prevalence of an "
+        "outcome, or, in eusocial species, the state of a colony. Used mainly for wildlife "
+        "and pollinator pathways, where, as the handbook says of Adverse Outcomes in "
+        "wildlife, the outcome of concern \"will most often be an outcome of demographic "
+        "significance, e.g., population sustainability\". Examples: \"Decrease, Population "
+        "growth rate\"; \"Death/Failure, Colony\"."
+    ),
+}
 
 # Source ontology enums: key = abbreviation, value = full name
 biological_object_source_enum_list = {
@@ -267,12 +313,48 @@ CLASS_DESCRIPTIONS = {
     "biological_objects": (),
     "biological_processes": (),
     "biological_actions": (),
-    "biological_organizations": (),
+    "biological_organizations": (
+        "The scale of biological organisation at which a Key Event occurs, from molecular "
+        "to population level. The AOP-Wiki records it as one structured term selected from "
+        "a fixed list; the permitted values and their definitions are "
+        "BiologicalOrganizationEnum. A Key Event is defined within a single level, and "
+        "only a Key Event Relationship transitions from one level to another. The level "
+        "selected also determines which structured terms are available for describing the "
+        "Key Event's components. The AOP Developers' Handbook recommends that an AOP "
+        "include at least one Key Event at each major level: molecular, cellular, tissue, "
+        "organ, and individual."
+    ),
     "confidence_levels": (),
     "directnesses": (),
-    "life_stage_terms": (),
-    "sex_terms": (),
-    "taxon_terms": (),
+    "life_stage_terms": (
+        "A term stating the life stage of the organisms to which a biological observation "
+        "or claim applies, such as an embryonic, larval, juvenile, adult, or age-defined "
+        "stage, drawn from the AOP-Wiki's list of life-stage terms. In EMOD a life-stage "
+        "term can be attached to a line of evidence or to an applicability statement on an "
+        "AOP, Key Event, or Key Event Relationship. An applicability statement may be "
+        "asserted during AOP development, or derived from the life stages recorded on "
+        "cited evidence; where evidence is cited, the life stage claimed can be traced to "
+        "an Observation."
+    ),
+    "sex_terms": (
+        "A term stating the sex of the organisms to which a biological observation or "
+        "claim applies, from the AOP-Wiki's fixed list: male, female, mixed, asexual, "
+        "third gender, hermaphrodite, or unspecific. In EMOD a sex term can be attached to "
+        "a line of evidence or to an applicability statement on an AOP, Key Event, or Key "
+        "Event Relationship. An applicability statement may be asserted during AOP "
+        "development, or derived from the sexes recorded on cited evidence; where evidence "
+        "is cited, the sex claimed can be traced to an Observation."
+    ),
+    "taxon_terms": (
+        "A taxon used to state the organisms to which a biological observation, method, or "
+        "claim applies: a species by its scientific or common name, or a broader grouping "
+        "such as a genus, family, order, or class, identified by its NCBI Taxonomy ID "
+        "where one exists. In EMOD a taxon term can be attached to a line of evidence, an "
+        "assay, or an applicability statement on an AOP, Key Event, or Key Event "
+        "Relationship. An applicability statement may be asserted during AOP development, "
+        "or derived from the taxa recorded on cited evidence; where evidence is cited, the "
+        "taxon claimed can be traced to an Observation."
+    ),
     "organ_terms": (),
     "cell_terms": (),
     "oecd_statuses": (),

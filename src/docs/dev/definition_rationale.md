@@ -160,6 +160,101 @@ Stressor was written for EMOD. Checked against the
   presents harmonized Events and candidate merger groups as the response to conceptually
   similar and redundant Key Events in the seizure and lung-fibrosis use cases.
 
+## LevelOfBiologicalOrganization
+
+**Definition** (`CLASS_DESCRIPTIONS["biological_organizations"]`, adopted 2026-09-22):
+
+> The scale of biological organisation at which a Key Event occurs, from molecular to
+> population level. The AOP-Wiki records it as one structured term selected from a fixed
+> list; the permitted values and their definitions are BiologicalOrganizationEnum. A Key
+> Event is defined within a single level, and only a Key Event Relationship transitions
+> from one level to another. The level selected also determines which structured terms
+> are available for describing the Key Event's components. The AOP Developers' Handbook
+> recommends that an AOP include at least one Key Event at each major level: molecular,
+> cellular, tissue, organ, and individual.
+
+**Rationale:** the first sentence frames the class as a scale, matching the enum value
+definitions below. Everything after it is from the AOP Developers' Handbook 2.8: Section 2
+("Level of Biological Organisation": structured terms from a drop-down; a KE defined within
+one level; only KERs transition; the level determines the component terms available) and
+the AOP-development guidance on including a KE at each major level. The pointer to the
+enum is there so a reader of the class finds the six level definitions.
+
+## BiologicalOrganizationEnum (levels of biological organization)
+
+**Definitions** (`biological_organization_enum_list`, adopted 2026-09-22): one per value,
+Molecular, Cellular, Tissue, Organ, Individual, Population. Written for EMOD; the AOP
+Developers' Handbook does not define the levels.
+
+**Rationale:**
+
+- *A level is a scale, not a change.* The Key Event is the change; the level is the scale
+  at which it happens. Each definition therefore names the kind of biological entity that
+  is the unit at that level, then says what a Key Event at that level occurs in. An
+  earlier draft defined each level as "a change in ..." and was corrected.
+- *What the handbook does say* (v2.8, Section 2): a Key Event "should be defined within a
+  particular level of biological organisation", only Key Event Relationships transition
+  between levels, and an AOP should include a Key Event "at each major level of
+  biological organisation (molecular, cellular, tissue, organ, individual)". That list
+  stops at individual; Population is in the EMOD enum but is not among the handbook's
+  major levels.
+- *Source for the examples and boundaries: the AOP-Wiki itself.* In the XML export dated
+  2026-09-15, Key Events per level are Cellular 542, Molecular 449, Tissue 222, Organ
+  196, Individual 157, Population 36, and 2,542 with no level. The titles at each level
+  supplied the examples and showed where the practical boundaries fall. The vocabulary
+  in each definition was checked against those titles; working keyword lists used along
+  the way were suggestions, not sources, and are not cited.
+- *Level is where a change happens, not where it is measured* (the CLI's own framing).
+  A draft of the Tissue definition said AOP-Wiki practice files serum and plasma
+  concentrations at Tissue. Checked against the 2026-09-15 snapshot, the seven Key
+  Events titled "in serum/plasma/blood" are spread over Molecular (2), Cellular (1),
+  Tissue (2) and Organ (2); "Thyroxine (T4) in serum, Decreased" (KE 281) is Tissue while
+  "Increased, Thyroxine (T4) in serum" (KE 1828) is Organ. That is inconsistent
+  assignment, not practice, so the sentence was removed.
+- *Population is scoped explicitly* because it is rarely used and a third of its Key
+  Events concern bee colonies. The definition names the demographic scope and quotes the
+  handbook's note that a wildlife Adverse Outcome "will most often be an outcome of
+  demographic significance".
+
+## TaxonTerm, SexTerm, and LifeStageTerm
+
+**Definitions** (`CLASS_DESCRIPTIONS["taxon_terms"]`, `["sex_terms"]`,
+`["life_stage_terms"]`, adopted 2026-09-22). Each defines the term as a descriptor of
+biological context: what it states (the organisms, sex, or life stage an observation,
+method, or claim applies to), the vocabulary it draws from, where in EMOD it can be
+attached, and how an applicability statement may come about.
+
+**Rationale:**
+
+- *Defined as a descriptor, not as a property of a Key Event.* An earlier draft opened
+  each definition with "named in the taxonomic applicability of an AOP, Key Event, or Key
+  Event Relationship" and carried the handbook's applicability rules (empirical versus
+  biologically plausible domain; an AOP takes the most restrictive of its parts). That
+  flattened a distinction the handbook makes, since a term is chosen for a KE, carried to
+  a KER by the same process, and derived for the AOP, and it over-emphasized those
+  entities. In the schema each term is referenced equally by `Evidence`, by the three
+  applicability join tables, and for taxa by `Assay`, so the definition names those
+  attachment points as a list ("can be attached to ...") and no more. The handbook's
+  applicability rules belong to the AOP and KER definitions, if anywhere.
+- *EMOD's evidence link.* A line of `Evidence` carries its own taxon, sex, and life-stage
+  terms, so an entity's applicability can be derived from cited Observations. EMOD is
+  meant to address limitations of the handbook's model here, and the final sentence
+  records that traceability.
+- *Both development strategies are respected.* Some AOP development approaches assert
+  taxa, sex, and life stage before citation; others require derivation from cited
+  sources. The sentence therefore says an applicability statement "may be asserted
+  during AOP development, or derived from ... cited evidence", and the traceability
+  clause applies only "where evidence is cited". A draft that said applicability "is
+  expected to be derived" from evidence was relaxed for this reason.
+- *Vocabulary.* The sex list is the handbook's closed list ("male, female, mixed,
+  asexual, third gender, hermaphrodite, or unspecific"), which matches `SexTermEnum`. The
+  taxon detail (scientific or common name; genus, family, order, or class; NCBI Taxonomy
+  ID) matches the `TaxonTerm` attributes. The existing `LifeStageTermEnum` mixes kinds
+  of value (age bands, named stages, and entries such as "Human" and "Development", plus
+  both "Foetal" and "Fetal"); the definition describes what a life-stage term is for and
+  leaves tidying the list as a separate job.
+- *"Observation" is capitalized* where it names the EMOD data class.
+
 ## TestGuideline
 
 **Definition** (`CLASS_DESCRIPTIONS["test_guidelines"]`, adopted 2026-09-18):
