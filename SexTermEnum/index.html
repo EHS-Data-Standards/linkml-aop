@@ -382,37 +382,37 @@
 <tr>
 <td>Male</td>
 <td>None</td>
-<td></td>
+<td>Applies to male organisms</td>
 </tr>
 <tr>
 <td>Female</td>
 <td>None</td>
-<td></td>
+<td>Applies to female organisms</td>
 </tr>
 <tr>
 <td>Mixed</td>
 <td>None</td>
-<td></td>
+<td>Applies to both males and females as a single term; the evidence or claim cov...</td>
 </tr>
 <tr>
 <td>Asexual</td>
 <td>None</td>
-<td></td>
+<td>Applies to organisms that reproduce without sexes, so a male/female distincti...</td>
 </tr>
 <tr>
 <td>Third Gender</td>
 <td>None</td>
-<td></td>
+<td>Applies to organisms with a sex or mating type other than male or female</td>
 </tr>
 <tr>
 <td>Hermaphrodite</td>
 <td>None</td>
-<td></td>
+<td>Applies to organisms with both male and female reproductive organs, whether s...</td>
 </tr>
 <tr>
 <td>Unspecific</td>
 <td>None</td>
-<td></td>
+<td>The sex is not specified: not reported, not determined, or not considered rel...</td>
 </tr>
 </tbody>
 </table>
@@ -430,18 +430,33 @@ rank: 1000
 permissible_values:
   Male:
     text: Male
+    description: Applies to male organisms. May be combined with other sex terms;
+      Male together with Female states applicability to both sexes.
   Female:
     text: Female
+    description: Applies to female organisms. May be combined with other sex terms;
+      Female together with Male states applicability to both sexes.
   Mixed:
     text: Mixed
+    description: Applies to both males and females as a single term; the evidence
+      or claim covers both sexes without distinguishing them. In AOP-Wiki practice,
+      listing Male and Female together is used for the same purpose.
   Asexual:
     text: Asexual
+    description: Applies to organisms that reproduce without sexes, so a male/female
+      distinction does not apply.
   Third Gender:
     text: Third Gender
+    description: Applies to organisms with a sex or mating type other than male or
+      female.
   Hermaphrodite:
     text: Hermaphrodite
+    description: Applies to organisms with both male and female reproductive organs,
+      whether simultaneously or sequentially.
   Unspecific:
     text: Unspecific
+    description: 'The sex is not specified: not reported, not determined, or not considered
+      relevant. Distinct from Mixed, which states that both sexes are covered.'
 
 </code></pre>
 
