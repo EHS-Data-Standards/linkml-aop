@@ -286,6 +286,7 @@ equivalent in both sexes, do not restrict the context by sex."
 - *"Human" removed* (2026-09-22). It is a taxon, not a life stage. It was in the AOP-Wiki's
   life-stage list, but no AOP, Key Event, or Key Event Relationship in the export of
   2026-09-15 uses it as a life stage, so removing it invalidates no data.
+
 **Definitions** (`life_stage_terms_enum_list`, adopted 2026-09-23): one per value, 31 in
 all. The AOP Developers' Handbook says life stage is "described ... by selecting from
 structured ontology terms" and that the terms "may still require further
