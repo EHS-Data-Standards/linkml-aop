@@ -1,5 +1,5 @@
 # Auto generated from aop_emod_linkml.yaml by pythongen.py version: 0.0.1
-# Generation date: 2026-10-03T21:32:27
+# Generation date: 2026-10-03T21:49:53
 # Schema: aopwiki-emod
 #
 # id: http://example.org/aopwiki-emod
@@ -84,14 +84,6 @@ class EventId(extended_int):
 
 
 class KeRelationshipId(extended_int):
-    pass
-
-
-class AssayId(extended_int):
-    pass
-
-
-class ObservationId(extended_int):
     pass
 
 
@@ -250,7 +242,7 @@ class Aop(YAMLRoot):
     has_references: Optional[Union[bool, Bool]] = None
     project_129: Optional[Union[bool, Bool]] = None
     has_structured_methods: Optional[Union[bool, Bool]] = None
-    assays: Optional[Union[Union[int, AssayId], list[Union[int, AssayId]]]] = empty_list()
+    assays: Optional[Union[Union[dict, "Assay"], list[Union[dict, "Assay"]]]] = empty_list()
     prototypical_stressors: Optional[Union[dict[Union[int, AopToPrototypicalStressorId], Union[dict, "AopToPrototypicalStressor"]], list[Union[dict, "AopToPrototypicalStressor"]]]] = empty_dict()
     events: Optional[Union[dict[Union[int, AopToEventId], Union[dict, "AopToEvent"]], list[Union[dict, "AopToEvent"]]]] = empty_dict()
     ke_relationships: Optional[Union[dict[Union[int, AopToKeRelationshipId], Union[dict, "AopToKeRelationship"]], list[Union[dict, "AopToKeRelationship"]]]] = empty_dict()
@@ -356,7 +348,7 @@ class Aop(YAMLRoot):
 
         if not isinstance(self.assays, list):
             self.assays = [self.assays] if self.assays is not None else []
-        self.assays = [v if isinstance(v, AssayId) else AssayId(v) for v in self.assays]
+        self.assays = [v if isinstance(v, Assay) else Assay(**as_dict(v)) for v in self.assays]
 
         self._normalize_inlined_as_list(slot_name="prototypical_stressors", slot_type=AopToPrototypicalStressor, key_name="id", keyed=True)
 
@@ -427,8 +419,8 @@ class Event(YAMLRoot):
     aop_oecd_program_count: Optional[int] = None
     aop_oecd_endorsed_count: Optional[int] = None
     event_components: Optional[Union[Union[dict, "EventComponent"], list[Union[dict, "EventComponent"]]]] = empty_list()
-    assays: Optional[Union[Union[int, AssayId], list[Union[int, AssayId]]]] = empty_list()
-    observations: Optional[Union[Union[int, ObservationId], list[Union[int, ObservationId]]]] = empty_list()
+    assays: Optional[Union[Union[dict, "Assay"], list[Union[dict, "Assay"]]]] = empty_list()
+    observations: Optional[Union[Union[dict, "Observation"], list[Union[dict, "Observation"]]]] = empty_list()
     bio_target_families: Optional[Union[Union[int, BioTargetFamilyId], list[Union[int, BioTargetFamilyId]]]] = empty_list()
     test_guidelines: Optional[Union[Union[int, TestGuidelineId], list[Union[int, TestGuidelineId]]]] = empty_list()
     aops: Optional[Union[dict[Union[int, AopToEventId], Union[dict, "AopToEvent"]], list[Union[dict, "AopToEvent"]]]] = empty_dict()
@@ -508,11 +500,11 @@ class Event(YAMLRoot):
 
         if not isinstance(self.assays, list):
             self.assays = [self.assays] if self.assays is not None else []
-        self.assays = [v if isinstance(v, AssayId) else AssayId(v) for v in self.assays]
+        self.assays = [v if isinstance(v, Assay) else Assay(**as_dict(v)) for v in self.assays]
 
         if not isinstance(self.observations, list):
             self.observations = [self.observations] if self.observations is not None else []
-        self.observations = [v if isinstance(v, ObservationId) else ObservationId(v) for v in self.observations]
+        self.observations = [v if isinstance(v, Observation) else Observation(**as_dict(v)) for v in self.observations]
 
         if not isinstance(self.bio_target_families, list):
             self.bio_target_families = [self.bio_target_families] if self.bio_target_families is not None else []
@@ -663,9 +655,9 @@ class Assay(YAMLRoot):
     class_name: ClassVar[str] = "Assay"
     class_model_uri: ClassVar[URIRef] = URIRef("http://example.org/aopwiki-emod/Assay")
 
-    id: Union[int, AssayId] = None
     created_at: Optional[Union[str, XSDDateTime]] = None
     updated_at: Optional[Union[str, XSDDateTime]] = None
+    id: Optional[int] = None
     title: Optional[str] = None
     description: Optional[str] = None
     detection_technology: Optional[str] = None
@@ -682,16 +674,14 @@ class Assay(YAMLRoot):
     test_guidelines: Optional[Union[Union[int, TestGuidelineId], list[Union[int, TestGuidelineId]]]] = empty_list()
 
     def __post_init__(self, *_: str, **kwargs: Any):
-        if self._is_empty(self.id):
-            self.MissingRequiredField("id")
-        if not isinstance(self.id, AssayId):
-            self.id = AssayId(self.id)
-
         if self.created_at is not None and not isinstance(self.created_at, XSDDateTime):
             self.created_at = XSDDateTime(self.created_at)
 
         if self.updated_at is not None and not isinstance(self.updated_at, XSDDateTime):
             self.updated_at = XSDDateTime(self.updated_at)
+
+        if self.id is not None and not isinstance(self.id, int):
+            self.id = int(self.id)
 
         if self.title is not None and not isinstance(self.title, str):
             self.title = str(self.title)
@@ -755,9 +745,9 @@ class Observation(YAMLRoot):
     class_name: ClassVar[str] = "Observation"
     class_model_uri: ClassVar[URIRef] = URIRef("http://example.org/aopwiki-emod/Observation")
 
-    id: Union[int, ObservationId] = None
     created_at: Optional[Union[str, XSDDateTime]] = None
     updated_at: Optional[Union[str, XSDDateTime]] = None
+    id: Optional[int] = None
     biological_action_id: Optional[Union[dict, "BiologicalAction"]] = None
     biological_process_id: Optional[Union[dict, "BiologicalProcess"]] = None
     biological_object_id: Optional[Union[dict, "BiologicalObject"]] = None
@@ -770,16 +760,14 @@ class Observation(YAMLRoot):
     citations: Optional[Union[Union[int, CitationId], list[Union[int, CitationId]]]] = empty_list()
 
     def __post_init__(self, *_: str, **kwargs: Any):
-        if self._is_empty(self.id):
-            self.MissingRequiredField("id")
-        if not isinstance(self.id, ObservationId):
-            self.id = ObservationId(self.id)
-
         if self.created_at is not None and not isinstance(self.created_at, XSDDateTime):
             self.created_at = XSDDateTime(self.created_at)
 
         if self.updated_at is not None and not isinstance(self.updated_at, XSDDateTime):
             self.updated_at = XSDDateTime(self.updated_at)
+
+        if self.id is not None and not isinstance(self.id, int):
+            self.id = int(self.id)
 
         if self.biological_action_id is not None and not isinstance(self.biological_action_id, BiologicalAction):
             self.biological_action_id = BiologicalAction(**as_dict(self.biological_action_id))
@@ -940,8 +928,8 @@ class Citation(YAMLRoot):
     year: Optional[str] = None
     publisher: Optional[str] = None
     bio_target_families: Optional[Union[Union[int, BioTargetFamilyId], list[Union[int, BioTargetFamilyId]]]] = empty_list()
-    observations: Optional[Union[Union[int, ObservationId], list[Union[int, ObservationId]]]] = empty_list()
-    assays: Optional[Union[Union[int, AssayId], list[Union[int, AssayId]]]] = empty_list()
+    observations: Optional[Union[Union[dict, Observation], list[Union[dict, Observation]]]] = empty_list()
+    assays: Optional[Union[Union[dict, Assay], list[Union[dict, Assay]]]] = empty_list()
 
     def __post_init__(self, *_: str, **kwargs: Any):
         if self._is_empty(self.id):
@@ -979,11 +967,11 @@ class Citation(YAMLRoot):
 
         if not isinstance(self.observations, list):
             self.observations = [self.observations] if self.observations is not None else []
-        self.observations = [v if isinstance(v, ObservationId) else ObservationId(v) for v in self.observations]
+        self.observations = [v if isinstance(v, Observation) else Observation(**as_dict(v)) for v in self.observations]
 
         if not isinstance(self.assays, list):
             self.assays = [self.assays] if self.assays is not None else []
-        self.assays = [v if isinstance(v, AssayId) else AssayId(v) for v in self.assays]
+        self.assays = [v if isinstance(v, Assay) else Assay(**as_dict(v)) for v in self.assays]
 
         super().__post_init__(**kwargs)
 
@@ -1473,7 +1461,7 @@ class BioTargetFamily(YAMLRoot):
     created_at: Optional[Union[str, XSDDateTime]] = None
     updated_at: Optional[Union[str, XSDDateTime]] = None
     name: Optional[str] = None
-    assays: Optional[Union[Union[int, AssayId], list[Union[int, AssayId]]]] = empty_list()
+    assays: Optional[Union[Union[dict, Assay], list[Union[dict, Assay]]]] = empty_list()
     events: Optional[Union[Union[int, EventId], list[Union[int, EventId]]]] = empty_list()
     citations: Optional[Union[Union[int, CitationId], list[Union[int, CitationId]]]] = empty_list()
 
@@ -1494,7 +1482,7 @@ class BioTargetFamily(YAMLRoot):
 
         if not isinstance(self.assays, list):
             self.assays = [self.assays] if self.assays is not None else []
-        self.assays = [v if isinstance(v, AssayId) else AssayId(v) for v in self.assays]
+        self.assays = [v if isinstance(v, Assay) else Assay(**as_dict(v)) for v in self.assays]
 
         if not isinstance(self.events, list):
             self.events = [self.events] if self.events is not None else []
@@ -2443,7 +2431,7 @@ class TestGuideline(YAMLRoot):
     short_title: Optional[str] = None
     full_title: Optional[str] = None
     citation_id: Optional[Union[dict, Citation]] = None
-    assays: Optional[Union[Union[int, AssayId], list[Union[int, AssayId]]]] = empty_list()
+    assays: Optional[Union[Union[dict, Assay], list[Union[dict, Assay]]]] = empty_list()
     events: Optional[Union[Union[int, EventId], list[Union[int, EventId]]]] = empty_list()
 
     def __post_init__(self, *_: str, **kwargs: Any):
@@ -2469,7 +2457,7 @@ class TestGuideline(YAMLRoot):
 
         if not isinstance(self.assays, list):
             self.assays = [self.assays] if self.assays is not None else []
-        self.assays = [v if isinstance(v, AssayId) else AssayId(v) for v in self.assays]
+        self.assays = [v if isinstance(v, Assay) else Assay(**as_dict(v)) for v in self.assays]
 
         if not isinstance(self.events, list):
             self.events = [self.events] if self.events is not None else []
@@ -2960,7 +2948,7 @@ slots.aop__has_structured_methods = Slot(uri=DEFAULT_.has_structured_methods, na
                    model_uri=DEFAULT_.aop__has_structured_methods, domain=None, range=Optional[Union[bool, Bool]])
 
 slots.aop__assays = Slot(uri=DEFAULT_.assays, name="aop__assays", curie=DEFAULT_.curie('assays'),
-                   model_uri=DEFAULT_.aop__assays, domain=None, range=Optional[Union[Union[int, AssayId], list[Union[int, AssayId]]]])
+                   model_uri=DEFAULT_.aop__assays, domain=None, range=Optional[Union[Union[dict, Assay], list[Union[dict, Assay]]]])
 
 slots.aop__prototypical_stressors = Slot(uri=DEFAULT_.prototypical_stressors, name="aop__prototypical_stressors", curie=DEFAULT_.curie('prototypical_stressors'),
                    model_uri=DEFAULT_.aop__prototypical_stressors, domain=None, range=Optional[Union[dict[Union[int, AopToPrototypicalStressorId], Union[dict, AopToPrototypicalStressor]], list[Union[dict, AopToPrototypicalStressor]]]])
@@ -3041,10 +3029,10 @@ slots.event__event_components = Slot(uri=DEFAULT_.event_components, name="event_
                    model_uri=DEFAULT_.event__event_components, domain=None, range=Optional[Union[Union[dict, EventComponent], list[Union[dict, EventComponent]]]])
 
 slots.event__assays = Slot(uri=DEFAULT_.assays, name="event__assays", curie=DEFAULT_.curie('assays'),
-                   model_uri=DEFAULT_.event__assays, domain=None, range=Optional[Union[Union[int, AssayId], list[Union[int, AssayId]]]])
+                   model_uri=DEFAULT_.event__assays, domain=None, range=Optional[Union[Union[dict, Assay], list[Union[dict, Assay]]]])
 
 slots.event__observations = Slot(uri=DEFAULT_.observations, name="event__observations", curie=DEFAULT_.curie('observations'),
-                   model_uri=DEFAULT_.event__observations, domain=None, range=Optional[Union[Union[int, ObservationId], list[Union[int, ObservationId]]]])
+                   model_uri=DEFAULT_.event__observations, domain=None, range=Optional[Union[Union[dict, Observation], list[Union[dict, Observation]]]])
 
 slots.event__bio_target_families = Slot(uri=DEFAULT_.bio_target_families, name="event__bio_target_families", curie=DEFAULT_.curie('bio_target_families'),
                    model_uri=DEFAULT_.event__bio_target_families, domain=None, range=Optional[Union[Union[int, BioTargetFamilyId], list[Union[int, BioTargetFamilyId]]]])
@@ -3131,7 +3119,7 @@ slots.keRelationship__life_stages = Slot(uri=DEFAULT_.life_stages, name="keRelat
                    model_uri=DEFAULT_.keRelationship__life_stages, domain=None, range=Optional[Union[dict[Union[int, KeRelationshipToLifeStageId], Union[dict, KeRelationshipToLifeStage]], list[Union[dict, KeRelationshipToLifeStage]]]])
 
 slots.assay__id = Slot(uri=DEFAULT_.id, name="assay__id", curie=DEFAULT_.curie('id'),
-                   model_uri=DEFAULT_.assay__id, domain=None, range=URIRef)
+                   model_uri=DEFAULT_.assay__id, domain=None, range=Optional[int])
 
 slots.assay__title = Slot(uri=DEFAULT_.title, name="assay__title", curie=DEFAULT_.curie('title'),
                    model_uri=DEFAULT_.assay__title, domain=None, range=Optional[str])
@@ -3176,7 +3164,7 @@ slots.assay__test_guidelines = Slot(uri=DEFAULT_.test_guidelines, name="assay__t
                    model_uri=DEFAULT_.assay__test_guidelines, domain=None, range=Optional[Union[Union[int, TestGuidelineId], list[Union[int, TestGuidelineId]]]])
 
 slots.observation__id = Slot(uri=DEFAULT_.id, name="observation__id", curie=DEFAULT_.curie('id'),
-                   model_uri=DEFAULT_.observation__id, domain=None, range=URIRef)
+                   model_uri=DEFAULT_.observation__id, domain=None, range=Optional[int])
 
 slots.observation__biological_action_id = Slot(uri=DEFAULT_.biological_action_id, name="observation__biological_action_id", curie=DEFAULT_.curie('biological_action_id'),
                    model_uri=DEFAULT_.observation__biological_action_id, domain=None, range=Optional[Union[dict, BiologicalAction]])
@@ -3272,10 +3260,10 @@ slots.citation__bio_target_families = Slot(uri=DEFAULT_.bio_target_families, nam
                    model_uri=DEFAULT_.citation__bio_target_families, domain=None, range=Optional[Union[Union[int, BioTargetFamilyId], list[Union[int, BioTargetFamilyId]]]])
 
 slots.citation__observations = Slot(uri=DEFAULT_.observations, name="citation__observations", curie=DEFAULT_.curie('observations'),
-                   model_uri=DEFAULT_.citation__observations, domain=None, range=Optional[Union[Union[int, ObservationId], list[Union[int, ObservationId]]]])
+                   model_uri=DEFAULT_.citation__observations, domain=None, range=Optional[Union[Union[dict, Observation], list[Union[dict, Observation]]]])
 
 slots.citation__assays = Slot(uri=DEFAULT_.assays, name="citation__assays", curie=DEFAULT_.curie('assays'),
-                   model_uri=DEFAULT_.citation__assays, domain=None, range=Optional[Union[Union[int, AssayId], list[Union[int, AssayId]]]])
+                   model_uri=DEFAULT_.citation__assays, domain=None, range=Optional[Union[Union[dict, Assay], list[Union[dict, Assay]]]])
 
 slots.biologicalAction__id = Slot(uri=DEFAULT_.id, name="biologicalAction__id", curie=DEFAULT_.curie('id'),
                    model_uri=DEFAULT_.biologicalAction__id, domain=None, range=Optional[int])
@@ -3440,7 +3428,7 @@ slots.bioTargetFamily__name = Slot(uri=DEFAULT_.name, name="bioTargetFamily__nam
                    model_uri=DEFAULT_.bioTargetFamily__name, domain=None, range=Optional[str])
 
 slots.bioTargetFamily__assays = Slot(uri=DEFAULT_.assays, name="bioTargetFamily__assays", curie=DEFAULT_.curie('assays'),
-                   model_uri=DEFAULT_.bioTargetFamily__assays, domain=None, range=Optional[Union[Union[int, AssayId], list[Union[int, AssayId]]]])
+                   model_uri=DEFAULT_.bioTargetFamily__assays, domain=None, range=Optional[Union[Union[dict, Assay], list[Union[dict, Assay]]]])
 
 slots.bioTargetFamily__events = Slot(uri=DEFAULT_.events, name="bioTargetFamily__events", curie=DEFAULT_.curie('events'),
                    model_uri=DEFAULT_.bioTargetFamily__events, domain=None, range=Optional[Union[Union[int, EventId], list[Union[int, EventId]]]])
@@ -3758,7 +3746,7 @@ slots.testGuideline__citation_id = Slot(uri=DEFAULT_.citation_id, name="testGuid
                    model_uri=DEFAULT_.testGuideline__citation_id, domain=None, range=Optional[Union[dict, Citation]])
 
 slots.testGuideline__assays = Slot(uri=DEFAULT_.assays, name="testGuideline__assays", curie=DEFAULT_.curie('assays'),
-                   model_uri=DEFAULT_.testGuideline__assays, domain=None, range=Optional[Union[Union[int, AssayId], list[Union[int, AssayId]]]])
+                   model_uri=DEFAULT_.testGuideline__assays, domain=None, range=Optional[Union[Union[dict, Assay], list[Union[dict, Assay]]]])
 
 slots.testGuideline__events = Slot(uri=DEFAULT_.events, name="testGuideline__events", curie=DEFAULT_.curie('events'),
                    model_uri=DEFAULT_.testGuideline__events, domain=None, range=Optional[Union[Union[int, EventId], list[Union[int, EventId]]]])
