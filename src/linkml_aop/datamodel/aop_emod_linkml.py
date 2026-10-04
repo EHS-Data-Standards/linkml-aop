@@ -1,5 +1,5 @@
 # Auto generated from aop_emod_linkml.yaml by pythongen.py version: 0.0.1
-# Generation date: 2026-10-03T21:32:27
+# Generation date: 2026-10-03T23:39:28
 # Schema: aopwiki-emod
 #
 # id: http://example.org/aopwiki-emod
@@ -188,6 +188,10 @@ class KeRelationshipToSexId(extended_int):
 
 
 class KeRelationshipToTaxonId(extended_int):
+    pass
+
+
+class EventComponentId(extended_int):
     pass
 
 
@@ -426,7 +430,7 @@ class Event(YAMLRoot):
     aop_open_for_adoption_count: Optional[int] = None
     aop_oecd_program_count: Optional[int] = None
     aop_oecd_endorsed_count: Optional[int] = None
-    event_components: Optional[Union[Union[dict, "EventComponent"], list[Union[dict, "EventComponent"]]]] = empty_list()
+    event_components: Optional[Union[dict[Union[int, EventComponentId], Union[dict, "EventComponent"]], list[Union[dict, "EventComponent"]]]] = empty_dict()
     assays: Optional[Union[Union[int, AssayId], list[Union[int, AssayId]]]] = empty_list()
     observations: Optional[Union[Union[int, ObservationId], list[Union[int, ObservationId]]]] = empty_list()
     bio_target_families: Optional[Union[Union[int, BioTargetFamilyId], list[Union[int, BioTargetFamilyId]]]] = empty_list()
@@ -502,9 +506,7 @@ class Event(YAMLRoot):
         if self.aop_oecd_endorsed_count is not None and not isinstance(self.aop_oecd_endorsed_count, int):
             self.aop_oecd_endorsed_count = int(self.aop_oecd_endorsed_count)
 
-        if not isinstance(self.event_components, list):
-            self.event_components = [self.event_components] if self.event_components is not None else []
-        self.event_components = [v if isinstance(v, EventComponent) else EventComponent(**as_dict(v)) for v in self.event_components]
+        self._normalize_inlined_as_list(slot_name="event_components", slot_type=EventComponent, key_name="id", keyed=True)
 
         if not isinstance(self.assays, list):
             self.assays = [self.assays] if self.assays is not None else []
@@ -2335,22 +2337,24 @@ class EventComponent(YAMLRoot):
     class_name: ClassVar[str] = "EventComponent"
     class_model_uri: ClassVar[URIRef] = URIRef("http://example.org/aopwiki-emod/EventComponent")
 
+    id: Union[int, EventComponentId] = None
     created_at: Optional[Union[str, XSDDateTime]] = None
     updated_at: Optional[Union[str, XSDDateTime]] = None
-    id: Optional[int] = None
     biological_action_id: Optional[Union[dict, BiologicalAction]] = None
     biological_object_id: Optional[Union[dict, BiologicalObject]] = None
     biological_process_id: Optional[Union[dict, BiologicalProcess]] = None
 
     def __post_init__(self, *_: str, **kwargs: Any):
+        if self._is_empty(self.id):
+            self.MissingRequiredField("id")
+        if not isinstance(self.id, EventComponentId):
+            self.id = EventComponentId(self.id)
+
         if self.created_at is not None and not isinstance(self.created_at, XSDDateTime):
             self.created_at = XSDDateTime(self.created_at)
 
         if self.updated_at is not None and not isinstance(self.updated_at, XSDDateTime):
             self.updated_at = XSDDateTime(self.updated_at)
-
-        if self.id is not None and not isinstance(self.id, int):
-            self.id = int(self.id)
 
         if self.biological_action_id is not None and not isinstance(self.biological_action_id, BiologicalAction):
             self.biological_action_id = BiologicalAction(**as_dict(self.biological_action_id))
@@ -3038,7 +3042,7 @@ slots.event__aop_oecd_endorsed_count = Slot(uri=DEFAULT_.aop_oecd_endorsed_count
                    model_uri=DEFAULT_.event__aop_oecd_endorsed_count, domain=None, range=Optional[int])
 
 slots.event__event_components = Slot(uri=DEFAULT_.event_components, name="event__event_components", curie=DEFAULT_.curie('event_components'),
-                   model_uri=DEFAULT_.event__event_components, domain=None, range=Optional[Union[Union[dict, EventComponent], list[Union[dict, EventComponent]]]])
+                   model_uri=DEFAULT_.event__event_components, domain=None, range=Optional[Union[dict[Union[int, EventComponentId], Union[dict, EventComponent]], list[Union[dict, EventComponent]]]])
 
 slots.event__assays = Slot(uri=DEFAULT_.assays, name="event__assays", curie=DEFAULT_.curie('assays'),
                    model_uri=DEFAULT_.event__assays, domain=None, range=Optional[Union[Union[int, AssayId], list[Union[int, AssayId]]]])
@@ -3713,7 +3717,7 @@ slots.sexTerm__term = Slot(uri=DEFAULT_.term, name="sexTerm__term", curie=DEFAUL
                    model_uri=DEFAULT_.sexTerm__term, domain=None, range=Optional[Union[str, "SexTermEnum"]])
 
 slots.eventComponent__id = Slot(uri=DEFAULT_.id, name="eventComponent__id", curie=DEFAULT_.curie('id'),
-                   model_uri=DEFAULT_.eventComponent__id, domain=None, range=Optional[int])
+                   model_uri=DEFAULT_.eventComponent__id, domain=None, range=URIRef)
 
 slots.eventComponent__biological_action_id = Slot(uri=DEFAULT_.biological_action_id, name="eventComponent__biological_action_id", curie=DEFAULT_.curie('biological_action_id'),
                    model_uri=DEFAULT_.eventComponent__biological_action_id, domain=None, range=Optional[Union[dict, BiologicalAction]])

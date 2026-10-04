@@ -920,6 +920,7 @@ classes:
       - updated_at
     attributes:
       id:
+        identifier: true
         range: integer
       biological_action_id:
         range: BiologicalAction
