@@ -1,5 +1,5 @@
 # Auto generated from aop_emod_linkml.yaml by pythongen.py version: 0.0.1
-# Generation date: 2026-09-23T00:25:11
+# Generation date: 2026-10-03T21:32:27
 # Schema: aopwiki-emod
 #
 # id: http://example.org/aopwiki-emod
@@ -107,22 +107,6 @@ class CitationId(extended_int):
     pass
 
 
-class BiologicalActionId(extended_int):
-    pass
-
-
-class BiologicalObjectId(extended_int):
-    pass
-
-
-class BiologicalProcessId(extended_int):
-    pass
-
-
-class LevelOfBiologicalOrganizationId(extended_int):
-    pass
-
-
 class AopToEventId(extended_int):
     pass
 
@@ -152,18 +136,6 @@ class AssignedLicenseId(extended_int):
 
 
 class BioTargetFamilyId(extended_int):
-    pass
-
-
-class CellTermId(extended_int):
-    pass
-
-
-class ConfidenceLevelId(extended_int):
-    pass
-
-
-class DirectnessId(extended_int):
     pass
 
 
@@ -203,15 +175,7 @@ class LicenseId(extended_int):
     pass
 
 
-class LifeStageTermId(extended_int):
-    pass
-
-
 class OecdStatusId(extended_int):
-    pass
-
-
-class OrganTermId(extended_int):
     pass
 
 
@@ -224,18 +188,6 @@ class KeRelationshipToSexId(extended_int):
 
 
 class KeRelationshipToTaxonId(extended_int):
-    pass
-
-
-class SexTermId(extended_int):
-    pass
-
-
-class EventComponentId(extended_int):
-    pass
-
-
-class TaxonTermId(extended_int):
     pass
 
 
@@ -474,7 +426,7 @@ class Event(YAMLRoot):
     aop_open_for_adoption_count: Optional[int] = None
     aop_oecd_program_count: Optional[int] = None
     aop_oecd_endorsed_count: Optional[int] = None
-    event_components: Optional[Union[dict[Union[int, EventComponentId], Union[dict, "EventComponent"]], list[Union[dict, "EventComponent"]]]] = empty_dict()
+    event_components: Optional[Union[Union[dict, "EventComponent"], list[Union[dict, "EventComponent"]]]] = empty_list()
     assays: Optional[Union[Union[int, AssayId], list[Union[int, AssayId]]]] = empty_list()
     observations: Optional[Union[Union[int, ObservationId], list[Union[int, ObservationId]]]] = empty_list()
     bio_target_families: Optional[Union[Union[int, BioTargetFamilyId], list[Union[int, BioTargetFamilyId]]]] = empty_list()
@@ -550,7 +502,9 @@ class Event(YAMLRoot):
         if self.aop_oecd_endorsed_count is not None and not isinstance(self.aop_oecd_endorsed_count, int):
             self.aop_oecd_endorsed_count = int(self.aop_oecd_endorsed_count)
 
-        self._normalize_inlined_as_list(slot_name="event_components", slot_type=EventComponent, key_name="id", keyed=True)
+        if not isinstance(self.event_components, list):
+            self.event_components = [self.event_components] if self.event_components is not None else []
+        self.event_components = [v if isinstance(v, EventComponent) else EventComponent(**as_dict(v)) for v in self.event_components]
 
         if not isinstance(self.assays, list):
             self.assays = [self.assays] if self.assays is not None else []
@@ -718,9 +672,9 @@ class Assay(YAMLRoot):
     biological_action_id: Optional[Union[dict, "BiologicalAction"]] = None
     external_assay_id: Optional[str] = None
     classification: Optional[str] = None
-    objects: Optional[Union[dict[Union[int, BiologicalObjectId], Union[dict, "BiologicalObject"]], list[Union[dict, "BiologicalObject"]]]] = empty_dict()
-    processes: Optional[Union[dict[Union[int, BiologicalProcessId], Union[dict, "BiologicalProcess"]], list[Union[dict, "BiologicalProcess"]]]] = empty_dict()
-    taxon_terms: Optional[Union[dict[Union[int, TaxonTermId], Union[dict, "TaxonTerm"]], list[Union[dict, "TaxonTerm"]]]] = empty_dict()
+    objects: Optional[Union[Union[dict, "BiologicalObject"], list[Union[dict, "BiologicalObject"]]]] = empty_list()
+    processes: Optional[Union[Union[dict, "BiologicalProcess"], list[Union[dict, "BiologicalProcess"]]]] = empty_list()
+    taxon_terms: Optional[Union[Union[dict, "TaxonTerm"], list[Union[dict, "TaxonTerm"]]]] = empty_list()
     events: Optional[Union[Union[int, EventId], list[Union[int, EventId]]]] = empty_list()
     bio_target_families: Optional[Union[Union[int, BioTargetFamilyId], list[Union[int, BioTargetFamilyId]]]] = empty_list()
     aops: Optional[Union[Union[int, AopId], list[Union[int, AopId]]]] = empty_list()
@@ -757,11 +711,17 @@ class Assay(YAMLRoot):
         if self.classification is not None and not isinstance(self.classification, str):
             self.classification = str(self.classification)
 
-        self._normalize_inlined_as_list(slot_name="objects", slot_type=BiologicalObject, key_name="id", keyed=True)
+        if not isinstance(self.objects, list):
+            self.objects = [self.objects] if self.objects is not None else []
+        self.objects = [v if isinstance(v, BiologicalObject) else BiologicalObject(**as_dict(v)) for v in self.objects]
 
-        self._normalize_inlined_as_list(slot_name="processes", slot_type=BiologicalProcess, key_name="id", keyed=True)
+        if not isinstance(self.processes, list):
+            self.processes = [self.processes] if self.processes is not None else []
+        self.processes = [v if isinstance(v, BiologicalProcess) else BiologicalProcess(**as_dict(v)) for v in self.processes]
 
-        self._normalize_inlined_as_list(slot_name="taxon_terms", slot_type=TaxonTerm, key_name="id", keyed=True)
+        if not isinstance(self.taxon_terms, list):
+            self.taxon_terms = [self.taxon_terms] if self.taxon_terms is not None else []
+        self.taxon_terms = [v if isinstance(v, TaxonTerm) else TaxonTerm(**as_dict(v)) for v in self.taxon_terms]
 
         if not isinstance(self.events, list):
             self.events = [self.events] if self.events is not None else []
@@ -1037,24 +997,22 @@ class BiologicalAction(YAMLRoot):
     class_name: ClassVar[str] = "BiologicalAction"
     class_model_uri: ClassVar[URIRef] = URIRef("http://example.org/aopwiki-emod/BiologicalAction")
 
-    id: Union[int, BiologicalActionId] = None
     created_at: Optional[Union[str, XSDDateTime]] = None
     updated_at: Optional[Union[str, XSDDateTime]] = None
+    id: Optional[int] = None
     term: Optional[Union[str, "BiologicalActionEnum"]] = None
     source: Optional[str] = None
     source_id: Optional[str] = None
 
     def __post_init__(self, *_: str, **kwargs: Any):
-        if self._is_empty(self.id):
-            self.MissingRequiredField("id")
-        if not isinstance(self.id, BiologicalActionId):
-            self.id = BiologicalActionId(self.id)
-
         if self.created_at is not None and not isinstance(self.created_at, XSDDateTime):
             self.created_at = XSDDateTime(self.created_at)
 
         if self.updated_at is not None and not isinstance(self.updated_at, XSDDateTime):
             self.updated_at = XSDDateTime(self.updated_at)
+
+        if self.id is not None and not isinstance(self.id, int):
+            self.id = int(self.id)
 
         if self.term is not None and not isinstance(self.term, BiologicalActionEnum):
             self.term = BiologicalActionEnum(self.term)
@@ -1077,9 +1035,9 @@ class BiologicalObject(YAMLRoot):
     class_name: ClassVar[str] = "BiologicalObject"
     class_model_uri: ClassVar[URIRef] = URIRef("http://example.org/aopwiki-emod/BiologicalObject")
 
-    id: Union[int, BiologicalObjectId] = None
     created_at: Optional[Union[str, XSDDateTime]] = None
     updated_at: Optional[Union[str, XSDDateTime]] = None
+    id: Optional[int] = None
     term: Optional[str] = None
     source: Optional[Union[str, "BiologicalObjectSourceEnum"]] = None
     source_id: Optional[str] = None
@@ -1087,16 +1045,14 @@ class BiologicalObject(YAMLRoot):
     url: Optional[str] = None
 
     def __post_init__(self, *_: str, **kwargs: Any):
-        if self._is_empty(self.id):
-            self.MissingRequiredField("id")
-        if not isinstance(self.id, BiologicalObjectId):
-            self.id = BiologicalObjectId(self.id)
-
         if self.created_at is not None and not isinstance(self.created_at, XSDDateTime):
             self.created_at = XSDDateTime(self.created_at)
 
         if self.updated_at is not None and not isinstance(self.updated_at, XSDDateTime):
             self.updated_at = XSDDateTime(self.updated_at)
+
+        if self.id is not None and not isinstance(self.id, int):
+            self.id = int(self.id)
 
         if self.term is not None and not isinstance(self.term, str):
             self.term = str(self.term)
@@ -1125,9 +1081,9 @@ class BiologicalProcess(YAMLRoot):
     class_name: ClassVar[str] = "BiologicalProcess"
     class_model_uri: ClassVar[URIRef] = URIRef("http://example.org/aopwiki-emod/BiologicalProcess")
 
-    id: Union[int, BiologicalProcessId] = None
     created_at: Optional[Union[str, XSDDateTime]] = None
     updated_at: Optional[Union[str, XSDDateTime]] = None
+    id: Optional[int] = None
     term: Optional[str] = None
     source: Optional[Union[str, "BiologicalProcessSourceEnum"]] = None
     source_id: Optional[str] = None
@@ -1135,16 +1091,14 @@ class BiologicalProcess(YAMLRoot):
     url: Optional[str] = None
 
     def __post_init__(self, *_: str, **kwargs: Any):
-        if self._is_empty(self.id):
-            self.MissingRequiredField("id")
-        if not isinstance(self.id, BiologicalProcessId):
-            self.id = BiologicalProcessId(self.id)
-
         if self.created_at is not None and not isinstance(self.created_at, XSDDateTime):
             self.created_at = XSDDateTime(self.created_at)
 
         if self.updated_at is not None and not isinstance(self.updated_at, XSDDateTime):
             self.updated_at = XSDDateTime(self.updated_at)
+
+        if self.id is not None and not isinstance(self.id, int):
+            self.id = int(self.id)
 
         if self.term is not None and not isinstance(self.term, str):
             self.term = str(self.term)
@@ -1181,22 +1135,20 @@ class LevelOfBiologicalOrganization(YAMLRoot):
     class_name: ClassVar[str] = "LevelOfBiologicalOrganization"
     class_model_uri: ClassVar[URIRef] = URIRef("http://example.org/aopwiki-emod/LevelOfBiologicalOrganization")
 
-    id: Union[int, LevelOfBiologicalOrganizationId] = None
     created_at: Optional[Union[str, XSDDateTime]] = None
     updated_at: Optional[Union[str, XSDDateTime]] = None
+    id: Optional[int] = None
     term: Optional[Union[str, "BiologicalOrganizationEnum"]] = None
 
     def __post_init__(self, *_: str, **kwargs: Any):
-        if self._is_empty(self.id):
-            self.MissingRequiredField("id")
-        if not isinstance(self.id, LevelOfBiologicalOrganizationId):
-            self.id = LevelOfBiologicalOrganizationId(self.id)
-
         if self.created_at is not None and not isinstance(self.created_at, XSDDateTime):
             self.created_at = XSDDateTime(self.created_at)
 
         if self.updated_at is not None and not isinstance(self.updated_at, XSDDateTime):
             self.updated_at = XSDDateTime(self.updated_at)
+
+        if self.id is not None and not isinstance(self.id, int):
+            self.id = int(self.id)
 
         if self.term is not None and not isinstance(self.term, BiologicalOrganizationEnum):
             self.term = BiologicalOrganizationEnum(self.term)
@@ -1564,9 +1516,9 @@ class CellTerm(YAMLRoot):
     class_name: ClassVar[str] = "CellTerm"
     class_model_uri: ClassVar[URIRef] = URIRef("http://example.org/aopwiki-emod/CellTerm")
 
-    id: Union[int, CellTermId] = None
     created_at: Optional[Union[str, XSDDateTime]] = None
     updated_at: Optional[Union[str, XSDDateTime]] = None
+    id: Optional[int] = None
     source_id: Optional[str] = None
     term: Optional[str] = None
     official_name: Optional[str] = None
@@ -1575,16 +1527,14 @@ class CellTerm(YAMLRoot):
     url: Optional[str] = None
 
     def __post_init__(self, *_: str, **kwargs: Any):
-        if self._is_empty(self.id):
-            self.MissingRequiredField("id")
-        if not isinstance(self.id, CellTermId):
-            self.id = CellTermId(self.id)
-
         if self.created_at is not None and not isinstance(self.created_at, XSDDateTime):
             self.created_at = XSDDateTime(self.created_at)
 
         if self.updated_at is not None and not isinstance(self.updated_at, XSDDateTime):
             self.updated_at = XSDDateTime(self.updated_at)
+
+        if self.id is not None and not isinstance(self.id, int):
+            self.id = int(self.id)
 
         if self.source_id is not None and not isinstance(self.source_id, str):
             self.source_id = str(self.source_id)
@@ -1616,22 +1566,20 @@ class ConfidenceLevel(YAMLRoot):
     class_name: ClassVar[str] = "ConfidenceLevel"
     class_model_uri: ClassVar[URIRef] = URIRef("http://example.org/aopwiki-emod/ConfidenceLevel")
 
-    id: Union[int, ConfidenceLevelId] = None
     created_at: Optional[Union[str, XSDDateTime]] = None
     updated_at: Optional[Union[str, XSDDateTime]] = None
+    id: Optional[int] = None
     term: Optional[Union[str, "ConfidenceLevelEnum"]] = None
 
     def __post_init__(self, *_: str, **kwargs: Any):
-        if self._is_empty(self.id):
-            self.MissingRequiredField("id")
-        if not isinstance(self.id, ConfidenceLevelId):
-            self.id = ConfidenceLevelId(self.id)
-
         if self.created_at is not None and not isinstance(self.created_at, XSDDateTime):
             self.created_at = XSDDateTime(self.created_at)
 
         if self.updated_at is not None and not isinstance(self.updated_at, XSDDateTime):
             self.updated_at = XSDDateTime(self.updated_at)
+
+        if self.id is not None and not isinstance(self.id, int):
+            self.id = int(self.id)
 
         if self.term is not None and not isinstance(self.term, ConfidenceLevelEnum):
             self.term = ConfidenceLevelEnum(self.term)
@@ -1648,23 +1596,21 @@ class Directness(YAMLRoot):
     class_name: ClassVar[str] = "Directness"
     class_model_uri: ClassVar[URIRef] = URIRef("http://example.org/aopwiki-emod/Directness")
 
-    id: Union[int, DirectnessId] = None
     created_at: Optional[Union[str, XSDDateTime]] = None
     updated_at: Optional[Union[str, XSDDateTime]] = None
+    id: Optional[int] = None
     term: Optional[Union[str, "DirectnessEnum"]] = None
     description: Optional[str] = None
 
     def __post_init__(self, *_: str, **kwargs: Any):
-        if self._is_empty(self.id):
-            self.MissingRequiredField("id")
-        if not isinstance(self.id, DirectnessId):
-            self.id = DirectnessId(self.id)
-
         if self.created_at is not None and not isinstance(self.created_at, XSDDateTime):
             self.created_at = XSDDateTime(self.created_at)
 
         if self.updated_at is not None and not isinstance(self.updated_at, XSDDateTime):
             self.updated_at = XSDDateTime(self.updated_at)
+
+        if self.id is not None and not isinstance(self.id, int):
+            self.id = int(self.id)
 
         if self.term is not None and not isinstance(self.term, DirectnessEnum):
             self.term = DirectnessEnum(self.term)
@@ -1810,7 +1756,7 @@ class ExperimentSetup(YAMLRoot):
     assay_id: Optional[Union[dict, Assay]] = None
     causal_agent_id: Optional[Union[dict, Stressor]] = None
     description: Optional[str] = None
-    cell_terms: Optional[Union[dict[Union[int, CellTermId], Union[dict, CellTerm]], list[Union[dict, CellTerm]]]] = empty_dict()
+    cell_terms: Optional[Union[Union[dict, CellTerm], list[Union[dict, CellTerm]]]] = empty_list()
 
     def __post_init__(self, *_: str, **kwargs: Any):
         if self._is_empty(self.id):
@@ -1833,7 +1779,9 @@ class ExperimentSetup(YAMLRoot):
         if self.description is not None and not isinstance(self.description, str):
             self.description = str(self.description)
 
-        self._normalize_inlined_as_list(slot_name="cell_terms", slot_type=CellTerm, key_name="id", keyed=True)
+        if not isinstance(self.cell_terms, list):
+            self.cell_terms = [self.cell_terms] if self.cell_terms is not None else []
+        self.cell_terms = [v if isinstance(v, CellTerm) else CellTerm(**as_dict(v)) for v in self.cell_terms]
 
         super().__post_init__(**kwargs)
 
@@ -2110,22 +2058,20 @@ class LifeStageTerm(YAMLRoot):
     class_name: ClassVar[str] = "LifeStageTerm"
     class_model_uri: ClassVar[URIRef] = URIRef("http://example.org/aopwiki-emod/LifeStageTerm")
 
-    id: Union[int, LifeStageTermId] = None
     created_at: Optional[Union[str, XSDDateTime]] = None
     updated_at: Optional[Union[str, XSDDateTime]] = None
+    id: Optional[int] = None
     term: Optional[Union[str, "LifeStageTermEnum"]] = None
 
     def __post_init__(self, *_: str, **kwargs: Any):
-        if self._is_empty(self.id):
-            self.MissingRequiredField("id")
-        if not isinstance(self.id, LifeStageTermId):
-            self.id = LifeStageTermId(self.id)
-
         if self.created_at is not None and not isinstance(self.created_at, XSDDateTime):
             self.created_at = XSDDateTime(self.created_at)
 
         if self.updated_at is not None and not isinstance(self.updated_at, XSDDateTime):
             self.updated_at = XSDDateTime(self.updated_at)
+
+        if self.id is not None and not isinstance(self.id, int):
+            self.id = int(self.id)
 
         if self.term is not None and not isinstance(self.term, LifeStageTermEnum):
             self.term = LifeStageTermEnum(self.term)
@@ -2182,9 +2128,9 @@ class OrganTerm(YAMLRoot):
     class_name: ClassVar[str] = "OrganTerm"
     class_model_uri: ClassVar[URIRef] = URIRef("http://example.org/aopwiki-emod/OrganTerm")
 
-    id: Union[int, OrganTermId] = None
     created_at: Optional[Union[str, XSDDateTime]] = None
     updated_at: Optional[Union[str, XSDDateTime]] = None
+    id: Optional[int] = None
     source_id: Optional[str] = None
     term: Optional[str] = None
     official_name: Optional[str] = None
@@ -2193,16 +2139,14 @@ class OrganTerm(YAMLRoot):
     url: Optional[str] = None
 
     def __post_init__(self, *_: str, **kwargs: Any):
-        if self._is_empty(self.id):
-            self.MissingRequiredField("id")
-        if not isinstance(self.id, OrganTermId):
-            self.id = OrganTermId(self.id)
-
         if self.created_at is not None and not isinstance(self.created_at, XSDDateTime):
             self.created_at = XSDDateTime(self.created_at)
 
         if self.updated_at is not None and not isinstance(self.updated_at, XSDDateTime):
             self.updated_at = XSDDateTime(self.updated_at)
+
+        if self.id is not None and not isinstance(self.id, int):
+            self.id = int(self.id)
 
         if self.source_id is not None and not isinstance(self.source_id, str):
             self.source_id = str(self.source_id)
@@ -2361,22 +2305,20 @@ class SexTerm(YAMLRoot):
     class_name: ClassVar[str] = "SexTerm"
     class_model_uri: ClassVar[URIRef] = URIRef("http://example.org/aopwiki-emod/SexTerm")
 
-    id: Union[int, SexTermId] = None
     created_at: Optional[Union[str, XSDDateTime]] = None
     updated_at: Optional[Union[str, XSDDateTime]] = None
+    id: Optional[int] = None
     term: Optional[Union[str, "SexTermEnum"]] = None
 
     def __post_init__(self, *_: str, **kwargs: Any):
-        if self._is_empty(self.id):
-            self.MissingRequiredField("id")
-        if not isinstance(self.id, SexTermId):
-            self.id = SexTermId(self.id)
-
         if self.created_at is not None and not isinstance(self.created_at, XSDDateTime):
             self.created_at = XSDDateTime(self.created_at)
 
         if self.updated_at is not None and not isinstance(self.updated_at, XSDDateTime):
             self.updated_at = XSDDateTime(self.updated_at)
+
+        if self.id is not None and not isinstance(self.id, int):
+            self.id = int(self.id)
 
         if self.term is not None and not isinstance(self.term, SexTermEnum):
             self.term = SexTermEnum(self.term)
@@ -2393,24 +2335,22 @@ class EventComponent(YAMLRoot):
     class_name: ClassVar[str] = "EventComponent"
     class_model_uri: ClassVar[URIRef] = URIRef("http://example.org/aopwiki-emod/EventComponent")
 
-    id: Union[int, EventComponentId] = None
     created_at: Optional[Union[str, XSDDateTime]] = None
     updated_at: Optional[Union[str, XSDDateTime]] = None
+    id: Optional[int] = None
     biological_action_id: Optional[Union[dict, BiologicalAction]] = None
     biological_object_id: Optional[Union[dict, BiologicalObject]] = None
     biological_process_id: Optional[Union[dict, BiologicalProcess]] = None
 
     def __post_init__(self, *_: str, **kwargs: Any):
-        if self._is_empty(self.id):
-            self.MissingRequiredField("id")
-        if not isinstance(self.id, EventComponentId):
-            self.id = EventComponentId(self.id)
-
         if self.created_at is not None and not isinstance(self.created_at, XSDDateTime):
             self.created_at = XSDDateTime(self.created_at)
 
         if self.updated_at is not None and not isinstance(self.updated_at, XSDDateTime):
             self.updated_at = XSDDateTime(self.updated_at)
+
+        if self.id is not None and not isinstance(self.id, int):
+            self.id = int(self.id)
 
         if self.biological_action_id is not None and not isinstance(self.biological_action_id, BiologicalAction):
             self.biological_action_id = BiologicalAction(**as_dict(self.biological_action_id))
@@ -2441,9 +2381,9 @@ class TaxonTerm(YAMLRoot):
     class_name: ClassVar[str] = "TaxonTerm"
     class_model_uri: ClassVar[URIRef] = URIRef("http://example.org/aopwiki-emod/TaxonTerm")
 
-    id: Union[int, TaxonTermId] = None
     created_at: Optional[Union[str, XSDDateTime]] = None
     updated_at: Optional[Union[str, XSDDateTime]] = None
+    id: Optional[int] = None
     term_class: Optional[Union[str, "TaxonTermClassEnum"]] = None
     term: Optional[str] = None
     source: Optional[str] = None
@@ -2452,16 +2392,14 @@ class TaxonTerm(YAMLRoot):
     source_id: Optional[str] = None
 
     def __post_init__(self, *_: str, **kwargs: Any):
-        if self._is_empty(self.id):
-            self.MissingRequiredField("id")
-        if not isinstance(self.id, TaxonTermId):
-            self.id = TaxonTermId(self.id)
-
         if self.created_at is not None and not isinstance(self.created_at, XSDDateTime):
             self.created_at = XSDDateTime(self.created_at)
 
         if self.updated_at is not None and not isinstance(self.updated_at, XSDDateTime):
             self.updated_at = XSDDateTime(self.updated_at)
+
+        if self.id is not None and not isinstance(self.id, int):
+            self.id = int(self.id)
 
         if self.term_class is not None and not isinstance(self.term_class, TaxonTermClassEnum):
             self.term_class = TaxonTermClassEnum(self.term_class)
@@ -3100,7 +3038,7 @@ slots.event__aop_oecd_endorsed_count = Slot(uri=DEFAULT_.aop_oecd_endorsed_count
                    model_uri=DEFAULT_.event__aop_oecd_endorsed_count, domain=None, range=Optional[int])
 
 slots.event__event_components = Slot(uri=DEFAULT_.event_components, name="event__event_components", curie=DEFAULT_.curie('event_components'),
-                   model_uri=DEFAULT_.event__event_components, domain=None, range=Optional[Union[dict[Union[int, EventComponentId], Union[dict, EventComponent]], list[Union[dict, EventComponent]]]])
+                   model_uri=DEFAULT_.event__event_components, domain=None, range=Optional[Union[Union[dict, EventComponent], list[Union[dict, EventComponent]]]])
 
 slots.event__assays = Slot(uri=DEFAULT_.assays, name="event__assays", curie=DEFAULT_.curie('assays'),
                    model_uri=DEFAULT_.event__assays, domain=None, range=Optional[Union[Union[int, AssayId], list[Union[int, AssayId]]]])
@@ -3214,13 +3152,13 @@ slots.assay__classification = Slot(uri=DEFAULT_.classification, name="assay__cla
                    model_uri=DEFAULT_.assay__classification, domain=None, range=Optional[str])
 
 slots.assay__objects = Slot(uri=DEFAULT_.objects, name="assay__objects", curie=DEFAULT_.curie('objects'),
-                   model_uri=DEFAULT_.assay__objects, domain=None, range=Optional[Union[dict[Union[int, BiologicalObjectId], Union[dict, BiologicalObject]], list[Union[dict, BiologicalObject]]]])
+                   model_uri=DEFAULT_.assay__objects, domain=None, range=Optional[Union[Union[dict, BiologicalObject], list[Union[dict, BiologicalObject]]]])
 
 slots.assay__processes = Slot(uri=DEFAULT_.processes, name="assay__processes", curie=DEFAULT_.curie('processes'),
-                   model_uri=DEFAULT_.assay__processes, domain=None, range=Optional[Union[dict[Union[int, BiologicalProcessId], Union[dict, BiologicalProcess]], list[Union[dict, BiologicalProcess]]]])
+                   model_uri=DEFAULT_.assay__processes, domain=None, range=Optional[Union[Union[dict, BiologicalProcess], list[Union[dict, BiologicalProcess]]]])
 
 slots.assay__taxon_terms = Slot(uri=DEFAULT_.taxon_terms, name="assay__taxon_terms", curie=DEFAULT_.curie('taxon_terms'),
-                   model_uri=DEFAULT_.assay__taxon_terms, domain=None, range=Optional[Union[dict[Union[int, TaxonTermId], Union[dict, TaxonTerm]], list[Union[dict, TaxonTerm]]]])
+                   model_uri=DEFAULT_.assay__taxon_terms, domain=None, range=Optional[Union[Union[dict, TaxonTerm], list[Union[dict, TaxonTerm]]]])
 
 slots.assay__events = Slot(uri=DEFAULT_.events, name="assay__events", curie=DEFAULT_.curie('events'),
                    model_uri=DEFAULT_.assay__events, domain=None, range=Optional[Union[Union[int, EventId], list[Union[int, EventId]]]])
@@ -3340,7 +3278,7 @@ slots.citation__assays = Slot(uri=DEFAULT_.assays, name="citation__assays", curi
                    model_uri=DEFAULT_.citation__assays, domain=None, range=Optional[Union[Union[int, AssayId], list[Union[int, AssayId]]]])
 
 slots.biologicalAction__id = Slot(uri=DEFAULT_.id, name="biologicalAction__id", curie=DEFAULT_.curie('id'),
-                   model_uri=DEFAULT_.biologicalAction__id, domain=None, range=URIRef)
+                   model_uri=DEFAULT_.biologicalAction__id, domain=None, range=Optional[int])
 
 slots.biologicalAction__term = Slot(uri=DEFAULT_.term, name="biologicalAction__term", curie=DEFAULT_.curie('term'),
                    model_uri=DEFAULT_.biologicalAction__term, domain=None, range=Optional[Union[str, "BiologicalActionEnum"]])
@@ -3352,7 +3290,7 @@ slots.biologicalAction__source_id = Slot(uri=DEFAULT_.source_id, name="biologica
                    model_uri=DEFAULT_.biologicalAction__source_id, domain=None, range=Optional[str])
 
 slots.biologicalObject__id = Slot(uri=DEFAULT_.id, name="biologicalObject__id", curie=DEFAULT_.curie('id'),
-                   model_uri=DEFAULT_.biologicalObject__id, domain=None, range=URIRef)
+                   model_uri=DEFAULT_.biologicalObject__id, domain=None, range=Optional[int])
 
 slots.biologicalObject__term = Slot(uri=DEFAULT_.term, name="biologicalObject__term", curie=DEFAULT_.curie('term'),
                    model_uri=DEFAULT_.biologicalObject__term, domain=None, range=Optional[str])
@@ -3370,7 +3308,7 @@ slots.biologicalObject__url = Slot(uri=DEFAULT_.url, name="biologicalObject__url
                    model_uri=DEFAULT_.biologicalObject__url, domain=None, range=Optional[str])
 
 slots.biologicalProcess__id = Slot(uri=DEFAULT_.id, name="biologicalProcess__id", curie=DEFAULT_.curie('id'),
-                   model_uri=DEFAULT_.biologicalProcess__id, domain=None, range=URIRef)
+                   model_uri=DEFAULT_.biologicalProcess__id, domain=None, range=Optional[int])
 
 slots.biologicalProcess__term = Slot(uri=DEFAULT_.term, name="biologicalProcess__term", curie=DEFAULT_.curie('term'),
                    model_uri=DEFAULT_.biologicalProcess__term, domain=None, range=Optional[str])
@@ -3388,7 +3326,7 @@ slots.biologicalProcess__url = Slot(uri=DEFAULT_.url, name="biologicalProcess__u
                    model_uri=DEFAULT_.biologicalProcess__url, domain=None, range=Optional[str])
 
 slots.levelOfBiologicalOrganization__id = Slot(uri=DEFAULT_.id, name="levelOfBiologicalOrganization__id", curie=DEFAULT_.curie('id'),
-                   model_uri=DEFAULT_.levelOfBiologicalOrganization__id, domain=None, range=URIRef)
+                   model_uri=DEFAULT_.levelOfBiologicalOrganization__id, domain=None, range=Optional[int])
 
 slots.levelOfBiologicalOrganization__term = Slot(uri=DEFAULT_.term, name="levelOfBiologicalOrganization__term", curie=DEFAULT_.curie('term'),
                    model_uri=DEFAULT_.levelOfBiologicalOrganization__term, domain=None, range=Optional[Union[str, "BiologicalOrganizationEnum"]])
@@ -3511,7 +3449,7 @@ slots.bioTargetFamily__citations = Slot(uri=DEFAULT_.citations, name="bioTargetF
                    model_uri=DEFAULT_.bioTargetFamily__citations, domain=None, range=Optional[Union[Union[int, CitationId], list[Union[int, CitationId]]]])
 
 slots.cellTerm__id = Slot(uri=DEFAULT_.id, name="cellTerm__id", curie=DEFAULT_.curie('id'),
-                   model_uri=DEFAULT_.cellTerm__id, domain=None, range=URIRef)
+                   model_uri=DEFAULT_.cellTerm__id, domain=None, range=Optional[int])
 
 slots.cellTerm__source_id = Slot(uri=DEFAULT_.source_id, name="cellTerm__source_id", curie=DEFAULT_.curie('source_id'),
                    model_uri=DEFAULT_.cellTerm__source_id, domain=None, range=Optional[str])
@@ -3532,13 +3470,13 @@ slots.cellTerm__url = Slot(uri=DEFAULT_.url, name="cellTerm__url", curie=DEFAULT
                    model_uri=DEFAULT_.cellTerm__url, domain=None, range=Optional[str])
 
 slots.confidenceLevel__id = Slot(uri=DEFAULT_.id, name="confidenceLevel__id", curie=DEFAULT_.curie('id'),
-                   model_uri=DEFAULT_.confidenceLevel__id, domain=None, range=URIRef)
+                   model_uri=DEFAULT_.confidenceLevel__id, domain=None, range=Optional[int])
 
 slots.confidenceLevel__term = Slot(uri=DEFAULT_.term, name="confidenceLevel__term", curie=DEFAULT_.curie('term'),
                    model_uri=DEFAULT_.confidenceLevel__term, domain=None, range=Optional[Union[str, "ConfidenceLevelEnum"]])
 
 slots.directness__id = Slot(uri=DEFAULT_.id, name="directness__id", curie=DEFAULT_.curie('id'),
-                   model_uri=DEFAULT_.directness__id, domain=None, range=URIRef)
+                   model_uri=DEFAULT_.directness__id, domain=None, range=Optional[int])
 
 slots.directness__term = Slot(uri=DEFAULT_.term, name="directness__term", curie=DEFAULT_.curie('term'),
                    model_uri=DEFAULT_.directness__term, domain=None, range=Optional[Union[str, "DirectnessEnum"]])
@@ -3595,7 +3533,7 @@ slots.experimentSetup__description = Slot(uri=DEFAULT_.description, name="experi
                    model_uri=DEFAULT_.experimentSetup__description, domain=None, range=Optional[str])
 
 slots.experimentSetup__cell_terms = Slot(uri=DEFAULT_.cell_terms, name="experimentSetup__cell_terms", curie=DEFAULT_.curie('cell_terms'),
-                   model_uri=DEFAULT_.experimentSetup__cell_terms, domain=None, range=Optional[Union[dict[Union[int, CellTermId], Union[dict, CellTerm]], list[Union[dict, CellTerm]]]])
+                   model_uri=DEFAULT_.experimentSetup__cell_terms, domain=None, range=Optional[Union[Union[dict, CellTerm], list[Union[dict, CellTerm]]]])
 
 slots.experimentType__id = Slot(uri=DEFAULT_.id, name="experimentType__id", curie=DEFAULT_.curie('id'),
                    model_uri=DEFAULT_.experimentType__id, domain=None, range=URIRef)
@@ -3694,7 +3632,7 @@ slots.license__short_code = Slot(uri=DEFAULT_.short_code, name="license__short_c
                    model_uri=DEFAULT_.license__short_code, domain=None, range=Optional[str])
 
 slots.lifeStageTerm__id = Slot(uri=DEFAULT_.id, name="lifeStageTerm__id", curie=DEFAULT_.curie('id'),
-                   model_uri=DEFAULT_.lifeStageTerm__id, domain=None, range=URIRef)
+                   model_uri=DEFAULT_.lifeStageTerm__id, domain=None, range=Optional[int])
 
 slots.lifeStageTerm__term = Slot(uri=DEFAULT_.term, name="lifeStageTerm__term", curie=DEFAULT_.curie('term'),
                    model_uri=DEFAULT_.lifeStageTerm__term, domain=None, range=Optional[Union[str, "LifeStageTermEnum"]])
@@ -3712,7 +3650,7 @@ slots.oecdStatus__sort = Slot(uri=DEFAULT_.sort, name="oecdStatus__sort", curie=
                    model_uri=DEFAULT_.oecdStatus__sort, domain=None, range=Optional[int])
 
 slots.organTerm__id = Slot(uri=DEFAULT_.id, name="organTerm__id", curie=DEFAULT_.curie('id'),
-                   model_uri=DEFAULT_.organTerm__id, domain=None, range=URIRef)
+                   model_uri=DEFAULT_.organTerm__id, domain=None, range=Optional[int])
 
 slots.organTerm__source_id = Slot(uri=DEFAULT_.source_id, name="organTerm__source_id", curie=DEFAULT_.curie('source_id'),
                    model_uri=DEFAULT_.organTerm__source_id, domain=None, range=Optional[str])
@@ -3769,13 +3707,13 @@ slots.keRelationshipToTaxon__confidence_id = Slot(uri=DEFAULT_.confidence_id, na
                    model_uri=DEFAULT_.keRelationshipToTaxon__confidence_id, domain=None, range=Optional[Union[dict, ConfidenceLevel]])
 
 slots.sexTerm__id = Slot(uri=DEFAULT_.id, name="sexTerm__id", curie=DEFAULT_.curie('id'),
-                   model_uri=DEFAULT_.sexTerm__id, domain=None, range=URIRef)
+                   model_uri=DEFAULT_.sexTerm__id, domain=None, range=Optional[int])
 
 slots.sexTerm__term = Slot(uri=DEFAULT_.term, name="sexTerm__term", curie=DEFAULT_.curie('term'),
                    model_uri=DEFAULT_.sexTerm__term, domain=None, range=Optional[Union[str, "SexTermEnum"]])
 
 slots.eventComponent__id = Slot(uri=DEFAULT_.id, name="eventComponent__id", curie=DEFAULT_.curie('id'),
-                   model_uri=DEFAULT_.eventComponent__id, domain=None, range=URIRef)
+                   model_uri=DEFAULT_.eventComponent__id, domain=None, range=Optional[int])
 
 slots.eventComponent__biological_action_id = Slot(uri=DEFAULT_.biological_action_id, name="eventComponent__biological_action_id", curie=DEFAULT_.curie('biological_action_id'),
                    model_uri=DEFAULT_.eventComponent__biological_action_id, domain=None, range=Optional[Union[dict, BiologicalAction]])
@@ -3787,7 +3725,7 @@ slots.eventComponent__biological_process_id = Slot(uri=DEFAULT_.biological_proce
                    model_uri=DEFAULT_.eventComponent__biological_process_id, domain=None, range=Optional[Union[dict, BiologicalProcess]])
 
 slots.taxonTerm__id = Slot(uri=DEFAULT_.id, name="taxonTerm__id", curie=DEFAULT_.curie('id'),
-                   model_uri=DEFAULT_.taxonTerm__id, domain=None, range=URIRef)
+                   model_uri=DEFAULT_.taxonTerm__id, domain=None, range=Optional[int])
 
 slots.taxonTerm__term_class = Slot(uri=DEFAULT_.term_class, name="taxonTerm__term_class", curie=DEFAULT_.curie('term_class'),
                    model_uri=DEFAULT_.taxonTerm__term_class, domain=None, range=Optional[Union[str, "TaxonTermClassEnum"]])
@@ -3830,3 +3768,4 @@ slots.user__id = Slot(uri=DEFAULT_.id, name="user__id", curie=DEFAULT_.curie('id
 
 slots.user__email = Slot(uri=DEFAULT_.email, name="user__email", curie=DEFAULT_.curie('email'),
                    model_uri=DEFAULT_.user__email, domain=None, range=Optional[str])
+

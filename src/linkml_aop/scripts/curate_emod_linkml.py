@@ -272,6 +272,7 @@ def convert_class_block(
     dropped_attrs: list[str] | None = None,
     descriptions: dict[str, str] | None = None,
     class_description: str | None = None,
+    optional_id: bool = False,
 ) -> list[str]:
     """Convert a schemauto-generated class block to the hand-curated style.
 
@@ -279,7 +280,8 @@ def convert_class_block(
       - dropped_attrs fields are removed entirely
       - SHARED_SLOTS fields are removed from attributes: and recorded for
         the slots: list
-      - id range is normalised to integer
+      - id range is normalised to integer; with optional_id, it also stops being
+        the class identifier, so a record may omit it
       - range: string is stripped (covered by default_range: string)
       - curated_ranges values are applied where available, overriding any
         generated range: string for that attribute
@@ -326,6 +328,8 @@ def convert_class_block(
                 new_block = []
                 has_range = False
                 for al in attr_block:
+                    if optional_id and re.match(r"^        identifier:\s+true\s*$", al):
+                        continue
                     if re.match(r"^        range:\s+\S+\s*$", al):
                         new_block.append("        range: integer\n")
                         has_range = True
@@ -508,6 +512,7 @@ def build_classes_yaml(
             raw_lines, CURATED_RANGES.get(sql_name, {}),
             DROPPED_ATTRS.get(sql_name, []) + DROPPED_ATTRS_ALL_CLASSES,
             ATTRIBUTE_DESCRIPTIONS.get(sql_name), CLASS_DESCRIPTIONS.get(sql_name),
+            optional_id=sql_name in OPTIONAL_ID_TABLES,
         )
         converted = apply_class_renames(converted, CLASS_RENAMES)
         if sql_name in extra_attrs:

@@ -446,7 +446,6 @@ classes:
       - updated_at
     attributes:
       id:
-        identifier: true
         range: integer
       term:
         range: BiologicalActionEnum
@@ -458,7 +457,6 @@ classes:
       - updated_at
     attributes:
       id:
-        identifier: true
         range: integer
       term:
       source:
@@ -472,7 +470,6 @@ classes:
       - updated_at
     attributes:
       id:
-        identifier: true
         range: integer
       term:
       source:
@@ -488,7 +485,6 @@ classes:
       - updated_at
     attributes:
       id:
-        identifier: true
         range: integer
       term:
         range: BiologicalOrganizationEnum
@@ -644,7 +640,6 @@ classes:
       - updated_at
     attributes:
       id:
-        identifier: true
         range: integer
       source_id:
       term:
@@ -658,7 +653,6 @@ classes:
       - updated_at
     attributes:
       id:
-        identifier: true
         range: integer
       term:
         range: ConfidenceLevelEnum
@@ -668,7 +662,6 @@ classes:
       - updated_at
     attributes:
       id:
-        identifier: true
         range: integer
       term:
         range: DirectnessEnum
@@ -830,7 +823,6 @@ classes:
       - updated_at
     attributes:
       id:
-        identifier: true
         range: integer
       term:
         range: LifeStageTermEnum
@@ -853,7 +845,6 @@ classes:
       - updated_at
     attributes:
       id:
-        identifier: true
         range: integer
       source_id:
       term:
@@ -920,7 +911,6 @@ classes:
       - updated_at
     attributes:
       id:
-        identifier: true
         range: integer
       term:
         range: SexTermEnum
@@ -930,7 +920,6 @@ classes:
       - updated_at
     attributes:
       id:
-        identifier: true
         range: integer
       biological_action_id:
         range: BiologicalAction
@@ -949,7 +938,6 @@ classes:
       - updated_at
     attributes:
       id:
-        identifier: true
         range: integer
       term_class:
         range: TaxonTermClassEnum

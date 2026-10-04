@@ -10,6 +10,7 @@ __all__ = [
     "JOIN_TABLES_TO_BIDIRECTIONAL_RELS",
     "JOIN_TABLES_TO_UNIDIRECTIONAL_RELS",
     "CURATED_RANGES",
+    "OPTIONAL_ID_TABLES",
     "CLASS_ORDER",
     "CLASS_RENAMES",
 ]
@@ -339,6 +340,28 @@ CURATED_RANGES: dict[str, dict[str, str]] = {
     "test_guidelines": {
         "citation_id": "citations",
     },
+}
+
+# Tables whose `id` is an ordinary optional attribute, not the class identifier.
+# These are the term lookups and the event components: a record names one by its
+# term (and, for ontology terms, its source and source_id), and the integer is only
+# the database row. A record written outside the database cannot know that integer,
+# so it must be able to leave it out. Every reference to these classes is inlined,
+# so none of them needs an identifier to be referred to.
+# Use SQL-based table names here (pre-CLASS_RENAMES, pre-PascalCase).
+OPTIONAL_ID_TABLES = {
+    "biological_actions",
+    "biological_objects",
+    "biological_processes",
+    "biological_organizations",
+    "cell_terms",
+    "confidence_levels",
+    "directnesses",
+    "life_stage_terms",
+    "organ_terms",
+    "sex_terms",
+    "taxon_terms",
+    "sub_events",
 }
 
 # Classes that appear first in the output, in this order. All other classes follow alphabetically.
