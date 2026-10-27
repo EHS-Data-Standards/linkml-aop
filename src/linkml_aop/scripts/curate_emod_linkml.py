@@ -21,6 +21,8 @@ What this script does:
          both referenced classes gain a multivalued attribute pointing to the join table.
        - JOIN_TABLES_TO_UNIDIRECTIONAL_RELS: join table stays as a top-level class;
          only class_a gains a multivalued attribute pointing to the join table.
+     ADDED_INVERSE_LINKS are handled like BIDIRECTIONAL_INVERSE but have no join table
+     in the input; they add links the EMOD database does not record.
   4. For each remaining class:
        - CURATED_RANGES attribute-level range: references are grafted onto the
          generated attributes, then the slots pattern conversion is applied
@@ -560,8 +562,13 @@ def main() -> None:
 
     report_class_breakdown(sql_based_classes, removed, pure_pivot, bidir_inv, bidir_rels, unidir_rels)
 
+    print(f"  Added inverse links — not in the input, collapsed into both classes ({len(ADDED_INVERSE_LINKS)}):")
+    for jt in sorted(ADDED_INVERSE_LINKS):
+        print(f"    {jt}")
+    print("")
+
     sql_based_blocks = extract_class_blocks(sql_based_linkml, sql_based_classes)
-    extra_attrs = build_extra_attrs(pure_pivot, bidir_inv, bidir_rels, unidir_rels)
+    extra_attrs = build_extra_attrs(pure_pivot, bidir_inv | ADDED_INVERSE_LINKS, bidir_rels, unidir_rels)
     ordered_classes = resolve_class_order(sql_based_classes, collapsed_join_tables)
     classes_yaml = build_classes_yaml(ordered_classes, sql_based_blocks, extra_attrs)
 

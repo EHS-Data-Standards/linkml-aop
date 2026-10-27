@@ -7,6 +7,7 @@ __all__ = [
     "DROPPED_ATTRS_ALL_CLASSES",
     "PURE_PIVOT_UNIDIRECTIONAL",
     "BIDIRECTIONAL_INVERSE",
+    "ADDED_INVERSE_LINKS",
     "JOIN_TABLES_TO_BIDIRECTIONAL_RELS",
     "JOIN_TABLES_TO_UNIDIRECTIONAL_RELS",
     "CURATED_RANGES",
@@ -134,6 +135,13 @@ BIDIRECTIONAL_INVERSE: dict[str, tuple[str, str, str, str]] = {
     "assay_citations": ("assays", "citations", "citations", "assays"),
     "test_guideline_assays": ("test_guidelines", "assays", "assays", "test_guidelines"),
     "test_guideline_events": ("test_guidelines", "events", "events", "test_guidelines"),
+}
+
+# Many-to-many links that the EMOD database has no join table for, added here so the
+# schema can record them. Same format and output as BIDIRECTIONAL_INVERSE, but always
+# applied, since the join table they name is not in the input.
+ADDED_INVERSE_LINKS: dict[str, tuple[str, str, str, str]] = {
+    "relationship_assays": ("relationships", "assays", "assays", "ke_relationships"),
 }
 
 # Join tables that stay as top-level classes; both class_a and class_b get a

@@ -1,5 +1,5 @@
 # Auto generated from aop_emod_linkml.yaml by pythongen.py version: 0.0.1
-# Generation date: 2026-10-03T23:39:28
+# Generation date: 2026-10-27T11:21:25
 # Schema: aopwiki-emod
 #
 # id: http://example.org/aopwiki-emod
@@ -569,6 +569,7 @@ class KeRelationship(YAMLRoot):
     references: Optional[str] = None
     completion_score: Optional[float] = None
     has_tabulated_evidence: Optional[Union[bool, Bool]] = None
+    assays: Optional[Union[Union[int, AssayId], list[Union[int, AssayId]]]] = empty_list()
     aops: Optional[Union[dict[Union[int, AopToKeRelationshipId], Union[dict, "AopToKeRelationship"]], list[Union[dict, "AopToKeRelationship"]]]] = empty_dict()
     taxons: Optional[Union[dict[Union[int, KeRelationshipToTaxonId], Union[dict, "KeRelationshipToTaxon"]], list[Union[dict, "KeRelationshipToTaxon"]]]] = empty_dict()
     sexes: Optional[Union[dict[Union[int, KeRelationshipToSexId], Union[dict, "KeRelationshipToSex"]], list[Union[dict, "KeRelationshipToSex"]]]] = empty_dict()
@@ -637,6 +638,10 @@ class KeRelationship(YAMLRoot):
         if self.has_tabulated_evidence is not None and not isinstance(self.has_tabulated_evidence, Bool):
             self.has_tabulated_evidence = Bool(self.has_tabulated_evidence)
 
+        if not isinstance(self.assays, list):
+            self.assays = [self.assays] if self.assays is not None else []
+        self.assays = [v if isinstance(v, AssayId) else AssayId(v) for v in self.assays]
+
         self._normalize_inlined_as_list(slot_name="aops", slot_type=AopToKeRelationship, key_name="id", keyed=True)
 
         self._normalize_inlined_as_list(slot_name="taxons", slot_type=KeRelationshipToTaxon, key_name="id", keyed=True)
@@ -682,6 +687,7 @@ class Assay(YAMLRoot):
     aops: Optional[Union[Union[int, AopId], list[Union[int, AopId]]]] = empty_list()
     citations: Optional[Union[Union[int, CitationId], list[Union[int, CitationId]]]] = empty_list()
     test_guidelines: Optional[Union[Union[int, TestGuidelineId], list[Union[int, TestGuidelineId]]]] = empty_list()
+    ke_relationships: Optional[Union[Union[int, KeRelationshipId], list[Union[int, KeRelationshipId]]]] = empty_list()
 
     def __post_init__(self, *_: str, **kwargs: Any):
         if self._is_empty(self.id):
@@ -744,6 +750,10 @@ class Assay(YAMLRoot):
         if not isinstance(self.test_guidelines, list):
             self.test_guidelines = [self.test_guidelines] if self.test_guidelines is not None else []
         self.test_guidelines = [v if isinstance(v, TestGuidelineId) else TestGuidelineId(v) for v in self.test_guidelines]
+
+        if not isinstance(self.ke_relationships, list):
+            self.ke_relationships = [self.ke_relationships] if self.ke_relationships is not None else []
+        self.ke_relationships = [v if isinstance(v, KeRelationshipId) else KeRelationshipId(v) for v in self.ke_relationships]
 
         super().__post_init__(**kwargs)
 
@@ -3122,6 +3132,9 @@ slots.keRelationship__completion_score = Slot(uri=DEFAULT_.completion_score, nam
 slots.keRelationship__has_tabulated_evidence = Slot(uri=DEFAULT_.has_tabulated_evidence, name="keRelationship__has_tabulated_evidence", curie=DEFAULT_.curie('has_tabulated_evidence'),
                    model_uri=DEFAULT_.keRelationship__has_tabulated_evidence, domain=None, range=Optional[Union[bool, Bool]])
 
+slots.keRelationship__assays = Slot(uri=DEFAULT_.assays, name="keRelationship__assays", curie=DEFAULT_.curie('assays'),
+                   model_uri=DEFAULT_.keRelationship__assays, domain=None, range=Optional[Union[Union[int, AssayId], list[Union[int, AssayId]]]])
+
 slots.keRelationship__aops = Slot(uri=DEFAULT_.aops, name="keRelationship__aops", curie=DEFAULT_.curie('aops'),
                    model_uri=DEFAULT_.keRelationship__aops, domain=None, range=Optional[Union[dict[Union[int, AopToKeRelationshipId], Union[dict, AopToKeRelationship]], list[Union[dict, AopToKeRelationship]]]])
 
@@ -3178,6 +3191,9 @@ slots.assay__citations = Slot(uri=DEFAULT_.citations, name="assay__citations", c
 
 slots.assay__test_guidelines = Slot(uri=DEFAULT_.test_guidelines, name="assay__test_guidelines", curie=DEFAULT_.curie('test_guidelines'),
                    model_uri=DEFAULT_.assay__test_guidelines, domain=None, range=Optional[Union[Union[int, TestGuidelineId], list[Union[int, TestGuidelineId]]]])
+
+slots.assay__ke_relationships = Slot(uri=DEFAULT_.ke_relationships, name="assay__ke_relationships", curie=DEFAULT_.curie('ke_relationships'),
+                   model_uri=DEFAULT_.assay__ke_relationships, domain=None, range=Optional[Union[Union[int, KeRelationshipId], list[Union[int, KeRelationshipId]]]])
 
 slots.observation__id = Slot(uri=DEFAULT_.id, name="observation__id", curie=DEFAULT_.curie('id'),
                    model_uri=DEFAULT_.observation__id, domain=None, range=URIRef)
@@ -3772,4 +3788,3 @@ slots.user__id = Slot(uri=DEFAULT_.id, name="user__id", curie=DEFAULT_.curie('id
 
 slots.user__email = Slot(uri=DEFAULT_.email, name="user__email", curie=DEFAULT_.curie('email'),
                    model_uri=DEFAULT_.user__email, domain=None, range=Optional[str])
-
