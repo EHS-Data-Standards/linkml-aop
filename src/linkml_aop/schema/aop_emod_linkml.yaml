@@ -269,6 +269,8 @@ classes:
       has_tabulated_evidence:
         range: boolean
       assays:
+        description: >-
+          Assays that measure both the upstream and the downstream Event of this relationship in the same test system, so that one assay can inform the relationship as a single module.
         multivalued: true
         range: Assay
       aops:

@@ -1,5 +1,5 @@
 # Auto generated from aop_emod_linkml.yaml by pythongen.py version: 0.0.1
-# Generation date: 2026-10-27T11:21:25
+# Generation date: 2026-10-27T11:32:56
 # Schema: aopwiki-emod
 #
 # id: http://example.org/aopwiki-emod

@@ -246,7 +246,7 @@ def description_lines(text: str, indent: int) -> list[str]:
 
 
 def make_multivalued_attr_lines(
-    attr_name: str, range_name: str, inlined: bool = True
+    attr_name: str, range_name: str, inlined: bool = True, description: str | None = None
 ) -> list[str]:
     """Return attribute lines for a multivalued reference.
 
@@ -257,6 +257,7 @@ def make_multivalued_attr_lines(
     """
     lines = [
         f"      {attr_name}:\n",
+        *(description_lines(description, indent=8) if description else []),
         f"        multivalued: true\n",
         f"        range: {range_name}\n",
     ]
@@ -466,12 +467,14 @@ def build_extra_attrs(
             make_multivalued_attr_lines(attr_name, target_range)
         )
     for jt, (parent, parent_attr, inv_class, inv_attr) in bidirectional_inv.items():
-        extra_attrs.setdefault(parent, []).extend(
-            make_multivalued_attr_lines(parent_attr, inv_class, inlined=False)
-        )
-        extra_attrs.setdefault(inv_class, []).extend(
-            make_multivalued_attr_lines(inv_attr, parent, inlined=False)
-        )
+        extra_attrs.setdefault(parent, []).extend(make_multivalued_attr_lines(
+            parent_attr, inv_class, inlined=False,
+            description=ATTRIBUTE_DESCRIPTIONS.get(parent, {}).get(parent_attr),
+        ))
+        extra_attrs.setdefault(inv_class, []).extend(make_multivalued_attr_lines(
+            inv_attr, parent, inlined=False,
+            description=ATTRIBUTE_DESCRIPTIONS.get(inv_class, {}).get(inv_attr),
+        ))
     for jt, (class_a, class_a_attr, class_b) in bidir_rels.items():
         extra_attrs.setdefault(class_a, []).extend(
             make_multivalued_attr_lines(class_a_attr, jt)

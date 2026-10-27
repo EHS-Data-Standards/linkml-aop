@@ -467,9 +467,17 @@ CLASS_DESCRIPTIONS = {
 
 
 
+relationship_definitions = {
+    "assays": (
+        "Assays that measure both the upstream and the downstream Event of this relationship "
+        "in the same test system, so that one assay can inform the relationship as a single module."
+    ),
+}
+
 # Attribute descriptions keyed by sql-based class name -> attr name -> description string.
 ATTRIBUTE_DESCRIPTIONS: dict[str, dict[str, str]] = {
     "events": event_definitions,
+    "relationships": relationship_definitions,
     "test_guidelines": test_guideline_definitions,
 }
 
