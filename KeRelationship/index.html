@@ -262,6 +262,17 @@
 
 
 
+      KeRelationship : assays
+
+
+
+
+
+        KeRelationship --&gt; "*" Assay : assays
+        click Assay href "../Assay/"
+
+
+
       KeRelationship : biological_plausibility
 
       KeRelationship : completion_score
@@ -488,6 +499,12 @@
 <td>direct</td>
 </tr>
 <tr>
+<td><a href="../assays/">assays</a></td>
+<td>* <br/> <a href="../Assay/">Assay</a></td>
+<td>Assays that measure both the upstream and the downstream Event of this relati...</td>
+<td>direct</td>
+</tr>
+<tr>
 <td><a href="../aops/">aops</a></td>
 <td>* <br/> <a href="../AopToKeRelationship/">AopToKeRelationship</a></td>
 <td></td>
@@ -524,6 +541,12 @@
 </tr>
 </thead>
 <tbody>
+<tr>
+<td><a href="../Assay/">Assay</a></td>
+<td><a href="../ke_relationships/">ke_relationships</a></td>
+<td>range</td>
+<td><a href="./">KeRelationship</a></td>
+</tr>
 <tr>
 <td><a href="../Evidence/">Evidence</a></td>
 <td><a href="../relationship_id/">relationship_id</a></td>
@@ -753,6 +776,21 @@ attributes:
     domain_of:
     - KeRelationship
     range: boolean
+  assays:
+    name: assays
+    description: Assays that measure both the upstream and the downstream Event of
+      this relationship in the same test system, so that one assay can inform the
+      relationship as a single module.
+    from_schema: http://example.org/aopwiki-emod
+    domain_of:
+    - Aop
+    - Event
+    - KeRelationship
+    - Citation
+    - BioTargetFamily
+    - TestGuideline
+    range: Assay
+    multivalued: true
   aops:
     name: aops
     from_schema: http://example.org/aopwiki-emod
@@ -1018,6 +1056,23 @@ attributes:
     domain_of:
     - KeRelationship
     range: boolean
+  assays:
+    name: assays
+    description: Assays that measure both the upstream and the downstream Event of
+      this relationship in the same test system, so that one assay can inform the
+      relationship as a single module.
+    from_schema: http://example.org/aopwiki-emod
+    alias: assays
+    owner: KeRelationship
+    domain_of:
+    - Aop
+    - Event
+    - KeRelationship
+    - Citation
+    - BioTargetFamily
+    - TestGuideline
+    range: Assay
+    multivalued: true
   aops:
     name: aops
     from_schema: http://example.org/aopwiki-emod

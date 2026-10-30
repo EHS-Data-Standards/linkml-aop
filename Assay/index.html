@@ -318,6 +318,17 @@
 
       Assay : id
 
+      Assay : ke_relationships
+
+
+
+
+
+        Assay --&gt; "*" KeRelationship : ke_relationships
+        click KeRelationship href "../KeRelationship/"
+
+
+
       Assay : objects
 
 
@@ -482,6 +493,12 @@
 <td></td>
 <td>direct</td>
 </tr>
+<tr>
+<td><a href="../ke_relationships/">ke_relationships</a></td>
+<td>* <br/> <a href="../KeRelationship/">KeRelationship</a></td>
+<td></td>
+<td>direct</td>
+</tr>
 </tbody>
 </table>
 <h2 id="usages">Usages</h2>
@@ -503,6 +520,12 @@
 </tr>
 <tr>
 <td><a href="../Event/">Event</a></td>
+<td><a href="../assays/">assays</a></td>
+<td>range</td>
+<td><a href="./">Assay</a></td>
+</tr>
+<tr>
+<td><a href="../KeRelationship/">KeRelationship</a></td>
 <td><a href="../assays/">assays</a></td>
 <td>range</td>
 <td><a href="./">Assay</a></td>
@@ -759,6 +782,14 @@ attributes:
     - Assay
     range: TestGuideline
     multivalued: true
+  ke_relationships:
+    name: ke_relationships
+    from_schema: http://example.org/aopwiki-emod
+    domain_of:
+    - Aop
+    - Assay
+    range: KeRelationship
+    multivalued: true
 
 </code></pre>
 </details>
@@ -987,6 +1018,16 @@ attributes:
     - Event
     - Assay
     range: TestGuideline
+    multivalued: true
+  ke_relationships:
+    name: ke_relationships
+    from_schema: http://example.org/aopwiki-emod
+    alias: ke_relationships
+    owner: Assay
+    domain_of:
+    - Aop
+    - Assay
+    range: KeRelationship
     multivalued: true
   created_at:
     name: created_at
