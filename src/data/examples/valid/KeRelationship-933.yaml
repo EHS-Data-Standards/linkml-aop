@@ -1,7 +1,5 @@
 # KER #933 from AOP-Wiki: adjacent relationship in AOP #3.
-# Its Events are named by their AOP-Wiki ids: 888, Binding of inhibitor,
-# NADH-ubiquinone oxidoreductase (complex I); 887, Inhibition,
-# NADH-ubiquinone oxidoreductase (complex I).
+# Its Events are named by their AOP-Wiki ids.
 id: 933
-upstream_event_id: 888
-downstream_event_id: 887
+upstream_event_id: 888  # Binding of inhibitor, NADH-ubiquinone oxidoreductase (complex I)
+downstream_event_id: 887  # Inhibition, NADH-ubiquinone oxidoreductase (complex I)

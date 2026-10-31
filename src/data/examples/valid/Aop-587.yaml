@@ -4,21 +4,21 @@ id: 587
 title: "Inhibition of the mitochondrial complex III of nigro-striatal neurons leads to parkinsonian motor deficits"
 short_name: "Mitochondrial dysfunction and Neurotoxicity (cIII)"
 events:
-  - event_id: 1542
+  - event_id: 1542  # Inhibition, Mitochondrial complex III
     type: MolecularInitiatingEvent
-  - event_id: 177
+  - event_id: 177  # Increase, Mitochondrial dysfunction
     type: KeyEvent
-  - event_id: 890
+  - event_id: 890  # Degeneration of dopaminergic neurons of the nigrostriatal pathway
     type: KeyEvent
-  - event_id: 896
+  - event_id: 896  # Parkinsonian motor deficits
     type: AdverseOutcome
 ke_relationships:
-  - relationship_id: 3637
+  - relationship_id: 3637  # Inhibition, Mitochondrial complex III leads to Increase, Mitochondrial dysfunction
     directness_id:
       term: adjacent
-  - relationship_id: 908
+  - relationship_id: 908  # Increase, Mitochondrial dysfunction leads to Degeneration of dopaminergic neurons of the nigrostriatal pathway
     directness_id:
       term: adjacent
-  - relationship_id: 910
+  - relationship_id: 910  # Degeneration of dopaminergic neurons of the nigrostriatal pathway leads to Parkinsonian motor deficits
     directness_id:
       term: adjacent
