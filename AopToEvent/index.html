@@ -293,6 +293,15 @@
 
       AopToEvent : type
 
+
+
+
+
+        AopToEvent --&gt; "0..1" KeyEventTypeEnum : type
+        click KeyEventTypeEnum href "../KeyEventTypeEnum/"
+
+
+
       AopToEvent : updated_at
 
 
@@ -323,7 +332,7 @@
 </tr>
 <tr>
 <td><a href="../id/">id</a></td>
-<td>1 <br/> <a href="../Integer/">Integer</a></td>
+<td>0..1 <br/> <a href="../Integer/">Integer</a></td>
 <td></td>
 <td>direct</td>
 </tr>
@@ -341,7 +350,7 @@
 </tr>
 <tr>
 <td><a href="../type/">type</a></td>
-<td>0..1 <br/> <a href="../String/">String</a></td>
+<td>0..1 <br/> <a href="../KeyEventTypeEnum/">KeyEventTypeEnum</a></td>
 <td></td>
 <td>direct</td>
 </tr>
@@ -427,7 +436,6 @@ attributes:
   id:
     name: id
     from_schema: http://example.org/aopwiki-emod
-    identifier: true
     domain_of:
     - Aop
     - Event
@@ -473,7 +481,6 @@ attributes:
     - TestGuideline
     - User
     range: integer
-    required: true
   aop_id:
     name: aop_id
     from_schema: http://example.org/aopwiki-emod
@@ -486,7 +493,6 @@ attributes:
     - AopToPrototypicalStressor
     - AopToTaxon
     range: Aop
-    inlined: true
   event_id:
     name: event_id
     from_schema: http://example.org/aopwiki-emod
@@ -497,7 +503,6 @@ attributes:
     - EventToSex
     - EventToTaxon
     range: Event
-    inlined: true
   type:
     name: type
     from_schema: http://example.org/aopwiki-emod
@@ -505,6 +510,7 @@ attributes:
     domain_of:
     - AopToEvent
     - AopToKeRelationship
+    range: KeyEventTypeEnum
   essentiality_id:
     name: essentiality_id
     from_schema: http://example.org/aopwiki-emod
@@ -539,7 +545,6 @@ attributes:
   id:
     name: id
     from_schema: http://example.org/aopwiki-emod
-    identifier: true
     alias: id
     owner: AopToEvent
     domain_of:
@@ -587,7 +592,6 @@ attributes:
     - TestGuideline
     - User
     range: integer
-    required: true
   aop_id:
     name: aop_id
     from_schema: http://example.org/aopwiki-emod
@@ -602,7 +606,6 @@ attributes:
     - AopToPrototypicalStressor
     - AopToTaxon
     range: Aop
-    inlined: true
   event_id:
     name: event_id
     from_schema: http://example.org/aopwiki-emod
@@ -615,7 +618,6 @@ attributes:
     - EventToSex
     - EventToTaxon
     range: Event
-    inlined: true
   type:
     name: type
     from_schema: http://example.org/aopwiki-emod
@@ -625,7 +627,7 @@ attributes:
     domain_of:
     - AopToEvent
     - AopToKeRelationship
-    range: string
+    range: KeyEventTypeEnum
   essentiality_id:
     name: essentiality_id
     from_schema: http://example.org/aopwiki-emod
