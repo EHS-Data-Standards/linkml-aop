@@ -322,6 +322,24 @@ oecd_status_enum_list = [
     "Under Review",
 ]
 
+# The role of an Event within one AOP, as aop_events.type stores it. The role belongs
+# to the AOP, not the Event: one Event can be the MIE of one AOP and a KE of another.
+# Rationale and sources: definition_rationale.md.
+key_event_type_enum_list = {
+    "MolecularInitiatingEvent": (
+        "The first Key Event of the AOP: the initial interaction of a stressor with a "
+        "biomolecule within an organism that causes a perturbation in its biology."
+    ),
+    "KeyEvent": (
+        "An intermediate Key Event: a measurable change in biological state between the "
+        "Molecular Initiating Event and the Adverse Outcome."
+    ),
+    "AdverseOutcome": (
+        "A final Key Event of the AOP: an adverse effect considered relevant to risk "
+        "assessment or regulatory decision-making."
+    ),
+}
+
 # Class-level descriptions. Aop and KeRelationship are quoted from the AOP Developers'
 # Handbook; Stressor, Event, Assay, and TestGuideline were written for EMOD. Sources and
 # reasoning for each are in src/docs/dev/definition_rationale.md.
@@ -495,4 +513,5 @@ ENUM_DEFINITIONS: dict[str, list | dict] = {
     "confidence_level_enum":         confidence_levels_enum_list,
     "directness_enum":               directnesses_enum_list,
     "oecd_status_enum":              oecd_status_enum_list,
+    "key_event_type_enum":           key_event_type_enum_list,
 }

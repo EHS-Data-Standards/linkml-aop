@@ -1,12 +1,6 @@
 {
   "id": 933,
-  "upstream_event_id": {
-    "id": 887,
-    "title": "Inhibition, mitochondrial complex I"
-  },
-  "downstream_event_id": {
-    "id": 177,
-    "title": "Cell injury/death"
-  },
+  "upstream_event_id": 888,
+  "downstream_event_id": 887,
   "@type": "KeRelationship"
 }

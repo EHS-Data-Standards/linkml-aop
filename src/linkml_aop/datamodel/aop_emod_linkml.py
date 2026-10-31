@@ -1,5 +1,5 @@
 # Auto generated from aop_emod_linkml.yaml by pythongen.py version: 0.0.1
-# Generation date: 2026-10-27T11:32:56
+# Generation date: 2026-10-31T11:06:48
 # Schema: aopwiki-emod
 #
 # id: http://example.org/aopwiki-emod
@@ -107,15 +107,7 @@ class CitationId(extended_int):
     pass
 
 
-class AopToEventId(extended_int):
-    pass
-
-
 class AopToLifeStageId(extended_int):
-    pass
-
-
-class AopToKeRelationshipId(extended_int):
     pass
 
 
@@ -256,8 +248,8 @@ class Aop(YAMLRoot):
     has_structured_methods: Optional[Union[bool, Bool]] = None
     assays: Optional[Union[Union[int, AssayId], list[Union[int, AssayId]]]] = empty_list()
     prototypical_stressors: Optional[Union[dict[Union[int, AopToPrototypicalStressorId], Union[dict, "AopToPrototypicalStressor"]], list[Union[dict, "AopToPrototypicalStressor"]]]] = empty_dict()
-    events: Optional[Union[dict[Union[int, AopToEventId], Union[dict, "AopToEvent"]], list[Union[dict, "AopToEvent"]]]] = empty_dict()
-    ke_relationships: Optional[Union[dict[Union[int, AopToKeRelationshipId], Union[dict, "AopToKeRelationship"]], list[Union[dict, "AopToKeRelationship"]]]] = empty_dict()
+    events: Optional[Union[Union[dict, "AopToEvent"], list[Union[dict, "AopToEvent"]]]] = empty_list()
+    ke_relationships: Optional[Union[Union[dict, "AopToKeRelationship"], list[Union[dict, "AopToKeRelationship"]]]] = empty_list()
     life_stages: Optional[Union[dict[Union[int, AopToLifeStageId], Union[dict, "AopToLifeStage"]], list[Union[dict, "AopToLifeStage"]]]] = empty_dict()
     sexes: Optional[Union[dict[Union[int, AopToSexId], Union[dict, "AopToSex"]], list[Union[dict, "AopToSex"]]]] = empty_dict()
     taxons: Optional[Union[dict[Union[int, AopToTaxonId], Union[dict, "AopToTaxon"]], list[Union[dict, "AopToTaxon"]]]] = empty_dict()
@@ -364,9 +356,13 @@ class Aop(YAMLRoot):
 
         self._normalize_inlined_as_list(slot_name="prototypical_stressors", slot_type=AopToPrototypicalStressor, key_name="id", keyed=True)
 
-        self._normalize_inlined_as_list(slot_name="events", slot_type=AopToEvent, key_name="id", keyed=True)
+        if not isinstance(self.events, list):
+            self.events = [self.events] if self.events is not None else []
+        self.events = [v if isinstance(v, AopToEvent) else AopToEvent(**as_dict(v)) for v in self.events]
 
-        self._normalize_inlined_as_list(slot_name="ke_relationships", slot_type=AopToKeRelationship, key_name="id", keyed=True)
+        if not isinstance(self.ke_relationships, list):
+            self.ke_relationships = [self.ke_relationships] if self.ke_relationships is not None else []
+        self.ke_relationships = [v if isinstance(v, AopToKeRelationship) else AopToKeRelationship(**as_dict(v)) for v in self.ke_relationships]
 
         self._normalize_inlined_as_list(slot_name="life_stages", slot_type=AopToLifeStage, key_name="id", keyed=True)
 
@@ -435,7 +431,7 @@ class Event(YAMLRoot):
     observations: Optional[Union[Union[int, ObservationId], list[Union[int, ObservationId]]]] = empty_list()
     bio_target_families: Optional[Union[Union[int, BioTargetFamilyId], list[Union[int, BioTargetFamilyId]]]] = empty_list()
     test_guidelines: Optional[Union[Union[int, TestGuidelineId], list[Union[int, TestGuidelineId]]]] = empty_list()
-    aops: Optional[Union[dict[Union[int, AopToEventId], Union[dict, "AopToEvent"]], list[Union[dict, "AopToEvent"]]]] = empty_dict()
+    aops: Optional[Union[Union[dict, "AopToEvent"], list[Union[dict, "AopToEvent"]]]] = empty_list()
     life_stages: Optional[Union[dict[Union[int, EventToLifeStageId], Union[dict, "EventToLifeStage"]], list[Union[dict, "EventToLifeStage"]]]] = empty_dict()
     sexes: Optional[Union[dict[Union[int, EventToSexId], Union[dict, "EventToSex"]], list[Union[dict, "EventToSex"]]]] = empty_dict()
     taxons: Optional[Union[dict[Union[int, EventToTaxonId], Union[dict, "EventToTaxon"]], list[Union[dict, "EventToTaxon"]]]] = empty_dict()
@@ -524,7 +520,9 @@ class Event(YAMLRoot):
             self.test_guidelines = [self.test_guidelines] if self.test_guidelines is not None else []
         self.test_guidelines = [v if isinstance(v, TestGuidelineId) else TestGuidelineId(v) for v in self.test_guidelines]
 
-        self._normalize_inlined_as_list(slot_name="aops", slot_type=AopToEvent, key_name="id", keyed=True)
+        if not isinstance(self.aops, list):
+            self.aops = [self.aops] if self.aops is not None else []
+        self.aops = [v if isinstance(v, AopToEvent) else AopToEvent(**as_dict(v)) for v in self.aops]
 
         self._normalize_inlined_as_list(slot_name="life_stages", slot_type=EventToLifeStage, key_name="id", keyed=True)
 
@@ -552,8 +550,8 @@ class KeRelationship(YAMLRoot):
     id: Union[int, KeRelationshipId] = None
     created_at: Optional[Union[str, XSDDateTime]] = None
     updated_at: Optional[Union[str, XSDDateTime]] = None
-    upstream_event_id: Optional[Union[dict, Event]] = None
-    downstream_event_id: Optional[Union[dict, Event]] = None
+    upstream_event_id: Optional[Union[int, EventId]] = None
+    downstream_event_id: Optional[Union[int, EventId]] = None
     how_it_works: Optional[str] = None
     biological_plausibility: Optional[str] = None
     empirical_support: Optional[str] = None
@@ -570,7 +568,7 @@ class KeRelationship(YAMLRoot):
     completion_score: Optional[float] = None
     has_tabulated_evidence: Optional[Union[bool, Bool]] = None
     assays: Optional[Union[Union[int, AssayId], list[Union[int, AssayId]]]] = empty_list()
-    aops: Optional[Union[dict[Union[int, AopToKeRelationshipId], Union[dict, "AopToKeRelationship"]], list[Union[dict, "AopToKeRelationship"]]]] = empty_dict()
+    aops: Optional[Union[Union[dict, "AopToKeRelationship"], list[Union[dict, "AopToKeRelationship"]]]] = empty_list()
     taxons: Optional[Union[dict[Union[int, KeRelationshipToTaxonId], Union[dict, "KeRelationshipToTaxon"]], list[Union[dict, "KeRelationshipToTaxon"]]]] = empty_dict()
     sexes: Optional[Union[dict[Union[int, KeRelationshipToSexId], Union[dict, "KeRelationshipToSex"]], list[Union[dict, "KeRelationshipToSex"]]]] = empty_dict()
     life_stages: Optional[Union[dict[Union[int, KeRelationshipToLifeStageId], Union[dict, "KeRelationshipToLifeStage"]], list[Union[dict, "KeRelationshipToLifeStage"]]]] = empty_dict()
@@ -587,11 +585,11 @@ class KeRelationship(YAMLRoot):
         if self.updated_at is not None and not isinstance(self.updated_at, XSDDateTime):
             self.updated_at = XSDDateTime(self.updated_at)
 
-        if self.upstream_event_id is not None and not isinstance(self.upstream_event_id, Event):
-            self.upstream_event_id = Event(**as_dict(self.upstream_event_id))
+        if self.upstream_event_id is not None and not isinstance(self.upstream_event_id, EventId):
+            self.upstream_event_id = EventId(self.upstream_event_id)
 
-        if self.downstream_event_id is not None and not isinstance(self.downstream_event_id, Event):
-            self.downstream_event_id = Event(**as_dict(self.downstream_event_id))
+        if self.downstream_event_id is not None and not isinstance(self.downstream_event_id, EventId):
+            self.downstream_event_id = EventId(self.downstream_event_id)
 
         if self.how_it_works is not None and not isinstance(self.how_it_works, str):
             self.how_it_works = str(self.how_it_works)
@@ -642,7 +640,9 @@ class KeRelationship(YAMLRoot):
             self.assays = [self.assays] if self.assays is not None else []
         self.assays = [v if isinstance(v, AssayId) else AssayId(v) for v in self.assays]
 
-        self._normalize_inlined_as_list(slot_name="aops", slot_type=AopToKeRelationship, key_name="id", keyed=True)
+        if not isinstance(self.aops, list):
+            self.aops = [self.aops] if self.aops is not None else []
+        self.aops = [v if isinstance(v, AopToKeRelationship) else AopToKeRelationship(**as_dict(v)) for v in self.aops]
 
         self._normalize_inlined_as_list(slot_name="taxons", slot_type=KeRelationshipToTaxon, key_name="id", keyed=True)
 
@@ -840,13 +840,13 @@ class Evidence(YAMLRoot):
     id: Union[int, EvidenceId] = None
     created_at: Optional[Union[str, XSDDateTime]] = None
     updated_at: Optional[Union[str, XSDDateTime]] = None
-    upstream_observation_id: Optional[Union[dict, Observation]] = None
-    downstream_observation_id: Optional[Union[dict, Observation]] = None
+    upstream_observation_id: Optional[Union[int, ObservationId]] = None
+    downstream_observation_id: Optional[Union[int, ObservationId]] = None
     citation_id: Optional[Union[dict, "Citation"]] = None
     taxon_term_id: Optional[Union[dict, "TaxonTerm"]] = None
     sex_term_id: Optional[Union[dict, "SexTerm"]] = None
     life_stage_term_id: Optional[Union[dict, "LifeStageTerm"]] = None
-    relationship_id: Optional[Union[dict, KeRelationship]] = None
+    relationship_id: Optional[Union[int, KeRelationshipId]] = None
     experimental_design: Optional[str] = None
     notes: Optional[str] = None
 
@@ -862,11 +862,11 @@ class Evidence(YAMLRoot):
         if self.updated_at is not None and not isinstance(self.updated_at, XSDDateTime):
             self.updated_at = XSDDateTime(self.updated_at)
 
-        if self.upstream_observation_id is not None and not isinstance(self.upstream_observation_id, Observation):
-            self.upstream_observation_id = Observation(**as_dict(self.upstream_observation_id))
+        if self.upstream_observation_id is not None and not isinstance(self.upstream_observation_id, ObservationId):
+            self.upstream_observation_id = ObservationId(self.upstream_observation_id)
 
-        if self.downstream_observation_id is not None and not isinstance(self.downstream_observation_id, Observation):
-            self.downstream_observation_id = Observation(**as_dict(self.downstream_observation_id))
+        if self.downstream_observation_id is not None and not isinstance(self.downstream_observation_id, ObservationId):
+            self.downstream_observation_id = ObservationId(self.downstream_observation_id)
 
         if self.citation_id is not None and not isinstance(self.citation_id, Citation):
             self.citation_id = Citation(**as_dict(self.citation_id))
@@ -880,8 +880,8 @@ class Evidence(YAMLRoot):
         if self.life_stage_term_id is not None and not isinstance(self.life_stage_term_id, LifeStageTerm):
             self.life_stage_term_id = LifeStageTerm(**as_dict(self.life_stage_term_id))
 
-        if self.relationship_id is not None and not isinstance(self.relationship_id, KeRelationship):
-            self.relationship_id = KeRelationship(**as_dict(self.relationship_id))
+        if self.relationship_id is not None and not isinstance(self.relationship_id, KeRelationshipId):
+            self.relationship_id = KeRelationshipId(self.relationship_id)
 
         if self.experimental_design is not None and not isinstance(self.experimental_design, str):
             self.experimental_design = str(self.experimental_design)
@@ -1177,36 +1177,34 @@ class AopToEvent(YAMLRoot):
     class_name: ClassVar[str] = "AopToEvent"
     class_model_uri: ClassVar[URIRef] = URIRef("http://example.org/aopwiki-emod/AopToEvent")
 
-    id: Union[int, AopToEventId] = None
     created_at: Optional[Union[str, XSDDateTime]] = None
     updated_at: Optional[Union[str, XSDDateTime]] = None
-    aop_id: Optional[Union[dict, Aop]] = None
-    event_id: Optional[Union[dict, Event]] = None
-    type: Optional[str] = None
+    id: Optional[int] = None
+    aop_id: Optional[Union[int, AopId]] = None
+    event_id: Optional[Union[int, EventId]] = None
+    type: Optional[Union[str, "KeyEventTypeEnum"]] = None
     essentiality_id: Optional[Union[dict, "ConfidenceLevel"]] = None
     row_order: Optional[int] = None
     sequence: Optional[int] = None
 
     def __post_init__(self, *_: str, **kwargs: Any):
-        if self._is_empty(self.id):
-            self.MissingRequiredField("id")
-        if not isinstance(self.id, AopToEventId):
-            self.id = AopToEventId(self.id)
-
         if self.created_at is not None and not isinstance(self.created_at, XSDDateTime):
             self.created_at = XSDDateTime(self.created_at)
 
         if self.updated_at is not None and not isinstance(self.updated_at, XSDDateTime):
             self.updated_at = XSDDateTime(self.updated_at)
 
-        if self.aop_id is not None and not isinstance(self.aop_id, Aop):
-            self.aop_id = Aop(**as_dict(self.aop_id))
+        if self.id is not None and not isinstance(self.id, int):
+            self.id = int(self.id)
 
-        if self.event_id is not None and not isinstance(self.event_id, Event):
-            self.event_id = Event(**as_dict(self.event_id))
+        if self.aop_id is not None and not isinstance(self.aop_id, AopId):
+            self.aop_id = AopId(self.aop_id)
 
-        if self.type is not None and not isinstance(self.type, str):
-            self.type = str(self.type)
+        if self.event_id is not None and not isinstance(self.event_id, EventId):
+            self.event_id = EventId(self.event_id)
+
+        if self.type is not None and not isinstance(self.type, KeyEventTypeEnum):
+            self.type = KeyEventTypeEnum(self.type)
 
         if self.essentiality_id is not None and not isinstance(self.essentiality_id, ConfidenceLevel):
             self.essentiality_id = ConfidenceLevel(**as_dict(self.essentiality_id))
@@ -1269,11 +1267,11 @@ class AopToKeRelationship(YAMLRoot):
     class_name: ClassVar[str] = "AopToKeRelationship"
     class_model_uri: ClassVar[URIRef] = URIRef("http://example.org/aopwiki-emod/AopToKeRelationship")
 
-    id: Union[int, AopToKeRelationshipId] = None
     created_at: Optional[Union[str, XSDDateTime]] = None
     updated_at: Optional[Union[str, XSDDateTime]] = None
-    aop_id: Optional[Union[dict, Aop]] = None
-    relationship_id: Optional[Union[dict, KeRelationship]] = None
+    id: Optional[int] = None
+    aop_id: Optional[Union[int, AopId]] = None
+    relationship_id: Optional[Union[int, KeRelationshipId]] = None
     confidence_id: Optional[Union[dict, "ConfidenceLevel"]] = None
     quantitative_understanding_id: Optional[Union[dict, "ConfidenceLevel"]] = None
     row_order: Optional[int] = None
@@ -1281,22 +1279,20 @@ class AopToKeRelationship(YAMLRoot):
     type: Optional[str] = None
 
     def __post_init__(self, *_: str, **kwargs: Any):
-        if self._is_empty(self.id):
-            self.MissingRequiredField("id")
-        if not isinstance(self.id, AopToKeRelationshipId):
-            self.id = AopToKeRelationshipId(self.id)
-
         if self.created_at is not None and not isinstance(self.created_at, XSDDateTime):
             self.created_at = XSDDateTime(self.created_at)
 
         if self.updated_at is not None and not isinstance(self.updated_at, XSDDateTime):
             self.updated_at = XSDDateTime(self.updated_at)
 
-        if self.aop_id is not None and not isinstance(self.aop_id, Aop):
-            self.aop_id = Aop(**as_dict(self.aop_id))
+        if self.id is not None and not isinstance(self.id, int):
+            self.id = int(self.id)
 
-        if self.relationship_id is not None and not isinstance(self.relationship_id, KeRelationship):
-            self.relationship_id = KeRelationship(**as_dict(self.relationship_id))
+        if self.aop_id is not None and not isinstance(self.aop_id, AopId):
+            self.aop_id = AopId(self.aop_id)
+
+        if self.relationship_id is not None and not isinstance(self.relationship_id, KeRelationshipId):
+            self.relationship_id = KeRelationshipId(self.relationship_id)
 
         if self.confidence_id is not None and not isinstance(self.confidence_id, ConfidenceLevel):
             self.confidence_id = ConfidenceLevel(**as_dict(self.confidence_id))
@@ -2873,6 +2869,22 @@ class OecdStatusEnum(EnumDefinitionImpl):
         setattr(cls, "Under Review",
             PermissibleValue(text="Under Review"))
 
+class KeyEventTypeEnum(EnumDefinitionImpl):
+
+    MolecularInitiatingEvent = PermissibleValue(
+        text="MolecularInitiatingEvent",
+        description="""The first Key Event of the AOP: the initial interaction of a stressor with a biomolecule within an organism that causes a perturbation in its biology.""")
+    KeyEvent = PermissibleValue(
+        text="KeyEvent",
+        description="""An intermediate Key Event: a measurable change in biological state between the Molecular Initiating Event and the Adverse Outcome.""")
+    AdverseOutcome = PermissibleValue(
+        text="AdverseOutcome",
+        description="""A final Key Event of the AOP: an adverse effect considered relevant to risk assessment or regulatory decision-making.""")
+
+    _defn = EnumDefinition(
+        name="KeyEventTypeEnum",
+    )
+
 # Slots
 class slots:
     pass
@@ -2980,10 +2992,10 @@ slots.aop__prototypical_stressors = Slot(uri=DEFAULT_.prototypical_stressors, na
                    model_uri=DEFAULT_.aop__prototypical_stressors, domain=None, range=Optional[Union[dict[Union[int, AopToPrototypicalStressorId], Union[dict, AopToPrototypicalStressor]], list[Union[dict, AopToPrototypicalStressor]]]])
 
 slots.aop__events = Slot(uri=DEFAULT_.events, name="aop__events", curie=DEFAULT_.curie('events'),
-                   model_uri=DEFAULT_.aop__events, domain=None, range=Optional[Union[dict[Union[int, AopToEventId], Union[dict, AopToEvent]], list[Union[dict, AopToEvent]]]])
+                   model_uri=DEFAULT_.aop__events, domain=None, range=Optional[Union[Union[dict, AopToEvent], list[Union[dict, AopToEvent]]]])
 
 slots.aop__ke_relationships = Slot(uri=DEFAULT_.ke_relationships, name="aop__ke_relationships", curie=DEFAULT_.curie('ke_relationships'),
-                   model_uri=DEFAULT_.aop__ke_relationships, domain=None, range=Optional[Union[dict[Union[int, AopToKeRelationshipId], Union[dict, AopToKeRelationship]], list[Union[dict, AopToKeRelationship]]]])
+                   model_uri=DEFAULT_.aop__ke_relationships, domain=None, range=Optional[Union[Union[dict, AopToKeRelationship], list[Union[dict, AopToKeRelationship]]]])
 
 slots.aop__life_stages = Slot(uri=DEFAULT_.life_stages, name="aop__life_stages", curie=DEFAULT_.curie('life_stages'),
                    model_uri=DEFAULT_.aop__life_stages, domain=None, range=Optional[Union[dict[Union[int, AopToLifeStageId], Union[dict, AopToLifeStage]], list[Union[dict, AopToLifeStage]]]])
@@ -3067,7 +3079,7 @@ slots.event__test_guidelines = Slot(uri=DEFAULT_.test_guidelines, name="event__t
                    model_uri=DEFAULT_.event__test_guidelines, domain=None, range=Optional[Union[Union[int, TestGuidelineId], list[Union[int, TestGuidelineId]]]])
 
 slots.event__aops = Slot(uri=DEFAULT_.aops, name="event__aops", curie=DEFAULT_.curie('aops'),
-                   model_uri=DEFAULT_.event__aops, domain=None, range=Optional[Union[dict[Union[int, AopToEventId], Union[dict, AopToEvent]], list[Union[dict, AopToEvent]]]])
+                   model_uri=DEFAULT_.event__aops, domain=None, range=Optional[Union[Union[dict, AopToEvent], list[Union[dict, AopToEvent]]]])
 
 slots.event__life_stages = Slot(uri=DEFAULT_.life_stages, name="event__life_stages", curie=DEFAULT_.curie('life_stages'),
                    model_uri=DEFAULT_.event__life_stages, domain=None, range=Optional[Union[dict[Union[int, EventToLifeStageId], Union[dict, EventToLifeStage]], list[Union[dict, EventToLifeStage]]]])
@@ -3082,10 +3094,10 @@ slots.keRelationship__id = Slot(uri=DEFAULT_.id, name="keRelationship__id", curi
                    model_uri=DEFAULT_.keRelationship__id, domain=None, range=URIRef)
 
 slots.keRelationship__upstream_event_id = Slot(uri=DEFAULT_.upstream_event_id, name="keRelationship__upstream_event_id", curie=DEFAULT_.curie('upstream_event_id'),
-                   model_uri=DEFAULT_.keRelationship__upstream_event_id, domain=None, range=Optional[Union[dict, Event]])
+                   model_uri=DEFAULT_.keRelationship__upstream_event_id, domain=None, range=Optional[Union[int, EventId]])
 
 slots.keRelationship__downstream_event_id = Slot(uri=DEFAULT_.downstream_event_id, name="keRelationship__downstream_event_id", curie=DEFAULT_.curie('downstream_event_id'),
-                   model_uri=DEFAULT_.keRelationship__downstream_event_id, domain=None, range=Optional[Union[dict, Event]])
+                   model_uri=DEFAULT_.keRelationship__downstream_event_id, domain=None, range=Optional[Union[int, EventId]])
 
 slots.keRelationship__how_it_works = Slot(uri=DEFAULT_.how_it_works, name="keRelationship__how_it_works", curie=DEFAULT_.curie('how_it_works'),
                    model_uri=DEFAULT_.keRelationship__how_it_works, domain=None, range=Optional[str])
@@ -3136,7 +3148,7 @@ slots.keRelationship__assays = Slot(uri=DEFAULT_.assays, name="keRelationship__a
                    model_uri=DEFAULT_.keRelationship__assays, domain=None, range=Optional[Union[Union[int, AssayId], list[Union[int, AssayId]]]])
 
 slots.keRelationship__aops = Slot(uri=DEFAULT_.aops, name="keRelationship__aops", curie=DEFAULT_.curie('aops'),
-                   model_uri=DEFAULT_.keRelationship__aops, domain=None, range=Optional[Union[dict[Union[int, AopToKeRelationshipId], Union[dict, AopToKeRelationship]], list[Union[dict, AopToKeRelationship]]]])
+                   model_uri=DEFAULT_.keRelationship__aops, domain=None, range=Optional[Union[Union[dict, AopToKeRelationship], list[Union[dict, AopToKeRelationship]]]])
 
 slots.keRelationship__taxons = Slot(uri=DEFAULT_.taxons, name="keRelationship__taxons", curie=DEFAULT_.curie('taxons'),
                    model_uri=DEFAULT_.keRelationship__taxons, domain=None, range=Optional[Union[dict[Union[int, KeRelationshipToTaxonId], Union[dict, KeRelationshipToTaxon]], list[Union[dict, KeRelationshipToTaxon]]]])
@@ -3232,10 +3244,10 @@ slots.evidence__id = Slot(uri=DEFAULT_.id, name="evidence__id", curie=DEFAULT_.c
                    model_uri=DEFAULT_.evidence__id, domain=None, range=URIRef)
 
 slots.evidence__upstream_observation_id = Slot(uri=DEFAULT_.upstream_observation_id, name="evidence__upstream_observation_id", curie=DEFAULT_.curie('upstream_observation_id'),
-                   model_uri=DEFAULT_.evidence__upstream_observation_id, domain=None, range=Optional[Union[dict, Observation]])
+                   model_uri=DEFAULT_.evidence__upstream_observation_id, domain=None, range=Optional[Union[int, ObservationId]])
 
 slots.evidence__downstream_observation_id = Slot(uri=DEFAULT_.downstream_observation_id, name="evidence__downstream_observation_id", curie=DEFAULT_.curie('downstream_observation_id'),
-                   model_uri=DEFAULT_.evidence__downstream_observation_id, domain=None, range=Optional[Union[dict, Observation]])
+                   model_uri=DEFAULT_.evidence__downstream_observation_id, domain=None, range=Optional[Union[int, ObservationId]])
 
 slots.evidence__citation_id = Slot(uri=DEFAULT_.citation_id, name="evidence__citation_id", curie=DEFAULT_.curie('citation_id'),
                    model_uri=DEFAULT_.evidence__citation_id, domain=None, range=Optional[Union[dict, Citation]])
@@ -3250,7 +3262,7 @@ slots.evidence__life_stage_term_id = Slot(uri=DEFAULT_.life_stage_term_id, name=
                    model_uri=DEFAULT_.evidence__life_stage_term_id, domain=None, range=Optional[Union[dict, LifeStageTerm]])
 
 slots.evidence__relationship_id = Slot(uri=DEFAULT_.relationship_id, name="evidence__relationship_id", curie=DEFAULT_.curie('relationship_id'),
-                   model_uri=DEFAULT_.evidence__relationship_id, domain=None, range=Optional[Union[dict, KeRelationship]])
+                   model_uri=DEFAULT_.evidence__relationship_id, domain=None, range=Optional[Union[int, KeRelationshipId]])
 
 slots.evidence__experimental_design = Slot(uri=DEFAULT_.experimental_design, name="evidence__experimental_design", curie=DEFAULT_.curie('experimental_design'),
                    model_uri=DEFAULT_.evidence__experimental_design, domain=None, range=Optional[str])
@@ -3352,16 +3364,16 @@ slots.levelOfBiologicalOrganization__term = Slot(uri=DEFAULT_.term, name="levelO
                    model_uri=DEFAULT_.levelOfBiologicalOrganization__term, domain=None, range=Optional[Union[str, "BiologicalOrganizationEnum"]])
 
 slots.aopToEvent__id = Slot(uri=DEFAULT_.id, name="aopToEvent__id", curie=DEFAULT_.curie('id'),
-                   model_uri=DEFAULT_.aopToEvent__id, domain=None, range=URIRef)
+                   model_uri=DEFAULT_.aopToEvent__id, domain=None, range=Optional[int])
 
 slots.aopToEvent__aop_id = Slot(uri=DEFAULT_.aop_id, name="aopToEvent__aop_id", curie=DEFAULT_.curie('aop_id'),
-                   model_uri=DEFAULT_.aopToEvent__aop_id, domain=None, range=Optional[Union[dict, Aop]])
+                   model_uri=DEFAULT_.aopToEvent__aop_id, domain=None, range=Optional[Union[int, AopId]])
 
 slots.aopToEvent__event_id = Slot(uri=DEFAULT_.event_id, name="aopToEvent__event_id", curie=DEFAULT_.curie('event_id'),
-                   model_uri=DEFAULT_.aopToEvent__event_id, domain=None, range=Optional[Union[dict, Event]])
+                   model_uri=DEFAULT_.aopToEvent__event_id, domain=None, range=Optional[Union[int, EventId]])
 
 slots.aopToEvent__type = Slot(uri=DEFAULT_.type, name="aopToEvent__type", curie=DEFAULT_.curie('type'),
-                   model_uri=DEFAULT_.aopToEvent__type, domain=None, range=Optional[str])
+                   model_uri=DEFAULT_.aopToEvent__type, domain=None, range=Optional[Union[str, "KeyEventTypeEnum"]])
 
 slots.aopToEvent__essentiality_id = Slot(uri=DEFAULT_.essentiality_id, name="aopToEvent__essentiality_id", curie=DEFAULT_.curie('essentiality_id'),
                    model_uri=DEFAULT_.aopToEvent__essentiality_id, domain=None, range=Optional[Union[dict, ConfidenceLevel]])
@@ -3385,13 +3397,13 @@ slots.aopToLifeStage__confidence_id = Slot(uri=DEFAULT_.confidence_id, name="aop
                    model_uri=DEFAULT_.aopToLifeStage__confidence_id, domain=None, range=Optional[Union[dict, ConfidenceLevel]])
 
 slots.aopToKeRelationship__id = Slot(uri=DEFAULT_.id, name="aopToKeRelationship__id", curie=DEFAULT_.curie('id'),
-                   model_uri=DEFAULT_.aopToKeRelationship__id, domain=None, range=URIRef)
+                   model_uri=DEFAULT_.aopToKeRelationship__id, domain=None, range=Optional[int])
 
 slots.aopToKeRelationship__aop_id = Slot(uri=DEFAULT_.aop_id, name="aopToKeRelationship__aop_id", curie=DEFAULT_.curie('aop_id'),
-                   model_uri=DEFAULT_.aopToKeRelationship__aop_id, domain=None, range=Optional[Union[dict, Aop]])
+                   model_uri=DEFAULT_.aopToKeRelationship__aop_id, domain=None, range=Optional[Union[int, AopId]])
 
 slots.aopToKeRelationship__relationship_id = Slot(uri=DEFAULT_.relationship_id, name="aopToKeRelationship__relationship_id", curie=DEFAULT_.curie('relationship_id'),
-                   model_uri=DEFAULT_.aopToKeRelationship__relationship_id, domain=None, range=Optional[Union[dict, KeRelationship]])
+                   model_uri=DEFAULT_.aopToKeRelationship__relationship_id, domain=None, range=Optional[Union[int, KeRelationshipId]])
 
 slots.aopToKeRelationship__confidence_id = Slot(uri=DEFAULT_.confidence_id, name="aopToKeRelationship__confidence_id", curie=DEFAULT_.curie('confidence_id'),
                    model_uri=DEFAULT_.aopToKeRelationship__confidence_id, domain=None, range=Optional[Union[dict, ConfidenceLevel]])

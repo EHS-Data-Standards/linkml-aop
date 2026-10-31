@@ -1,0 +1,24 @@
+# AOP #587 from AOP-Wiki, with its Events and Key Event Relationships named by
+# their AOP-Wiki ids and each Event's role in this AOP.
+id: 587
+title: "Inhibition of the mitochondrial complex III of nigro-striatal neurons leads to parkinsonian motor deficits"
+short_name: "Mitochondrial dysfunction and Neurotoxicity (cIII)"
+events:
+  - event_id: 1542
+    type: MolecularInitiatingEvent
+  - event_id: 177
+    type: KeyEvent
+  - event_id: 890
+    type: KeyEvent
+  - event_id: 896
+    type: AdverseOutcome
+ke_relationships:
+  - relationship_id: 3637
+    directness_id:
+      term: adjacent
+  - relationship_id: 908
+    directness_id:
+      term: adjacent
+  - relationship_id: 910
+    directness_id:
+      term: adjacent

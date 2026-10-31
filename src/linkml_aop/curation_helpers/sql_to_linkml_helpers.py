@@ -12,6 +12,7 @@ __all__ = [
     "JOIN_TABLES_TO_UNIDIRECTIONAL_RELS",
     "CURATED_RANGES",
     "OPTIONAL_ID_TABLES",
+    "REFERENCED_BY_ID",
     "CLASS_ORDER",
     "CLASS_RENAMES",
 ]
@@ -184,6 +185,7 @@ CURATED_RANGES: dict[str, dict[str, str]] = {
         "essentiality_id": "confidence_levels",
         "row_order": "integer",
         "sequence": "integer",
+        "type": "key_event_type_enum",
     },
     "aop_life_stages": {
         "aop_id": "aops",
@@ -368,6 +370,26 @@ OPTIONAL_ID_TABLES = {
     "organ_terms",
     "sex_terms",
     "taxon_terms",
+    # The rows joining an AOP to its Events and to its Key Event Relationships. A
+    # record holds them inline in Aop.events and Aop.ke_relationships, and names
+    # the Event or relationship by its AOP-Wiki id (see REFERENCED_BY_ID).
+    "aop_events",
+    "aop_relationships",
+}
+
+# Foreign keys written as a reference by identifier instead of inlined. Each
+# names an AOP, an Event, a Key Event Relationship or an Observation: classes
+# whose identifier is a stable id (for AOPs, Events and relationships, the
+# AOP-Wiki id) and which a record keeps in its own file. Inlining them would
+# copy the whole object into every record that names it, and a back-reference
+# such as aop_id would nest the parent inside its own child. Every other
+# foreign key stays inlined.
+# Format: sql-based table name -> attribute names.
+REFERENCED_BY_ID: dict[str, set[str]] = {
+    "aop_events": {"aop_id", "event_id"},
+    "aop_relationships": {"aop_id", "relationship_id"},
+    "relationships": {"upstream_event_id", "downstream_event_id"},
+    "evidences": {"upstream_observation_id", "downstream_observation_id", "relationship_id"},
 }
 
 # Classes that appear first in the output, in this order. All other classes follow alphabetically.

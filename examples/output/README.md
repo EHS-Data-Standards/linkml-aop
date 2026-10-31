@@ -12,13 +12,9 @@ title: Inhibition of the mitochondrial complex I of nigro-striatal neurons leads
 ## KeRelationship-933
 ### Input
 ```yaml
-downstream_event_id:
-  id: 177
-  title: Cell injury/death
+downstream_event_id: 887
 id: 933
-upstream_event_id:
-  id: 887
-  title: Inhibition, mitochondrial complex I
+upstream_event_id: 888
 
 ```
 ## Event-887
@@ -29,11 +25,48 @@ short_name: Inhibition, complex I
 title: Inhibition, mitochondrial complex I
 
 ```
+## Aop-587
+### Input
+```yaml
+events:
+- event_id: 1542
+  type: MolecularInitiatingEvent
+- event_id: 177
+  type: KeyEvent
+- event_id: 890
+  type: KeyEvent
+- event_id: 896
+  type: AdverseOutcome
+id: 587
+ke_relationships:
+- directness_id:
+    term: adjacent
+  relationship_id: 3637
+- directness_id:
+    term: adjacent
+  relationship_id: 908
+- directness_id:
+    term: adjacent
+  relationship_id: 910
+short_name: Mitochondrial dysfunction and Neurotoxicity (cIII)
+title: Inhibition of the mitochondrial complex III of nigro-striatal neurons leads
+  to parkinsonian motor deficits
+
+```
 ## Aop-003
 ### Input
 ```yaml
 id: three
 title: Inhibition of the mitochondrial complex I of nigro-striatal neurons leads to
   parkinsonian motor deficits
+
+```
+## Aop-587
+### Input
+```yaml
+events:
+- event_id: 1542
+  type: MIE
+id: 587
 
 ```

@@ -1,0 +1,5 @@
+# Invalid: an Event's type must be a KeyEventTypeEnum value, not an abbreviation
+id: 587
+events:
+  - event_id: 1542
+    type: MIE

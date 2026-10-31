@@ -160,6 +160,25 @@ Stressor was written for EMOD. Checked against the
   presents harmonized Events and candidate merger groups as the response to conceptually
   similar and redundant Key Events in the seizure and lung-fibrosis use cases.
 
+## KeyEventTypeEnum (the role of an Event in an AOP)
+
+**Values:** `MolecularInitiatingEvent`, `KeyEvent`, `AdverseOutcome`, exactly as the EMOD
+database stores them in `aop_events.type` (`aopwiki_emod_web_app/app/pydantic_models.py`
+lists the same three). The column was a free string; the enum makes the three values the
+only ones a record may use.
+
+**Definitions** (`key_event_type_enum_list`): drawn from the Aop description, which is
+quoted from the AOP Developers' Handbook. The MolecularInitiatingEvent definition repeats
+its wording ("initial interaction(s) of a stressor with a biomolecule within an organism
+that causes a perturbation in its biology"), as does the AdverseOutcome definition
+("relevant to risk assessment or regulatory decision-making"). KeyEvent is written for
+EMOD from the same description's "measurable biological changes". The handbook's own
+definitions of MIE, KE and AO have not yet been checked against these.
+
+**Rationale:** the type belongs to the AOP's link to an Event, not to the Event, because
+one Event can be the Molecular Initiating Event of one AOP and an intermediate Key Event
+of another. The definitions therefore say "of the AOP".
+
 ## LevelOfBiologicalOrganization
 
 **Definition** (`CLASS_DESCRIPTIONS["biological_organizations"]`, adopted 2026-09-22):

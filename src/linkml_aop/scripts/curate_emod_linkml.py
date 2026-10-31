@@ -276,6 +276,7 @@ def convert_class_block(
     descriptions: dict[str, str] | None = None,
     class_description: str | None = None,
     optional_id: bool = False,
+    by_id_attrs: set[str] | None = None,
 ) -> list[str]:
     """Convert a schemauto-generated class block to the hand-curated style.
 
@@ -287,13 +288,16 @@ def convert_class_block(
         the class identifier, so a record may omit it
       - range: string is stripped (covered by default_range: string)
       - curated_ranges values are applied where available, overriding any
-        generated range: string for that attribute
+        generated range: string for that attribute; a class range is inlined
+        unless the attribute is in by_id_attrs, which makes it a reference by
+        identifier
       - descriptions values are injected as description: lines
 
     Pass 2 — inserts the slots: block immediately before attributes:.
     """
     dropped_attrs = dropped_attrs or []
     descriptions = descriptions or {}
+    by_id_attrs = by_id_attrs or set()
     found_slots: list[str] = []
 
     # Inject class-level description after the class header line (first line).
@@ -347,6 +351,12 @@ def convert_class_block(
             # Apply curated range if available. Otherwise keep the generated range,
             # dropping only range: string (the schema default).
             curated = curated_ranges.get(attr_name)
+            inline = (
+                curated is not None
+                and curated not in LINKML_BUILTIN_TYPES
+                and not curated.endswith("_enum")
+                and attr_name not in by_id_attrs
+            )
             new_block = []
             replaced = False
             for al in attr_block:
@@ -354,7 +364,7 @@ def convert_class_block(
                 if range_match:
                     if curated:
                         new_block.append(f"        range: {curated}\n")
-                        if curated not in LINKML_BUILTIN_TYPES and not curated.endswith("_enum"):
+                        if inline:
                             new_block.append(f"        inlined: true\n")
                         replaced = True
                     elif range_match.group(1) != "string":
@@ -364,7 +374,7 @@ def convert_class_block(
                     new_block.append(al)
             if curated and not replaced:
                 new_block.append(f"        range: {curated}\n")
-                if curated not in LINKML_BUILTIN_TYPES and not curated.endswith("_enum"):
+                if inline:
                     new_block.append(f"        inlined: true\n")
             desc = descriptions.get(attr_name)
             if desc and not any("description:" in al for al in new_block):
@@ -518,6 +528,7 @@ def build_classes_yaml(
             DROPPED_ATTRS.get(sql_name, []) + DROPPED_ATTRS_ALL_CLASSES,
             ATTRIBUTE_DESCRIPTIONS.get(sql_name), CLASS_DESCRIPTIONS.get(sql_name),
             optional_id=sql_name in OPTIONAL_ID_TABLES,
+            by_id_attrs=REFERENCED_BY_ID.get(sql_name),
         )
         converted = apply_class_renames(converted, CLASS_RENAMES)
         if sql_name in extra_attrs:
