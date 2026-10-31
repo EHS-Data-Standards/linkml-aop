@@ -105,6 +105,39 @@ Stressor was written for EMOD. Checked against the
   as a folded block scalar with two blank lines between paragraphs, which YAML folds into
   the single blank line that keeps the paragraph break in the parsed value.
 
+## EventComponent
+
+**Definition** (`CLASS_DESCRIPTIONS["sub_events"]`, adopted 2026-10-31):
+
+> One component of an Event: a combination of a biological action with a biological
+> object, a biological process, or both, describing the change the Event records. An
+> Event may have several. The id is required, so that one combination can be shared by
+> the Events that use it. The AOP-Wiki XML export does not carry the database's ids, so a
+> record written outside the EMOD database has to assign its own. EnviroMech does this
+> with one record per combination, under data/event_components/, and an id such as
+> enviromech:ec-0001 whose number is the component's id.
+
+**Rationale:** `EventComponent` keeps a required `id`, unlike the term lookup classes in
+`OPTIONAL_ID_TABLES` (PR #10), because an id names one combination of action, object
+and process that several Events can share. The AOP-Wiki XML export, which is what records
+written outside the database are usually built from, gives the terms but not the row id.
+The definition says how to get one rather than leaving each project to invent a scheme.
+[EnviroMech](https://github.com/monarch-initiative/enviromech) is the first project to
+need it. Its rule, adopted 2026-10-31
+([monarch-initiative/enviromech#18](https://github.com/monarch-initiative/enviromech/pull/18)):
+
+- each combination has one record under
+  [`data/event_components/`](https://github.com/monarch-initiative/enviromech/tree/main/data/event_components),
+  with an EnviroMech id such as `enviromech:ec-0001`;
+- the component's `id` is the number in that id (`enviromech:ec-0001` has `id: 1`);
+- an Event that uses a combination already recorded reuses its id;
+- a Key Event record still writes the component out in full, with that id.
+
+The numbers are EnviroMech's own and may coincide with EMOD database row ids. The rule
+is described in EnviroMech's
+[`CLAUDE.md`](https://github.com/monarch-initiative/enviromech/blob/main/CLAUDE.md), under
+"Ids", and checked by its `scripts/check_ids.py`.
+
 ## Assay
 
 **Definition** (`CLASS_DESCRIPTIONS["assays"]`, adopted 2026-09-20):

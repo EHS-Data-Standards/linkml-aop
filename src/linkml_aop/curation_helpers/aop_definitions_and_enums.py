@@ -435,6 +435,17 @@ CLASS_DESCRIPTIONS = {
     "biological_objects": (),
     "biological_processes": (),
     "biological_actions": (),
+    "sub_events": (
+        "One component of an Event: a combination of a biological action with a "
+        "biological object, a biological process, or both, describing the change the "
+        "Event records. An Event may have several. The id is required, so that one "
+        "combination can be shared by the Events that use it. The AOP-Wiki XML export "
+        "does not carry the database's ids, so a record written outside the EMOD "
+        "database has to assign its own. EnviroMech does this with one record per "
+        "combination, under data/event_components/, and an id such as "
+        "enviromech:ec-0001 whose number is the component's id: "
+        "https://github.com/monarch-initiative/enviromech/tree/main/data/event_components"
+    ),
     "biological_organizations": (
         "The scale of biological organisation at which a Key Event occurs, from molecular "
         "to population level. The AOP-Wiki records it as one structured term selected from "

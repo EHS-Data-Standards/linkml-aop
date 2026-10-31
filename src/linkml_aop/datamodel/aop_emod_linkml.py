@@ -1,5 +1,5 @@
 # Auto generated from aop_emod_linkml.yaml by pythongen.py version: 0.0.1
-# Generation date: 2026-10-31T11:06:48
+# Generation date: 2026-10-31T18:45:24
 # Schema: aopwiki-emod
 #
 # id: http://example.org/aopwiki-emod
@@ -2336,6 +2336,14 @@ class SexTerm(YAMLRoot):
 
 @dataclass(repr=False)
 class EventComponent(YAMLRoot):
+    """
+    One component of an Event: a combination of a biological action with a biological object, a biological process, or
+    both, describing the change the Event records. An Event may have several. The id is required, so that one
+    combination can be shared by the Events that use it. The AOP-Wiki XML export does not carry the database's ids, so
+    a record written outside the EMOD database has to assign its own. EnviroMech does this with one record per
+    combination, under data/event_components/, and an id such as enviromech:ec-0001 whose number is the component's
+    id: https://github.com/monarch-initiative/enviromech/tree/main/data/event_components
+    """
     _inherited_slots: ClassVar[list[str]] = []
 
     class_class_uri: ClassVar[URIRef] = URIRef("http://example.org/aopwiki-emod/EventComponent")
@@ -3800,3 +3808,4 @@ slots.user__id = Slot(uri=DEFAULT_.id, name="user__id", curie=DEFAULT_.curie('id
 
 slots.user__email = Slot(uri=DEFAULT_.email, name="user__email", curie=DEFAULT_.curie('email'),
                    model_uri=DEFAULT_.user__email, domain=None, range=Optional[str])
+
