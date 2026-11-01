@@ -246,6 +246,7 @@
 <div class="md-content" data-md-component="content">
 <article class="md-content__inner md-typeset">
 <h1 id="class-eventcomponent">Class: EventComponent</h1>
+<p><em>One component of an Event: a combination of a biological action with a biological object, a biological process, or both, describing the change the Event records. An Event may have several. The id is required, so that one combination can be shared by the Events that use it. The AOP-Wiki XML export does not carry the database's ids, so a record written outside the EMOD database has to assign its own. EnviroMech does this with one record per combination, under data/event_components/, and an id such as enviromech:ec-0001 whose number is the component's id: https://github.com/monarch-initiative/enviromech/tree/main/data/event_components</em></p>
 <p>URI: <a href="http://example.org/aopwiki-emod/EventComponent">http://example.org/aopwiki-emod/EventComponent</a></p>
 <div class="mermaid"> classDiagram
     class EventComponent
@@ -389,6 +390,13 @@
 <h3 id="direct">Direct</h3>
 <details>
 <pre><code class="language-yaml">name: EventComponent
+description: 'One component of an Event: a combination of a biological action with
+  a biological object, a biological process, or both, describing the change the Event
+  records. An Event may have several. The id is required, so that one combination
+  can be shared by the Events that use it. The AOP-Wiki XML export does not carry
+  the database''s ids, so a record written outside the EMOD database has to assign
+  its own. EnviroMech does this with one record per combination, under data/event_components/,
+  and an id such as enviromech:ec-0001 whose number is the component''s id: https://github.com/monarch-initiative/enviromech/tree/main/data/event_components'
 from_schema: http://example.org/aopwiki-emod
 slots:
 - created_at
@@ -475,6 +483,13 @@ attributes:
 <h3 id="induced">Induced</h3>
 <details>
 <pre><code class="language-yaml">name: EventComponent
+description: 'One component of an Event: a combination of a biological action with
+  a biological object, a biological process, or both, describing the change the Event
+  records. An Event may have several. The id is required, so that one combination
+  can be shared by the Events that use it. The AOP-Wiki XML export does not carry
+  the database''s ids, so a record written outside the EMOD database has to assign
+  its own. EnviroMech does this with one record per combination, under data/event_components/,
+  and an id such as enviromech:ec-0001 whose number is the component''s id: https://github.com/monarch-initiative/enviromech/tree/main/data/event_components'
 from_schema: http://example.org/aopwiki-emod
 attributes:
   id:
